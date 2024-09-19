@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class RegisterDao {
-	private String dburl = "jdbc:mysql://localhost:3306/Tran";
+	private String dburl = "jdbc:mysql://localhost:3306/userdb";
 	private String dbuname = "root";
-	private String dbpassword = "thyatran";
+	private String dbpassword = "mysqlpass";
 	private String dbdriver = "com.mysql.jdbc.Driver";
 
 	public void loadDriver(String dbDriver) {
@@ -32,7 +32,7 @@ public class RegisterDao {
 	public String insert(Member member) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "insert into Tran.member values(?,?,?,?)";
+		String sql = "insert into member values(?,?,?,?)";
 		String result = "Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
