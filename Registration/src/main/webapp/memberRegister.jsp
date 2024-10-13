@@ -4,14 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Account Register </title>
 </head>
 <body>
 	<form action="Register" method="post">
 		<table>
 			<tr>
-				<td>User Name</td>
-				<td><input type="text" name="uname"></td>
+				<td>Name</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>Display Name</td>
+				<td><input type="text" name="displayName"></td>
 			</tr>
 			<tr>
 				<td>Password</td>
@@ -19,12 +23,16 @@
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td><input type="text" name="email"></td>
+				<td><input type="text" name="emailAddress"></td>
 			</tr>
 			<tr>
-				<td>Phone</td>
-				<td><input type="text" name="phone"></td>
+				<td>Address</td>
+				<td><input type="text" name="address"></td>
 			</tr>
+			<tr>
+                <td>Register Anonymously</td>
+                <td><input type="checkbox" name="anonymous" value="false"> Yes</td>
+            </tr>
 			<tr>
 				<td>Submit</td>
 				<td><input type="submit" value="register"></td>
