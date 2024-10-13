@@ -1,14 +1,16 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisterDao {
+
+public class LoginDAO {
 	private String dburl = "jdbc:mysql://localhost:3306/artauction";
 	private String dbuname = "root";
 	private String dbpassword = "thyatran";
 	private String dbdriver = "com.mysql.jdbc.Driver";
-
+	
 	public void loadDriver(String dbDriver) {
 		try {
 			Class.forName(dbDriver);
@@ -29,25 +31,25 @@ public class RegisterDao {
 		return con;
 	}
 
-	public String insert(User user) {
+	public boolean validate(String email, String password) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "INSERT into User (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
-		String result = "Data Entered Successfully";
+		
+		String sql = "SELECT * FROM User WHERE emailAddress = ? AND password = ?";
+		boolean status = false;
+		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(2, user.getName());
-			ps.setString(1, user.getDisplayName());
-			ps.setString(4, user.getPassword());
-			ps.setString(3, user.getEmailAddress());
-			ps.setString(5, user.getAddress());
-			ps.setBoolean(6, user.isAnonymous());
-			ps.executeUpdate();
+			ps.setString(1, email);
+			ps.setString(2, password);
+			
+
+			ResultSet rs = ps.executeQuery();
+			// if found then account is valid
+			status = rs.next(); 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			result = "Data Not Entered Successfully";
 			e.printStackTrace();
 		}
-		return result;
+		return status;
 	}
 }
