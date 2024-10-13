@@ -4,38 +4,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Account Register </title>
+<title>Account Register</title>
 </head>
 <body>
 	<form action="Register" method="post">
 		<table>
+			<h1>Welcome to Online Art Auction</h1>
+			<h2>Register</h2>
 			<tr>
-				<td>Name</td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="name" placeholder="Name"></td>
 			</tr>
 			<tr>
-				<td>Display Name</td>
-				<td><input type="text" name="displayName"></td>
+				<td><input type="text" name="displayName"
+					placeholder="Display Name"></td>
 			</tr>
 			<tr>
-				<td>Password</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password"
+					placeholder="Password"></td>
 			</tr>
 			<tr>
-				<td>Email</td>
-				<td><input type="text" name="emailAddress"></td>
+				<td><input type="text" name="emailAddress" placeholder="Email"></td>
 			</tr>
 			<tr>
-				<td>Address</td>
-				<td><input type="text" name="address"></td>
+				<td><input type="text" name="address" placeholder="Address"></td>
 			</tr>
 			<tr>
-                <td>Register Anonymously</td>
-                <td><input type="checkbox" name="anonymous" value="false"> Yes</td>
-            </tr>
+				<td><input type="checkbox" name="anonymous" value="false">Register
+					Anonymously</td>
+			</tr>
 			<tr>
-				<td>Submit</td>
 				<td><input type="submit" value="register"></td>
+			</tr>
+
+			<tr>
+				<td><a href="login.jsp">Already have an account? Sign in</td>
 			</tr>
 		</table>
 	</form>

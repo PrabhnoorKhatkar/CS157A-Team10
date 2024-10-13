@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="myapp/login-style.css">
 <script src="myapp/main.js"></script>
 <title>Login</title>
 </head>
@@ -36,7 +37,7 @@
 			String errorMessage = (String) request.getAttribute("errorMessage");
 			if (errorMessage != null) {
 			%>
-			<div class="error"><%=errorMessage%></div>
+			<div type="error"><%=errorMessage%></div>
 			<%
 			}
 			%>

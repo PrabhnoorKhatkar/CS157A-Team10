@@ -27,7 +27,7 @@
 
 
 	<!-- Welcome pages -->
-	<display-name>Registration_Tran</display-name>
+	<display-name>Registration</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
