@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `artauction` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `artauction`;
--- MySQL dump 10.13  Distrib 8.0.38, for macos14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for macos14 (arm64)
 --
 -- Host: localhost    Database: artauction
 -- ------------------------------------------------------
@@ -326,7 +324,7 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User` (
-  `accountID` int NOT NULL,
+  `accountID` int NOT NULL AUTO_INCREMENT,
   `displayName` varchar(45) DEFAULT NULL,
   `Name` varchar(45) DEFAULT NULL,
   `emailAddress` varchar(45) DEFAULT NULL,
@@ -334,7 +332,7 @@ CREATE TABLE `User` (
   `address` varchar(45) DEFAULT NULL,
   `anonymous` tinyint DEFAULT '0',
   PRIMARY KEY (`accountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +341,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (11,'Rob','Robert','rob@gmail.com','rob123','777 Brockton Ave',1),(12,'Doro','Doroteo','doro@gmail.com','doro321','30 Memorial Dr',0),(13,'Bill','Bill','bill@gmail.com','bill1234','250 Hartford Ave',0),(14,'Char','Charles','charles@gmail.com','char12345','700 Oak St',0),(15,'Per','Per','per@gmail.com','per122','591 Memorial Dr',1),(16,'Dani','Danilo','dani@gmail.com','dani133','137 Teaticket Hwy',0),(17,'Dav','David','dav@gmail.com','dav144','374 William S Canning Blvd',0),(18,'Je','Jean','je@gmail.com','je155','121 Worcester Rd',0),(19,'Ru','Ruth','ru@gmail.com','ru166','677 Timapny Blvd',1),(20,'Ral','Ralph','ral@gmail.com','ral177','1775 Washington St',0);
+INSERT INTO `User` VALUES (11,'Rob','Robert','rob@gmail.com','rob123','777 Brockton Ave',1),(12,'Doro','Doroteo','doro@gmail.com','doro321','30 Memorial Dr',0),(13,'Bill','Bill','bill@gmail.com','bill1234','250 Hartford Ave',0),(14,'Char','Charles','charles@gmail.com','char12345','700 Oak St',0),(15,'Per','Per','per@gmail.com','per122','591 Memorial Dr',1),(16,'Dani','Danilo','dani@gmail.com','dani133','137 Teaticket Hwy',0),(17,'Dav','David','dav@gmail.com','dav144','374 William S Canning Blvd',0),(18,'Je','Jean','je@gmail.com','je155','121 Worcester Rd',0),(19,'Ru','Ruth','ru@gmail.com','ru166','677 Timapny Blvd',1),(20,'Ral','Ralph','ral@gmail.com','ral177','1775 Washington St',0),(21,'YEEHAW12','Exercise1','test@gmail.com','1234','214 Broadway Ave, San Jose 95112',0);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -356,4 +354,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-01  2:07:42
+-- Dump completed on 2024-10-13  0:27:37

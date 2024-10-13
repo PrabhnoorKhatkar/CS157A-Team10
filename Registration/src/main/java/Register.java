@@ -35,13 +35,16 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String uname = request.getParameter("uname");
+		String name = request.getParameter("name");
+		String displayName = request.getParameter("displayName");
 		String password = request.getParameter("password");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		Member member = new Member(uname, password, email, phone);
+		String emailAddress = request.getParameter("emailAddress");
+		String address = request.getParameter("address");
+		String anonymousParam = request.getParameter("anonymous");
+		Boolean anonymous = Boolean.parseBoolean(anonymousParam);
+		User user = new User(name, displayName, password, emailAddress, address, anonymous);
 		RegisterDao rdao = new RegisterDao();
-		String result = rdao.insert(member);
+		String result = rdao.insert(user);
 		response.getWriter().println(result);
 
 	}

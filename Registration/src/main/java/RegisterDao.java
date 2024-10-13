@@ -29,17 +29,19 @@ public class RegisterDao {
 		return con;
 	}
 
-	public String insert(Member member) {
+	public String insert(User user) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "insert into member values(?,?,?,?)";
+		String sql = "INSERT into User (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
 		String result = "Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, member.getUname());
-			ps.setString(2, member.getPassword());
-			ps.setString(3, member.getEmail());
-			ps.setNString(4, member.getPhone());
+			ps.setString(2, user.getName());
+			ps.setString(1, user.getDisplayName());
+			ps.setString(4, user.getPassword());
+			ps.setString(3, user.getEmailAddress());
+			ps.setString(5, user.getAddress());
+			ps.setBoolean(6, user.isAnonymous());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
