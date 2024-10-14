@@ -17,26 +17,16 @@ public class SearchArtwork extends HttpServlet {
     throws ServletException, IOException {
 
         String searchText = request.getParameter("searchQuery");
+        
+        SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+        
+        ResultSet resultQuery = searchDAO.query(searchText);
+        
+        // TODO add/update resultQuery to homepage
+        
+		
 
-
-        String sql = "SELECT * FROM Artwork WHERE 'title' LIKE ? OR 'description' LIKE ?";
-		String noResult = "No Artworks Found.";
-        PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, searchText);
-		ps.setString(2, searchText);
-
-
-        ResultSet resultSet = statement.executeQuery();
-        if(!resultSet.next())
-        {
-            //TODO Send result no artwork found
-        }
-        else
-        {
-            // TODO: Send result set into homepage .jsp with the structure defined in DTD
-        }
-
-
-        }
+	}
+    
     
 }
