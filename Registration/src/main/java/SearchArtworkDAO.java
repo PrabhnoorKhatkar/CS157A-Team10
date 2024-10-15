@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class SearchArtworkDAO {
 	private String dburl = "jdbc:mysql://localhost:3306/artauction";
 	private String dbuname = "root";
-	private String dbpassword = "dbpassword";
+	private String dbpassword = "thyatran";
 	private String dbdriver = "com.mysql.jdbc.Driver";
 
 	public void loadDriver(String dbDriver) {

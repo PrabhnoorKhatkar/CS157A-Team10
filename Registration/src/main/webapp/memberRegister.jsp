@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="myapp/register-style.css">
 <title>Account Register</title>
 </head>
 <body>
@@ -15,12 +16,10 @@
 				<td><input type="text" name="name" placeholder="Name"></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="displayName"
-					placeholder="Display Name"></td>
+				<td><input type="text" name="displayName" placeholder="Display Name"></td>
 			</tr>
 			<tr>
-				<td><input type="password" name="password"
-					placeholder="Password"></td>
+				<td><input type="password" name="password" placeholder="Password"></td>
 			</tr>
 			<tr>
 				<td><input type="text" name="emailAddress" placeholder="Email"></td>
@@ -29,13 +28,16 @@
 				<td><input type="text" name="address" placeholder="Address"></td>
 			</tr>
 			<tr>
-				<td><input type="checkbox" name="anonymous" value="false">Register
-					Anonymously</td>
+				<td>
+					<label> 
+						<input type="checkbox" name="anonymous" value="false"> 
+						Register Anonymously
+					</label>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="register"></td>
 			</tr>
-
 			<tr>
 				<td><a href="login.jsp">Already have an account? Sign in</td>
 			</tr>

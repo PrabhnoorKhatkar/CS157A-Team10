@@ -42,11 +42,24 @@ public class Register extends HttpServlet {
 		String address = request.getParameter("address");
 		String anonymousParam = request.getParameter("anonymous");
 		Boolean anonymous = Boolean.parseBoolean(anonymousParam);
+		
 		User user = new User(name, displayName, password, emailAddress, address, anonymous);
+		
 		RegisterDao rdao = new RegisterDao();
 		String result = rdao.insert(user);
-		response.getWriter().println(result);
+//		response.getWriter().println(result);
+		
+		if (result.equals("Data Entered Successfully")) {
+			
+			request.getSession().setAttribute("successMessage", "Registered successfully. You can now log in.");
 
+			response.sendRedirect("login.jsp");
+		} else {
+			
+			request.setAttribute("errorMessage", "Registered failed.");
+			
+			request.getRequestDispatcher("memberRegister.jsp").forward(request, response);
+		}
 	}
 
 }
