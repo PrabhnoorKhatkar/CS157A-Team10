@@ -10,28 +10,31 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class Login
  */
-@WebServlet(name="Upload", urlPatterns = {"/Upload/*"})
+@WebServlet(name = "Upload", urlPatterns = {"/Upload/*"})
 @MultipartConfig()
 public class Upload extends HttpServlet {
     private File localUploadDirectory;
+    private int uploadId = 0;
+    private final ArrayList<Path> filepaths = new ArrayList<>();
 
     @Override
     public void init() {
         // Get the file location where it would be stored.
-        localUploadDirectory = Path.of(System.getProperty("user.home")).toFile();
+        // TODO: decide a location for this
+        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir")).toFile();
+        uploadId = 0;
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String filename = request.getPathInfo().substring(1);
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Transfer-Encoding", "binary");
-        Path path = localUploadDirectory.toPath().resolve(filename);
+        int fileId = Integer.parseInt(request.getPathInfo().substring(1));
+        response.setContentType("image/png");
+        Path path = filepaths.get(fileId);
         Files.copy(path, response.getOutputStream());
     }
 
@@ -45,10 +48,14 @@ public class Upload extends HttpServlet {
             return;
         }
 
-        File uploaded = new File(localUploadDirectory, filePart.getSubmittedFileName());
+        File uploaded = new File(localUploadDirectory, uploadId + "-" + filePart.getSubmittedFileName());
         Files.copy(filePart.getInputStream(), uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
         // format is /Registration/Upload/{filename}
-        response.sendRedirect(String.format("%s", filePart.getSubmittedFileName()));
         System.out.println(uploaded.toPath());
+        var out = response.getWriter();
+        out.println(uploadId);
+        filepaths.add(uploaded.toPath());
+        uploadId++;
     }
 }

@@ -10,11 +10,15 @@
 </head>
 <body>
 <!--<p>homepage</p> -->
-<div class="search-container">
-    <h2> Art Auction</h2>
-    <input type="text" class="search-box" placeholder="Search..." name="searchText">
-    <button type="submit" class="search-button">Search</button>
-</div>
+<header class="">
+    <div class="search-container">
+        <h2> Art Auction</h2>
+        <input type="text" class="search-box" placeholder="Search..." name="searchText">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+    <img src="/Registration/Upload/0" alt="profile pic" width="64" height="64">
+</header>
+
 
 <section class="featured-artwork" id="gallery">
     <div class="container">

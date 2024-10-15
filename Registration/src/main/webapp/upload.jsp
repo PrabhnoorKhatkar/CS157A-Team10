@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<h3>File Upload:</h3>
+<h3>Profile picture upload:</h3>
 Select a file to upload: <br/>
 <form action="Upload/" method="POST" enctype="multipart/form-data">
     <input type="file" name="file" size="50"/>

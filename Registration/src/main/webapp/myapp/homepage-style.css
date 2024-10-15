@@ -35,3 +35,7 @@ h2 {
 .search-button:hover {
   background-color: #808080; /* Darker shade on hover */
 }
+
+.nav-header {
+    flex-flow: row;
+}

@@ -1,9 +1,8 @@
-
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**
@@ -44,6 +43,7 @@ public class Login extends HttpServlet {
 		LoginDAO loginDAO = new LoginDAO();
 		
 		if (loginDAO.validate(email, password)) {
+			request.getSession().setAttribute("email", email);
 			response.sendRedirect("homepage.jsp"); //redirect to home page
 		} else {
 			request.setAttribute("errorMessage", "Invalid email or password.");
