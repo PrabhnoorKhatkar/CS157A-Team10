@@ -13,7 +13,7 @@
 <body>
 <form action="/Upload" method="GET">
     <label for="uploadedFileId">Uploaded files</label>
-    <select id="uploadedFileId" size="3" style="width: 500px;">
+    <select id="uploadedFileId" size="3" style="width: 800px;">
         <%
             @SuppressWarnings("unchecked")
             ArrayList<Path> uploaded = (ArrayList<Path>) request.getAttribute("uploaded");
