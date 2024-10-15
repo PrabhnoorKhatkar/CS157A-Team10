@@ -32,6 +32,11 @@ public class Upload extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getPathInfo().substring(1).isEmpty()) {
+            request.setAttribute("uploaded", filepaths);
+            request.getRequestDispatcher("/WEB-INF/list-uploaded.jsp").forward(request, response);
+            response.sendRedirect("/");
+        }
         int fileId = Integer.parseInt(request.getPathInfo().substring(1));
         response.setContentType("image/png");
         Path path = filepaths.get(fileId);
