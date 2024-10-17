@@ -13,8 +13,11 @@
 <header class="">
     <div class="search-container">
         <h2> Art Auction</h2>
-        <input type="text" class="search-box" placeholder="Search..." name="searchText">
-        <button type="submit" class="search-button">Search</button>
+        <form action="SearchArtwork" method="post">
+            <input type="text" class="search-box" placeholder="Search..." name="searchText">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+       
     </div>
     <img src="/Registration/Upload/0" alt="profile pic" width="64" height="64">
 </header>
@@ -45,6 +48,26 @@
         </div>
     </div>
 </section>
+
+
+<section class="search-results" id="gallery">
+    <div class="container">
+        <h2>Search Results</h2>
+        <div class="art-grid">
+          
+                <!-- Iterate over the artwork list and display each artwork -->
+                <forEach var="artwork" items="${artworkList}">
+                    <div class="art-item">
+                        <h3>${artwork.title}</h3>
+                        <p>Starting Bid: $${artwork.startingPrice}</p>
+                        <p>Description: ${artwork.description}</p>
+                    </div>
+                </forEach>
+         
+        </div>
+    </div>
+</section>
+
 
 </body>
 </html>
