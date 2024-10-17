@@ -16,11 +16,15 @@
 			<h2>Login</h2>
 
 			<tr>
-				<td><input type="text" name="email" placeholder="email address"></td>
+				<td><label>
+					<input type="text" name="email" placeholder="email address">
+				</label></td>
 			</tr>
 
 			<tr>
-				<td><input type="password" name="password" placeholder="password"></td>
+				<td><label>
+					<input type="password" name="password" placeholder="password">
+				</label></td>
 			</tr>
 
 			<tr>
@@ -28,7 +32,7 @@
 			</tr>
 
 			<tr>
-				<td><a href="memberRegister.jsp">Sign up</td>
+				<td><a href="memberRegister.jsp">Sign up</a></td>
 			</tr>
 
 			<!-- display error for log in unsuccessfully-->

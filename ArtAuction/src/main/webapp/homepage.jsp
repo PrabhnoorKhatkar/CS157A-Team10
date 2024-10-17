@@ -16,7 +16,7 @@
         <input type="text" class="search-box" placeholder="Search..." name="searchText">
         <button type="submit" class="search-button">Search</button>
     </div>
-    <img src="/Registration/Upload/0" alt="profile pic" width="64" height="64">
+    <img src="${pageContext.request.contextPath}/Upload/0" alt="profile pic" width="64" height="64">
 </header>
 
 

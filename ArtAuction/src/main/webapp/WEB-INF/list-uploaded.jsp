@@ -21,8 +21,7 @@
                 var path = uploaded.get(i);
                 System.out.println(path);
         %>
-        <option value=<%=i%>><%=path.toString()%>
-        </option>
+        <option value=<%=i%>><%=path.toString()%></option>
         <%
             }
         %>
