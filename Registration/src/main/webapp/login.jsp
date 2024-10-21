@@ -24,8 +24,7 @@ background-size: cover;">
 			</tr>
 
 			<tr>
-				<td><input type="password" name="password"
-					placeholder="password"></td>
+				<td><input type="password" name="password" placeholder="password"></td>
 			</tr>
 
 			<tr>
@@ -36,14 +35,25 @@ background-size: cover;">
 				<td><a style = "color: #b5b5b5;" href="memberRegister.jsp">Sign up</a></td>
 			</tr>
 
-			<!-- java code to display error on jsp page -->
+			<!-- display error for log in unsuccessfully-->
+			
+			<!-- display register successful message -->
+			
 			<%
-			String errorMessage = (String) request.getAttribute("errorMessage");
-			if (errorMessage != null) {
+				String errorMessage = (String) request.getAttribute("errorMessage");
+				String successMessage = (String) request.getSession().getAttribute("successMessage");
+				
+				if (errorMessage != null) {
 			%>
-			<div type="error"><%=errorMessage%></div>
+				<div class="error"><%= errorMessage %></div>
 			<%
-			}
+				}
+				if (successMessage != null) {
+			%>
+				<div class="success"><%= successMessage %></div>
+			<%
+				request.getSession().removeAttribute("successMessage");
+				}
 			%>
 		</table>
 	</form>
