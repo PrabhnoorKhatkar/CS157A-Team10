@@ -28,7 +28,7 @@ h1 {
 
 /* headings */
 h1, h2 {
-	color: #515151;
+	color: white;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -67,7 +67,7 @@ input[type="submit"]:hover {
 
 /* sign-up link */
 a {
-    color: #515151;
+    color: #b5b5b5;
     text-decoration: none;
     display: block;
     text-align: center;

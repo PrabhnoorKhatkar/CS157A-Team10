@@ -15,7 +15,8 @@
   		<input type="text" class="search-box" placeholder="Search..." name="searchText">
   		<button type="submit" class="search-button">Search</button>
 	</div>
-	
+
+<!--  placeholder change later -->	
 <section class="featured-artwork" id="gallery">
     <div class="container">
       <h2>Featured Artwork</h2>
