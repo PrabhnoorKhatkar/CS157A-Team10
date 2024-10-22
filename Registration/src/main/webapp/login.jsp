@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="myapp/login-style.css">
+<link rel="stylesheet" href="myapp/login-style.css" type="text/css"/>
 <script src="myapp/main.js"></script>
 <title>Login</title>
 </head>
