@@ -7,6 +7,10 @@
 }
 
 body {
+	background-image: url('https://media.istockphoto.com/id/1441390460/vector/new-york-city-a-paintings-auction-1875.jpg?s=612x612&w=0&k=20&c=9NjYeF6T30rmdD21sknzFM29DL0hbh3-9U_CFEPwLdI='); 
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-size: cover;
     background-color: #f2f2f2;
     height: 100vh;
     display: flex;
@@ -16,6 +20,7 @@ body {
 
 /* form */
 form {
+	backdrop-filter: blur(3px);
 	border-radius: 5px;
 	outline: 1px solid #515151;
     padding: 30px;

@@ -9,13 +9,10 @@
 <script src="myapp/main.js"></script>
 <title>Login</title>
 </head>
-<body style = "background-image: url('https://magazine.artland.com/wp-content/uploads/2022/07/van-gogh-starry-night-min.jpg'); 
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: cover;">
-	<form action="Login" method="post" style = "background-color: rgba(0, 0, 0, 0.8);">
-		<h1 style = "color: #b5b5b5;">Welcome to Online Art Auction</h1>
-		<h2 style = "color: #b5b5b5;">Login</h2>
+<body>
+	<form action="Login" method="post" style = "background-color: rgba(0, 0, 0, 0.6);">
+		<h1 style = "color: white;">Welcome to Online Art Auction</h1>
+		<h2 style = "color: white;">Login</h2>
 		<table>
 			
 

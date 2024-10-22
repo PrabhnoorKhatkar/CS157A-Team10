@@ -23,6 +23,10 @@ img {
 }
 
 body {
+	background-image: url('https://c8.alamy.com/comp/DPXE27/sale-shakespeare-house-DPXE27.jpg'); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
     background-color: #e0e0e0;
     height: 100vh;
     display: flex;
