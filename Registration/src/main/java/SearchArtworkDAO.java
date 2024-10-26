@@ -1,8 +1,11 @@
+import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchArtworkDAO {
     private String dburl = "jdbc:mysql://localhost:3306/artauction";
@@ -31,33 +34,45 @@ public class SearchArtworkDAO {
     }
 
 
-    public ResultSet query(String keyword) {
+    public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ?";
-        String noResult = "No Artworks Found.";
+        String sql = "SELECT * FROM artauction.Artwork WHERE title LIKE ? OR description LIKE ?";
 
+        List<Artwork> searchList =  new ArrayList<>();
 
         ResultSet resultSet = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, keyword);
-            ps.setString(2, keyword);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
 
             resultSet = ps.executeQuery();
 
-            if (!resultSet.next()) {
-                //TODO Send result no artwork found
-
-            }
-
+            while (resultSet.next()) 
+			{
+			    // Retrieve data from the result set
+			    String title = resultSet.getString("title");
+			    float duration = resultSet.getFloat("auctionDuration");
+			    String result = resultSet.getString("result");
+			    float reserve = resultSet.getFloat("reserve");
+			    float startingPrice = resultSet.getFloat("startingPrice");
+			    String description = resultSet.getString("description");
+			    BufferedImage image = null; // TODO: Figure out how to approach image
+			    
+			    
+			    Artwork artwork = new Artwork(title, duration, result, reserve, startingPrice, description, image);
+			    searchList.add(artwork);
+			    
+			}
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-
-        return resultSet;
+    
+        
+        return searchList;
 
 
     }
