@@ -34,7 +34,7 @@ public class SearchArtworkDAO {
     public ResultSet query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork WHERE 'title' LIKE ? OR 'description' LIKE ?";
+        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ?";
         String noResult = "No Artworks Found.";
 
 
