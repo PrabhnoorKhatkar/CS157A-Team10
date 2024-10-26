@@ -23,6 +23,18 @@
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/Login</url-pattern>
 	</servlet-mapping>
+	
+		<!-- SearchArtwork -->
+	<servlet>
+		<servlet-name>SearchArtwork</servlet-name>
+		<servlet-class>SearchArtwork</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchArtwork</servlet-name>
+		<url-pattern>/SearchArtwork</url-pattern>
+	</servlet-mapping>
+	
+	
 
 	<!-- Welcome pages -->
 	<display-name>Registration</display-name>

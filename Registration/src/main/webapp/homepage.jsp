@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -49,20 +50,23 @@
 </section>
 
 
+
 <section class="search-results" id="gallery">
     <div class="container">
         <h2>Search Results</h2>
         <div class="art-grid">
-          
+                 <h2>Show Results</h2>
+                 
                 <!-- Iterate over the artwork list and display each artwork -->
-                <forEach var="artwork" items="${artworkList}">
+                <c:forEach var="artwork" items="${artworkList}">
                     <div class="art-item">
                         <h3>${artwork.title}</h3>
                         <p>Starting Bid: $${artwork.startingPrice}</p>
                         <p>Description: ${artwork.description}</p>
                     </div>
-                </forEach>
+                </c:forEach>
          
+        
         </div>
     </div>
 </section>
