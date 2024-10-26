@@ -5,16 +5,17 @@ public class Artwork
 
 	
 	private String title;
-	private float duration;
+	private String duration;
 	private String result;
-	private float reserve;
+	private String reserve;
 	private float startingPrice;
 	private String description;
 	private BufferedImage image;
 	
+
 	
 	
-	public Artwork(String title, float duration, String result, float reserve, float startingPrice, String description,
+	public Artwork(String title, String duration, String result, String reserve, float startingPrice, String description,
 			BufferedImage image) {
 		super();
 		this.title = title;
@@ -33,10 +34,10 @@ public class Artwork
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public float getDuration() {
+	public String getDuration() {
 		return duration;
 	}
-	public void setDuration(float duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 	public String getResult() {
@@ -45,10 +46,10 @@ public class Artwork
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public float getReserve() {
+	public String getReserve() {
 		return reserve;
 	}
-	public void setReserve(float reserve) {
+	public void setReserve(String reserve) {
 		this.reserve = reserve;
 	}
 	public float getStartingPrice() {

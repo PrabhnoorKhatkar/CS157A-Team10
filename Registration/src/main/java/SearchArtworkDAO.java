@@ -37,7 +37,7 @@ public class SearchArtworkDAO {
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM artauction.Artwork WHERE title LIKE ? OR description LIKE ?";
+        String sql = "SELECT * FROM artauction.Artwork WHERE title LIKE ? OR description LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -48,17 +48,20 @@ public class SearchArtworkDAO {
             ps.setString(2, "%" + keyword + "%");
 
             resultSet = ps.executeQuery();
+            
 
             while (resultSet.next()) 
 			{
+  
 			    // Retrieve data from the result set
 			    String title = resultSet.getString("title");
-			    float duration = resultSet.getFloat("auctionDuration");
+			    String duration = resultSet.getString("auctionDuration");
 			    String result = resultSet.getString("result");
-			    float reserve = resultSet.getFloat("reserve");
+			    String reserve = resultSet.getString("reserve");
 			    float startingPrice = resultSet.getFloat("startingPrice");
 			    String description = resultSet.getString("description");
 			    BufferedImage image = null; // TODO: Figure out how to approach image
+			    
 			    
 			    
 			    Artwork artwork = new Artwork(title, duration, result, reserve, startingPrice, description, image);
@@ -70,8 +73,7 @@ public class SearchArtworkDAO {
             e.printStackTrace();
         }
 
-    
-        
+       
         return searchList;
 
 
