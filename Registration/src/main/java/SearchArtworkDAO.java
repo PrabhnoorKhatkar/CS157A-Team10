@@ -54,6 +54,7 @@ public class SearchArtworkDAO {
 			{
   
 			    // Retrieve data from the result set
+                int id = resultSet.getInt("artID");
 			    String title = resultSet.getString("title");
 			    String duration = resultSet.getString("auctionDuration");
 			    String result = resultSet.getString("result");
@@ -64,7 +65,7 @@ public class SearchArtworkDAO {
 			    
 			    
 			    
-			    Artwork artwork = new Artwork(title, duration, result, reserve, startingPrice, description, image);
+			    Artwork artwork = new Artwork(id, title, duration, result, reserve, startingPrice, description, image);
 			    searchList.add(artwork);
 			    
 			}

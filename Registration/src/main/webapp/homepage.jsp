@@ -50,8 +50,6 @@
     </div>
 </section>
 
-
-
 <section class="search-results" id="gallery">
     <div class="container">
         <h2>Search Results</h2>
@@ -62,6 +60,7 @@
    
                 <!-- Iterate over the artwork list and display each artwork -->
                 <c:forEach var="artwork" items="${artworkList}">
+                    <a href="artworkDetails.jsp?id=${artwork.id}" class="art-item-link">
                     <div class="art-item">
                         <h3>${artwork.title}</h3>
                         <p>Starting Bid: $${artwork.startingPrice}</p>

@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 public class Artwork 
 {
 
-	
+	private int artID;
 	private String title;
 	private String duration;
 	private String result;
@@ -15,9 +15,9 @@ public class Artwork
 
 	
 	
-	public Artwork(String title, String duration, String result, String reserve, float startingPrice, String description,
-			BufferedImage image) {
-		super();
+	public Artwork(int artID, String title, String duration, String result, String reserve, float startingPrice,
+			String description, BufferedImage image) {
+		this.artID = artID;
 		this.title = title;
 		this.duration = duration;
 		this.result = result;
@@ -26,7 +26,7 @@ public class Artwork
 		this.description = description;
 		this.image = image;
 	}
-	
+
 	
 	public String getTitle() {
 		return title;
@@ -69,6 +69,16 @@ public class Artwork
 	}
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+
+
+	public int getArtID() {
+		return artID;
+	}
+
+
+	public void setArtID(int artID) {
+		this.artID = artID;
 	}
 	
 	
