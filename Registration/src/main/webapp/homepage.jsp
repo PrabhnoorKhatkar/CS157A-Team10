@@ -60,13 +60,15 @@
    
                 <!-- Iterate over the artwork list and display each artwork -->
                 <c:forEach var="artwork" items="${artworkList}">
-                    <a href="artworkDetails.jsp?id=${artwork.id}" class="art-item-link">
-                    <div class="art-item">
-                        <h3>${artwork.title}</h3>
-                        <p>Starting Bid: $${artwork.startingPrice}</p>
-                        <p>Description: ${artwork.description}</p>
-                    </div>
-                </c:forEach>
+                <a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
+			    <div class="art-item">
+			        <a href="ArtworkPage?artworkId=${artwork.artID}">
+			            <h3>${artwork.title}</h3>
+			            <p>Starting Bid: $${artwork.startingPrice}</p>
+			            <p>Description: ${artwork.description}</p>
+			        </a>
+			    </div>
+</c:forEach>
          
         
         </div>

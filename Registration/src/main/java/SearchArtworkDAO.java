@@ -79,5 +79,51 @@ public class SearchArtworkDAO {
 
 
     }
+
+	public Artwork getArtworkById(String artworkId) 
+	{
+		
+		loadDriver(dbdriver);
+        Connection con = getConnection();
+        String sql = "SELECT * FROM artauction.Artwork WHERE artID == ?;";
+
+        Artwork returnArtwork = null;
+
+        ResultSet resultSet = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, artworkId);
+ 
+
+            resultSet = ps.executeQuery();
+            
+
+            if (resultSet.next()) 
+			{
+  
+			    // Retrieve data from the result set
+                int id = resultSet.getInt("artID");
+			    String title = resultSet.getString("title");
+			    String duration = resultSet.getString("auctionDuration");
+			    String result = resultSet.getString("result");
+			    String reserve = resultSet.getString("reserve");
+			    float startingPrice = resultSet.getFloat("startingPrice");
+			    String description = resultSet.getString("description");
+			    BufferedImage image = null; // TODO: Figure out how to approach image
+			    
+			    
+			    
+			    returnArtwork = new Artwork(id, title, duration, result, reserve, startingPrice, description, image);
+			   
+			    
+			}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+       
+        return returnArtwork;
+	}
 }
 
