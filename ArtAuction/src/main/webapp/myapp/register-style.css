@@ -6,8 +6,28 @@
     font-size: 15px;
 }
 
+.container {
+	border-radius: 15px;
+	background-color: white;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 5px;
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img {
+	max-width: 200%;
+	max-height: 200%;
+}
+
 body {
-    background-color: #f2f2f2;
+	background-image: url('https://c8.alamy.com/comp/DPXE27/sale-shakespeare-house-DPXE27.jpg'); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+    background-color: #e0e0e0;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -15,7 +35,6 @@ body {
 }
 
 form {
-	outline: 1px solid #515151;
     padding: 30px;
     width: 400px;
 }
@@ -39,8 +58,9 @@ table {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
+	border-radius: 5px;
     border: 1px solid #515151;
-    background-color: #f2f2f2;
+    background-color: white;
     width: 100%;
     padding: 10px;
     margin: 10px 0px 10px;

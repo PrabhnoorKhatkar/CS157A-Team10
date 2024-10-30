@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+         
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,12 +15,14 @@
 <header class="">
     <div class="search-container">
         <h2> Art Auction</h2>
-        <input type="text" class="search-box" placeholder="Search..." name="searchText">
-        <button type="submit" class="search-button">Search</button>
+        <form action="SearchArtwork" method="post">
+            <input type="text" class="search-box" placeholder="Search..." name="searchText">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+       
     </div>
     <img src="${pageContext.request.contextPath}/Upload/0" alt="profile pic" width="64" height="64">
 </header>
-
 
 <section class="featured-artwork" id="gallery">
     <div class="container">
@@ -45,6 +49,32 @@
         </div>
     </div>
 </section>
+
+<section class="search-results" id="gallery">
+    <div class="container">
+        <h2>Search Results</h2>
+        <div class="art-grid">
+                 <h2>Show Results</h2>
+                 
+                 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   
+                <!-- Iterate over the artwork list and display each artwork -->
+                <c:forEach var="artwork" items="${artworkList}">
+                <a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
+			    <div class="art-item">
+			        <a href="ArtworkPage?artworkId=${artwork.artID}">
+			            <h3>${artwork.title}</h3>
+			            <p>Starting Bid: $${artwork.startingPrice}</p>
+			            <p>Description: ${artwork.description}</p>
+			        </a>
+			    </div>
+</c:forEach>
+         
+        
+        </div>
+    </div>
+</section>
+
 
 </body>
 </html>
