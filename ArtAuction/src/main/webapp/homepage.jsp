@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-         
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 
 <html>
@@ -55,8 +55,7 @@
         <h2>Search Results</h2>
         <div class="art-grid">
                  <h2>Show Results</h2>
-                 
-                 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
    
                 <!-- Iterate over the artwork list and display each artwork -->
                 <c:forEach var="artwork" items="${artworkList}">

@@ -33,13 +33,7 @@
 			</tr>
 
 			<tr>
-<<<<<<< HEAD:ArtAuction/src/main/webapp/login.jsp
-				<td><a href="memberRegister.jsp">Sign up</a></td>
-||||||| 5331214:Registration/src/main/webapp/login.jsp
-				<td><a href="memberRegister.jsp">Sign up</td>
-=======
 				<td><a style = "color: #b5b5b5;" href="memberRegister.jsp">Sign up</a></td>
->>>>>>> main:Registration/src/main/webapp/login.jsp
 			</tr>
 
 			<!-- display error for log in unsuccessfully-->
