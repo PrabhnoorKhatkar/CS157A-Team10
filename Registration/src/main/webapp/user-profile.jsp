@@ -37,9 +37,9 @@
 		
 		<h2 class="username">Username</h2>
 		
-		<button class="edit-profile-btn">Edit Profile</button>
+		<a href="edit-profile.jsp" class="edit-profile-btn">Edit Profile</a>
 		
-		<button class="setting-btn">Setting</button>
+		<a href="edit-profile.jsp" class="setting-btn">Setting</a>
 	</div>
 
 	<div class="user-artwork">

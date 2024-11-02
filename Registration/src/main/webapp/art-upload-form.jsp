@@ -13,8 +13,8 @@
 		<h2>Upload Artwork for Auction</h2>
 
 		<!-- TITLE -->
-		<label for="title">Title:</label> <input type="text" id="title"
-			name="title" placeholder="Artwork title" required>
+		<label for="title">Title:</label> 
+		<input type="text" id="title" name="title" placeholder="Artwork title" required>
 
 		<!-- DESCRIPTION -->
 		<label for="description">Description:</label>

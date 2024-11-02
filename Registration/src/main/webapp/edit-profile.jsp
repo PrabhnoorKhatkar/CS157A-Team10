@@ -11,6 +11,6 @@
     <title>Edit profile for <%=request.getSession().getAttribute("email")%></title>
 </head>
 <body>
-
+	<p>something</p>
 </body>
 </html>
