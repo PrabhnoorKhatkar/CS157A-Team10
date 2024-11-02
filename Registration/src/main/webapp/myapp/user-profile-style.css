@@ -2,14 +2,14 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: 'Arial', sans-serif;
+	font-family: Arial, sans-serif;
 }
 
 body {
-	background-color: #F9F9F9;
+	background-color: #F2F2F2;
 }
 
-.header {
+.profile-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -18,7 +18,7 @@ body {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.header-left .logo {
+.logo {
 	font-size: 36px;
 	color: #333;
 	text-decoration: none;
@@ -46,57 +46,54 @@ body {
 
 .upload-btn:hover,
 .signout-btn:hover {
-	background-color: #444;
+	background-color: rgb(58, 59, 59);
 }
 
 .profile-btn img {
 	border-radius: 50%;
 }
 
-.search-form-container {
-	display: flex;
-	justify-content: center;
-	margin: 20px 0;
+
+.profile-container {
+	text-align: center;
+	margin: 30px 0;
 }
 
-.search-box {
-	padding: 10px;
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	width: 300px;
-	font-size: 16px;
+.profile-pic {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
 }
 
-.search-button {
-	padding: 10px 20px;
+.username {
+	margin: 15px 0;
+	font-size: 24px;
+}
+
+.setting-btn,
+.edit-profile-btn {
 	background-color: #555;
 	color: white;
 	border: none;
+	padding: 10px 15px;
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: 700;
 }
 
-.search-button:hover {
-	background-color: #444;
+.setting-btn:hover,
+.edit-profile-btn:hover {
+	background-color: rgb(58, 59, 59);
 }
 
-.featured-artwork,
-.search-results {
-	padding: 40px 20px;
-}
-
-.featured-artwork h2,
-.search-results h2 {
+.user-artwork {
+	margin: 20px;
 	text-align: center;
-	color: #333;
-	margin-bottom: 20px;
 }
 
-.container {
-	max-width: 1200px;
-	margin: 0 auto;
+.user-artwork h2 {
+	margin-bottom: 15px;
 }
 
 .art-grid {
@@ -106,17 +103,23 @@ body {
 }
 
 .art-item {
-	background-color: #fff;
-	border-radius: 35px;
-	padding: 15px;
+	background-color: #f9f9f9;
+	border: none;
+	padding: 20px;
 	margin: 15px;
+	/* gap of each cards */
 	width: 250px;
 	text-align: center;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 35px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-decoration: none;
+	cursor: pointer;
+	display: block;
 }
 
-.art-item:hover {
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.art-item a {
+	text-decoration: none;
+	color: inherit;
 }
 
 .art-item img {
@@ -125,21 +128,8 @@ body {
 	border-radius: 35px;
 }
 
-.art-item h3 {
-	margin: 10px 0;
-	color: #333;
-}
-
 .art-item p {
-	font-size: 14px;
-	color: #666;
-}
-
-.search-results h2 {
-	margin-top: 40px;
-}
-
-.art-item-link {
+	font-size: 13px;
+	color: rgb(58, 59, 59);
 	text-decoration: none;
-	color: inherit;
 }
