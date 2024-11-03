@@ -1,4 +1,6 @@
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -7,15 +9,15 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Logout
  */
-public class Login extends HttpServlet {
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public Logout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -26,8 +28,14 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			session.invalidate();
+		}
+		// redirect to homepage after log out
+		response.sendRedirect("homepage.jsp"); 
+
 	}
 
 	/**
@@ -36,20 +44,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// get email & password
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		// create new member object with data
-		LoginDAO loginDAO = new LoginDAO();
-		
-		if (loginDAO.validate(email, password)) {
-			HttpSession session = request.getSession();
-			request.getSession().setAttribute("email", email);
-			response.sendRedirect("homepage.jsp"); //redirect to home page
-		} else {
-			request.setAttribute("errorMessage", "Invalid email or password.");
-	        request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }
