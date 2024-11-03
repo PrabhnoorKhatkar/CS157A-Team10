@@ -1,0 +1,34 @@
+services:
+    db:
+        image: mysql:8.0
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: dbpassword
+            MYSQL_DATABASE: artauction
+            MYSQL_ROOT_PASSWORD: dbpassword
+        networks:
+            - backend
+        volumes:
+            - "mysql:/data"
+    tomcat10:
+        image: tomcat:10
+        ports:
+            #     tomcat port
+            - 8080:8080
+            #     debugging port
+            - 5005:5005
+        command: "catalina.sh run"
+        networks:
+            - backend
+        volumes:
+            #     "host path to the directory with .war file" / "container tomcat directory with webapps"
+            - "./target:/usr/local/tomcat/webapps"
+        environment:
+          JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+volumes:
+    mysql:
+networks:
+    backend:
+        driver: bridge
