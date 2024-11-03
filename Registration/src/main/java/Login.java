@@ -2,6 +2,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -38,11 +39,12 @@ public class Login extends HttpServlet {
 		// get email & password
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		
 		// create new member object with data
 		LoginDAO loginDAO = new LoginDAO();
 		
 		if (loginDAO.validate(email, password)) {
+			HttpSession session = request.getSession();
 			request.getSession().setAttribute("email", email);
 			response.sendRedirect("homepage.jsp"); //redirect to home page
 		} else {

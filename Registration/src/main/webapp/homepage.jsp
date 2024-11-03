@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 
@@ -19,16 +20,25 @@
 			</h2>
 		</div>
 		<div class="header-right">
-			<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
-		
-			<form action="Logout" method="post">
-				<button type="submit" class="logout-btn">Log Out</button>
-			</form>
-			
-			<a href="user-profile.jsp" class="profile-btn"> <img
-				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
-				height="64">
-			</a>
+			<!-- login is shown when first visit. change to logout + profile + upload when user is logged in  -->
+			<c:choose>
+				<c:when test="${not empty sessionScope.email}">
+
+					<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
+
+					<form action="Logout" method="post">
+						<button type="submit" class="logout-btn">Log Out</button>
+					</form>
+
+					<a href="user-profile.jsp" class="profile-btn"> <img
+						src="myapp/temporary-pic.jpg" alt="profile picture" width="64"
+						height="64">
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="login.jsp" class="login-btn">Log In</a>
+				</c:otherwise>
+			</c:choose>
 
 		</div>
 	</header>

@@ -28,12 +28,13 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		HttpSession session = request.getSession(false);
 		if(session != null) {
 			session.invalidate();
 		}
-		
-		request.getRequestDispatcher("login.jsp").forward(request,response);
+		// redirect to homepage after log out
+		response.sendRedirect("homepage.jsp"); 
 
 	}
 
