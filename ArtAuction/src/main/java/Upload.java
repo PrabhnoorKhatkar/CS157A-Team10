@@ -7,10 +7,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Servlet implementation class Login
@@ -20,16 +22,28 @@ import java.util.ArrayList;
 public class Upload extends HttpServlet {
     private File localUploadDirectory;
     private int uploadId = 0;
-    private final ArrayList<Path> filepaths = new ArrayList<>();
 
     @Override
     public void init() {
         // Get the file location where it would be stored.
         // TODO: decide a location for this
         localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir")).toFile();
-        uploadId = 0;
     }
 
+    public File upload(InputStream inputStream, String filename) throws java.io.IOException {
+        File uploaded = new File(localUploadDirectory, String.format("%s-%s-%s", uploadId, UUID.randomUUID(), filename);
+        Files.copy(inputStream, uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    /***
+     *
+     * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
+     *
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     *
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getPathInfo().substring(1).isEmpty()) {
@@ -43,6 +57,15 @@ public class Upload extends HttpServlet {
         Files.copy(path, response.getOutputStream());
     }
 
+    /***
+     * Uploads the "file" to the OS's tmpdir.
+     * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
+     *
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     *
+     * @throws ServletException
+     * @throws java.io.IOException
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
@@ -52,15 +75,7 @@ public class Upload extends HttpServlet {
             System.out.println("file null");
             return;
         }
-
-        File uploaded = new File(localUploadDirectory, uploadId + "-" + filePart.getSubmittedFileName());
-        Files.copy(filePart.getInputStream(), uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-        // format is /Registration/Upload/{filename}
-        System.out.println(uploaded.toPath());
+        File uploaded = upload(filePart.getInputStream(), filePart.getSubmittedFileName());
         var out = response.getWriter();
-        out.println(uploadId);
-        filepaths.add(uploaded.toPath());
-        uploadId++;
     }
 }
