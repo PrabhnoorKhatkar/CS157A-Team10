@@ -45,7 +45,7 @@ public class Register extends HttpServlet {
 		
 		User user = new User(name, displayName, password, emailAddress, address, anonymous);
 		
-		RegisterDao rdao = new RegisterDao();
+		RegisterDAO rdao = new RegisterDAO();
 		String result = rdao.insert(user);
 //		response.getWriter().println(result);
 		

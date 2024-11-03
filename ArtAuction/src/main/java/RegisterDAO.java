@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RegisterDao {
+public class RegisterDAO {
 	private final String dburl = "jdbc:mysql://localhost:3306/artauction";
 	private final String dbuname = "root";
 	private final String dbpassword = "dbpassword";
