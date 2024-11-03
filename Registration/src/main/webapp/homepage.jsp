@@ -60,18 +60,21 @@
 					<h3>The Eternal Dream</h3>
 					<p>Artist: Jane Doe</p>
 					<p>Starting Bid: $5,000</p>
+					<button type="submit" class="save-btn">Save</button>
 				</div>
 				<div class="art-item">
 					<img src="myapp/temporary-pic.jpg" alt="Artwork 2">
 					<h3>Colors of the Wind</h3>
 					<p>Artist: John Smith</p>
 					<p>Starting Bid: $8,000</p>
+					<button type="submit" class="save-btn">Save</button>
 				</div>
 				<div class="art-item">
 					<img src="myapp/temporary-pic.jpg" alt="Artwork 3">
 					<h3>Whispers in Time</h3>
 					<p>Artist: Alice Brown</p>
 					<p>Starting Bid: $12,000</p>
+					<button type="submit" class="save-btn">Save</button>
 				</div>
 			</div>
 		</div>
@@ -93,6 +96,7 @@
 							<h3>${artwork.title}</h3>
 							<p>Starting Bid: $${artwork.startingPrice}</p>
 							<p>Description: ${artwork.description}</p>
+							<button type="submit" class="save-btn">Save</button>
 						</div>
 					</a>
 				</c:forEach>
