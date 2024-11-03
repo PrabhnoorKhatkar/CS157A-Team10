@@ -7,7 +7,7 @@ public class ImageDAO {
     private String dburl = "jdbc:mysql://localhost:3306/artauction";
     private String dbuname = "root";
     private String dbpassword = "dbpassword";
-    private String dbdriver = "com.mysql.jdbc.Driver";
+    private String dbdriver = "com.mysql.cj.jdbc.Driver";
 
     public void loadDriver(String dbDriver) {
         try {

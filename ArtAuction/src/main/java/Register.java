@@ -41,7 +41,7 @@ public class Register extends HttpServlet {
 		String emailAddress = request.getParameter("emailAddress");
 		String address = request.getParameter("address");
 		String anonymousParam = request.getParameter("anonymous");
-		Boolean anonymous = Boolean.parseBoolean(anonymousParam);
+		boolean anonymous = Boolean.parseBoolean(anonymousParam);
 		
 		User user = new User(name, displayName, password, emailAddress, address, anonymous);
 		
@@ -58,7 +58,7 @@ public class Register extends HttpServlet {
 			
 			request.setAttribute("errorMessage", "Registered failed.");
 			
-			request.getRequestDispatcher("memberRegister.jsp").forward(request, response);
+			request.getRequestDispatcher("register.jsp").forward(request, response);
 		}
 	}
 

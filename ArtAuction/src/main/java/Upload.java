@@ -30,10 +30,12 @@ public class Upload extends HttpServlet {
         localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir")).toFile();
     }
 
-    public File upload(InputStream inputStream, String filename) throws java.io.IOException {
-        File uploaded = new File(localUploadDirectory, String.format("%s-%s-%s", uploadId, UUID.randomUUID(), filename);
+    private File upload(InputStream inputStream, String filename) throws java.io.IOException {
+        File uploaded = new File(localUploadDirectory, String.format("%s-%s-%s", uploadId, UUID.randomUUID(), filename));
         Files.copy(inputStream, uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        return uploaded;
     }
+
 
     /***
      *
@@ -46,15 +48,7 @@ public class Upload extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getPathInfo().substring(1).isEmpty()) {
-            request.setAttribute("uploaded", filepaths);
-            request.getRequestDispatcher("/WEB-INF/list-uploaded.jsp").forward(request, response);
-            response.sendRedirect("/");
-        }
-        int fileId = Integer.parseInt(request.getPathInfo().substring(1));
         response.setContentType("image/png");
-        Path path = filepaths.get(fileId);
-        Files.copy(path, response.getOutputStream());
     }
 
     /***
@@ -76,6 +70,8 @@ public class Upload extends HttpServlet {
             return;
         }
         File uploaded = upload(filePart.getInputStream(), filePart.getSubmittedFileName());
+        response.setContentType("text/plain");
         var out = response.getWriter();
+        out.write(uploaded.getAbsolutePath());
     }
 }

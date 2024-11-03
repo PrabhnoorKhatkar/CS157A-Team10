@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class RegisterDao {
-	private String dburl = "jdbc:mysql://localhost:3306/artauction";
-	private String dbuname = "root";
-	private String dbpassword = "dbpassword";
-	private String dbdriver = "com.mysql.jdbc.Driver";
+	private final String dburl = "jdbc:mysql://localhost:3306/artauction";
+	private final String dbuname = "root";
+	private final String dbpassword = "dbpassword";
+	private final String dbdriver = "com.mysql.cj.jdbc.Driver";
 
 	public void loadDriver(String dbDriver) {
 		try {
