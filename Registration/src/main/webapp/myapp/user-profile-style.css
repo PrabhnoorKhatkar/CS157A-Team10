@@ -31,13 +31,13 @@ body {
 }
 
 .upload-btn,
-.signout-btn {
-	background-color: #555;
-	color: #fff;
+.logout-btn {
+	background-color: transparent;
+	color: #444;
 	padding: 10px 15px;
 	margin: 0 5px;
-	border: none;
-	border-radius: 5px;
+	border: 1px solid #444;
+	/*border-radius: 5px;*/
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: 700;
@@ -45,8 +45,9 @@ body {
 }
 
 .upload-btn:hover,
-.signout-btn:hover {
-	background-color: rgb(58, 59, 59);
+.logout-btn:hover {
+	/*background-color: rgb(58, 59, 59);*/
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .profile-btn img {
@@ -66,26 +67,28 @@ body {
 }
 
 .username {
-	margin: 15px 0;
+	margin: 15px 0px 30px 0px;
 	font-size: 24px;
 }
 
 .setting-btn,
 .edit-profile-btn {
-	background-color: #555;
-	color: white;
-	border: none;
+	background-color: transparent;
+	color: #444;
+	border: 1px solid #444;
 	padding: 10px 15px;
-	border-radius: 5px;
+	/*border-radius: 5px;*/
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: 700;
 	text-decoration: none;
+	margin: 10px;
 }
 
 .setting-btn:hover,
 .edit-profile-btn:hover {
-	background-color: rgb(58, 59, 59);
+	/*background-color: rgb(58, 59, 59);*/
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .user-artwork {

@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="https://jakarta.ee/xml/ns/jakartaee"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-	version="6.0">
-	<!-- Register -->
-	<servlet>
-		<display-name>Register</display-name>
-		<servlet-name>Register</servlet-name>
-		<servlet-class>Register</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Register</servlet-name>
-		<url-pattern>/Register</url-pattern>
-	</servlet-mapping>
-
-	<!-- Login -->
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>Login</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/Login</url-pattern>
-	</servlet-mapping>
-	
-		<!-- SearchArtwork -->
-	<servlet>
-		<servlet-name>SearchArtwork</servlet-name>
-		<servlet-class>SearchArtwork</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SearchArtwork</servlet-name>
-		<url-pattern>/SearchArtwork</url-pattern>
-	</servlet-mapping>
-	
-	
-
-	<!-- Welcome pages -->
-	<display-name>Registration</display-name>
-	<welcome-file-list>
-		<welcome-file>homepage.html</welcome-file>
-		<welcome-file>homepage.jsp</welcome-file>
-	</welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <servlet>
+    <display-name>Register</display-name>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SearchArtwork</servlet-name>
+    <servlet-class>SearchArtwork</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchArtwork</servlet-name>
+    <url-pattern>/SearchArtwork</url-pattern>
+  </servlet-mapping>
+  <display-name>Registration</display-name>
+  <welcome-file-list>
+    <welcome-file>homepage.html</welcome-file>
+    <welcome-file>homepage.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>UploadArtwork</display-name>
+    <servlet-name>UploadArtwork</servlet-name>
+    <servlet-class>UploadArtwork</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadArtwork</servlet-name>
+    <url-pattern>/UploadArtwork</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
 </web-app>

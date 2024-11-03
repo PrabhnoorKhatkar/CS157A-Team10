@@ -21,7 +21,7 @@
 
 			<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
 
-			<button class="signout-btn">Sign Out</button>
+			<button class="logout-btn">Log Out</button>
 
 			<a href="user-profile.jsp" class="profile-btn"> <img
 				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
@@ -31,21 +31,21 @@
 	</header>
 
 	<div class="profile-container">
-		
+
 		<img src="myapp/temporary-pic.jpg" alt="Profile Picture"
 			class="profile-pic">
-		
+
 		<h2 class="username">Username</h2>
-		
-		<a href="edit-profile.jsp" class="edit-profile-btn">Edit Profile</a>
-		
-		<a href="edit-profile.jsp" class="setting-btn">Setting</a>
+
+		<a href="edit-profile.jsp" class="edit-profile-btn">Edit Profile</a> <a
+			href="edit-profile.jsp" class="setting-btn">Setting</a>
+
 	</div>
 
 	<div class="user-artwork">
 		<h2>My Artwork</h2>
 		<div class="art-grid">
-			
+
 			<div class="art-item">
 				<a href="ArtworkPage?artworkId=${artwork.artID}"
 					class="art-item-link">
@@ -54,7 +54,7 @@
 					<p>Description: ${artwork.description}</p>
 				</a>
 			</div>
-			
+
 			<div class="art-item">
 				<a href="ArtworkPage?artworkId=${artwork.artID}"
 					class="art-item-link">
@@ -63,7 +63,7 @@
 					<p>Description: ${artwork.description}</p>
 				</a>
 			</div>
-			
+
 			<div class="art-item">
 				<a href="ArtworkPage?artworkId=${artwork.artID}"
 					class="art-item-link">
@@ -72,7 +72,7 @@
 					<p>Description: ${artwork.description}</p>
 				</a>
 			</div>
-			
+
 		</div>
 	</div>
 

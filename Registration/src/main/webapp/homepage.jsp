@@ -20,9 +20,11 @@
 		</div>
 		<div class="header-right">
 			<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
-
-			<button class="signout-btn">Sign Out</button>
-
+		
+			<form action="Logout" method="post">
+				<button type="submit" class="logout-btn">Log Out</button>
+			</form>
+			
 			<a href="user-profile.jsp" class="profile-btn"> <img
 				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
 				height="64">
@@ -44,22 +46,19 @@
 		<div class="container">
 			<div class="art-grid">
 				<div class="art-item">
-					<img src="myapp/temporary-pic.jpg"
-						alt="Artwork 1">
+					<img src="myapp/temporary-pic.jpg" alt="Artwork 1">
 					<h3>The Eternal Dream</h3>
 					<p>Artist: Jane Doe</p>
 					<p>Starting Bid: $5,000</p>
 				</div>
 				<div class="art-item">
-					<img src="myapp/temporary-pic.jpg"
-						alt="Artwork 2">
+					<img src="myapp/temporary-pic.jpg" alt="Artwork 2">
 					<h3>Colors of the Wind</h3>
 					<p>Artist: John Smith</p>
 					<p>Starting Bid: $8,000</p>
 				</div>
 				<div class="art-item">
-					<img src="myapp/temporary-pic.jpg"
-						alt="Artwork 3">
+					<img src="myapp/temporary-pic.jpg" alt="Artwork 3">
 					<h3>Whispers in Time</h3>
 					<p>Artist: Alice Brown</p>
 					<p>Starting Bid: $12,000</p>
