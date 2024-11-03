@@ -80,19 +80,19 @@ public class SearchArtworkDAO {
 
     }
 
-	public Artwork getArtworkById(String artworkId) 
+	public Artwork getArtworkById(int artworkId) 
 	{
 		
 		loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM artauction.Artwork WHERE artID == ?;";
+        String sql = "SELECT * FROM artauction.Artwork WHERE artID = ?;";
 
         Artwork returnArtwork = null;
 
         ResultSet resultSet = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, artworkId);
+            ps.setInt(1, artworkId);
  
 
             resultSet = ps.executeQuery();

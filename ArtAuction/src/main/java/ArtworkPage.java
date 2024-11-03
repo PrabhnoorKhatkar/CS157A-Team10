@@ -12,7 +12,8 @@ public class ArtworkPage extends HttpServlet
 	
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String artworkId = request.getParameter("artworkId");
+       
+        int artworkId = Integer.parseInt(request.getParameter("id"));
       
         SearchArtworkDAO searchDAO = new SearchArtworkDAO();
         Artwork artwork = searchDAO.getArtworkById(artworkId); 
