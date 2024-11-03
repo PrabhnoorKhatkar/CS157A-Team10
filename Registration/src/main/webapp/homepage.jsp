@@ -91,7 +91,7 @@
 
 				<!-- Iterate over the artwork list and display each artwork -->
 				<c:forEach var="artwork" items="${artworkList}">
-					<a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
+					<a href="ArtworkPage?id=${artwork.artID}" class="art-item-link">
 						<div class="art-item">
 							<h3>${artwork.title}</h3>
 							<p>Starting Bid: $${artwork.startingPrice}</p>

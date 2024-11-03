@@ -50,4 +50,14 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ArtworkPage</servlet-name>
+    <servlet-class>ArtworkPage</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ArtworkPage</servlet-name>
+    <url-pattern>/ArtworkPage</url-pattern>
+</servlet-mapping>
+
 </web-app>
