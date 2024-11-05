@@ -19,7 +19,7 @@
 
 			<div class="header-right">
 
-				<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
+				<a href="art-upload-form.jsp" class="upload-btn">ImageUpload</a>
 
 				<button class="logout-btn">Log Out</button>
 

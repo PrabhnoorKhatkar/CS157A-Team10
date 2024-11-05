@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -19,15 +19,21 @@ import java.util.UUID;
  */
 @WebServlet(name = "Upload", urlPatterns = {"/Upload/*"})
 @MultipartConfig()
-public class Upload extends HttpServlet {
+public class ImageUpload extends HttpServlet {
     private File localUploadDirectory;
     private int uploadId = 0;
+    private ImageDAO dao = new ImageDAO();
 
     @Override
     public void init() {
         // Get the file location where it would be stored.
         // TODO: decide a location for this
         localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir")).toFile();
+        var context = getServletContext();
+        Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
+        for (var s: resourcePaths) {
+            var realpath = Path.of(context.getRealPath(s));
+        }
     }
 
     private File upload(InputStream inputStream, String filename) throws java.io.IOException {
@@ -36,6 +42,10 @@ public class Upload extends HttpServlet {
         return uploaded;
     }
 
+    private File retrieve(int id) {
+        var filepath = dao.findByID(id);
+        return filepath.map(image -> localUploadDirectory.toPath().resolve(image.getFilename()).toFile()).orElse(null);
+    }
 
     /***
      *

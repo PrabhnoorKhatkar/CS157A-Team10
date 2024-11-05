@@ -12,7 +12,7 @@
 		<br/>
 		<form action="Upload/" method="POST" enctype="multipart/form-data">
 			<input type="file" name="file" size="50"/> <br/> <input
-				type="submit" value="Upload File"/>
+				type="submit" value="ImageUpload File"/>
 		</form>
 	</body>
 </html>

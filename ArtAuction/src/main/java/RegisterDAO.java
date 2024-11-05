@@ -3,31 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RegisterDAO {
-	private final String dburl = "jdbc:mysql://localhost:3306/artauction";
-	private final String dbuname = "root";
-	private final String dbpassword = "dbpassword";
-	private final String dbdriver = "com.mysql.cj.jdbc.Driver";
-
-	public void loadDriver(String dbDriver) {
-		try {
-			Class.forName(dbDriver);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public Connection getConnection() {
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection(dburl, dbuname, dbpassword);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return con;
-	}
+public class RegisterDAO extends DAO {
 
 	public String insert(User user) {
 		loadDriver(dbdriver);

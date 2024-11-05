@@ -8,7 +8,12 @@ services:
             MYSQL_PASSWORD: dbpassword
             MYSQL_DATABASE: artauction
             MYSQL_ROOT_PASSWORD: dbpassword
+        networks:
+            - backend
         volumes:
             - "mysql:/data"
 volumes:
     mysql:
+networks:
+    backend:
+        driver: host

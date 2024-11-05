@@ -1,53 +1,24 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
+import java.nio.file.Path;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+@Stateless
 public class ImageDAO {
-    private String dburl = "jdbc:mysql://localhost:3306/artauction";
-    private String dbuname = "root";
-    private String dbpassword = "dbpassword";
-    private String dbdriver = "com.mysql.cj.jdbc.Driver";
+    @PersistenceContext
+    private EntityManager em;
 
-    public void loadDriver(String dbDriver) {
-        try {
-            Class.forName(dbDriver);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public List<Image> getAllImages() {
+        return em.createQuery("SELECT i FROM Image i", Image.class).getResultList();
     }
 
-    public Connection getConnection() {
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(dburl, dbuname, dbpassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return con;
-    }
-
-    public String insert(User user) {
-        loadDriver(dbdriver);
-        Connection con = getConnection();
-        String sql = "INSERT into User (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
-        String result = "Data Entered Successfully";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(2, user.getName());
-            ps.setString(1, user.getDisplayName());
-            ps.setString(4, user.getPassword());
-            ps.setString(3, user.getEmailAddress());
-            ps.setString(5, user.getAddress());
-            ps.setBoolean(6, user.isAnonymous());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            result = "Data Not Entered Successfully";
-            e.printStackTrace();
-        }
-        return result;
+    public Optional<Image> findByID(int id) {
+        return Optional.ofNullable(em.find(Image.class, id));
     }
 }

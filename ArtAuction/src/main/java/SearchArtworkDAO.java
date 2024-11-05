@@ -1,3 +1,5 @@
+import jakarta.persistence.EntityManager;
+
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,37 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchArtworkDAO {
-    private String dburl = "jdbc:mysql://localhost:3306/artauction";
-    private String dbuname = "root";
-    private String dbpassword = "dbpassword";
-    private String dbdriver = "com.mysql.cj.jdbc.Driver";
-
-    public void loadDriver(String dbDriver) {
-        try {
-            Class.forName(dbDriver);
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() {
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(dburl, dbuname, dbpassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return con;
-    }
-
+public class SearchArtworkDAO extends DAO {
 
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM artauction.Artwork WHERE title LIKE ? OR description LIKE ?;";
+        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -52,21 +29,14 @@ public class SearchArtworkDAO {
 
             while (resultSet.next()) 
 			{
-  
+
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("artID");
+                int id = resultSet.getInt("ID");
 			    String title = resultSet.getString("title");
-			    String duration = resultSet.getString("auctionDuration");
-			    String result = resultSet.getString("result");
-			    String reserve = resultSet.getString("reserve");
-			    float startingPrice = resultSet.getFloat("startingPrice");
 			    String description = resultSet.getString("description");
+                String artist = resultSet.getString("artist");
 			    BufferedImage image = null; // TODO: Figure out how to approach image
-			    
-			    
-			    
-			    Artwork artwork = new Artwork(id, title, duration, result, reserve, startingPrice, description, image);
-			    searchList.add(artwork);
+			    searchList.add(new Artwork(id, title, description, artist));
 			    
 			}
         } catch (SQLException e) {
@@ -82,38 +52,29 @@ public class SearchArtworkDAO {
 
 	public Artwork getArtworkById(int artworkId) 
 	{
-		
-		loadDriver(dbdriver);
-        Connection con = getConnection();
-        String sql = "SELECT * FROM artauction.Artwork WHERE artID = ?;";
 
-        Artwork returnArtwork = null;
-
-        ResultSet resultSet = null;
+        var con = getConnection();
+        Artwork returnArtwork = new Artwork();
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork WHERE ID = ?");
             ps.setInt(1, artworkId);
- 
 
-            resultSet = ps.executeQuery();
+            var resultSet = ps.executeQuery();
             
 
-            if (resultSet.next()) 
+            if (resultSet.next())
 			{
   
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("artID");
-			    String title = resultSet.getString("title");
-			    String duration = resultSet.getString("auctionDuration");
-			    String result = resultSet.getString("result");
-			    String reserve = resultSet.getString("reserve");
-			    float startingPrice = resultSet.getFloat("startingPrice");
-			    String description = resultSet.getString("description");
-			    BufferedImage image = null; // TODO: Figure out how to approach image
+                int id = resultSet.getInt("ID");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                String artist = resultSet.getString("artist");
+                BufferedImage image = null; // TODO: Figure out how to approach image
+
 			    
 			    
-			    
-			    returnArtwork = new Artwork(id, title, duration, result, reserve, startingPrice, description, image);
+			    returnArtwork = new Artwork(id, title, description, artist);
 			   
 			    
 			}

@@ -33,7 +33,7 @@
 				<!-- login is shown when first visit. change to logout + profile + upload when user is logged in  -->
 				<c:choose>
 				<c:when test="${not empty sessionScope.email}">
-				<a href="art-upload-form.jsp" class="upload-btn">Upload</a>
+				<a href="art-upload-form.jsp" class="upload-btn">ImageUpload</a>
 				<form action="Logout" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
@@ -55,17 +55,25 @@
 
 
 							<!-- Iterate over the artwork list and display each artwork -->
-							<c:forEach var="artwork" items="${artworkList}">
-								<a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
-									<div class="art-item">
-										<a href="ArtworkPage?artworkId=${artwork.artID}">
-											<h3>${artwork.title}</h3>
-											<p>Starting Bid: $${artwork.startingPrice}</p>
-											<p>Description: ${artwork.description}</p>
+							<c:choose>
+								<c:when test="${not empty sessionScope.artworkList}">
+									<jsp:useBean id="artworkList" scope="request" type="java.util.List"/>
+									<c:forEach var="artwork" items="${artworkList}">
+										<a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
+											<div class="art-item">
+												<a href="ArtworkPage?artworkId=${artwork.artID}">
+													<h3>${artwork.title}</h3>
+													<p>Starting Bid: $${artwork.startingPrice}</p>
+													<p>Description: ${artwork.description}</p>
+												</a>
+											</div>
 										</a>
-									</div>
-								</a>
-							</c:forEach>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div>(no artworks)</div>
+								</c:otherwise>
+							</c:choose>
 
 
 						</div>
