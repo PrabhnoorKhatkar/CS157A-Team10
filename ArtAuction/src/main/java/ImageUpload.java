@@ -1,3 +1,4 @@
+import jakarta.ejb.Startup;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,12 +14,15 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Servlet implementation class Login
  */
-@WebServlet(name = "Upload", urlPatterns = {"/Upload/*"})
+@WebServlet(name = "ImageUpload", urlPatterns = {"/ImageUpload/*"})
 @MultipartConfig()
+@Startup
 public class ImageUpload extends HttpServlet {
     private File localUploadDirectory;
     private int uploadId = 0;
@@ -32,6 +36,11 @@ public class ImageUpload extends HttpServlet {
         var context = getServletContext();
         Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
         for (var s: resourcePaths) {
+            System.err.println(s);
+            try {
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             var realpath = Path.of(context.getRealPath(s));
         }
     }
@@ -58,7 +67,17 @@ public class ImageUpload extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("image/png");
+        response.setContentType("text/html");
+
+        var out = response.getWriter();
+        out.println("<html>");
+        out.println("hi");
+        Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
+        for (var s: resourcePaths) {
+            out.println(s);
+            var realpath = Path.of(getServletContext().getRealPath(s));
+        }
+        out.println("</html>");
     }
 
     /***
