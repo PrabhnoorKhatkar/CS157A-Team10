@@ -1,28 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="myapp/artwork-style.css">
-		<title>Artwork</title>
-	</head>
-	<body>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="myapp/artwork-style.css">
+<title>Artwork</title>
+</head>
+<body>
 
-		<!-- TODO Iterate over the artwork list and display each artwork -->
+	<!-- TODO Iterate over the artwork list and display each artwork -->
 
-		<section class="artwork-details">
-			<div class="container">
-				<h2>Title: ${artwork.title}</h2>
-				<p>Description: ${artwork.description}</p>
-				<button class="save-btn">Save</button>
-				
-			</div>
-		</section>
+	<section class="artwork-details">
+		<div class="container">
+			<h2>Title: ${artwork.title}</h2>
+			<p>Description: ${artwork.description}</p>
 
-		<%-- TODO populate rest
+			<!-- save favorite artwork functionality -->
+			<form action="SaveArtwork" method="post">
+
+				<input type="hidden" name="artworkId" value="${artworkID}">
+
+				<input type="hidden" name="userID" value="${sessionScope.userID}">
+
+				<button type="submit" class="save-btn">Save</button>
+
+			</form>
+
+
+		</div>
+	</section>
+
+	<%-- TODO populate rest
 <section class="artwork-details">
 	<div class="container">
 		<h2>${artwork.title}Title</h2>
@@ -41,5 +52,5 @@
 	</div>
 </section>
 --%>
-	</body>
+</body>
 </html>

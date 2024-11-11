@@ -50,14 +50,22 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ArtworkPage</servlet-name>
     <servlet-class>ArtworkPage</servlet-class>
-</servlet>
-<servlet-mapping>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>ArtworkPage</servlet-name>
     <url-pattern>/ArtworkPage</url-pattern>
-</servlet-mapping>
-
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveArtwork</display-name>
+    <servlet-name>SaveArtwork</servlet-name>
+    <servlet-class>SaveArtwork</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveArtwork</servlet-name>
+    <url-pattern>/SaveArtwork</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -137,3 +137,8 @@ body {
 	color: rgb(58, 59, 59);
 	text-decoration: none;
 }
+
+.saved-artwork {
+	margin: 20px;
+	text-align: center;
+}
