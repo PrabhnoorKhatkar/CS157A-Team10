@@ -6,13 +6,13 @@ public class Artwork {
     private String artist;
 
     public Artwork() {
-        this.artist = "<no-artist>";
+        //this.artist = "<no-artist>";
         this.description = "<no-description>";
         this.id = -1;
         this.title = "<no-title>";
     }
-    public Artwork(Integer id, String description, String artist, String title) {
-        this.artist = artist;
+    public Artwork(Integer id, String description, String title) {
+        //this.artist = artist;
         this.description = description;
         this.id = id;
         this.title = title;

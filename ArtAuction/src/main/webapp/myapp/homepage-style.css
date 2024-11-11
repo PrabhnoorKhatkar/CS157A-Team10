@@ -22,6 +22,9 @@ body {
 	font-size: 36px;
 	color: #333;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 15px;
 }
 
 .header-right {
@@ -77,10 +80,11 @@ body {
 }
 
 .search-box {
+	
 	padding: 10px;
 	/*border-radius: 5px;*/
 	border: 1px solid #444;
-	width: 300px;
+	width: 650px;
 	font-size: 16px;
 }
 

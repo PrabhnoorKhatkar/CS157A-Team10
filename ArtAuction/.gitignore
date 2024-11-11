@@ -20,6 +20,17 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 
 ### NetBeans ###
 /nbproject/private/

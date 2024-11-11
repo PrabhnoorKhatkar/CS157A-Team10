@@ -12,16 +12,6 @@
 	</head>
 	<body>
 		<!--<p>homepage</p> -->
-		<header class="">
-			<div class="search-container">
-				<h2> Art Auction</h2>
-				<form action="SearchArtwork" method="post">
-					<input type="text" class="search-box" placeholder="Search..." name="searchText">
-					<button type="submit" class="search-button">Search</button>
-				</form>
-
-			</div>
-		</header>
 
 		<header class="header">
 			<div class="header-left">
@@ -29,7 +19,14 @@
 					<a href="homepage.jsp" class="logo">ART AUCTION</a>
 				</h2>
 			</div>
+			<div class="header-mid">
+				<form action="SearchArtwork" method="post">
+					<input type="text" class="search-box" placeholder="Search..." name="searchText">
+					<button type="submit" class="search-button">Search</button>
+				</form>
+			</div>
 			<div class="header-right">
+				
 				<!-- login is shown when first visit. change to logout + profile + upload when user is logged in  -->
 				<c:choose>
 				<c:when test="${not empty sessionScope.email}">
@@ -47,7 +44,10 @@
 				</c:otherwise>
 				</c:choose>
 
-				<section class="search-results" id="gallery">
+			</div>
+		</header>
+		<header>
+			<section class="search-results" id="gallery">
 					<div class="container">
 						<h2>Search Results</h2>
 						<div class="art-grid">
@@ -79,6 +79,7 @@
 						</div>
 					</div>
 				</section>
+		</header>
 
 
 	</body>

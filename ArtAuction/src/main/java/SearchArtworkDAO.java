@@ -31,12 +31,12 @@ public class SearchArtworkDAO extends DAO {
 			{
 
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("ID");
+                int id = resultSet.getInt("artID");
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
-                String artist = resultSet.getString("artist");
+                //String artist = resultSet.getString("artist");
 			    BufferedImage image = null; // TODO: Figure out how to approach image
-			    searchList.add(new Artwork(id, title, description, artist));
+			    searchList.add(new Artwork(id, description, title));
 			    
 			}
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class SearchArtworkDAO extends DAO {
 
 			    
 			    
-			    returnArtwork = new Artwork(id, title, description, artist);
+			    returnArtwork = new Artwork(id, description, title);
 			   
 			    
 			}

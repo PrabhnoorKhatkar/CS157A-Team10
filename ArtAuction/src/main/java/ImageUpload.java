@@ -37,10 +37,6 @@ public class ImageUpload extends HttpServlet {
         Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
         for (var s: resourcePaths) {
             System.err.println(s);
-            try {
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
             var realpath = Path.of(context.getRealPath(s));
         }
     }
