@@ -1,0 +1,19 @@
+services:
+    db:
+        image: mysql:8.0
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_USER: root
+            MYSQL_PASSWORD: dbpassword
+            MYSQL_DATABASE: artauction
+            MYSQL_ROOT_PASSWORD: dbpassword
+        networks:
+            - backend
+        volumes:
+            - "mysql:/data"
+volumes:
+    mysql:
+networks:
+    backend:
+        driver: host
