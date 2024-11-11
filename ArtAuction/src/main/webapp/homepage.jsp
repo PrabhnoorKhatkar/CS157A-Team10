@@ -51,19 +51,16 @@
 					<div class="container">
 						<h2>Search Results</h2>
 						<div class="art-grid">
-							<h2>Show Results</h2>
-
 
 							<!-- Iterate over the artwork list and display each artwork -->
 							<c:choose>
-								<c:when test="${not empty sessionScope.artworkList}">
-									<jsp:useBean id="artworkList" scope="request" type="java.util.List"/>
-									<c:forEach var="artwork" items="${artworkList}">
-										<a href="artwork.jsp?id=${artwork.artID}" class="art-item-link">
+								<c:when test="${not empty requestScope.artworkList}">
+									<c:forEach var="artwork" items="${requestScope.artworkList}">
+										<a href="artwork.jsp?id=${artwork.id}" class="art-item-link">
 											<div class="art-item">
-												<a href="ArtworkPage?artworkId=${artwork.artID}">
+												<a href="ArtworkPage?artworkId=${artwork.id}">
 													<h3>${artwork.title}</h3>
-													<p>Starting Bid: $${artwork.startingPrice}</p>
+											       
 													<p>Description: ${artwork.description}</p>
 												</a>
 											</div>

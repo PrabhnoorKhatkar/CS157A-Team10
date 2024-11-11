@@ -31,7 +31,7 @@ public class SearchArtworkDAO extends DAO {
 			{
 
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("artID");
+                int id = resultSet.getInt("ID");
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
                 //String artist = resultSet.getString("artist");
