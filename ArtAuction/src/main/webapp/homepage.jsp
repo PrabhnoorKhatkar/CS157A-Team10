@@ -56,11 +56,10 @@
 							<c:choose>
 								<c:when test="${not empty requestScope.artworkList}">
 									<c:forEach var="artwork" items="${requestScope.artworkList}">
-										<a href="artwork.jsp?id=${artwork.id}" class="art-item-link">
+										<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
 											<div class="art-item">
-												<a href="ArtworkPage?artworkId=${artwork.id}">
+												
 													<h3>${artwork.title}</h3>
-											       
 													<p>Description: ${artwork.description}</p>
 												</a>
 											</div>
