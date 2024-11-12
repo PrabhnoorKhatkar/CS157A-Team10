@@ -30,7 +30,7 @@
 				<!-- login is shown when first visit. change to logout + profile + upload when user is logged in  -->
 				<c:choose>
 				<c:when test="${not empty sessionScope.email}">
-				<a href="art-upload-form.jsp" class="upload-btn">ImageUpload</a>
+				<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
 				<form action="Logout" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>

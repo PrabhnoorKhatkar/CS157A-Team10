@@ -9,15 +9,15 @@
 	</head>
 	<body>
 		<form action="UploadArtwork" method="post" class="upload-form"
-			  enctype="multipart/form-data">
+			  >
 			<h2>Upload Artwork for Auction</h2>
 
 			<!-- TITLE -->
-			<label for="title">Title:</label> <input type="text" id="title"
+			<label for="title">Title:</label> <input type="text"
 													 name="title" placeholder="Artwork title" required>
 													 
 			<!-- TITLE -->
-			<label for="artist">Artist:</label> <input type="text" id="artist"
+			<label for="artist">Artist:</label> <input type="text" 
 													 name="artist" placeholder="Artist name" required>
 
 			<!-- DESCRIPTION -->
@@ -26,22 +26,22 @@
 					  placeholder="Describe your artwork" required></textarea>
 
 			<!-- IMAGE UPLOAD -->
-			<label for="image">Upload Image:</label> <input type="file" id="image"
+			<label for="image">Upload Image:</label> <input type="file" 
 															name="image" accept="image/*" required>
 
 			<!-- STARTING PRICE -->
 			<label for="startingPrice">Starting Price ($):</label> <input
-				type="number" id="startingPrice" name="startingPrice"
+				type="number"  name="startingPrice"
 				placeholder="e.g., 500" min="0" required>
 				
-			<!-- STARTING PRICE -->
+			<!-- RESERVE PRICE -->
 			<label for="reservePrice">Reserve Price ($):</label> <input
-				type="number" id="reservePrice" name="reservePrice"
+				type="number"  name="reservePrice"
 				placeholder="e.g., 500" min="0" >
 
 			<!-- AUCTION DURATION IN HOURS -->
 			<label for="duration">Auction Duration (hours):</label> <input
-				type="number" id="duration" name="duration"
+				type="number"  name="duration"
 				placeholder="Enter duration in hours" min="1" required>
 
 			<!-- SUBMIT BTN -->

@@ -36,14 +36,15 @@ public class UploadArtwork extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 				
-		int userID = (int) request.getSession().getAttribute("userID");
+		//int userID = (int) request.getSession().getAttribute("userID");
+		int userID = 99;
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
 		String startingPriceString = request.getParameter("startingPrice");
 		String reservePriceString = request.getParameter("reservePrice");
 		String durationString = request.getParameter("duration");
-
+		
 		Integer startingPrice = Integer.parseInt(startingPriceString);
 		Integer reservePrice = Integer.parseInt(reservePriceString);
 		Integer duration = Integer.parseInt(durationString);
@@ -73,8 +74,6 @@ public class UploadArtwork extends HttpServlet {
 
 
 
-
-		
 
 		//response.getWriter().println(result);
 		
