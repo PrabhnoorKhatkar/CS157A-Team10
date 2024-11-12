@@ -38,21 +38,30 @@ public class UploadArtwork extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
+		String artist = request.getParameter("artist");
 		String startingPriceString = request.getParameter("startingPrice");
 		String reservePriceString = request.getParameter("reservePrice");
 		String durationString = request.getParameter("duration");
-		// TODO image upload/store
-		// TODO Reserve price cant be smaller than starting price
-		
+
 		Integer startingPrice = Integer.parseInt(startingPriceString);
 		Integer reservePrice = Integer.parseInt(reservePriceString);
 		Integer duration = Integer.parseInt(durationString);
+		// TODO image upload/store
+
+		 // Validate reserve price
+		 if (reservePrice < startingPrice) {
+			response.getWriter().println("Reserve price cannot be smaller than starting price.");
+			return;
+		}
+
+		Artwork artwork = new Artwork(title, description, artist);
 		
-		//Artwork artwork = new Artwork(description, title);
-	
+		UploadDAO uploadDAO = new UploadDAO();
+		
+		String result = uploadDAO.insert(artwork);
 		
 
-//		response.getWriter().println(result);
+		//response.getWriter().println(result);
 		
 		response.sendRedirect("homepage.jsp"); // redirect to home page
 		
