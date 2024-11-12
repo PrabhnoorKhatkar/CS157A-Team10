@@ -35,7 +35,8 @@ public class UploadArtwork extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+				
+		int userID = (int) request.getSession().getAttribute("userID");
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
@@ -57,8 +58,22 @@ public class UploadArtwork extends HttpServlet {
 		Artwork artwork = new Artwork(title, description, artist);
 		
 		UploadDAO uploadDAO = new UploadDAO();
-		
-		String result = uploadDAO.insert(artwork);
+		Integer artworkID = uploadDAO.insert(artwork);
+		System.out.println("ArtworkID" + artworkID);
+
+		if (artworkID > 0) {
+			// Add to Auction Table
+			AuctionDAO auctionDAO = new AuctionDAO();
+			auctionDAO.insert(userID, artworkID, startingPrice, reservePrice, duration);
+			
+			response.sendRedirect("homepage.jsp"); // redirect to homepage
+		} else {
+			response.getWriter().println("Failed to upload artwork.");
+		}
+
+
+
+
 		
 
 		//response.getWriter().println(result);

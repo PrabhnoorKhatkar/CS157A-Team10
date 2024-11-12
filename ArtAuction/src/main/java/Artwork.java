@@ -27,8 +27,6 @@ public class Artwork {
         this.artist = artist;
     }
     
-    
-    
     public Artwork() {
     }
 
