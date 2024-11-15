@@ -99,70 +99,35 @@ VALUES
 CREATE TABLE `Image` (
     `ID` INT AUTO_INCREMENT,
     `filename` VARCHAR(255) NOT NULL UNIQUE,
-    PRIMARY KEY (`ID`)
+    `uploaderID` INT,
+    PRIMARY KEY (`ID`),
+    FOREIGN KEY (`uploaderID`) REFERENCES User(`ID`)
 );
 
 -- Insert 10 example records
-INSERT INTO `Image` (`filename`)
+INSERT INTO `Image` (`filename`, `uploaderID`)
 VALUES
-    ('art-0-XbY9lSMj.jpg'),
-    ('art-1-5NRmIQHz.jpg'),
-    ('art-2-gn7ZIP02.jpg'),
-    ('art-3-PjEcbylw.jpg'),
-    ('art-4-Kcgd4weU.jpg'),
-    ('art-5-o6dBd600.jpg'),
-    ('art-6-r2lPywol.jpg'),
-    ('art-7-F2uWnkV1.jpg'),
-    ('art-8-evk9wj9J.jpg'),
-    ('art-9-64ebf4RM.jpg'),
+    ('art-0-XbY9lSMj.jpg', 1),
+    ('art-1-5NRmIQHz.jpg', 3),
+    ('art-2-gn7ZIP02.jpg', 3),
+    ('art-3-PjEcbylw.jpg', 5),
+    ('art-4-Kcgd4weU.jpg', 5),
+    ('art-5-o6dBd600.jpg', 6),
+    ('art-6-r2lPywol.jpg', 6),
+    ('art-7-F2uWnkV1.jpg', 7),
+    ('art-8-evk9wj9J.jpg', 7),
+    ('art-9-64ebf4RM.jpg', 8),
 
-    ('profile-pic-0-KspewSnw.jpg'),
-    ('profile-pic-1-ZeBM90Sw.jpg'),
-    ('profile-pic-2-LZM2PdOD.jpg'),
-    ('profile-pic-3-8ilzL4dz.jpg'),
-    ('profile-pic-4-cYG3BuZ2.jpg'),
-    ('profile-pic-5-h5mqegh2.jpg'),
-    ('profile-pic-6-Qjt95p3G.jpg'),
-    ('profile-pic-7-17KKLjiL.jpg'),
-    ('profile-pic-8-RYPfQSGn.jpg'),
-    ('profile-pic-9-mH33ltOO.jpg');
-
-CREATE TABLE `Uploaded` (
-    `userID` INT,
-    `imageID` INT,
-    PRIMARY KEY (`userID`, `imageID`),
-    FOREIGN KEY (`userID`) REFERENCES User(`ID`),
-    FOREIGN KEY (`imageID`) REFERENCES Image(`ID`)
-);
-
--- Insert 10 example records
-INSERT INTO `Uploaded` (`userID`, `imageID`)
-VALUES
-    -- John Doe's uploads
-    (1, 1),  -- John uploaded vacation_beach_2024.jpg
-    (1, 4),  -- John uploaded sunset_landscape.jpg
-
-    -- Sarah Smith's uploads
-    (2, 2),  -- Sarah uploaded profile_photo_sarah.png
-    (2, 5),  -- Sarah uploaded product_showcase.png
-
-    -- Michael Johnson's uploads
-    (3, 3),  -- Michael uploaded family_reunion_2024.jpeg
-
-    -- Emily Brown's uploads
-    (4, 6),  -- Emily uploaded event_conference_2024.jpg
-
-    -- David Wilson's uploads
-    (6, 7),  -- David uploaded nature_hiking_trail.jpeg
-
-    -- Lisa Garcia's uploads
-    (7, 8),  -- Lisa uploaded birthday_celebration.jpg
-
-    -- Robert Taylor's uploads
-    (8, 9),  -- Robert uploaded team_photo_2024.png
-
-    -- Michelle Lee's uploads
-    (10, 10);  -- Michelle uploaded pet_dog_max.jpg
+    ('profile-pic-0-KspewSnw.jpg', 1),
+    ('profile-pic-1-ZeBM90Sw.jpg', 2),
+    ('profile-pic-2-LZM2PdOD.jpg', 3),
+    ('profile-pic-3-8ilzL4dz.jpg', 4),
+    ('profile-pic-4-cYG3BuZ2.jpg', 5),
+    ('profile-pic-5-h5mqegh2.jpg', 6),
+    ('profile-pic-6-Qjt95p3G.jpg', 7),
+    ('profile-pic-7-17KKLjiL.jpg', 8),
+    ('profile-pic-8-RYPfQSGn.jpg', 8),
+    ('profile-pic-9-mH33ltOO.jpg', 9);
 
 -- Create ProfilePicture table
 CREATE TABLE `ProfilePicture` (
@@ -175,16 +140,16 @@ CREATE TABLE `ProfilePicture` (
 -- Insert 10 example profile pictures
 INSERT INTO `ProfilePicture` (`userID`, `imageID`)
 VALUES
-    (1, 2),  -- John Doe's profile picture
-    (2, 2),  -- Sarah Smith's profile picture
-    (3, 5),  -- Michael Johnson's profile picture
-    (4, 1),  -- Emily Brown's profile picture
-    (5, 3),  -- Anonymous User's profile picture
-    (6, 4),  -- David Wilson's profile picture
-    (7, 6),  -- Lisa Garcia's profile picture
-    (8, 7),  -- Robert Taylor's profile picture
-    (9, 8),  -- Anonymous User 2's profile picture
-    (10, 9); -- Michelle Lee's profile picture
+    (1, 12),  -- John Doe's profile picture
+    (2, 12),  -- Sarah Smith's profile picture
+    (3, 15),  -- Michael Johnson's profile picture
+    (4, 11),  -- Emily Brown's profile picture
+    (5, 13),  -- Anonymous User's profile picture
+    (6, 14),  -- David Wilson's profile picture
+    (7, 16),  -- Lisa Garcia's profile picture
+    (8, 17),  -- Robert Taylor's profile picture
+    (9, 18),  -- Anonymous User 2's profile picture
+    (10, 19); -- Michelle Lee's profile picture
 
 -- Create ArtImage table
 CREATE TABLE `ArtImage` (
