@@ -297,8 +297,8 @@ CREATE TABLE `AuctionDetails` (
 INSERT INTO `AuctionDetails` (`startTimestamp`, `endTimestamp`, `amount`, `startingPrice`, `reserve`, `result`) VALUES
     ( '2024-11-01 10:00:00', '2024-11-07 10:00:00', 1500.00, 1000.00, 1200.00, 'SOLD'),
     ( '2024-11-02 10:00:00', '2024-11-08 10:00:00', 2000.00, 1500.00, 1800.00, 'SOLD'),
-    ( '2024-11-03 10:00:00', '2024-11-09 10:00:00', NULL, 2000.00, 2500.00, 'ACTIVE'),
-    ( '2024-11-04 10:00:00', '2024-11-10 10:00:00', NULL, 1800.00, 2000.00, 'ACTIVE'),
+    ( '2024-11-03 10:00:00', '2024-11-09 10:00:00', NULL, 2000.00, 2500.00, 'UNSOLD'),
+    ( '2024-11-04 10:00:00', '2024-11-10 10:00:00', NULL, 1800.00, 2000.00, 'UNSOLD'),
     ( '2024-11-05 10:00:00', '2024-11-11 10:00:00', 3000.00, 2500.00, 2800.00, 'SOLD'),
     ( '2024-11-06 10:00:00', '2024-11-12 10:00:00', NULL, 1200.00, 1500.00, 'ACTIVE'),
     ( '2024-11-07 10:00:00', '2024-11-13 10:00:00', NULL, 2200.00, 2500.00, 'ACTIVE'),
@@ -308,17 +308,14 @@ INSERT INTO `AuctionDetails` (`startTimestamp`, `endTimestamp`, `amount`, `start
 
 CREATE TABLE `Auction` (
     `userID` INT,
-    `artworkID` INT,
-    `auctionDetailsID` INT,
-    PRIMARY KEY (`userID`, `artworkID`, `auctionDetailsID`),
-    FOREIGN KEY (`userID`) REFERENCES User(`ID`),
-    FOREIGN KEY (`artworkID`) REFERENCES Artwork(`ID`),
-    FOREIGN KEY (`auctionDetailsID`) REFERENCES AuctionDetails(`ID`)
+    `artworkAndDetailsID` INT,
+    PRIMARY KEY (`userID`, `artworkAndDetailsID`),
+    FOREIGN KEY (`userID`) REFERENCES User(`ID`)
 );
 
-INSERT INTO `Auction` (userID, artworkID, auctionDetailsID) VALUES
-    (1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5),
-    (6, 6, 6), (7, 7, 7), (8, 8, 8), (9, 9, 9), (10, 10, 10);
+INSERT INTO `Auction` (`userID`, `artworkAndDetailsID`) VALUES
+    (1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
+    (6, 6), (7, 7), (8, 8), (9, 9), (10, 10);
 
 CREATE TABLE `Bid` (
     userID INT,
