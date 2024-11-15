@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 
 <html>
@@ -59,7 +60,17 @@
 										<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
 											<div class="art-item">
 													<h3>${artwork.title}</h3>
-													<p>Description: ${artwork.description}</p>
+													<p>Description: 
+													    <c:choose>
+													        <c:when test="${fn:length(artwork.description) > 45}">
+													            ${fn:substring(artwork.description, 0, 45)}...
+													        </c:when>
+													        <c:otherwise>
+													            ${artwork.description}
+													        </c:otherwise>
+													    </c:choose>
+													</p>
+
 													<p>By: ${artwork.artist}
 												</a>
 											</div>
