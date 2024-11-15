@@ -14,7 +14,7 @@ public class SearchArtworkDAO extends DAO {
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ?;";
+        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -23,6 +23,7 @@ public class SearchArtworkDAO extends DAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, "%" + keyword + "%");
             ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, "%" + keyword + "%");
 
             resultSet = ps.executeQuery();
             
@@ -35,7 +36,6 @@ public class SearchArtworkDAO extends DAO {
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-			    BufferedImage image = null; // TODO: Figure out how to approach image
 			    searchList.add(new Artwork(id, title, description, artist));
 			    
 			}

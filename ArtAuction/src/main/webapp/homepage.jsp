@@ -58,9 +58,9 @@
 									<c:forEach var="artwork" items="${requestScope.artworkList}">
 										<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
 											<div class="art-item">
-												
 													<h3>${artwork.title}</h3>
 													<p>Description: ${artwork.description}</p>
+													<p>By: ${artwork.artist}
 												</a>
 											</div>
 										</a>

@@ -37,7 +37,8 @@ public class UploadArtwork extends HttpServlet {
 			throws ServletException, IOException {
 				
 		//int userID = (int) request.getSession().getAttribute("userID");
-		int userID = 99;
+		// TODO remove hardcode userID
+		int userID = 10;
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
@@ -71,14 +72,6 @@ public class UploadArtwork extends HttpServlet {
 		} else {
 			response.getWriter().println("Failed to upload artwork.");
 		}
-
-
-
-
-		//response.getWriter().println(result);
-		
-		response.sendRedirect("homepage.jsp"); // redirect to home page
-		
 		
 	
 	}
