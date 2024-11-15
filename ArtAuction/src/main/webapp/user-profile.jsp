@@ -20,7 +20,7 @@
 
 		<div class="header-right">
 
-			<a href="art-upload-form.jsp" class="upload-btn">ImageUpload</a>
+			<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
 
 			<button class="logout-btn">Log Out</button>
 
@@ -36,7 +36,9 @@
 		<img src="myapp/temporary-pic.jpg" alt="Profile Picture"
 			class="profile-pic">
 
-		<h2 class="username">Username</h2>
+		<h2 class="Name: ">Name: ${user.name}</h2>
+		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
+		
 
 	</div>
 

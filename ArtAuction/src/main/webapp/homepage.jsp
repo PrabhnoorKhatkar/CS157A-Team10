@@ -35,7 +35,7 @@
 				<form action="Logout" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
-				<a href="user-profile.jsp" class="profile-btn"> <img
+				<a href="UserProfile" class="profile-btn"> <img
 						src="myapp/temporary-pic.jpg" alt="profile picture" width="64"
 						height="64">
 				</a>

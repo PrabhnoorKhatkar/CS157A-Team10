@@ -51,6 +51,16 @@
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description></description>
+    <display-name>UserProfile</display-name>
+    <servlet-name>UserProfile</servlet-name>
+    <servlet-class>UserProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserProfile</servlet-name>
+    <url-pattern>/UserProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ArtworkPage</servlet-name>
     <servlet-class>ArtworkPage</servlet-class>
   </servlet>

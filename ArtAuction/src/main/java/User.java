@@ -17,6 +17,13 @@ public class User
 		this.address = address;
 		this.anonymous = anonymous;
 	}
+	
+	public User(String name, String displayName) {
+		super();
+		this.name = name;
+		this.displayName = displayName;
+		
+	}
 
 	public boolean isAnonymous() {
 		return anonymous;
