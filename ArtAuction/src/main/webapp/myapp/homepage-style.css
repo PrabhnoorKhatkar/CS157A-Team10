@@ -53,7 +53,8 @@ body {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.login-btn {
+.login-btn,
+.signup-btn {
 	background-color: transparent;
 	color: #444;
 	padding: 10px 15px;
@@ -65,7 +66,8 @@ body {
 	text-decoration: none;
 }
 
-.login-btn:hover {
+.login-btn:hover,
+.signup-btn:hover {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 

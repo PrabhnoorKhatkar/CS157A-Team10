@@ -42,6 +42,7 @@
 				</c:when>
 				<c:otherwise>
 				<a href="login.jsp" class="login-btn">Log In</a>
+				<a href="register.jsp" class="signup-btn">Sign Up</a>
 				</c:otherwise>
 				</c:choose>
 

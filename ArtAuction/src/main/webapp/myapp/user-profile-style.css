@@ -107,18 +107,18 @@ body {
 }
 
 .art-item {
-	background-color: #f9f9f9;
-	border: none;
+	background-color: transparent;
+	/*border-radius: 35px;*/
 	padding: 20px;
 	margin: 15px;
-	/* gap of each cards */
 	width: 250px;
 	text-align: center;
-	border-radius: 35px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-decoration: none;
-	cursor: pointer;
-	display: block;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border: 1px solid #444;
+}
+
+.art-item:hover {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .art-item a {
