@@ -28,7 +28,7 @@
 			<!-- save favorite artwork functionality -->
 			<form action="SaveArtwork" method="post">
 
-				<input type="hidden" name="artworkId" value="${artworkID}">
+				<input type="hidden" name="artworkID" value="${artwork.id}">
 
 				<input type="hidden" name="userID" value="${sessionScope.userID}">
 

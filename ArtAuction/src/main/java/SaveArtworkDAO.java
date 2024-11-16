@@ -20,10 +20,7 @@ public class SaveArtworkDAO extends DAO {
 		} catch (SQLException e) {
 			result = "Data Not Entered Successfully";
 			e.printStackTrace();
-		}
-		
+		}	
 		return result;
 	}
-	
-	
 }

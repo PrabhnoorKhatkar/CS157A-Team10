@@ -44,8 +44,11 @@ public class Login extends HttpServlet {
 		LoginDAO loginDAO = new LoginDAO();
 		
 		if (loginDAO.validate(email, password)) {
+			int userID = loginDAO.getUserIDByEmail(email);
+			
 			HttpSession session = request.getSession();
-			request.getSession().setAttribute("email", email);
+			session.setAttribute("email", email);
+			session.setAttribute("userID", userID);
 			response.sendRedirect("homepage.jsp"); //redirect to home page
 		} else {
 			request.setAttribute("errorMessage", "Invalid email or password.");
