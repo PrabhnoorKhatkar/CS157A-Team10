@@ -33,8 +33,12 @@ public class UserProfile extends HttpServlet {
         UserProfileDAO userDAO = new UserProfileDAO();
         int userID = 10;
 		User user = userDAO.getUserById(userID);
-           
+          
+		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);
+		
         request.setAttribute("user", user);
+        request.setAttribute("artworkList", artworkList);
+        
         
         request.getRequestDispatcher("user-profile.jsp").forward(request, response);
         		

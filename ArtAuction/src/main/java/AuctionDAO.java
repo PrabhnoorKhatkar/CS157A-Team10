@@ -13,8 +13,8 @@ public class AuctionDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO Auction (userID, artworkAndDetailsID) VALUES (?, ?)";
-		String sql2 = "INSERT INTO AuctionDetails (ID, startTimestamp, endTimestamp, startingPrice, reserve, result) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Auction (userID, artworkID) VALUES (?, ?)";
+		String sql2 = "INSERT INTO AuctionDetails (artworkID, startTimestamp, endTimestamp, startingPrice, reserve, result) VALUES (?, ?, ?, ?, ?, ?)";
         String result = "Data Entered Successfully";
 
 		try {
