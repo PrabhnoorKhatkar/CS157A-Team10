@@ -49,6 +49,36 @@
 			</div>
 		</header>
 		<header>
+		<section class="featured-artwork" id="gallery">
+			<h2>Featured Artwork</h2>
+				<div class="container">
+					<div class="art-grid">
+						<div class="art-item">
+							<img src="myapp/temporary-pic.jpg"
+								alt="Artwork 1">
+							<h3>The Eternal Dream</h3>
+							<p>Artist: Jane Doe</p>
+							<p>Starting Bid: $5,000</p>
+						</div>
+						<div class="art-item">
+							<img src="myapp/temporary-pic.jpg"
+								alt="Artwork 2">
+							<h3>Colors of the Wind</h3>
+							<p>Artist: John Smith</p>
+							<p>Starting Bid: $8,000</p>
+						</div>
+						<div class="art-item">
+							<img src="myapp/temporary-pic.jpg"
+								alt="Artwork 3">
+							<h3>Whispers in Time</h3>
+							<p>Artist: Alice Brown</p>
+							<p>Starting Bid: $12,000</p>
+						</div>
+					</div>
+				</div>
+		</section>
+		</header>
+		<header>
 			<section class="search-results" id="gallery">
 					<div class="container">
 						<h2>Search Results</h2>
