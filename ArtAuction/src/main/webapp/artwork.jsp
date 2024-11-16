@@ -18,6 +18,8 @@
 		<form action="UpdateArtwork" method="post">
 			<input type="hidden" name="artworkID" value="${artwork.id}">
 			
+			<p>Owner: ${ownerDisplayName}</p>
+			
 			<label for="title">Title:</label>
 			<input type="text" id="title" name="title" value="${artwork.title}" required><br>
 			
@@ -44,6 +46,7 @@
 		<section class="artwork-details">
 			<div class="container">
 				<h2>Title: ${artwork.title}</h2>
+				<p>Owner: <a href="UserProfile/${user.displayName}">${ownerDisplayName}</a></p>
 				<p>Artist: ${artwork.artist}</p>
 				<p>Description: ${artwork.description}</p>
 				<p>Starting Bid: $${auction.startingPrice}</p>
