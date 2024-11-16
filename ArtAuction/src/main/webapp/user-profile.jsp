@@ -87,23 +87,36 @@
 				<h2>Favorites</h2>
 				<div class="art-grid">
 
-					<c:choose>
-						<c:when test="${not empty requestScope.artworkList}">
-							<c:forEach var="artwork" items="${requestScope.artworkList}">
-								<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
-									<div class="art-item">
+						<!-- Iterate over the artwork list and display each artwork -->
+			<c:choose>
+				<c:when test="${not empty requestScope.favArtworkList}">
+					<c:forEach var="favArtworkList" items="${requestScope.favArtworkList}">
+						<a href="ArtworkPage?id=${favArtworkList.id}" class="art-item-link">
+							<div class="art-item">
 
-										<h3>${artwork.title}</h3>
-										<p>Description: ${artwork.description}</p>
+									<h3>${favArtworkList.title}</h3>
+									<p>Description: 
+										<c:choose>
+											<c:when test="${fn:length(favArtworkList.description) > 45}">
+												${fn:substring(favArtworkList.description, 0, 45)}...
+											</c:when>
+											<c:otherwise>
+												${favArtworkList.description}
+											</c:otherwise>
+										</c:choose>
+									</p>
+
+									<p>By: ${favArtworkList.artist}
 								</a>
-				</div>
-				</a>
-				</c:forEach>
+							</div>
+						</a>
+					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div>(no artworks)</div>
+					<div>(no saved artworks)</div>
 				</c:otherwise>
-				</c:choose>
+			</c:choose>
+
 
 
 			</div>

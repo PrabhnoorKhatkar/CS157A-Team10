@@ -14,7 +14,7 @@ public class UserProfileDAO extends DAO {
         var con = getConnection();
         User returnUser = new User();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE ID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE userID = ?");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -76,8 +76,37 @@ public class UserProfileDAO extends DAO {
 	}
 	
 	public List<Artwork> getFavoritedArtworkByuserID(int userID) {
-		return null;
-		// TODO implementation
+
+		var con = getConnection();
+		List<Artwork> returnArtworkList =  new ArrayList<>();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN Favorite WHERE userID = ?;");
+			ps.setInt(1, userID);
+
+			var resultSet = ps.executeQuery();
+			
+			while (resultSet.next()) 
+			{
+
+				// Retrieve data from the result set
+				int id = resultSet.getInt("artworkID");
+				String title = resultSet.getString("title");
+				String description = resultSet.getString("description");
+				String artist = resultSet.getString("artist");
+				
+				BufferedImage image = null; // TODO: Figure out how to approach image
+
+				
+				returnArtworkList.add(new Artwork(id, title, description, artist));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	   
+		return returnArtworkList;
 		
 	}
 	

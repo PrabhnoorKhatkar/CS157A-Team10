@@ -32,7 +32,7 @@ public class SearchArtworkDAO extends DAO {
 			{
 
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("ID");
+                int id = resultSet.getInt("artworkID");
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
@@ -56,7 +56,7 @@ public class SearchArtworkDAO extends DAO {
         var con = getConnection();
         Artwork returnArtwork = new Artwork();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork WHERE ID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork WHERE artworkID = ?");
             ps.setInt(1, artworkId);
 
             var resultSet = ps.executeQuery();
@@ -66,7 +66,7 @@ public class SearchArtworkDAO extends DAO {
 			{
   
 			    // Retrieve data from the result set
-                int id = resultSet.getInt("ID");
+                int id = resultSet.getInt("artworkID");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");

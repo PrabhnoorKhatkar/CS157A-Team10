@@ -31,13 +31,16 @@ public class UserProfile extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
         
         UserProfileDAO userDAO = new UserProfileDAO();
-        int userID = 10;
+        int userID = 1;
 		User user = userDAO.getUserById(userID);
           
 		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);
+		List<Artwork> favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
 		
+
         request.setAttribute("user", user);
         request.setAttribute("artworkList", artworkList);
+		request.setAttribute("favArtworkList", favArtworkList);
         
         
         request.getRequestDispatcher("user-profile.jsp").forward(request, response);
