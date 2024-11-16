@@ -48,6 +48,43 @@ public class AuctionDAO extends DAO {
 
 	}
 
+	public Auction getAuctionByArtworkID(Integer artworkID){
+
+		var con = getConnection();
+        Auction returnAuction = new Auction();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM AuctionDetails WHERE artworkID = ?");
+            ps.setInt(1, artworkID);
+
+            var resultSet = ps.executeQuery();
+            
+
+            if (resultSet.next())
+			{
+  
+			    // Retrieve data from the result set
+                int id = resultSet.getInt("artworkID");
+				Timestamp startTimestamp = resultSet.getTimestamp("startTimestamp");
+				Timestamp endTimestamp = resultSet.getTimestamp("endTimestamp");
+				Float amount = resultSet.getFloat("amount");
+				Float startingPrice = resultSet.getFloat("startingPrice");
+				Float reserve = resultSet.getFloat("reserve");
+				String result = resultSet.getString("result");
+             
+			
+			    returnAuction = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve, result);
+			   
+			    
+			}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+       
+        return returnAuction;
+
+	}
 
 
 	
