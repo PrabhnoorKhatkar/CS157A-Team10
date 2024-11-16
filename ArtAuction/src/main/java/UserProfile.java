@@ -30,18 +30,23 @@ public class UserProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
         
-		String requestedUserDisplayName = request.getParameter("user"); // display user name of current url
+		// get user name of current url
+		String requestedUserDisplayName = request.getParameter("user"); 
 		
-		
-		int userID = (int) request.getSession().getAttribute("userID"); // logged in user id
+		// get logged in user id from the current session
+		int userID = (int) request.getSession().getAttribute("userID");
 		
         UserProfileDAO userDAO = new UserProfileDAO();
 		User user = null;
           
+		// if no parameter for display name it's others profile
+		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
 			user = userDAO.getUserById(userID);
+			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserByDisplayName(requestedUserDisplayName);
+			request.setAttribute("myProfile", false);
 		}
 		
 		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);

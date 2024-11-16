@@ -42,7 +42,11 @@
 		<h2 class="Name: ">Name: ${user.name}</h2>
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
+		<c:if test="${!myProfile}">
 
+			<button type="submit" class="follow-btn">Follow</button>
+
+		</c:if>
 	</div>
 
 	<div class="user-artwork">
