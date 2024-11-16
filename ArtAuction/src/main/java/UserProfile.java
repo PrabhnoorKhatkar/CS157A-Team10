@@ -30,8 +30,9 @@ public class UserProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
         
+		int userID = (int) request.getSession().getAttribute("userID");
+		
         UserProfileDAO userDAO = new UserProfileDAO();
-        int userID = 1;
 		User user = userDAO.getUserById(userID);
           
 		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);

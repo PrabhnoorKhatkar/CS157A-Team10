@@ -36,9 +36,8 @@ public class UploadArtwork extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 				
-		//int userID = (int) request.getSession().getAttribute("userID");
-		// TODO remove hardcode userID
-		int userID = 10;
+		int userID = (int) request.getSession().getAttribute("userID");
+
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
@@ -61,7 +60,6 @@ public class UploadArtwork extends HttpServlet {
 		
 		UploadDAO uploadDAO = new UploadDAO();
 		Integer artworkID = uploadDAO.insert(artwork);
-		System.out.println("ArtworkID" + artworkID);
 
 		if (artworkID > 0) {
 			// Add to Auction Table
