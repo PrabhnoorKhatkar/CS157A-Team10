@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 
@@ -11,39 +12,78 @@
 </head>
 <body>
 
-	<!-- TODO Iterate over the artwork list and display each artwork -->
-
-	<section class="artwork-details">
-		<div class="container">
-			<h2>Title: ${artwork.title}</h2>
-			<p>Artist: ${artwork.artist}</p>
-			<p>Description: ${artwork.description}</p>
-
-			<p>Starting Bid: $${auction.startingPrice}</p>
-
-			<p>Current Bid: $${auction.amount}</p>
+	<!-- Check if user is the owner -->
+	<c:if test="${isOwner}">
+		<h2>Edit Artwork Details ${artwork.title}</h2>
+		<form action="UpdateArtwork" method="post">
+			<input type="hidden" name="artworkID" value="${artwork.id}">
 			
+			<label for="title">Title:</label>
+			<input type="text" id="title" name="title" value="${artwork.title}" required><br>
+			
+			<label for="artist">Artist:</label>
+			<input type="text" id="artist" name="artist" value="${artwork.artist}" required><br>
+			
+			<label for="description">Description:</label>
+			<textarea id="description" name="description" required>${artwork.description}</textarea><br>
+			
+			<p>Starting Price: $${auction.startingPrice}</p>
+			<p>Current Bid: $${auction.amount}</p>
+			<p>Reserve: $${auction.reserve}</p>
+	        
 			<p>Auction Ends: ${auction.endTimestamp}</p>
+			
+			<button type="submit" class="btn save-btn">Save Changes</button>
+		</form>
+	</c:if>
 
-			<!-- save favorite artwork functionality -->
-			<form action="SaveArtwork" method="post">
 
-				<input type="hidden" name="artworkID" value="${artwork.id}">
+	<!-- For non owner page-->
+	<!-- Iterate over the artwork list and display each artwork -->
+	<c:if test="${!isOwner}">
+		<section class="artwork-details">
+			<div class="container">
+				<h2>Title: ${artwork.title}</h2>
+				<p>Artist: ${artwork.artist}</p>
+				<p>Description: ${artwork.description}</p>
+				<p>Starting Bid: $${auction.startingPrice}</p>
+				<p>Current Bid: $${auction.amount}</p>
+				<p>Auction Ends: ${auction.endTimestamp}</p>
 
-				<input type="hidden" name="userID" value="${sessionScope.userID}">
+				<!-- save favorite artwork functionality -->
+				<form action="SaveArtwork" method="post">
 
-				<button type="submit" class="save-btn">Save</button>
+					<input type="hidden" name="artworkID" value="${artwork.id}">
 
-			</form>
+					<input type="hidden" name="userID" value="${sessionScope.userID}">
 
-			<div class="bid-section">
-				<label for="bidAmount">Place Your Bid:</label>
-				<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
-					   placeholder="Enter bid amount" required>
-				<button class="btn bid-btn">Place Bid</button>
+					<button type="submit" class="save-btn">Save</button>
+
+				</form>
+
+				<div class="bid-section">
+					<label for="bidAmount">Place Your Bid:</label>
+					<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
+							placeholder="Enter bid amount" required>
+					<button class="btn bid-btn">Place Bid</button>
+				</div>
+
 			</div>
+		</section>
+	</c:if>
+	
 
+	<!-- Check if user is the owner Remove Listing Button -->
+	<c:if test="${isOwner}">
+		<div class="owner-actions">
+			<!-- Remove Listing -->
+			<form action="RemoveArtwork" method="post" onsubmit="return confirm('Are you sure you want to remove this listing?');">
+				<input type="hidden" name="artworkID" value="${artwork.id}">
+				<button type="submit" class="btn remove-btn">Remove Listing</button>
+			</form>
 		</div>
-	</section>
+	</c:if>
+	
 </body>
+
 </html>
