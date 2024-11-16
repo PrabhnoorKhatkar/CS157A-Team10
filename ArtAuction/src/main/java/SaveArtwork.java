@@ -63,7 +63,7 @@ public class SaveArtwork extends HttpServlet {
 			// response.getWriter().append("saved");
 			// response.getWriter().append("UserID: " + userID);
 			// response.getWriter().append("ArtworkID: " + artworkID);
-			response.sendRedirect("user-profile.jsp"); // saved then redirect to user profile
+			response.sendRedirect("UserProfile"); // saved then redirect to user profile
 		} else {
 			response.getWriter().append("Error Saving Artwork");
 		}
