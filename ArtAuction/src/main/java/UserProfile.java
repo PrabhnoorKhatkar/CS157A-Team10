@@ -30,11 +30,20 @@ public class UserProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
         
-		int userID = (int) request.getSession().getAttribute("userID");
+		String requestedUserDisplayName = request.getParameter("user"); // display user name of current url
+		
+		
+		int userID = (int) request.getSession().getAttribute("userID"); // logged in user id
 		
         UserProfileDAO userDAO = new UserProfileDAO();
-		User user = userDAO.getUserById(userID);
+		User user = null;
           
+		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
+			user = userDAO.getUserById(userID);
+		} else {
+			user = userDAO.getUserByDisplayName(requestedUserDisplayName);
+		}
+		
 		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);
 		List<Artwork> favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
 		
