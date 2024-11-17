@@ -88,51 +88,53 @@
 	</div>
 	</div>
 
-	<div class="saved-artwork">
-		<section class="search-results" id="gallery">
-			<div class="container">
-				<h2>Favorites</h2>
-				<div class="art-grid">
+	<c:if test="${myProfile}">
+		<div class="saved-artwork">
+			<section class="search-results" id="gallery">
+				<div class="container">
+					<h2>Favorites</h2>
+					<div class="art-grid">
 
-					<!-- Iterate over the artwork list and display each artwork -->
-					<c:choose>
-						<c:when test="${not empty requestScope.favArtworkList}">
-							<c:forEach var="favArtworkList"
-								items="${requestScope.favArtworkList}">
-								<a href="ArtworkPage?id=${favArtworkList.id}"
-									class="art-item-link">
-									<div class="art-item">
+						<!-- Iterate over the artwork list and display each artwork -->
+						<c:choose>
+							<c:when test="${not empty requestScope.favArtworkList}">
+								<c:forEach var="favArtworkList"
+									items="${requestScope.favArtworkList}">
+									<a href="ArtworkPage?id=${favArtworkList.id}"
+										class="art-item-link">
+										<div class="art-item">
 
-										<h3>${favArtworkList.title}</h3>
-										<p>
-											Description:
-											<c:choose>
-												<c:when test="${fn:length(favArtworkList.description) > 45}">
+											<h3>${favArtworkList.title}</h3>
+											<p>
+												Description:
+												<c:choose>
+													<c:when
+														test="${fn:length(favArtworkList.description) > 45}">
 												${fn:substring(favArtworkList.description, 0, 45)}...
 											</c:when>
-												<c:otherwise>
+													<c:otherwise>
 												${favArtworkList.description}
 											</c:otherwise>
-											</c:choose>
-										</p>
+												</c:choose>
+											</p>
 
-										<p>By: ${favArtworkList.artist}
-								</a>
+											<p>By: ${favArtworkList.artist}
+									</a>
+					</div>
+					</a>
+					</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div>(no saved artworks)</div>
+					</c:otherwise>
+					</c:choose>
+
+
+
 				</div>
-				</a>
-				</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<div>(no saved artworks)</div>
-				</c:otherwise>
-				</c:choose>
-
-
-
-			</div>
-	</div>
-	</section>
-	</div>
-
+		</div>
+		</section>
+		</div>
+	</c:if>
 </body>
 </html>
