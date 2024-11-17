@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfile extends HttpServlet {
-	
-    private static final long serialVersionUID = 1L;
-    
+
+	private static final long serialVersionUID = 1L;
+
 	public UserProfile() {
 		super();
 	}
@@ -26,21 +26,25 @@ public class UserProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-        
+
 		// get user name of current url
-		String requestedUserDisplayName = request.getParameter("user"); 
-		
+		String requestedUserDisplayName = request.getParameter("user");
+
 		// get logged in user id from the current session
 		int userID = (int) request.getSession().getAttribute("userID");
-		
-        UserProfileDAO userDAO = new UserProfileDAO();
+
+		UserProfileDAO userDAO = new UserProfileDAO();
+		FollowUserDAO followUserDAO = new FollowUserDAO();
+
+		int otherID = userDAO.getUserIDByDisplayName(requestedUserDisplayName);
+
 		User user = null;
 		List<Artwork> artworkList = null;
 		List<Artwork> favArtworkList = null;
-          
+
 		// if no parameter for display name it's others profile
 		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
@@ -49,20 +53,23 @@ public class UserProfile extends HttpServlet {
 			favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
 			request.setAttribute("myProfile", true);
 		} else {
-			user = userDAO.getUserByDisplayName(requestedUserDisplayName);
-			artworkList = userDAO.getArtworkByUserDisplayName(requestedUserDisplayName);
-			favArtworkList = userDAO.getFavoritedArtworkByuserDisplayName(requestedUserDisplayName);
+			user = userDAO.getUserById(otherID);
+			artworkList = userDAO.getArtworkByuserID(otherID);
+			favArtworkList = userDAO.getFavoritedArtworkByuserID(otherID);
 			request.setAttribute("myProfile", false);
-		}		
-
-        request.setAttribute("user", user);
-        request.setAttribute("artworkList", artworkList);
-		request.setAttribute("favArtworkList", favArtworkList);
-        
-        
-        request.getRequestDispatcher("user-profile.jsp").forward(request, response);
-        		
+		}
+		boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
+		int followerCount = followUserDAO.getFollowerCount(otherID);
 		
+		request.setAttribute("otherID", otherID);
+		request.setAttribute("isFollowed", isFollowed);
+		request.setAttribute("followerCount", followerCount);
+		request.setAttribute("user", user);
+		request.setAttribute("artworkList", artworkList);
+		request.setAttribute("favArtworkList", favArtworkList);
+
+		request.getRequestDispatcher("user-profile.jsp").forward(request, response);
+
 	}
 
 	/**
@@ -71,7 +78,14 @@ public class UserProfile extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		Integer followerID = (Integer) request.getSession().getAttribute("userID");
+		Integer followedUserID = Integer.parseInt(request.getParameter("followedUserId"));
+
+		FollowUserDAO followUserDAO = new FollowUserDAO();
+		followUserDAO.addFollow(followerID, followedUserID);
+
+		String displayName = request.getParameter("displayName");
+		response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + displayName);
 	}
-    
+
 }

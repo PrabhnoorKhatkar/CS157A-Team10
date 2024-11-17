@@ -34,28 +34,23 @@ public class UserProfileDAO extends DAO {
 		return returnUser;
 	}
 
-	public User getUserByDisplayName(String displayName) {
+	public int getUserIDByDisplayName(String displayName) {
 		var con = getConnection();
-		User returnUser = new User();
+		int userID = -1;
 
 		try {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE displayName = ?");
 			ps.setString(1, displayName);
-
 			var resultSet = ps.executeQuery();
+
 			if (resultSet.next()) {
-				// Retrieve data from the result set
-
-				String name = resultSet.getString("name");
-				String displayNameDB = resultSet.getString("displayName");
-				returnUser = new User(name, displayNameDB);
-
+				userID = resultSet.getInt("userID");
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return returnUser;
+		return userID;
 	}
 
 	public List<Artwork> getArtworkByuserID(int userID) {
@@ -121,66 +116,4 @@ public class UserProfileDAO extends DAO {
 		return returnArtworkList;
 
 	}
-
-	public List<Artwork> getArtworkByUserDisplayName(String displayName) {
-		var con = getConnection();
-		List<Artwork> returnArtworkList = new ArrayList<>();
-
-		try {
-			String sql = "SELECT * FROM Artwork NATURAL JOIN User NATURAL JOIN Auction WHERE displayName = ?;";
-
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, displayName);
-			var resultSet = ps.executeQuery();
-
-			while (resultSet.next()) {
-
-				// Retrieve data from the result set
-				int id = resultSet.getInt("artworkID");
-				String title = resultSet.getString("title");
-				String description = resultSet.getString("description");
-				String artist = resultSet.getString("artist");
-
-				BufferedImage image = null; // TODO: Figure out how to approach image
-
-				returnArtworkList.add(new Artwork(id, title, description, artist));
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return returnArtworkList;
-	}
-
-	public List<Artwork> getFavoritedArtworkByuserDisplayName(String displayName) {
-		var con = getConnection();
-		List<Artwork> returnArtworkList = new ArrayList<>();
-
-		try {
-			String sql = "SELECT * FROM Artwork NATURAL JOIN Favorite NATURAL JOIN User WHERE displayName = ?;";
-
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, displayName);
-			var resultSet = ps.executeQuery();
-
-			while (resultSet.next()) {
-				int id = resultSet.getInt("artworkID");
-				String title = resultSet.getString("title");
-				String description = resultSet.getString("description");
-				String artist = resultSet.getString("artist");
-
-				BufferedImage image = null; // TODO: Figure out how to approach image
-
-				returnArtworkList.add(new Artwork(id, title, description, artist));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return returnArtworkList;
-	}
-
 }

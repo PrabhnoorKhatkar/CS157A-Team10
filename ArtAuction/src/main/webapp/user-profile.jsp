@@ -42,9 +42,28 @@
 		<h2 class="Name: ">Name: ${user.name}</h2>
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
+		<c:if test="${myProfile}">
+			<p>${0}Following</p>
+
+			<p>${0}Followers</p>
+		</c:if>
+
 		<c:if test="${!myProfile}">
 
-			<button type="submit" class="follow-btn">Follow</button>
+			<p>${0}Following</p>
+
+			<p>${followerCount}Followers</p>
+			<form action="UserProfile" method="post">
+				<input type="hidden" name="followedUserId" value="${otherID}">
+				<input type="hidden" name="displayName" value="${user.displayName}">
+
+				<c:if test="${isFollowed}">
+					<button type="button" class="follow-btn" disabled>Followed</button>
+				</c:if>
+				<c:if test="${!isFollowed}">
+					<button type="submit" class="follow-btn">Follow</button>
+				</c:if>
+			</form>
 
 		</c:if>
 	</div>
@@ -57,8 +76,9 @@
 			<c:choose>
 				<c:when test="${not empty requestScope.artworkList}">
 					<c:forEach var="artwork" items="${requestScope.artworkList}">
-						<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
-							<div class="art-item">
+						<div class="art-item">
+							<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
+
 								<h3>${artwork.title}</h3>
 								<p>
 									Description:
@@ -72,20 +92,19 @@
 									</c:choose>
 								</p>
 
-								<p>By: ${artwork.artist}
-						</a>
+								<p>By: ${artwork.artist}</p>
+							</a>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div>(no artworks)</div>
+				</c:otherwise>
+			</c:choose>
+
+
+
 		</div>
-		</a>
-		</c:forEach>
-		</c:when>
-		<c:otherwise>
-			<div>(no artworks)</div>
-		</c:otherwise>
-		</c:choose>
-
-
-
-	</div>
 	</div>
 
 	<c:if test="${myProfile}">
@@ -100,9 +119,10 @@
 							<c:when test="${not empty requestScope.favArtworkList}">
 								<c:forEach var="favArtworkList"
 									items="${requestScope.favArtworkList}">
-									<a href="ArtworkPage?id=${favArtworkList.id}"
-										class="art-item-link">
-										<div class="art-item">
+									<div class="art-item">
+										<a href="ArtworkPage?id=${favArtworkList.id}"
+											class="art-item-link">
+
 
 											<h3>${favArtworkList.title}</h3>
 											<p>
@@ -118,22 +138,21 @@
 												</c:choose>
 											</p>
 
-											<p>By: ${favArtworkList.artist}
-									</a>
+											<p>By: ${favArtworkList.artist}</p>
+										</a>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div>(no saved artworks)</div>
+							</c:otherwise>
+						</c:choose>
+
+
+
 					</div>
-					</a>
-					</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<div>(no saved artworks)</div>
-					</c:otherwise>
-					</c:choose>
-
-
-
 				</div>
-		</div>
-		</section>
+			</section>
 		</div>
 	</c:if>
 </body>
