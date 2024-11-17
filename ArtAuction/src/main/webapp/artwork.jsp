@@ -59,6 +59,7 @@
 					
 					<p>Starting Price: $${auction.startingPrice}</p>
 					<p>Current Bid: $${auction.amount}</p>
+					<p>Highest Bidder: ${highestBidder.displayName}</p>
 					<p>Reserve: $${auction.reserve}</p>
 			        
 					<p>Auction Ends: ${auction.endTimestamp}</p>
@@ -88,6 +89,7 @@
 				<p>Description: ${artwork.description}</p>
 				<p>Starting Bid: $${auction.startingPrice}</p>
 				<p>Current Bid: $${auction.amount}</p>
+				<p>Highest Bidder: ${highestBidder.displayName}</p>
 				<p>Auction Ends: ${auction.endTimestamp}</p>
 
 				<!-- Countdown Timer -->
@@ -107,15 +109,20 @@
 				</form>
 
 				<div class="bid-section">
-					<form action="PlaceBid" method="post">
-						<input type="hidden" name="artworkID" value="${artwork.id}">
+					<c:if test="${auction.result == 'ACTIVE'}">
+						<form action="PlaceBid" method="post">
+							<input type="hidden" name="artworkID" value="${artwork.id}">
+							
+							<label for="bidAmount">Place Your Bid:</label>
+							<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
+								placeholder="Enter bid amount" required>
 						
-						<label for="bidAmount">Place Your Bid:</label>
-						<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
-							placeholder="Enter bid amount" required>
-					
-						<button type="submit" class="btn bid-btn">Place Bid</button>
-					</form>
+							<button type="submit" class="btn bid-btn">Place Bid</button>
+						</form>
+					</c:if>
+					<c:if test="${auction.result != 'ACTIVE'}">
+						<p>Bidding for this artwork is closed.</p>
+					</c:if>
 				</div>
 
 			</div>

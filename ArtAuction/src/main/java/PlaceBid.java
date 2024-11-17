@@ -40,11 +40,6 @@ public class PlaceBid extends HttpServlet {
         String bidAmountString = request.getParameter("bidAmount");
         Float bidAmount = Float.parseFloat(bidAmountString);
 
-        // TODO i dont think we need this get rid prob when done
-        SearchArtworkDAO searchDAO = new SearchArtworkDAO();
-		Artwork artwork = searchDAO.getArtworkById(artworkID);
-
-
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
@@ -52,6 +47,28 @@ public class PlaceBid extends HttpServlet {
         if(currentTimestamp.before(auction.getEndTimestamp()))
         {
             String result = auctionDAO.placeBid(userID, bidAmount, artworkID);
+           
+            if (result.equals("Bid Succesfully Placed")) 
+            {
+
+                Auction updatedAuction = auctionDAO.getAuctionByArtworkID(artworkID);
+                User highestBidder = auctionDAO.getHighestBidder(artworkID);
+    
+                // Set updated attributes
+                request.setAttribute("auction", updatedAuction);
+                request.setAttribute("highestBidder", highestBidder);
+    
+                SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+                Artwork updateArtwork = searchDAO.getArtworkById(artworkID);
+                request.setAttribute("artwork", updateArtwork);
+
+ 
+                // Forward to artwork page
+                RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
+                // Redirect or forward back to the artwork page
+                dispatcher.forward(request, response);
+                return;
+            }
         }
 
 

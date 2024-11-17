@@ -99,4 +99,15 @@
     <servlet-name>RemoveArtwork</servlet-name>
     <url-pattern>/RemoveArtwork</url-pattern>
   </servlet-mapping>
+
+     <servlet>
+    <description></description>
+    <display-name>PlaceBid</display-name>
+    <servlet-name>PlaceBid</servlet-name>
+    <servlet-class>PlaceBid</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlaceBid</servlet-name>
+    <url-pattern>/PlaceBid</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -29,7 +29,9 @@ public class ArtworkPage extends HttpServlet {
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
+		User highestBidder = auctionDAO.getHighestBidder(artworkID);
 		request.setAttribute("auction", auction);
+		request.setAttribute("highestBidder", highestBidder);
 
 		int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
 		request.setAttribute("ownerUserID", ownerUserID);
@@ -43,4 +45,6 @@ public class ArtworkPage extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+
+
 }
