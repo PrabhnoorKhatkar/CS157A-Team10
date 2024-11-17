@@ -41,6 +41,7 @@ public class UploadArtwork extends HttpServlet {
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
+		String filename = request.getParameter("image");
 		String startingPriceString = request.getParameter("startingPrice");
 		String reservePriceString = request.getParameter("reservePrice");
 		String durationString = request.getParameter("duration");
@@ -65,7 +66,9 @@ public class UploadArtwork extends HttpServlet {
 			// Add to Auction Table
 			AuctionDAO auctionDAO = new AuctionDAO();
 			auctionDAO.insert(userID, artworkID, startingPrice, reservePrice, duration);
-			
+			String result = uploadDAO.uploadImage(filename, userID, artworkID);
+
+		
 			response.sendRedirect("homepage.jsp"); // redirect to homepage
 		} else {
 			response.getWriter().println("Failed to upload artwork.");
