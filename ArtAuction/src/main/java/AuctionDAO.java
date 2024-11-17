@@ -117,7 +117,7 @@ public class AuctionDAO extends DAO {
         String result = "Bid Not Succesfully Placed";
 
         String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
-		String sql2 = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
+		String sql2 = "INSERT INTO Bid (userID, artworkID, timestamp, bidAmount) VALUES (?, ?, ?, ?)";
 
 		try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -130,6 +130,16 @@ public class AuctionDAO extends DAO {
             if (rowsAffected > 0) 
 			{
 
+				Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+				PreparedStatement ps2 = con.prepareStatement(sql2);
+				ps2.setInt(1, userID);
+				ps2.setInt(2, artworkID);
+				ps2.setTimestamp(3, currentTimestamp);
+				ps2.setFloat(4, bidAmount);
+
+				ps.executeUpdate();
+
 
 				result = "Bid Succesfully Placed";
             }
@@ -141,6 +151,41 @@ public class AuctionDAO extends DAO {
 
 
 		return result;
+
+	}
+
+	public User getHighestBidder(Integer artworkID)
+	{
+
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+
+		User highestBidder = new User();
+
+		String sql = "SELECT displayName FROM User WHERE userID = (SELECT userID FROM Bid WHERE artworkID = ? ORDER BY dollarAmount DESC LIMIT 1);";
+		
+		try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, artworkID);
+
+			var resultSet = ps.executeQuery();
+
+			if (resultSet.next())
+			{
+  
+			    // Retrieve data from the result set
+                String displayName = resultSet.getString("displayName"); 
+			
+			    highestBidder = new User(displayName);
+			
+			}
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return highestBidder;
 
 	}
 
