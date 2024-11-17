@@ -88,4 +88,15 @@
     <servlet-name>EditArtwork</servlet-name>
     <url-pattern>/EditArtwork</url-pattern>
   </servlet-mapping>
+
+   <servlet>
+    <description></description>
+    <display-name>RemoveArtwork</display-name>
+    <servlet-name>RemoveArtwork</servlet-name>
+    <servlet-class>RemoveArtwork</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveArtwork</servlet-name>
+    <url-pattern>/RemoveArtwork</url-pattern>
+  </servlet-mapping>
 </web-app>

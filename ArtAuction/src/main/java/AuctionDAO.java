@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -82,6 +81,34 @@ public class AuctionDAO extends DAO {
         return returnAuction;
 
 	}
+
+	public String removeArtwork(Integer artworkID)
+    {
+        loadDriver(dbdriver);
+		Connection con = getConnection();
+
+        String result = "Not Succesfully Removed";
+
+        String sql = "UPDATE AuctionDetails SET result = 'REMOVED' WHERE artworkID = ?;";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, artworkID);
+
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if update was succesfull
+            if (rowsAffected > 0) {
+                result = "Successfully Removed";
+            }
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+    }
 
 
 	

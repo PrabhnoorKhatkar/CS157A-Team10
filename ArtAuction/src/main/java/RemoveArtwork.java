@@ -34,12 +34,16 @@ public class RemoveArtwork extends HttpServlet {
 		int artworkID = Integer.parseInt(request.getParameter("artworkID"));
 
 
+		AuctionDAO auctionDAO = new AuctionDAO();
+		String result = auctionDAO.removeArtwork(artworkID);
 
+		if (result.equals("Successfully Removed"))
+		{
 
+			// TODO 
 
+		}
 
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
