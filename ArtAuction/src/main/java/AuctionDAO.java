@@ -21,7 +21,6 @@ public class AuctionDAO extends DAO {
 
 
             // TODO Add to AuctionDetail if INSERT into Auction was sucessful
-			// TODO change ID to artworkID in schema
 			Timestamp startTimestamp = new Timestamp(System.currentTimeMillis());
 			Timestamp endTimestamp = new Timestamp(System.currentTimeMillis() + (duration * 86400000L));
 
@@ -109,6 +108,41 @@ public class AuctionDAO extends DAO {
 
 		return result;
     }
+
+	public String placeBid(Integer userID, Float bidAmount, Integer artworkID)
+	{  
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+
+        String result = "Bid Not Succesfully Placed";
+
+        String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
+		String sql2 = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
+
+		try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setFloat(1, bidAmount);
+			ps.setInt(2, artworkID);
+
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if update was succesfull
+            if (rowsAffected > 0) 
+			{
+
+
+				result = "Bid Succesfully Placed";
+            }
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+
+		return result;
+
+	}
 
 
 	

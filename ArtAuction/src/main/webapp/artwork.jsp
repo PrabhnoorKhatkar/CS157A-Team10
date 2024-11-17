@@ -20,6 +20,8 @@
 			
 			<p>Owner: ${ownerDisplayName}</p>
 			<img src="myapp/images/${artwork.filepath}" >
+			<p></p>
+
 			<label for="title">Title:</label>
 			<input type="text" id="title" name="title" value="${artwork.title}" required><br>
 			
@@ -54,6 +56,11 @@
 				<p>Current Bid: $${auction.amount}</p>
 				<p>Auction Ends: ${auction.endTimestamp}</p>
 
+				<!-- Countdown Timer -->
+				<div class="countdown-timer">
+					<p>Auction Ends In: <span id="countdown"></span></p>
+				</div>
+
 				<!-- save favorite artwork functionality -->
 				<form action="SaveArtwork" method="post">
 
@@ -66,10 +73,15 @@
 				</form>
 
 				<div class="bid-section">
-					<label for="bidAmount">Place Your Bid:</label>
-					<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
+					<form action="PlaceBid" method="post">
+						<input type="hidden" name="artworkID" value="${artwork.id}">
+						
+						<label for="bidAmount">Place Your Bid:</label>
+						<input type="number" id="bidAmount" name="bidAmount" min="${auction.startingPrice}"
 							placeholder="Enter bid amount" required>
-					<button class="btn bid-btn">Place Bid</button>
+					
+						<button type="submit" class="btn bid-btn">Place Bid</button>
+					</form>
 				</div>
 
 			</div>
