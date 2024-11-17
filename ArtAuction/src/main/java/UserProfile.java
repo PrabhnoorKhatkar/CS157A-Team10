@@ -40,7 +40,9 @@ public class UserProfile extends HttpServlet {
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 
 		int otherID = userDAO.getUserIDByDisplayName(requestedUserDisplayName);
-
+		int followerCount = -1;
+		int followingCount = -1;
+		
 		User user = null;
 		List<Artwork> artworkList = null;
 		List<Artwork> favArtworkList = null;
@@ -51,19 +53,24 @@ public class UserProfile extends HttpServlet {
 			user = userDAO.getUserById(userID);
 			artworkList = userDAO.getArtworkByuserID(userID);
 			favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
+			followerCount = followUserDAO.getFollowerCount(userID);
+			followingCount = followUserDAO.getFollowingCount(userID);
 			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserById(otherID);
 			artworkList = userDAO.getArtworkByuserID(otherID);
 			favArtworkList = userDAO.getFavoritedArtworkByuserID(otherID);
+			followerCount = followUserDAO.getFollowerCount(otherID);
+			followingCount = followUserDAO.getFollowingCount(otherID);
 			request.setAttribute("myProfile", false);
 		}
 		boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
-		int followerCount = followUserDAO.getFollowerCount(otherID);
+		
 		
 		request.setAttribute("otherID", otherID);
 		request.setAttribute("isFollowed", isFollowed);
 		request.setAttribute("followerCount", followerCount);
+		request.setAttribute("followingCount", followingCount);
 		request.setAttribute("user", user);
 		request.setAttribute("artworkList", artworkList);
 		request.setAttribute("favArtworkList", favArtworkList);

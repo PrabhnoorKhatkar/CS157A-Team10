@@ -43,14 +43,14 @@
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
-			<p>${0}Following</p>
+			<p>${followingCount}Following</p>
 
-			<p>${0}Followers</p>
+			<p>${followerCount}Followers</p>
 		</c:if>
 
 		<c:if test="${!myProfile}">
 
-			<p>${0}Following</p>
+			<p>${followingCount}Following</p>
 
 			<p>${followerCount}Followers</p>
 			<form action="UserProfile" method="post">

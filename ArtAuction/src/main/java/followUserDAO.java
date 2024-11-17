@@ -59,7 +59,7 @@ public class FollowUserDAO extends DAO {
 
 	public int getFollowerCount(int followedUserID) {
 		var con = getConnection();
-		String sql = "SELECT COUNT(*) FROM Follow WHERE followingID = ?;";
+		String sql = "SELECT COUNT(*) FROM Follow WHERE followerID = ?;";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, followedUserID);
@@ -68,10 +68,28 @@ public class FollowUserDAO extends DAO {
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return 0;
+	}
+
+	public int getFollowingCount(int followerID) {
+		var con = getConnection();
+		String sql = "SELECT COUNT(*) FROM Follow WHERE followingID = ?;";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, followerID);
+
+			var rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 }
