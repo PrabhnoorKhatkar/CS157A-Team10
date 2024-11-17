@@ -24,6 +24,12 @@ public class User
 		this.displayName = displayName;
 		
 	}
+	
+	public User(String displayName) {
+		super();
+		this.displayName = displayName;
+		
+	}
 
 	public boolean isAnonymous() {
 		return anonymous;
