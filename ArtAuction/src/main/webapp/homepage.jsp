@@ -90,6 +90,7 @@
 									<c:forEach var="artwork" items="${requestScope.artworkList}">
 										<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
 											<div class="art-item">
+												<img src="myapp/images/${artwork.filepath}" >
 													<h3>${artwork.title}</h3>
 													<p>Description: 
 													    <c:choose>

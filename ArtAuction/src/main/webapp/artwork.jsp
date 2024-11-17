@@ -19,7 +19,7 @@
 			<input type="hidden" name="artworkID" value="${artwork.id}">
 			
 			<p>Owner: ${ownerDisplayName}</p>
-			
+			<img src="myapp/images/${artwork.filepath}" >
 			<label for="title">Title:</label>
 			<input type="text" id="title" name="title" value="${artwork.title}" required><br>
 			
@@ -46,6 +46,7 @@
 		<section class="artwork-details">
 			<div class="container">
 				<h2>Title: ${artwork.title}</h2>
+				<img src="myapp/images/${artwork.filepath}" >
 				<p>Owner: <a href="UserProfile?user=${ownerDisplayName}">${ownerDisplayName}</a></p>
 				<p>Artist: ${artwork.artist}</p>
 				<p>Description: ${artwork.description}</p>

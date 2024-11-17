@@ -5,6 +5,7 @@ public class Artwork {
     private String description;
     private String artist;
     private Integer duration;
+    private String filepath;
     // TODO private ImageUpload image;
 
     public Artwork(Integer id, String title, String description, String artist, Integer duration) {
@@ -19,6 +20,13 @@ public class Artwork {
         this.title = title;
         this.description = description;
         this.artist = artist;
+    }
+    public Artwork(Integer id, String title, String description, String artist, String filepath) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.artist = artist;
+        this.filepath = filepath;
     }
 
     public Artwork(String title, String description, String artist) {
@@ -60,6 +68,12 @@ public class Artwork {
     }
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+    public String getFilepath() {
+        return filepath;
+    }
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
     }
         
 }

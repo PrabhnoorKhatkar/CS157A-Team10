@@ -11,7 +11,7 @@ public class SearchArtworkDAO extends DAO {
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
+        String sql = "SELECT * FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -33,7 +33,9 @@ public class SearchArtworkDAO extends DAO {
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-			    searchList.add(new Artwork(id, title, description, artist));
+                String filepath = resultSet.getString("filename");
+			    
+			    searchList.add(new Artwork(id, title, description, artist, filepath));
 			    
 			}
         } catch (SQLException e) {
@@ -53,7 +55,7 @@ public class SearchArtworkDAO extends DAO {
         var con = getConnection();
         Artwork returnArtwork = new Artwork();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork WHERE artworkID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE artworkID = ?;");
             ps.setInt(1, artworkId);
 
             var resultSet = ps.executeQuery();
@@ -67,12 +69,9 @@ public class SearchArtworkDAO extends DAO {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-                
-                BufferedImage image = null; // TODO: Figure out how to approach image
-
+                String filepath = resultSet.getString("filename");
 			    
-			    
-			    returnArtwork = new Artwork(id, title, description, artist);
+			    returnArtwork = new Artwork(id, title, description, artist, filepath);
 			   
 			    
 			}
