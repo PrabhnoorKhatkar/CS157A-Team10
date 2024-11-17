@@ -15,7 +15,7 @@
 	<!-- Check if user is the owner -->
 	<c:if test="${isOwner}">
 		<h2>Edit Artwork Details ${artwork.title}</h2>
-		<form action="UpdateArtwork" method="post">
+		<form action="EditArtwork" method="post">
 			<input type="hidden" name="artworkID" value="${artwork.id}">
 			
 			<p>Owner: ${ownerDisplayName}</p>
