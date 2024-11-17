@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userID", userID);
-			response.sendRedirect("homepage.jsp"); //redirect to home page
+			response.sendRedirect("/ArtAuction"); //redirect to home page
 		} else {
 			request.setAttribute("errorMessage", "Invalid email or password.");
 	        request.getRequestDispatcher("login.jsp").forward(request, response);

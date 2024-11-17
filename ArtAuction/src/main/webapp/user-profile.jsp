@@ -15,7 +15,7 @@
 	<header class="profile-header">
 		<div class="header-left">
 			<h2>
-				<a href="homepage.jsp" class="logo">ART AUCTION</a>
+				<a href="/ArtAuction" class="logo">ART AUCTION</a>
 			</h2>
 		</div>
 

@@ -38,20 +38,22 @@ public class UserProfile extends HttpServlet {
 		
         UserProfileDAO userDAO = new UserProfileDAO();
 		User user = null;
+		List<Artwork> artworkList = null;
+		List<Artwork> favArtworkList = null;
           
 		// if no parameter for display name it's others profile
 		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
 			user = userDAO.getUserById(userID);
+			artworkList = userDAO.getArtworkByuserID(userID);
+			favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
 			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserByDisplayName(requestedUserDisplayName);
+			artworkList = userDAO.getArtworkByUserDisplayName(requestedUserDisplayName);
+			favArtworkList = userDAO.getFavoritedArtworkByuserDisplayName(requestedUserDisplayName);
 			request.setAttribute("myProfile", false);
-		}
-		
-		List<Artwork> artworkList = userDAO.getArtworkByuserID(userID);
-		List<Artwork> favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
-		
+		}		
 
         request.setAttribute("user", user);
         request.setAttribute("artworkList", artworkList);
