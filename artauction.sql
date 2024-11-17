@@ -52,7 +52,7 @@ CREATE TABLE `ArtImage` (
   `imageID` int NOT NULL,
   PRIMARY KEY (`artworkID`),
   KEY `imageID` (`imageID`),
-  CONSTRAINT `artimage_ibfk_1` FOREIGN KEY (`imageID`) REFERENCES `Image` (`ID`)
+  CONSTRAINT `artimage_ibfk_1` FOREIGN KEY (`imageID`) REFERENCES `Image` (`imageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -238,10 +238,10 @@ DROP TABLE IF EXISTS `Image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Image` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+  `imageID` int NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   `uploaderID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
+  PRIMARY KEY (`imageID`),
   UNIQUE KEY `filename` (`filename`),
   KEY `uploaderID` (`uploaderID`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uploaderID`) REFERENCES `User` (`userID`)
@@ -352,7 +352,7 @@ CREATE TABLE `ProfilePicture` (
   PRIMARY KEY (`userID`),
   KEY `imageID` (`imageID`),
   CONSTRAINT `profilepicture_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `profilepicture_ibfk_2` FOREIGN KEY (`imageID`) REFERENCES `Image` (`ID`)
+  CONSTRAINT `profilepicture_ibfk_2` FOREIGN KEY (`imageID`) REFERENCES `Image` (`imageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -430,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-15 19:26:50
+-- Dump completed on 2024-11-16 23:16:59
