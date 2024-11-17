@@ -11,34 +11,70 @@
 <title>Artwork</title>
 </head>
 <body>
+	
+	<header class="profile-header">
+		<div class="header-left">
+			<h2>
+				<a href="/ArtAuction" class="logo">ART AUCTION</a>
+			</h2>
+		</div>
 
+		<div class="header-right">
+
+			<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
+
+			<form action="Logout" method="post">
+				<button type="submit" class="logout-btn">Log Out</button>
+			</form>
+
+			<a href="UserProfile" class="profile-btn"> <img
+				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
+				height="64">
+			</a>
+		</div>
+	</header>
+	
+		
 	<!-- Check if user is the owner -->
 	<c:if test="${isOwner}">
-		<h2>Edit Artwork Details ${artwork.title}</h2>
-		<form action="EditArtwork" method="post">
-			<input type="hidden" name="artworkID" value="${artwork.id}">
-			
-			<p>Owner: ${ownerDisplayName}</p>
-			<img src="myapp/images/${artwork.filepath}" >
-			<label for="title">Title:</label>
-			<input type="text" id="title" name="title" value="${artwork.title}" required><br>
-			
-			<label for="artist">Artist:</label>
-			<input type="text" id="artist" name="artist" value="${artwork.artist}" required><br>
-			
-			<label for="description">Description:</label>
-			<textarea id="description" name="description" required>${artwork.description}</textarea><br>
-			
-			<p>Starting Price: $${auction.startingPrice}</p>
-			<p>Current Bid: $${auction.amount}</p>
-			<p>Reserve: $${auction.reserve}</p>
-	        
-			<p>Auction Ends: ${auction.endTimestamp}</p>
-			
-			<button type="submit" class="btn save-btn">Save Changes</button>
-		</form>
+		<header class = "artwork-header">
+			<div class = "left">
+				<img class = "art" src="myapp/images/${artwork.filepath}" >
+			</div>
+			<div class = right>
+				<h2>Edit Artwork Details: ${artwork.title}</h2>
+				<form action="EditArtwork" method="post">
+					<input type="hidden" name="artworkID" value="${artwork.id}">
+					
+					<p>Owner: ${ownerDisplayName}</p>
+					
+					<label for="title">Title:</label>
+					<input type="text" id="title" name="title" value="${artwork.title}" required><br>
+					
+					<label for="artist">Artist:</label>
+					<input type="text" id="artist" name="artist" value="${artwork.artist}" required><br>
+					
+					<label for="description">Description:</label>
+					<textarea id="description" name="description" required>${artwork.description}</textarea><br>
+					
+					<p>Starting Price: $${auction.startingPrice}</p>
+					<p>Current Bid: $${auction.amount}</p>
+					<p>Reserve: $${auction.reserve}</p>
+			        
+					<p>Auction Ends: ${auction.endTimestamp}</p>
+					
+					<button type="submit" class="btn save-btn">Save Changes</button>
+				</form>
+			</div>
+			<div class="owner-actions">
+			<!-- Remove Listing -->
+			<form action="RemoveArtwork" method="post" onsubmit="return confirm('Are you sure you want to remove this listing?');">
+				<input type="hidden" name="artworkID" value="${artwork.id}">
+				<button type="submit" class="btn remove-btn">Remove Listing</button>
+			</form>
+		</div>
+		</header>
 	</c:if>
-
 
 	<!-- For non owner page-->
 	<!-- Iterate over the artwork list and display each artwork -->
@@ -74,18 +110,6 @@
 
 			</div>
 		</section>
-	</c:if>
-	
-
-	<!-- Check if user is the owner Remove Listing Button -->
-	<c:if test="${isOwner}">
-		<div class="owner-actions">
-			<!-- Remove Listing -->
-			<form action="RemoveArtwork" method="post" onsubmit="return confirm('Are you sure you want to remove this listing?');">
-				<input type="hidden" name="artworkID" value="${artwork.id}">
-				<button type="submit" class="btn remove-btn">Remove Listing</button>
-			</form>
-		</div>
 	</c:if>
 	
 </body>

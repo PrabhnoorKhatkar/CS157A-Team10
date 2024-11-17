@@ -17,10 +17,10 @@ public class SearchArtwork extends HttpServlet {
 
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
         String searchText = request.getParameter("searchText");
@@ -28,12 +28,12 @@ public class SearchArtwork extends HttpServlet {
         SearchArtworkDAO searchDAO = new SearchArtworkDAO();
         
         List<Artwork> artworkList = searchDAO.query(searchText);
-           
+
         request.setAttribute("artworkList", artworkList);
         
         request.getRequestDispatcher("homepage.jsp").forward(request, response);
         
-	}
+    }
     
     
 }
