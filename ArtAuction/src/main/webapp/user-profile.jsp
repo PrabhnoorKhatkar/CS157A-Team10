@@ -43,26 +43,30 @@
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
-			<p>${followingCount}Following</p>
+			<p>${followingCount} Following</p>
 
-			<p>${followerCount}Followers</p>
+			<p>${followerCount} Followers</p>
 		</c:if>
 
 		<c:if test="${!myProfile}">
 
-			<p>${followingCount}Following</p>
+			<p>${followingCount} Following</p>
 
-			<p>${followerCount}Followers</p>
+			<p>${followerCount} Followers</p>
 			<form action="UserProfile" method="post">
 				<input type="hidden" name="followedUserId" value="${otherID}">
 				<input type="hidden" name="displayName" value="${user.displayName}">
 
-				<c:if test="${isFollowed}">
-					<button type="button" class="follow-btn" disabled>Followed</button>
-				</c:if>
-				<c:if test="${!isFollowed}">
-					<button type="submit" class="follow-btn">Follow</button>
-				</c:if>
+				<c:choose>
+					<c:when test="${isFollowed}">
+						<!-- Submit form to unfollow when clicked -->
+						<button type="submit" name="action" value="unfollow" class="follow-btn">Unfollow</button>
+					</c:when>
+					<c:otherwise>
+						<!-- Submit form to follow when clicked -->
+						<button type="submit" name="action" value="follow" class="follow-btn">Follow</button>
+					</c:otherwise>
+				</c:choose>
 			</form>
 
 		</c:if>

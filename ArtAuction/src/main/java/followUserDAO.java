@@ -2,7 +2,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class FollowUserDAO extends DAO {
-	public boolean addFollow(int followerID, int followingID) {
+	public boolean followUser(int followerID, int followingID) {
 		var con = getConnection();
 		String sql = "INSERT INTO follow (followerID, followingID) VALUES (?,?);";
 
@@ -20,7 +20,7 @@ public class FollowUserDAO extends DAO {
 		}
 	}
 
-	public boolean removeFollow(int followerID, int followingID) {
+	public boolean unfollowUser(int followerID, int followingID) {
 		var con = getConnection();
 		String sql = "DELETE FROM follow wHERE followerID = ? AND followingID = ?;";
 		try {
@@ -57,12 +57,12 @@ public class FollowUserDAO extends DAO {
 		return false;
 	}
 
-	public int getFollowerCount(int followedUserID) {
+	public int getFollowerCount(int followerID) {
 		var con = getConnection();
-		String sql = "SELECT COUNT(*) FROM Follow WHERE followerID = ?;";
+		String sql = "SELECT COUNT(*) FROM Follow WHERE followingID = ?;";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, followedUserID);
+			ps.setInt(1, followerID);
 
 			var rs = ps.executeQuery();
 			if (rs.next()) {
@@ -74,13 +74,13 @@ public class FollowUserDAO extends DAO {
 		return 0;
 	}
 
-	public int getFollowingCount(int followerID) {
+	public int getFollowingCount(int followedUserID) {
 		var con = getConnection();
-		String sql = "SELECT COUNT(*) FROM Follow WHERE followingID = ?;";
+		String sql = "SELECT COUNT(*) FROM Follow WHERE followerID = ?;";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, followerID);
+			ps.setInt(1, followedUserID);
 
 			var rs = ps.executeQuery();
 			if (rs.next()) {

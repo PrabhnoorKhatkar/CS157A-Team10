@@ -87,9 +87,15 @@ public class UserProfile extends HttpServlet {
 			throws ServletException, IOException {
 		Integer followerID = (Integer) request.getSession().getAttribute("userID");
 		Integer followedUserID = Integer.parseInt(request.getParameter("followedUserId"));
+		String action = request.getParameter("action");
 
 		FollowUserDAO followUserDAO = new FollowUserDAO();
-		followUserDAO.addFollow(followerID, followedUserID);
+		
+		if (action.equals("follow")) {
+			followUserDAO.followUser(followerID, followedUserID);
+		} else if (action.equals("unfollow")) {
+			followUserDAO.unfollowUser(followerID, followedUserID);
+		}
 
 		String displayName = request.getParameter("displayName");
 		response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + displayName);
