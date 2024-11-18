@@ -88,7 +88,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Removed";
 
-        String sql = "UPDATE AuctionDetails SET result = 'REMOVED' WHERE artworkID = ?;";
+        String sql = "UPDATE AuctionDetails SET result = 'WITHDRAWN' WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -109,6 +109,63 @@ public class AuctionDAO extends DAO {
 		return result;
     }
 
+	public String endArtwork(Integer artworkID)
+    {
+        loadDriver(dbdriver);
+		Connection con = getConnection();
+
+        String result = "Not Succesfully Ended";
+
+        String sql = "UPDATE AuctionDetails SET result = 'UNSOLD' WHERE artworkID = ?;";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, artworkID);
+
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if update was succesfull
+            if (rowsAffected > 0) {
+                result = "Successfully Ended";
+            }
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+    }
+
+	public String sellArtwork(Integer artworkID)
+    {
+        loadDriver(dbdriver);
+		Connection con = getConnection();
+
+        String result = "Not Succesfully Sold";
+
+        String sql = "UPDATE AuctionDetails SET result = 'SOLD' WHERE artworkID = ?;";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, artworkID);
+
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if update was succesfull
+            if (rowsAffected > 0) {
+                result = "Successfully Sold";
+            }
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+    }
+
+
 	public String placeBid(Integer userID, Float bidAmount, Integer artworkID)
 	{  
 		loadDriver(dbdriver);
@@ -116,7 +173,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Bid Not Succesfully Placed";
 
-        String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
+        String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ? AND result = 'ACTIVE';";
 		String sql2 = "INSERT INTO Bid (userID, artworkID, timestamp, bidAmount) VALUES (?, ?, ?, ?)";
 
 		try {
@@ -162,7 +219,7 @@ public class AuctionDAO extends DAO {
 
 		User highestBidder = new User();
 
-		String sql = "SELECT displayName FROM User WHERE userID = (SELECT userID FROM Bid WHERE artworkID = ? ORDER BY dollarAmount DESC LIMIT 1);";
+		String sql = "SELECT displayName FROM User WHERE userID = (SELECT userID FROM Bid WHERE artworkID = ? ORDER BY bidAmount DESC LIMIT 1);";
 		
 		try {
             PreparedStatement ps = con.prepareStatement(sql);

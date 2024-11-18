@@ -5,12 +5,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class ArtworkPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// TODO check if artwork auction is over 
+		// Update result on page for non winning users
+		// For winning user provide place to order the artwork
 
 		int artworkID = Integer.parseInt(request.getParameter("id"));
 		int userID = (int) request.getSession().getAttribute("userID");
@@ -29,6 +34,12 @@ public class ArtworkPage extends HttpServlet {
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
+
+		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+		if(auction.getEndTimestamp().after(currentTimestamp))
+		{
+			// TODO update status to UNSOLD
+		}
 		User highestBidder = auctionDAO.getHighestBidder(artworkID);
 		request.setAttribute("auction", auction);
 		request.setAttribute("highestBidder", highestBidder);
