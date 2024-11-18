@@ -46,7 +46,9 @@ public class UserProfile extends HttpServlet {
 		User user = null;
 		List<Artwork> artworkList = null;
 		List<Artwork> favArtworkList = null;
-
+		List<User> getFollowingUsersList = null;
+		List<User> getFollowerUsersList = null;
+		
 		// if no parameter for display name it's others profile
 		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
@@ -55,6 +57,10 @@ public class UserProfile extends HttpServlet {
 			favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
 			followerCount = followUserDAO.getFollowerCount(userID);
 			followingCount = followUserDAO.getFollowingCount(userID);
+			
+			getFollowingUsersList = followUserDAO.getFollowingUsersList(userID);
+			getFollowerUsersList = followUserDAO.getFollowerUsersList(userID);
+			
 			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserById(otherID);
@@ -62,6 +68,10 @@ public class UserProfile extends HttpServlet {
 			favArtworkList = userDAO.getFavoritedArtworkByuserID(otherID);
 			followerCount = followUserDAO.getFollowerCount(otherID);
 			followingCount = followUserDAO.getFollowingCount(otherID);
+			
+			getFollowingUsersList = followUserDAO.getFollowingUsersList(otherID);
+			getFollowerUsersList = followUserDAO.getFollowerUsersList(otherID);
+			
 			request.setAttribute("myProfile", false);
 		}
 		boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
@@ -74,6 +84,10 @@ public class UserProfile extends HttpServlet {
 		request.setAttribute("user", user);
 		request.setAttribute("artworkList", artworkList);
 		request.setAttribute("favArtworkList", favArtworkList);
+		
+
+		request.setAttribute("followingUsersList", getFollowingUsersList);
+		request.setAttribute("getFollowerUsersList", getFollowerUsersList);
 
 		request.getRequestDispatcher("user-profile.jsp").forward(request, response);
 
@@ -86,14 +100,17 @@ public class UserProfile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Integer followerID = (Integer) request.getSession().getAttribute("userID");
-		Integer followedUserID = Integer.parseInt(request.getParameter("followedUserId"));
+		String followUserStr = request.getParameter("followedUserId");
+		
 		String action = request.getParameter("action");
 
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 		
-		if (action.equals("follow")) {
+		if (action.equals("follow") && followUserStr != null) {
+			Integer followedUserID = Integer.parseInt(followUserStr);
 			followUserDAO.followUser(followerID, followedUserID);
-		} else if (action.equals("unfollow")) {
+		} else if (action.equals("unfollow") && followUserStr != null) {
+			Integer followedUserID = Integer.parseInt(followUserStr);
 			followUserDAO.unfollowUser(followerID, followedUserID);
 		}
 

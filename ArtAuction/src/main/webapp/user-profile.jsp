@@ -43,16 +43,26 @@
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
-			<p>${followingCount} Following</p>
-
-			<p>${followerCount} Followers</p>
+			<p>${followingCount}Following</p>
+			<c:forEach items="${followingUsersList}" var="user">
+				<p>${user.displayName}</p>
+			</c:forEach>
+			<p>${followerCount}Followers</p>
+			<c:forEach items="${getFollowerUsersList}" var="user">
+				<p>${user.displayName}</p>
+			</c:forEach>
 		</c:if>
 
 		<c:if test="${!myProfile}">
 
-			<p>${followingCount} Following</p>
-
-			<p>${followerCount} Followers</p>
+			<button>${followingCount}Following</button>
+			<c:forEach items="${followingUsersList}" var="user">
+				<p>${user.displayName}</p>
+			</c:forEach>
+			<button>${followerCount}Followers</button>
+			<c:forEach items="${getFollowerUsersList}" var="user">
+				<p>${user.displayName}</p>
+			</c:forEach>
 			<form action="UserProfile" method="post">
 				<input type="hidden" name="followedUserId" value="${otherID}">
 				<input type="hidden" name="displayName" value="${user.displayName}">
@@ -60,11 +70,13 @@
 				<c:choose>
 					<c:when test="${isFollowed}">
 						<!-- Submit form to unfollow when clicked -->
-						<button type="submit" name="action" value="unfollow" class="follow-btn">Unfollow</button>
+						<button type="submit" name="action" value="unfollow"
+							class="follow-btn">Unfollow</button>
 					</c:when>
 					<c:otherwise>
 						<!-- Submit form to follow when clicked -->
-						<button type="submit" name="action" value="follow" class="follow-btn">Follow</button>
+						<button type="submit" name="action" value="follow"
+							class="follow-btn">Follow</button>
 					</c:otherwise>
 				</c:choose>
 			</form>
