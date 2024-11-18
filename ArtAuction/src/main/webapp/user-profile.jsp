@@ -1,3 +1,4 @@
+<jsp:useBean id="user" scope="request" type="ArtAuction.User"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
@@ -123,6 +124,7 @@
 		</div>
 	</div>
 
+	<jsp:useBean id="myProfile" scope="request" type="java.lang.Boolean"/>
 	<c:if test="${myProfile}">
 		<div class="saved-artwork">
 			<section class="search-results" id="gallery">

@@ -36,6 +36,11 @@
 
 
 	<!-- Check if user is the owner -->
+	<jsp:useBean id="artwork" scope="request" type="ArtAuction.Artwork"/>
+	<jsp:useBean id="ownerDisplayName" scope="request" type="java.lang.String"/>
+	<jsp:useBean id="isOwner" scope="request" type="java.lang.Boolean"/>
+	<jsp:useBean id="auction" scope="request" type="ArtAuction.Auction"/>
+	<jsp:useBean id="highestBidder" scope="request" type="ArtAuction.User"/>
 	<c:if test="${isOwner}">
 		<header class="artwork-header">
 			<div class="left">
