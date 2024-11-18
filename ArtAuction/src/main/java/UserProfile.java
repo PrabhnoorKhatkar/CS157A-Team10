@@ -106,11 +106,16 @@ public class UserProfile extends HttpServlet {
 
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 		
-		if (action.equals("follow") && followUserStr != null) {
-			Integer followedUserID = Integer.parseInt(followUserStr);
+		if (followUserStr == null || followUserStr.isEmpty()) {
+			response.getWriter().append("Invalid followed user ID.");
+			return;
+		}
+		
+		Integer followedUserID = Integer.parseInt(followUserStr);
+		
+		if (action.equals("follow")) {
 			followUserDAO.followUser(followerID, followedUserID);
-		} else if (action.equals("unfollow") && followUserStr != null) {
-			Integer followedUserID = Integer.parseInt(followUserStr);
+		} else if (action.equals("unfollow")) {
 			followUserDAO.unfollowUser(followerID, followedUserID);
 		}
 

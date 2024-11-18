@@ -24,7 +24,7 @@ public class FollowUserDAO extends DAO {
 
 	public boolean unfollowUser(int followerID, int followingID) {
 		var con = getConnection();
-		String sql = "DELETE FROM follow wHERE followerID = ? AND followingID = ?;";
+		String sql = "DELETE FROM follow WHERE followerID = ? AND followingID = ?;";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, followerID);

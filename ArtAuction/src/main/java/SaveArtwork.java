@@ -23,9 +23,7 @@ public class SaveArtwork extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-
+	
 	}
 
 	/**
@@ -34,38 +32,33 @@ public class SaveArtwork extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		Integer userID = (Integer) request.getSession().getAttribute("userID");
-		//response.getWriter().append("User: " + userID);
+		String artworkIdParam = request.getParameter("artworkID");
+		SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
+		String action = request.getParameter("action");
 
 		if (userID == null || userID == -1) {
-			// response.getWriter().append("User not logged in.");
-			response.sendRedirect("login.jsp"); // redirect to login if not logged in
+			// User not logged in
+			response.sendRedirect("login.jsp");
 			return;
 		}
-
-		String artworkIdParam = request.getParameter("artworkID");
 
 		if (artworkIdParam == null || artworkIdParam.isEmpty()) {
 			response.getWriter().append("Invalid artwork ID.");
 			return;
 		}
-		// response.getWriter().append("artworkID: " + artworkIdParam);
 
-		int artworkID = Integer.parseInt(artworkIdParam);
+		Integer artworkID = Integer.parseInt(artworkIdParam);
 
-		SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-		String result = saveArtworkDAO.insert(userID, artworkID);
-
-		if (result.equals("Data Entered Successfully")) {
-			// response.getWriter().append("saved");
-			// response.getWriter().append("UserID: " + userID);
-			// response.getWriter().append("ArtworkID: " + artworkID);
-			response.sendRedirect("UserProfile"); // saved then redirect to user profile
-		} else {
-			response.getWriter().append("Error Saving Artwork");
+		if (action.equals("save")) {
+			saveArtworkDAO.insert(userID, artworkID);
+		} else if (action.equals("unsave")) {
+			saveArtworkDAO.removeSave(userID, artworkID);
 		}
-
+		
+		
+		
+		response.sendRedirect(request.getContextPath() + "/ArtworkPage?id=" + artworkID);
 	}
 
 }

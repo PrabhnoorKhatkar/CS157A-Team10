@@ -50,7 +50,12 @@ public class ArtworkPage extends HttpServlet {
 		// Get the owner display name using the ArtworkPageDAO
 		String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
 		request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-
+		
+		SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
+		boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
+		request.setAttribute("checkSave", checkSave);
+		System.out.println("check check : " + checkSave);
+		
 		// Forward to the artwork details JSP page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
 		dispatcher.forward(request, response);

@@ -43,11 +43,11 @@
 		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
-			<p>${followingCount}Following</p>
+			<button>${followingCount} Following</button>
 			<c:forEach items="${followingUsersList}" var="user">
 				<p>${user.displayName}</p>
 			</c:forEach>
-			<p>${followerCount}Followers</p>
+			<button>${followerCount} Followers</button>
 			<c:forEach items="${getFollowerUsersList}" var="user">
 				<p>${user.displayName}</p>
 			</c:forEach>
@@ -55,11 +55,11 @@
 
 		<c:if test="${!myProfile}">
 
-			<button>${followingCount}Following</button>
+			<button>${followingCount} Following</button>
 			<c:forEach items="${followingUsersList}" var="user">
 				<p>${user.displayName}</p>
 			</c:forEach>
-			<button>${followerCount}Followers</button>
+			<button>${followerCount} Followers</button>
 			<c:forEach items="${getFollowerUsersList}" var="user">
 				<p>${user.displayName}</p>
 			</c:forEach>
