@@ -155,13 +155,13 @@ DROP TABLE IF EXISTS `Bid`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Bid` (
   `userID` int NOT NULL,
-  `auctionDetailsID` int NOT NULL,
+  `artworkID` int NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dollarAmount` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`userID`,`auctionDetailsID`,`timestamp`),
-  KEY `auctionDetailsID` (`auctionDetailsID`),
+  `bidAmount` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`userID`,`artworkID`,`timestamp`),
+  KEY `auctionDetailsID` (`artworkID`),
   CONSTRAINT `bid_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `bid_ibfk_2` FOREIGN KEY (`auctionDetailsID`) REFERENCES `AuctionDetails` (`artworkID`)
+  CONSTRAINT `bid_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `AuctionDetails` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -430,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-16 23:16:59
+-- Dump completed on 2024-11-17 16:25:09

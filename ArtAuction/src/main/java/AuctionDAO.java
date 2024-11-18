@@ -117,7 +117,7 @@ public class AuctionDAO extends DAO {
         String result = "Bid Not Succesfully Placed";
 
         String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ?;";
-		String sql2 = "INSERT INTO Bid (userID, artworkID, timestamp, dollarAmount) VALUES (?, ?, ?, ?)";
+		String sql2 = "INSERT INTO Bid (userID, artworkID, timestamp, bidAmount) VALUES (?, ?, ?, ?)";
 
 		try {
             PreparedStatement ps = con.prepareStatement(sql);
