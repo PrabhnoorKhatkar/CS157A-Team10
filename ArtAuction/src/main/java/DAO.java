@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class DAO {
     protected String dbdriver = "com.mysql.cj.jdbc.Driver";
-    private String dburl = "jdbc:mysql://localhost:3306/artauction";
-    private String dbuname = "root";
-    private String dbpassword = "dbpassword";
+    private final String dburl = "jdbc:mysql://localhost:3306/artauction";
+    private final String dbuname = "root";
+    private final String dbpassword = "dbpassword";
 
     public void loadDriver(String dbDriver) {
         try {

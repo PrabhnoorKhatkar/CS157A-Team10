@@ -1,22 +1,17 @@
+import java.sql.ResultSet;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "Image")
 public class Image {
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-
-    @Column(name = "filename")
+    private Integer imageId;
     private String filename;
 
-    public Integer getId() {
-        return this.id;
+    private Integer uploaderId;
+
+    public Integer getImageId() {
+        return this.imageId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
     }
 
     public String getFilename() {
@@ -25,5 +20,13 @@ public class Image {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public Integer getUploaderId() {
+        return this.uploaderId;
+    }
+
+    public void setUploaderId(Integer uploaderId) {
+        this.uploaderId = uploaderId;
     }
 }

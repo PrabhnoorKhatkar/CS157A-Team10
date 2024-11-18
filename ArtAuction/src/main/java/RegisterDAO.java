@@ -11,10 +11,10 @@ public class RegisterDAO extends DAO {
 		String result = "Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(2, user.getName());
 			ps.setString(1, user.getDisplayName());
-			ps.setString(4, user.getPassword());
+			ps.setString(2, user.getName());
 			ps.setString(3, user.getEmailAddress());
+			ps.setString(4, user.getPassword());
 			ps.setString(5, user.getAddress());
 			ps.setBoolean(6, user.isAnonymous());
 			ps.executeUpdate();

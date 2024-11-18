@@ -7,11 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -20,36 +23,49 @@ import java.util.logging.Logger;
 /**
  * Servlet implementation class Login
  */
-@WebServlet(name = "ImageUpload", urlPatterns = {"/ImageUpload/*"})
+@WebServlet(name = "ImageUpload", urlPatterns = {"/ImageUpload/*"}, loadOnStartup = 1)
 @MultipartConfig()
-@Startup
 public class ImageUpload extends HttpServlet {
     private File localUploadDirectory;
-    private int uploadId = 0;
-    private ImageDAO dao = new ImageDAO();
+    private final ImageDAO dao = new ImageDAO();
 
     @Override
     public void init() {
         // Get the file location where it would be stored.
-        // TODO: decide a location for this
-        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir")).toFile();
+        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir"), "ArtAuction", Long.toString(Instant.now().getEpochSecond())).toFile();
+        var localDirMade = localUploadDirectory.mkdirs();
+        if (!localDirMade) return;
+
+        System.err.printf("Storing images in: %s%n", localUploadDirectory);
         var context = getServletContext();
-        Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
-        for (var s: resourcePaths) {
-            System.err.println(s);
+        Set<String> resourcePaths = context.getResourcePaths("/myapp/images");
+        System.err.println("initial images:");
+        // We assume that the files listed in the database are also in sorted order
+        var sortedPaths = resourcePaths.stream().sorted().toList();
+        for (var s: sortedPaths) {
             var realpath = Path.of(context.getRealPath(s));
+            try (var stream = new FileInputStream(realpath.toFile())) {
+                var filename = realpath.getFileName().toString();
+                var uploaded = upload(stream, filename);
+                System.err.printf("%s%n", uploaded);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     private File upload(InputStream inputStream, String filename) throws java.io.IOException {
-        File uploaded = new File(localUploadDirectory, String.format("%s-%s-%s", uploadId, UUID.randomUUID(), filename));
+        File uploaded = new File(localUploadDirectory, filename);
         Files.copy(inputStream, uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
         return uploaded;
     }
 
     private File retrieve(int id) {
-        var filepath = dao.findByID(id);
-        return filepath.map(image -> localUploadDirectory.toPath().resolve(image.getFilename()).toFile()).orElse(null);
+        var img = dao.findByID(id);
+        if (img == null) {
+            return null;
+        }
+        return Path.of(localUploadDirectory.getAbsolutePath(), img.getFilename()).toFile();
     }
 
     /***
@@ -63,17 +79,13 @@ public class ImageUpload extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-
-        var out = response.getWriter();
-        out.println("<html>");
-        out.println("hi");
-        Set<String> resourcePaths = getServletContext().getResourcePaths("/WEB-INF/premade-files");
-        for (var s: resourcePaths) {
-            out.println(s);
-            var realpath = Path.of(getServletContext().getRealPath(s));
-        }
-        out.println("</html>");
+        String idStr = request.getPathInfo().substring(1);
+        int id = Integer.parseInt(idStr);
+        File file = retrieve(id);
+        if (file == null) {return;}
+        response.setContentType(Files.probeContentType(file.toPath()));
+        response.setContentLength((int) file.length());
+        response.getOutputStream().write(Files.readAllBytes(file.toPath()));
     }
 
     /***
