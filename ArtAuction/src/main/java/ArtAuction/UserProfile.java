@@ -1,13 +1,16 @@
 package ArtAuction;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
+@MultipartConfig
 public class UserProfile extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -96,10 +99,21 @@ public class UserProfile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-		if (action.equals("changeProfilePicture")) {
-
-		}
-		Integer followerID = (Integer) request.getSession().getAttribute("userID");
+		Integer userID = (Integer) request.getSession().getAttribute("userID");
+		if (action.equals("editProfilePicture")) {
+			UserProfileDAO userDAO = new UserProfileDAO();
+			var part = request.getPart("profilepicture");
+			var filename = String.format("profile-pic-%s-%s", ImageUploader.salt(8), part.getSubmittedFileName());
+			ImageUploader.upload(part.getInputStream(), filename);
+			var imageDao = new ImageDAO();
+			var img = new Image(userID, filename);
+            try {
+                userDAO.upsertProfilePicture(userID, imageDao.insertImage(img));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+			return;
+        }
 		String followUserStr = request.getParameter("followedUserId");
 		
 
@@ -113,9 +127,9 @@ public class UserProfile extends HttpServlet {
 		Integer followedUserID = Integer.parseInt(followUserStr);
 		
 		if (action.equals("follow")) {
-			followUserDAO.followUser(followerID, followedUserID);
+			followUserDAO.followUser(userID, followedUserID);
 		} else if (action.equals("unfollow")) {
-			followUserDAO.unfollowUser(followerID, followedUserID);
+			followUserDAO.unfollowUser(userID, followedUserID);
 		}
 
 		String displayName = request.getParameter("displayName");

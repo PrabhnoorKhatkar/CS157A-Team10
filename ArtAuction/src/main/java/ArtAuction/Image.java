@@ -5,6 +5,16 @@ public class Image {
     private String filename;
     private Integer uploaderId;
 
+    public Image(Integer uploaderId, String filename) {
+        this.uploaderId = uploaderId;
+        this.filename = filename;
+    }
+
+    public Image() {
+
+    }
+
+
     public Integer getImageId() {
         return this.imageId;
     }

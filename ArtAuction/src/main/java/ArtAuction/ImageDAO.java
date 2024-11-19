@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class ImageDAO extends DAO {
     /**
      * @param img The Image to be added.
-     * @return The ID of the image in the database.
+     * @return The same Image, but with its ID populated.
      */
-    public int insertImage(Image img) {
+    public Image insertImage(Image img) {
         loadDriver(dbdriver);
+        System.err.println("inserting img");
         var con = getConnection();
         var sql = "INSERT INTO Image(filename, uploaderID) VALUES (?, ?) ";
         try {
@@ -22,12 +23,15 @@ public class ImageDAO extends DAO {
 
             ps.executeUpdate();
             var keys = ps.getGeneratedKeys();
-            var id = keys.getInt(1);
-            return id;
+            if (keys.next()) {
+                var id = keys.getInt(1);
+                img.setImageId(id);
+                return img;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
     public ArrayList<Image> findByID(int id) {
         loadDriver(dbdriver);

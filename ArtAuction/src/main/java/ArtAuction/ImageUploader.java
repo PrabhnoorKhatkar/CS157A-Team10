@@ -17,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -28,16 +29,17 @@ public class ImageUploader extends HttpServlet {
     private static File localUploadDirectory;
     private static final ImageDAO dao = new ImageDAO();
     private static final SecureRandom random = new SecureRandom();
+    private static File placeholder;
 
     @Override
     public void init() {
         // Get the file location where it would be stored.
-        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir"), "ArtAuction", Long.toString(Instant.now().getEpochSecond())).toFile();
-        var localDirMade = localUploadDirectory.mkdirs();
-        if (!localDirMade) return;
+        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir"), "ArtAuction").toFile();
+        localUploadDirectory.mkdirs();
 
         System.err.printf("Storing images in: %s%n", localUploadDirectory);
         var context = getServletContext();
+        placeholder = new File(context.getRealPath("/myapp/temporary-pic.jpg"));
         Set<String> resourcePaths = context.getResourcePaths("/myapp/images");
         System.err.println("Uploaded initial images:");
         // We assume that the files listed in the database are also in sorted order
@@ -47,7 +49,6 @@ public class ImageUploader extends HttpServlet {
             try (var stream = new FileInputStream(realpath.toFile())) {
                 var filename = realpath.getFileName().toString();
                 var uploaded = upload(stream, filename);
-                System.err.printf("%s%n", uploaded);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -63,13 +64,17 @@ public class ImageUploader extends HttpServlet {
     public static File upload(InputStream inputStream, String filename) throws java.io.IOException {
         File uploaded = new File(localUploadDirectory, filename);
         Files.copy(inputStream, uploaded.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        System.err.println("Uploaded: " + uploaded);
         return uploaded;
     }
 
     public static String salt(int length) {
-        byte[] bytes = new byte[length];
-        random.nextBytes(bytes);
-        return Base64.getEncoder().encodeToString(bytes);
+        String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789";
+        StringBuilder sb = new StringBuilder(8);
+        for (int i = 0; i < 8; i++) {
+            sb.append(saltChars.charAt(random.nextInt(saltChars.length())));
+        }
+        return sb.toString();
     }
 
     /**
@@ -103,14 +108,14 @@ public class ImageUploader extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getPathInfo().substring(1);
-        File file;
+        File file = placeholder;
         try {
             int id = Integer.parseInt(idStr);
             file = retrieveById(id);
         } catch (NumberFormatException e) {
             file = retrieveByName(idStr);
         }
-        if (file == null) {return;}
+        assert file != null;
         response.setContentType(Files.probeContentType(file.toPath()));
         response.setContentLength((int) file.length());
         response.getOutputStream().write(Files.readAllBytes(file.toPath()));

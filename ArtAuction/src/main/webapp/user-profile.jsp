@@ -37,17 +37,15 @@
 
 	<div class="profile-container">
 
-		<img src="myapp/temporary-pic.jpg" alt="Profile Picture"
-			class="profile-pic">
+		<img src="<c:url value="${test}"/>" alt="Profile Picture" class="profile-pic">
 
 		<h2 class="name">Name: ${user.name}</h2>
 		<h2 class="display-name">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
-			<form action="UserProfile" method="POST">
-				<input name="action" hidden value="editprofilepicture">
-				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="image">
-				<button type="submit">Submit</button>
+			<form action="UserProfile" method="POST" enctype="multipart/form-data">
+				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="file">
+				<button type="submit" name="action" value="editProfilePicture">Submit</button>
 			</form>
 			<button>${followingCount} Following</button>
 			<c:forEach items="${followingUsersList}" var="user">
