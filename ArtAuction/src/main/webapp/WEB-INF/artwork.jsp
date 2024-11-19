@@ -48,7 +48,7 @@
 					<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
 				</c:forEach>
 			</div>
-			<div class=right>
+			<div class="right">
 				<h2>Edit Artwork Details: ${artwork.title}</h2>
 				<form action="EditArtwork" method="post">
 					<input type="hidden" name="artworkID" value="${artwork.id}">
