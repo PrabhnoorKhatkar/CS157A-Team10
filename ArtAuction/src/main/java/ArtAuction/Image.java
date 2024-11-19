@@ -5,9 +5,12 @@ public class Image {
     private String filename;
     private Integer uploaderId;
 
-    public Image(Integer uploaderId, String filename) {
-        this.uploaderId = uploaderId;
+    public Image(Integer imageId) {
+        this.imageId = imageId;
+    }
+    public Image(String filename, Integer uploaderId) {
         this.filename = filename;
+        this.uploaderId = uploaderId;
     }
 
     public Image() {

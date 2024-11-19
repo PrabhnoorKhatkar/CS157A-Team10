@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="myapp/artwork-style.css">
+<link rel="stylesheet" href="<c:url value="/myapp/artwork-style.css"/>">
 <title>Artwork</title>
 </head>
 <body>
@@ -15,21 +15,21 @@
 	<header class="profile-header">
 		<div class="header-left">
 			<h2>
-				<a href="/ArtAuction" class="logo">ART AUCTION</a>
+				<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
 			</h2>
 		</div>
 
 		<div class="header-right">
 
-			<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
+			<a href="<c:url value="/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
 
 			<form action="Logout" method="post">
 				<button type="submit" class="logout-btn">Log Out</button>
 			</form>
 
-			<a href="UserProfile" class="profile-btn"> <img
-				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
-				height="64">
+			<a href="<c:url value="/UserProfile"/>" class="profile-btn"> <img
+					src="<c:url value="/myapp/temporary-pic.jpg"/>" alt="profile pic" width="64"
+					height="64">
 			</a>
 		</div>
 	</header>
@@ -44,7 +44,9 @@
 	<c:if test="${isOwner}">
 		<header class="artwork-header">
 			<div class="left">
-				<img class="art" src="myapp/images/${artwork.filepath}">
+				<c:forEach var="image" items="${artwork.images}">
+					<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
+				</c:forEach>
 			</div>
 			<div class=right>
 				<h2>Edit Artwork Details: ${artwork.title}</h2>
@@ -90,9 +92,11 @@
 		<section class="artwork-details">
 			<div class="container">
 				<h2>Title: ${artwork.title}</h2>
-				<img src="myapp/images/${artwork.filepath}">
+				<c:forEach var="image" items="${artwork.images}">
+					<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
+				</c:forEach>
 				<p>
-					Owner: <a href="UserProfile?user=${ownerDisplayName}">${ownerDisplayName}</a>
+					Owner: <a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>">${ownerDisplayName}</a>
 				</p>
 				<p>Artist: ${artwork.artist}</p>
 				<p>Description: ${artwork.description}</p>

@@ -106,7 +106,7 @@ public class UserProfile extends HttpServlet {
 			var filename = String.format("profile-pic-%s-%s", ImageUploader.salt(8), part.getSubmittedFileName());
 			ImageUploader.upload(part.getInputStream(), filename);
 			var imageDao = new ImageDAO();
-			var img = new Image(userID, filename);
+			var img = new Image(filename, userID);
             try {
                 userDAO.upsertProfilePicture(userID, imageDao.insertImage(img));
             } catch (SQLException e) {

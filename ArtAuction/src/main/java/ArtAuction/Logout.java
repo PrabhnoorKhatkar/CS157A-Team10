@@ -34,7 +34,7 @@ public class Logout extends HttpServlet {
 			session.invalidate();
 		}
 		// redirect to homepage after log out
-		response.sendRedirect("/");
+		response.sendRedirect(getServletContext().getContextPath() + "/");
 
 	}
 

@@ -51,29 +51,31 @@ public class SearchArtworkDAO extends DAO {
 
 	public Artwork getArtworkById(int artworkId) 
 	{
-
         var con = getConnection();
         Artwork returnArtwork = new Artwork();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE artworkID = ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT artworkID, title, description, artist, imageID FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE artworkID = ?;");
             ps.setInt(1, artworkId);
 
             var resultSet = ps.executeQuery();
-            
+            var images = new ArrayList<Image>();
 
             if (resultSet.next())
 			{
-  
 			    // Retrieve data from the result set
                 int id = resultSet.getInt("artworkID");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-
+                var img = new Image(resultSet.getInt("imageID"));
 			    returnArtwork = new Artwork(id, title, description, artist);
-			   
-			    
+                returnArtwork.setImages(images);
+                images.add(img);
 			}
+            while (resultSet.next()) {
+                var img = new Image(resultSet.getInt("imageID"));
+                images.add(img);
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

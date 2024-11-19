@@ -59,7 +59,7 @@ public class ArtworkPage extends HttpServlet {
 		System.out.println("check check : " + checkSave);
 		
 		// Forward to the artwork details JSP page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/artwork.jsp");
 		dispatcher.forward(request, response);
 
 	}
