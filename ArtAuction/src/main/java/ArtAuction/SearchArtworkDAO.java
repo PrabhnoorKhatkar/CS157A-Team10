@@ -1,4 +1,5 @@
-import java.awt.image.BufferedImage;
+package ArtAuction;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,9 +34,8 @@ public class SearchArtworkDAO extends DAO {
 			    String title = resultSet.getString("title");
 			    String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-                String filepath = resultSet.getString("filename");
-			    
-			    searchList.add(new Artwork(id, title, description, artist, filepath));
+
+			    searchList.add(new Artwork(id, title, description, artist));
 			    
 			}
         } catch (SQLException e) {
@@ -69,9 +69,8 @@ public class SearchArtworkDAO extends DAO {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-                String filepath = resultSet.getString("filename");
-			    
-			    returnArtwork = new Artwork(id, title, description, artist, filepath);
+
+			    returnArtwork = new Artwork(id, title, description, artist);
 			   
 			    
 			}

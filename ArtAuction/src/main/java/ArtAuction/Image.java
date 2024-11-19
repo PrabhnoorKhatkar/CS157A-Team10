@@ -1,9 +1,8 @@
-import java.sql.ResultSet;
+package ArtAuction;
 
 public class Image {
     private Integer imageId;
     private String filename;
-
     private Integer uploaderId;
 
     public Integer getImageId() {

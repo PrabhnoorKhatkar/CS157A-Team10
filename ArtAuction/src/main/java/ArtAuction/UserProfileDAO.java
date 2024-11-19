@@ -1,5 +1,6 @@
+package ArtAuction;
+
 import java.awt.image.BufferedImage;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -115,5 +116,12 @@ public class UserProfileDAO extends DAO {
 
 		return returnArtworkList;
 
+	}
+
+	public boolean upsertUserProfilePicture(int userId, Image newProfilePicture) {
+
+		loadDriver();
+		var con = getConnection();
+		return true;
 	}
 }

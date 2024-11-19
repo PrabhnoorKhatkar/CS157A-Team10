@@ -1,15 +1,11 @@
+package ArtAuction;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfile extends HttpServlet {
@@ -99,10 +95,13 @@ public class UserProfile extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if (action.equals("changeProfilePicture")) {
+
+		}
 		Integer followerID = (Integer) request.getSession().getAttribute("userID");
 		String followUserStr = request.getParameter("followedUserId");
 		
-		String action = request.getParameter("action");
 
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 		
@@ -120,7 +119,7 @@ public class UserProfile extends HttpServlet {
 		}
 
 		String displayName = request.getParameter("displayName");
-		response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + displayName);
+		response.sendRedirect("/UserProfile?user=" + displayName);
 	}
 
 }

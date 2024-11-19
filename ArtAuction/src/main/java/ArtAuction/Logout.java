@@ -1,3 +1,4 @@
+package ArtAuction;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -33,7 +34,7 @@ public class Logout extends HttpServlet {
 			session.invalidate();
 		}
 		// redirect to homepage after log out
-		response.sendRedirect("/ArtAuction"); 
+		response.sendRedirect("/");
 
 	}
 

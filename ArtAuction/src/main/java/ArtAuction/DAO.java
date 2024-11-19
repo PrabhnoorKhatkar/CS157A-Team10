@@ -1,5 +1,4 @@
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+package ArtAuction;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +13,14 @@ public class DAO {
     public void loadDriver(String dbDriver) {
         try {
             Class.forName(dbDriver);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void loadDriver() {
+        try {
+            Class.forName(dbdriver);
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

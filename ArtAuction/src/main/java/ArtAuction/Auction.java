@@ -1,3 +1,5 @@
+package ArtAuction;
+
 import java.sql.Timestamp;
 
 public class Auction {

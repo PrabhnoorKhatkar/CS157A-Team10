@@ -1,3 +1,5 @@
+package ArtAuction;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,9 +33,6 @@ public class SearchArtwork extends HttpServlet {
 
         request.setAttribute("artworkList", artworkList);
         
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
-        
+        request.getRequestDispatcher("/homepage.jsp").forward(request, response);
     }
-    
-    
 }

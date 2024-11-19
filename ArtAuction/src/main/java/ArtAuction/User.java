@@ -1,4 +1,6 @@
-public class User 
+package ArtAuction;
+
+public class User
 {
 	private String name;
 	private String displayName;

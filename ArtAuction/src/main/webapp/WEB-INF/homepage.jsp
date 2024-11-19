@@ -53,7 +53,6 @@
 				<h2>Featured Artwork</h2>
 				<div class="container">
 					<div class="art-grid">
-
 						<jsp:useBean id="featuredArtworks" scope="request" type="ArtAuction.Artwork[]"/>
 						<c:forEach var="artwork" items="${featuredArtworks}">
 							<div class="art-item">

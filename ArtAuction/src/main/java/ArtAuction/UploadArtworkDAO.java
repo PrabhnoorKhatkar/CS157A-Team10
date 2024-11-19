@@ -1,10 +1,12 @@
+package ArtAuction;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UploadDAO extends DAO {
+public class UploadArtworkDAO extends DAO {
 
 	public int insert(Artwork artwork) {
 		loadDriver(dbdriver);
@@ -35,7 +37,7 @@ public class UploadDAO extends DAO {
 	}
 
 
-	public String uploadImage(String filePath, Integer userID, Integer artworkID){
+	public String insertArtImage(String filename, Integer userID, Integer artworkID){
 
 		loadDriver(dbdriver);
 		Connection con = getConnection();
@@ -45,12 +47,12 @@ public class UploadDAO extends DAO {
 		String sql = "INSERT INTO Image (filename, uploaderID) VALUES (?, ?)";
 		String sql2 = "INSERT INTO ArtImage (artworkID, imageID) VALUES (?, ?)";
 		int imageID = -1;
-		String result = "Did Not Sucessfully Upload Image";
+		String result = "Did Not Successfully Upload Image";
 		
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, filePath);
+			ps.setString(1, filename);
 			ps.setInt(2, userID);
 	
 			ps.executeUpdate();
@@ -68,7 +70,7 @@ public class UploadDAO extends DAO {
 
 				if (resultSet.next()) 
 				{
-					result = "Sucessfully Upload Image";
+					result = "Successfully Upload Image";
 					
 				}
 

@@ -3,7 +3,7 @@
   <servlet>
     <display-name>Register</display-name>
     <servlet-name>Register</servlet-name>
-    <servlet-class>Register</servlet-class>
+    <servlet-class>ArtAuction.Register</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -11,7 +11,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>Login</servlet-class>
+    <servlet-class>ArtAuction.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>SearchArtwork</servlet-name>
-    <servlet-class>SearchArtwork</servlet-class>
+    <servlet-class>ArtAuction.SearchArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchArtwork</servlet-name>
@@ -34,7 +34,7 @@
     <description></description>
     <display-name>UploadArtwork</display-name>
     <servlet-name>UploadArtwork</servlet-name>
-    <servlet-class>UploadArtwork</servlet-class>
+    <servlet-class>ArtAuction.UploadArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadArtwork</servlet-name>
@@ -44,7 +44,7 @@
     <description></description>
     <display-name>Logout</display-name>
     <servlet-name>Logout</servlet-name>
-    <servlet-class>Logout</servlet-class>
+    <servlet-class>ArtAuction.Logout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
@@ -54,7 +54,7 @@
     <description></description>
     <display-name>UserProfile</display-name>
     <servlet-name>UserProfile</servlet-name>
-    <servlet-class>UserProfile</servlet-class>
+    <servlet-class>ArtAuction.UserProfile</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserProfile</servlet-name>
@@ -62,7 +62,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ArtworkPage</servlet-name>
-    <servlet-class>ArtworkPage</servlet-class>
+    <servlet-class>ArtAuction.ArtworkPage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ArtworkPage</servlet-name>
@@ -72,7 +72,7 @@
     <description></description>
     <display-name>SaveArtwork</display-name>
     <servlet-name>SaveArtwork</servlet-name>
-    <servlet-class>SaveArtwork</servlet-class>
+    <servlet-class>ArtAuction.SaveArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SaveArtwork</servlet-name>
@@ -82,7 +82,7 @@
     <description></description>
     <display-name>EditArtwork</display-name>
     <servlet-name>EditArtwork</servlet-name>
-    <servlet-class>EditArtwork</servlet-class>
+    <servlet-class>ArtAuction.EditArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditArtwork</servlet-name>
@@ -93,7 +93,7 @@
     <description></description>
     <display-name>RemoveArtwork</display-name>
     <servlet-name>RemoveArtwork</servlet-name>
-    <servlet-class>RemoveArtwork</servlet-class>
+    <servlet-class>ArtAuction.RemoveArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RemoveArtwork</servlet-name>
@@ -104,7 +104,7 @@
     <description></description>
     <display-name>PlaceBid</display-name>
     <servlet-name>PlaceBid</servlet-name>
-    <servlet-class>PlaceBid</servlet-class>
+    <servlet-class>ArtAuction.PlaceBid</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PlaceBid</servlet-name>

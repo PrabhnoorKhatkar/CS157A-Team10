@@ -40,10 +40,15 @@
 		<img src="myapp/temporary-pic.jpg" alt="Profile Picture"
 			class="profile-pic">
 
-		<h2 class="Name: ">Name: ${user.name}</h2>
-		<h2 class="Display Name ">Display Name: ${user.displayName}</h2>
+		<h2 class="name">Name: ${user.name}</h2>
+		<h2 class="display-name">Display Name: ${user.displayName}</h2>
 
 		<c:if test="${myProfile}">
+			<form action="UserProfile" method="POST">
+				<input name="action" hidden value="editprofilepicture">
+				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="image">
+				<button type="submit">Submit</button>
+			</form>
 			<button>${followingCount} Following</button>
 			<c:forEach items="${followingUsersList}" var="user">
 				<p>${user.displayName}</p>

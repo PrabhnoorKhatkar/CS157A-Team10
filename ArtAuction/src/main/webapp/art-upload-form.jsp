@@ -9,16 +9,16 @@
 	</head>
 	<body>
 		<form action="UploadArtwork" method="post" class="upload-form"
-			  >
+		>
 			<h2>Upload Artwork for Auction</h2>
 
 			<!-- TITLE -->
-			<label for="title">Title:</label> <input type="text"
+			<label for="title">Title:</label> <input type="text" id="title"
 													 name="title" placeholder="Artwork title" required>
-													 
+
 			<!-- TITLE -->
-			<label for="artist">Artist:</label> <input type="text" 
-													 name="artist" placeholder="Artist name" required>
+			<label for="artist">Artist:</label> <input type="text" id="artist"
+													   name="artist" placeholder="Artist name" required>
 
 			<!-- DESCRIPTION -->
 			<label for="description">Description:</label>
@@ -26,23 +26,24 @@
 					  placeholder="Describe your artwork" required></textarea>
 
 			<!-- IMAGE UPLOAD -->
-			<label for="image">Upload Image:</label> <input type="file" 
+			<label for="image">Upload Image:</label> <input type="file" id="image"
 															name="image" accept="image/*" required>
 
 			<!-- STARTING PRICE -->
 			<label for="startingPrice">Starting Price ($):</label> <input
-				type="number"  name="startingPrice"
+				type="number" name="startingPrice" id="startingPrice"
 				placeholder="e.g., 500" min="0" required>
-				
+
 			<!-- RESERVE PRICE -->
-			<label for="reservePrice">Reserve Price ($):</label> <input
-				type="number"  name="reservePrice"
-				placeholder="e.g., 500" min="0" >
+			<label for="reservePrice">Reserve Price ($):</label> <input id="reservePrice"
+																		type="number" name="reservePrice"
+																		placeholder="e.g., 500" min="0">
 
 			<!-- AUCTION DURATION IN HOURS -->
-			<label for="duration">Auction Duration (hours):</label> <input
-				type="number"  name="duration"
-				placeholder="Enter duration in hours" min="1" required>
+			<label for="duration">Auction Duration (hours):</label> <input id="duration"
+																		   type="number" name="duration"
+																		   placeholder="Enter duration in hours" min="1"
+																		   required>
 
 			<!-- SUBMIT BTN -->
 			<button type="submit" class="upload-btn">Upload Artwork</button>

@@ -1,4 +1,7 @@
+package ArtAuction;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -6,8 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class UploadArtwork
+ * Servlet implementation class ArtAuction.UploadArtwork
  */
+@MultipartConfig
 public class UploadArtwork extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +45,7 @@ public class UploadArtwork extends HttpServlet {
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String artist = request.getParameter("artist");
-		String filename = request.getParameter("image");
+		var image = request.getPart("image");
 		String startingPriceString = request.getParameter("startingPrice");
 		String reservePriceString = request.getParameter("reservePrice");
 		String durationString = request.getParameter("duration");
@@ -49,7 +53,7 @@ public class UploadArtwork extends HttpServlet {
 		Integer startingPrice = Integer.parseInt(startingPriceString);
 		Integer reservePrice = Integer.parseInt(reservePriceString);
 		Integer duration = Integer.parseInt(durationString);
-		// TODO image upload/store
+		var uploaded = ImageUploader.upload(image.getInputStream(), String.format("art-%s-%s", ImageUploader.salt(8), image.getSubmittedFileName()));
 
 		 // Validate reserve price
 		 if (reservePrice < startingPrice) {
@@ -59,14 +63,14 @@ public class UploadArtwork extends HttpServlet {
 
 		Artwork artwork = new Artwork(title, description, artist);
 		
-		UploadDAO uploadDAO = new UploadDAO();
+		UploadArtworkDAO uploadDAO = new UploadArtworkDAO();
 		Integer artworkID = uploadDAO.insert(artwork);
 
 		if (artworkID > 0) {
 			// Add to Auction Table
 			AuctionDAO auctionDAO = new AuctionDAO();
 			auctionDAO.insert(userID, artworkID, startingPrice, reservePrice, duration);
-			String result = uploadDAO.uploadImage(filename, userID, artworkID);
+			String result = uploadDAO.insertArtImage(uploaded.getName(), userID, artworkID);
 
 		
 			response.sendRedirect("homepage.jsp"); // redirect to homepage
