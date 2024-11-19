@@ -20,6 +20,13 @@ public class ArtworkPage extends HttpServlet {
 		// For winning user provide place to order the artwork
 
 		int artworkID = Integer.parseInt(request.getParameter("id"));
+		
+		if (request.getSession().getAttribute("userID") == null) 
+		{
+			// User is not logged in, redirect to login
+			response.sendRedirect("login.jsp");
+			return;
+		}
 		int userID = (int) request.getSession().getAttribute("userID");
 
 		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
@@ -59,7 +66,7 @@ public class ArtworkPage extends HttpServlet {
 		System.out.println("check check : " + checkSave);
 		
 		// Forward to the artwork details JSP page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/artwork.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
 		dispatcher.forward(request, response);
 
 	}
