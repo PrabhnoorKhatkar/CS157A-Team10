@@ -27,7 +27,7 @@
 			<!-- Tags -->
 			<label for="tags">Tags:</label>
 			<textarea id="tags" name="tags"
-					  placeholder="Tags: list them" required></textarea>
+					  placeholder="Tags: list them" ></textarea>
 
 			<!-- IMAGE UPLOAD -->
 			<label for="image">Upload Image:</label> <input type="file" id="image"

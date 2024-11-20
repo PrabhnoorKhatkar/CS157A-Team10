@@ -159,6 +159,18 @@
 					</c:if>
 				</div>
 
+				<c:if test="${winningUser}">
+					<p>You WON!!!</p>
+					<!-- purchase artwork functionality -->
+					<form action="PurchaseArtwork" method="post">
+						<input type="hidden" name="artworkID" value="${artwork.id}">
+						<input type="hidden" name="userID" value="${userID}">
+						
+							<button type="submit" name="action" value="Purchase" class="purchase-btn">Purchase</button>
+					</form>
+				</c:if>
+				
+
 				<!-- Display tags -->
 				<c:if test="${! empty tags}">
 					<div class="tags-section">
