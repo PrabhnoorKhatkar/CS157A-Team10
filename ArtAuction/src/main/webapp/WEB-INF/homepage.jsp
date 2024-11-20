@@ -36,7 +36,7 @@
 							<button type="submit" class="logout-btn">Log Out</button>
 						</form>
 						<a href="UserProfile" class="profile-btn"> <img
-								src="/myapp/temporary-pic.jpg" alt="profile picture" width="64"
+								src="myapp/temporary-pic.jpg" alt="profile picture" width="64"
 								height="64">
 						</a>
 					</c:when>
