@@ -96,4 +96,11 @@ public class ImageDAO extends DAO {
         }
         return null;
     }
+    public void loadImagesIntoArtwork(Artwork artwork) {
+        // unused but might be a cleaner approach
+        artwork.setImages(findByArtwork(artwork));
+    }
+    public void loadImagesIntoProfile(User user) {
+        // TODO?
+    }
 }

@@ -46,7 +46,6 @@ public class UploadArtworkDAO extends DAO {
 		// TODO prob split into 2 methods so profile pic upload can use the first sql
 		String sql = "INSERT INTO Image (filename, uploaderID) VALUES (?, ?)";
 		String sql2 = "INSERT INTO ArtImage (artworkID, imageID) VALUES (?, ?)";
-		int imageID = -1;
 		String result = "Did Not Successfully Upload Image";
 		
 
@@ -60,18 +59,19 @@ public class UploadArtworkDAO extends DAO {
 			// Retrieve the generated imageID
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				imageID = rs.getInt(1);
-
+				int imageID = rs.getInt(1);
 				PreparedStatement ps2 = con.prepareStatement(sql2);
 				ps2.setInt(1, artworkID);
 				ps2.setInt(2, imageID);
 		
-				var resultSet = ps2.executeQuery();
+				var rowCountDelta = ps2.executeUpdate();
 
-				if (resultSet.next()) 
+				if (rowCountDelta > 0)
 				{
 					result = "Successfully Upload Image";
-					
+				}
+				else {
+					result = "Uploading failed";
 				}
 
 			}

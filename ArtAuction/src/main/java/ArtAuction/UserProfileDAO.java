@@ -59,7 +59,7 @@ public class UserProfileDAO extends DAO {
         var con = getConnection();
         List<Artwork> returnArtworkList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN Auction WHERE userID = ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage WHERE userID = ?;");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -71,10 +71,11 @@ public class UserProfileDAO extends DAO {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
-
-                BufferedImage image = null; // TODO: Figure out how to approach image
-
-                returnArtworkList.add(new Artwork(id, title, description, artist));
+                var artwork = new Artwork(id, title, description, artist);
+                var images = new ArrayList<Image>();
+                images.add(new Image(resultSet.getInt("imageID")));
+                artwork.setImages(images);
+                returnArtworkList.add(artwork);
 
             }
         } catch (SQLException e) {
@@ -91,7 +92,7 @@ public class UserProfileDAO extends DAO {
         List<Artwork> returnArtworkList = new ArrayList<>();
         try {
             PreparedStatement ps = con
-                    .prepareStatement("SELECT * FROM Artwork NATURAL JOIN Favorite WHERE userID = ?;");
+                    .prepareStatement("SELECT * FROM Artwork NATURAL JOIN Favorite NATURAL JOIN ArtImage WHERE userID = ?;");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -103,10 +104,12 @@ public class UserProfileDAO extends DAO {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
+                var artwork = new Artwork(id, title, description, artist);
+                var images = new ArrayList<Image>();
+                images.add(new Image(resultSet.getInt("imageID")));
+                artwork.setImages(images);
 
-                BufferedImage image = null; // TODO: Figure out how to approach image
-
-                returnArtworkList.add(new Artwork(id, title, description, artist));
+                returnArtworkList.add(artwork);
 
             }
         } catch (SQLException e) {

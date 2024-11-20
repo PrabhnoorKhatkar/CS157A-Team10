@@ -8,8 +8,7 @@
 		<link rel="stylesheet" href="myapp/art-upload-form-style.css">
 	</head>
 	<body>
-		<form action="UploadArtwork" method="post" class="upload-form"
-		>
+		<form action="UploadArtwork" method="post" class="upload-form" enctype="multipart/form-data">
 			<h2>Upload Artwork for Auction</h2>
 
 			<!-- TITLE -->
