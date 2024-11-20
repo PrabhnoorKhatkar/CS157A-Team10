@@ -59,19 +59,42 @@ public class PlaceBid extends HttpServlet {
                 // Set updated attributes
                 request.setAttribute("auction", updatedAuction);
                 request.setAttribute("highestBidder", highestBidder);
-    
-                SearchArtworkDAO searchDAO = new SearchArtworkDAO();
-                Artwork updateArtwork = searchDAO.getArtworkById(artworkID);
-                request.setAttribute("artwork", updateArtwork);
+            
+                if (request.getSession().getAttribute("userID") == null) 
+                {
+                    // User is not logged in, redirect to login
+                    response.sendRedirect("login.jsp");
+                    return;
+                }
 
- 
-                // Forward to artwork page
+                ArtworkPageDAO artworkPage = new ArtworkPageDAO();
+
+                if (artworkPage.checkArtworkAccount(userID, artworkID)) {
+                    request.setAttribute("isOwner", true); // userID is owner
+                } else {
+                    request.setAttribute("isOwner", false);
+                }
+
+                SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+                Artwork artwork = searchDAO.getArtworkById(artworkID);
+                request.setAttribute("artwork", artwork);
+
+                int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
+                request.setAttribute("ownerUserID", ownerUserID);
+
+                // Get the owner display name using the ArtworkPageDAO
+                String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
+                request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
+                
+                SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
+                boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
+                request.setAttribute("checkSave", checkSave);
+                
+                // Forward to the artwork details JSP page
                 RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
-                // Redirect or forward back to the artwork page
                 dispatcher.forward(request, response);
-                return;
+                }
             }
-        }
 
 
 
