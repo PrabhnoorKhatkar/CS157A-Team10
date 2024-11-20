@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Artwork Upload Form</title>
-		<link rel="stylesheet" href="myapp/art-upload-form-style.css">
+		<link rel="stylesheet" href="myapp/css/art-upload-form-style.css">
 	</head>
 	<body>
 		<form action="UploadArtwork" method="post" class="upload-form" enctype="multipart/form-data">

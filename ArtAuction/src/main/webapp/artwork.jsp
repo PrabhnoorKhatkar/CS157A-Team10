@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/myapp/artwork-style.css"/>">
+<link rel="stylesheet" href="<c:url value="/myapp/css/artwork-style.css"/>">
 <title>Artwork</title>
 </head>
 <body>

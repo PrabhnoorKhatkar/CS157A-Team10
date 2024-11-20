@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="myapp/user-profile-style.css"
+<link rel="stylesheet" href="myapp/css/user-profile-style.css"
 	type="text/css" />
 <title>My Profile</title>
 </head>

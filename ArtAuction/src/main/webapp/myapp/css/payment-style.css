@@ -1,0 +1,149 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	padding: 0;
+	background-color: #f9f9f9;
+	color: #333;
+}
+
+h1,
+h2 {
+	text-align: center;
+	margin: 50px 0 30px 0px;
+}
+
+form.payment-form {
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: none;
+	border: 1px solid #333;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+input,
+select {
+	width: calc(100% - 20px);
+	padding: 8px 10px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+/* artwork preview */
+
+.artwork-preview-container {
+	display: flex;
+	/*justify-content: center;*/
+	align-items: center;
+	border-radius: 15px;
+	height: 150px;
+	/*text-align: center;*/
+	margin-bottom: 20px;
+	background-color: #EAEAEA;
+	gap: 8%;
+}
+
+.artwork-preview-container img {
+	border-radius: 15px;
+	margin: 10px 0 10px 10px;
+}
+
+.artwork-preview-container h3 {
+	font-size: 18px;
+	color: #333;
+}
+
+.artwork-preview-container p {
+	color: #333;
+	font-size: 14px;
+}
+
+/* price container */
+.price-container {
+	margin-bottom: 20px;
+	gap: 10%;
+}
+
+.price-container p {
+	font-size: 16px;
+	margin: 25px 0;
+}
+
+.price-container span {
+	float: right;
+	font-weight: bold;
+	color: #333;
+}
+
+/* payment method */
+.payment-method-container {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px; 
+}
+
+.payment-method-container .form-group {
+	margin-bottom: 15px;
+}
+
+.payment-method-container select {
+	width: 48%;
+}
+
+.payment-method-container input {
+	margin-bottom: 15px;
+}
+
+/* delivery info */
+.delivery-info-container {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px; 
+}
+
+.expiration-container {
+	display: flex;
+	gap: 10px;
+}
+
+.billing {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.billing input {
+	width: 30px;
+	margin: 0;
+}
+
+.billing label {
+	width: auto;
+	margin: 0;
+}
+
+/* pay button */
+.pay-btn {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: none;
+	color: #333;
+	border: 1px solid #333;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.pay-btn:hover {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

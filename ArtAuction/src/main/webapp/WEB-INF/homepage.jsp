@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="<c:url value="/myapp/homepage-style.css"/>" type="text/css"/>
+		<link rel="stylesheet" href="<c:url value="/myapp/css/homepage-style.css"/>" type="text/css"/>
 		<script src="<c:url value="/myapp/main.js"/>"></script>
 		<title>Homepage</title>
 	</head>

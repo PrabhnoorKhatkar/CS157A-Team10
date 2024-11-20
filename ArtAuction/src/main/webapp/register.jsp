@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="myapp/register-style.css" type="text/css"/>
+		<link rel="stylesheet" href="myapp/css/register-style.css" type="text/css"/>
 		<title>Account Register</title>
 	</head>
 	<body>
