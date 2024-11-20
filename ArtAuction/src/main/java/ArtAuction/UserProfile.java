@@ -133,7 +133,7 @@ public class UserProfile extends HttpServlet {
 		}
 
 		String displayName = request.getParameter("displayName");
-		response.sendRedirect("/UserProfile?user=" + displayName);
+		response.sendRedirect(request.getContextPath() +"/UserProfile?user=" + displayName);
 	}
 
 }
