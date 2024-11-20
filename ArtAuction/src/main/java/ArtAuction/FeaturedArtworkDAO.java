@@ -39,7 +39,7 @@ public class FeaturedArtworkDAO extends DAO {
         loadDriver();
         var con = getConnection();
 
-        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN AuctionDetails WHERE userID IN (SELECT followingID as userID FROM Follow WHERE loggedInUserID = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC;"; 
+        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN AuctionDetails WHERE userID IN (SELECT followingID as userID FROM Follow WHERE ? = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC;"; 
         var featuredArtworks = new Artwork[limit];
         
         try {

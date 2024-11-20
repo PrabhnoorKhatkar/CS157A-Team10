@@ -15,6 +15,7 @@ public class Homepage extends HttpServlet {
         var dao = new FeaturedArtworkDAO();
         var imageDao = new ImageDAO();
         try {
+            // TODO CALL getFeatuedArtworksbyFollowing
             var featuredArtworks = dao.getFeaturedArtworks(3);
             for (var featuredArtwork: featuredArtworks) {
                 featuredArtwork.setImages(imageDao.findByArtwork(featuredArtwork));
