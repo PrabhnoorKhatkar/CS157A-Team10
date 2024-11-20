@@ -24,6 +24,11 @@
 			<textarea id="description" name="description"
 					  placeholder="Describe your artwork" required></textarea>
 
+			<!-- Tags -->
+			<label for="tags">Tags:</label>
+			<textarea id="tags" name="tags"
+					  placeholder="Tags: list them" required></textarea>
+
 			<!-- IMAGE UPLOAD -->
 			<label for="image">Upload Image:</label> <input type="file" id="image"
 															name="image" accept="image/*" required>

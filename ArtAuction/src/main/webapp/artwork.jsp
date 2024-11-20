@@ -147,6 +147,18 @@
 					</c:if>
 				</div>
 
+				<!-- Display tags -->
+				<c:if test="${! empty tags}">
+					<div class="tags-section">
+						<p><strong>Tags:</strong></p>
+						<div class="tags-container">
+							<c:forEach var="tag" items="${tags}">
+								<span class="tag">${tag},</span>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
+
 			</div>
 		</section>
 	</c:if>

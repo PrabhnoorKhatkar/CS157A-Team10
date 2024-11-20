@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Servlet implementation class EditArtwork
@@ -78,6 +79,10 @@ public class PlaceBid extends HttpServlet {
                 SearchArtworkDAO searchDAO = new SearchArtworkDAO();
                 Artwork artwork = searchDAO.getArtworkById(artworkID);
                 request.setAttribute("artwork", artwork);
+
+                List<String> tags = searchDAO.getTagsByArtworkID(artworkID);
+		        request.setAttribute("tags", tags);
+
 
                 int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
                 request.setAttribute("ownerUserID", ownerUserID);

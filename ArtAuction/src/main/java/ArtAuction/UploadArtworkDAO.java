@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class UploadArtworkDAO extends DAO {
 
@@ -76,6 +77,33 @@ public class UploadArtworkDAO extends DAO {
 
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public String insertTag(int artworkID, List<String> tags)
+	{
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+
+		String sql = "INSERT INTO Tag (artworkID, name) VALUES (?, ?)";
+		String result = "Succesfully Added Tags";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			for(String tagName : tags)
+			{
+				ps.setInt(1, artworkID);
+				ps.setString(2, tagName);
+			
+				ps.executeUpdate();
+
+			}
+	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

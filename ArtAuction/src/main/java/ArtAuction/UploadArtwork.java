@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet implementation class ArtAuction.UploadArtwork
@@ -44,6 +46,7 @@ public class UploadArtwork extends HttpServlet {
 
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
+		String tags = request.getParameter("tags");
 		String artist = request.getParameter("artist");
 		var image = request.getPart("image");
 		String startingPriceString = request.getParameter("startingPrice");
@@ -55,6 +58,16 @@ public class UploadArtwork extends HttpServlet {
 		Integer duration = Integer.parseInt(durationString);
 		var uploaded = ImageUploader.upload(image.getInputStream(), String.format("art-%s-%s", ImageUploader.salt(8), image.getSubmittedFileName()));
 
+		UploadArtworkDAO uploadDAO = new UploadArtworkDAO();
+
+		String[] tagsArray = tags.split("[,\\s]+");
+
+		List<String> tagsList = new ArrayList<>();
+		for (String tag : tagsArray) 
+		{
+			tagsList.add(tag);
+		}
+		
 		 // Validate reserve price
 		 if (reservePrice < startingPrice) {
 			response.getWriter().println("Reserve price cannot be smaller than starting price.");
@@ -63,8 +76,8 @@ public class UploadArtwork extends HttpServlet {
 
 		Artwork artwork = new Artwork(title, description, artist);
 		
-		UploadArtworkDAO uploadDAO = new UploadArtworkDAO();
 		Integer artworkID = uploadDAO.insert(artwork);
+		uploadDAO.insertTag(artworkID, tagsList);
 
 		if (artworkID > 0) {
 			// Add to Auction Table

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ArtworkPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,6 +41,9 @@ public class ArtworkPage extends HttpServlet {
 		SearchArtworkDAO searchDAO = new SearchArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
 		request.setAttribute("artwork", artwork);
+
+		List<String> tags = searchDAO.getTagsByArtworkID(artworkID);
+		request.setAttribute("tags", tags);
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);

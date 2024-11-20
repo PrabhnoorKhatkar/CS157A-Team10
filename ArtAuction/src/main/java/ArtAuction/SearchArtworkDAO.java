@@ -84,5 +84,30 @@ public class SearchArtworkDAO extends DAO {
        
         return returnArtwork;
 	}
+
+    public List<String> getTagsByArtworkID(int artworkID)
+    {
+        var con = getConnection();
+        List<String> returnList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT name FROM Tag WHERE artworkID = ? ");
+            ps.setInt(1, artworkID);
+
+            var resultSet = ps.executeQuery();
+
+            while (resultSet.next()) 
+            {
+                // Retrieve data from the result set
+                returnList.add(resultSet.getString("name"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+       
+        return returnList;
+
+    }
 }
 
