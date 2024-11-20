@@ -47,26 +47,45 @@
 				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="file">
 				<button type="submit" name="action" value="editProfilePicture">Submit</button>
 			</form>
-			<button>${followingCount} Following</button>
-			<c:forEach items="${followingUsersList}" var="user">
-				<p>${user.displayName}</p>
-			</c:forEach>
-			<button>${followerCount} Followers</button>
-			<c:forEach items="${getFollowerUsersList}" var="user">
-				<p>${user.displayName}</p>
-			</c:forEach>
+			
+			
+			<button onclick="toggleFollowingList()" id="followingBtn">${followingCount} Following</button>
+			
+			<div id="followingList" style="display: none;">
+			
+				<c:forEach items="${followingUsersList}" var="user">
+					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
+				</c:forEach>
+				
+			</div>
+			
+			<button onclick="toggleFollowersList()" id="followersBtn">${followerCount} Followers</button>
+			
+			<div id="followersList" style="display: none;">
+				<c:forEach items="${getFollowerUsersList}" var="user">
+					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
+				</c:forEach>
+			</div>
 		</c:if>
 
 		<c:if test="${!myProfile}">
 
-			<button>${followingCount} Following</button>
-			<c:forEach items="${followingUsersList}" var="user">
-				<p>${user.displayName}</p>
-			</c:forEach>
-			<button>${followerCount} Followers</button>
-			<c:forEach items="${getFollowerUsersList}" var="user">
-				<p>${user.displayName}</p>
-			</c:forEach>
+			<button onclick="toggleFollowingList()" id="followingBtn">${followingCount} Following</button>
+			
+			<div id="followingList" style="display: none;">
+				<c:forEach items="${followingUsersList}" var="user">
+					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
+				</c:forEach>
+			</div>
+			
+			<button onclick="toggleFollowersList()" id="followersBtn">${followerCount} Followers</button>
+			
+			<div id="followersList" style="display: none;">
+				<c:forEach items="${getFollowerUsersList}" var="user">
+					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
+				</c:forEach>
+			</div>
+			
 			<form action="UserProfile" method="post">
 				<input type="hidden" name="followedUserId" value="${otherID}">
 				<input type="hidden" name="displayName" value="${user.displayName}">
@@ -180,5 +199,7 @@
 			</section>
 		</div>
 	</c:if>
+	
+	<script src="myapp/javascript/user-profile.js"></script>
 </body>
 </html>
