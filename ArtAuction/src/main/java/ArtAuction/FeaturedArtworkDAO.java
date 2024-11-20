@@ -1,9 +1,12 @@
 package ArtAuction;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class FeaturedArtworkDAO extends DAO {
-    public FeaturedArtworkDAO() {}
+    public FeaturedArtworkDAO() {
+    }
+
     public Artwork[] getFeaturedArtworks(int limit) throws SQLException {
         loadDriver();
         var con = getConnection();
@@ -28,5 +31,38 @@ public class FeaturedArtworkDAO extends DAO {
             e.printStackTrace();
         }
         return featuredArtworks;
+    }
+
+    public Artwork[] getFeaturedArtworksByFollowing(int loggedInUserID, int limit) 
+    {
+
+        loadDriver();
+        var con = getConnection();
+
+        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN AuctionDetails WHERE userID IN (SELECT followingID as userID FROM Follow WHERE loggedInUserID = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC;"; 
+        var featuredArtworks = new Artwork[limit];
+        
+        try {
+            var ps = con.prepareStatement(sql);
+            ps.setInt(1, loggedInUserID);
+            ps.setInt(2, limit);
+
+            var rs = ps.executeQuery();
+            var i = 0;
+            while (rs.next() && i < limit) {
+                var artworkId = rs.getInt(1);
+                String title = rs.getString(2);
+                String description = rs.getString(3);
+                String artist = rs.getString(4);
+                Artwork artwork = new Artwork(artworkId, title, description, artist);
+                featuredArtworks[i++] = artwork;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return featuredArtworks;
+
     }
 }

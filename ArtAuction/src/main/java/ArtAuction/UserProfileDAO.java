@@ -1,6 +1,5 @@
 package ArtAuction;
 
-import java.awt.image.BufferedImage;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
