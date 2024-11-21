@@ -8,7 +8,7 @@ import java.util.List;
 public class FollowUserDAO extends DAO {
 	public boolean followUser(int followerID, int followingID) {
 		var con = getConnection();
-		String sql = "INSERT INTO follow (followerID, followingID) VALUES (?,?);";
+		String sql = "INSERT INTO Follow (followerID, followingID) VALUES (?,?);";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class FollowUserDAO extends DAO {
 
 	public boolean unfollowUser(int followerID, int followingID) {
 		var con = getConnection();
-		String sql = "DELETE FROM follow WHERE followerID = ? AND followingID = ?;";
+		String sql = "DELETE FROM Follow WHERE followerID = ? AND followingID = ?;";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, followerID);
@@ -100,7 +100,7 @@ public class FollowUserDAO extends DAO {
 	public List<User> getFollowingUsersList(int userID) {
 		var con = getConnection();
 		List<User> followingUsers = new ArrayList<>();
-		String sql = "SELECT displayName FROM User INNER JOIN follow ON userID = followingID WHERE  followerID = ?;";
+		String sql = "SELECT displayName FROM User INNER JOIN Follow ON userID = followingID WHERE  followerID = ?;";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
