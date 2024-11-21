@@ -31,7 +31,11 @@ public class ArtworkPage extends HttpServlet {
 		int userID = (int) request.getSession().getAttribute("userID");
 
 		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-
+		User curr = null;
+		UserProfileDAO currUser = new UserProfileDAO();
+		curr = currUser.getUserById(userID);
+		request.setAttribute("current", curr);
+		
 		// Check if visting user is owner
 		if (artworkPage.checkArtworkAccount(userID, artworkID)) {
 			request.setAttribute("isOwner", true); // userID is owner
@@ -48,7 +52,18 @@ public class ArtworkPage extends HttpServlet {
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
-
+		
+		User highestBidder = auctionDAO.getHighestBidder(artworkID);
+		
+		// Check if current user is highest bidder
+		if (highestBidder.getDisplayName() != null) {
+			if (highestBidder.getDisplayName().equals(curr.getDisplayName())) {
+				request.setAttribute("isHighest", true);
+			}
+			else {
+				request.setAttribute("isHighest", false);
+			}
+		}
 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		// Check if auction is over and reserve not met and is ACTIVE
@@ -57,9 +72,10 @@ public class ArtworkPage extends HttpServlet {
 		{
 			auctionDAO.endArtwork(artworkID);
 			auction = auctionDAO.getAuctionByArtworkID(artworkID);
-			User highestBidder = auctionDAO.getHighestBidder(artworkID);
+			
 			request.setAttribute("auction", auction);
 			request.setAttribute("highestBidder", highestBidder);
+			
 	
 			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
 			request.setAttribute("ownerUserID", ownerUserID);
@@ -97,7 +113,7 @@ public class ArtworkPage extends HttpServlet {
 				request.setAttribute("winningUser", false);
 			}
 
-			User highestBidder = auctionDAO.getHighestBidder(artworkID);
+			highestBidder = auctionDAO.getHighestBidder(artworkID);
 			request.setAttribute("auction", auction);
 			request.setAttribute("highestBidder", highestBidder);
 
@@ -118,8 +134,6 @@ public class ArtworkPage extends HttpServlet {
 		}
 		else
 		{
-
-			User highestBidder = auctionDAO.getHighestBidder(artworkID);
 			request.setAttribute("auction", auction);
 			request.setAttribute("highestBidder", highestBidder);
 

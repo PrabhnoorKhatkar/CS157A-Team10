@@ -131,6 +131,9 @@
 					<p class ="bidding"><em> Starting Bid: </em> $${auction.startingPrice}</p>
 					<p class ="bidding"><em> Current Bid: </em> $${auction.amount}</p>
 					<p class ="bidding"> <em>  Highest Bidder: </em>${highestBidder.displayName}</p>
+					<c:if test = "${isHighest}">
+						<p class ="highest"> You are currently the highest bidder</p>
+					</c:if>
 					<c:if test="${auction.result == 'ACTIVE'}">
 						<form action="PlaceBid" method="post" class="placebid">
 							<input type="hidden" name="artworkID" value="${artwork.id}">

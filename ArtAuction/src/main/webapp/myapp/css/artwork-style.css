@@ -110,13 +110,17 @@ body {
 section {
 	align-items: center;
 	width: 65%;
-	height: 270px;
+	height: 300px;
 	border: 1px solid #dedede;
 	background-color: #dedede;
 }
 
-.bidding {
+.bidding, .highest {
 	margin-left: 1em;
+}
+
+.highest {
+	color: #d10202;
 }
 
 .closed {
