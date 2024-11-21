@@ -12,7 +12,7 @@ public class SearchArtworkDAO extends DAO {
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
+        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -35,7 +35,11 @@ public class SearchArtworkDAO extends DAO {
 			    String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
 
-			    searchList.add(new Artwork(id, title, description, artist));
+                Artwork resultArtwork = new Artwork(id, title, description, artist);
+                var images = new ArrayList<Image>();
+                images.add(new Image(resultSet.getInt("imageID")));
+                resultArtwork.setImages(images);
+                searchList.add(resultArtwork);
 			    
 			}
         } catch (SQLException e) {

@@ -94,6 +94,10 @@
 									<div class="art-item">
 										<a href="<c:url value="/ArtworkPage?id=${artwork.id}"/>"
 										   class="art-item-link">
+										   <c:forEach var="image" items="${artwork.images}">
+												<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
+											</c:forEach>
+
 											<h3>${artwork.title}</h3>
 											<p>
 												Description:
