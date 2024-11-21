@@ -15,19 +15,19 @@
 						<h1>Welcome to Online Art Auction</h1>
 						<h2>Register</h2>
 						<tr>
-							<td><input type="text" name="name" placeholder="Name"></td>
+							<td><input type="text" name="name" placeholder="Name" required></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="displayName" placeholder="Display Name"></td>
+							<td><input type="text" name="displayName" placeholder="Display Name" required></td>
 						</tr>
 						<tr>
-							<td><input type="password" name="password" placeholder="Password"></td>
+							<td><input type="password" name="password" placeholder="Password" required></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="emailAddress" placeholder="Email"></td>
+							<td><input type="email" name="emailAddress" placeholder="Email" required></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="address" placeholder="Address"></td>
+							<td><input type="text" name="address" placeholder="Address" required></td>
 						</tr>
 						<tr>
 							<td>
