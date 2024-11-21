@@ -130,7 +130,7 @@ body {
 .art-item img {
 	width: 100%;
 	height: auto;
-	border-radius: 35px;
+	/*border-radius: 35px*/;
 }
 
 .art-item p {

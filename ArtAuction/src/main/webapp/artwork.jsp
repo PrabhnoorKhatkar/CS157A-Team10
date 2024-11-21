@@ -47,55 +47,62 @@
 				<c:forEach var="image" items="${artwork.images}">
 					<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
 				</c:forEach>
-			</div>
-			<div class="right">
-				<h2>Edit Artwork Details: </h2>
-				<h2> ${artwork.title}</h2>
-				<form action="EditArtwork" method="post">
-					<input type="hidden" name="artworkID" value="${artwork.id}">
-
-					<p>Owner: ${ownerDisplayName}</p>
-
-					<label for="title">Title:</label> <input type="text" id="title"
-						name="title" value="${artwork.title}" required><br> <label
-						for="artist">Artist:</label> <input type="text" id="artist"
-						name="artist" value="${artwork.artist}" required><br>
-
+				<br> 
+				<hr width="100%" size="2" class= "left-line">
+				<h2 class ="title1"> Item Overview</h2>
+				
+				<form action="EditArtwork" method="post" class ="edit-description">
 					<label for="description">Description:</label>
 					<textarea id="description" name="description" required>${artwork.description}</textarea>
-					<br>
-
-					<p>Starting Price: $${auction.startingPrice}</p>
-					<p>Current Bid: $${auction.amount}</p>
-					<p>Highest Bidder: ${highestBidder.displayName}</p>
-					<p>Reserve: $${auction.reserve}</p>
-
-					<p>Auction Ends: ${auction.endTimestamp}</p>
-
-					<button type="submit" class="btn save-btn">Save Changes</button>
 				</form>
+				
+				<hr width="100%" size="2">
 			</div>
-			<div class="owner-actions">
+			<div class="right">
+				<form action="EditArtwork" method="post" class="edit-artwork">
+					<h2 class ="title0">Edit Artwork Details </h2>
+					<label for="artist"> <em>Artist: </em></label> <br>
+					<input type="text" id="artist" name="artist" value="${artwork.artist}" required>
+					<br>
+					<label for="title"> <em> Title: </em></label> <br>
+					<input type="text" id="title" name="title" value="${artwork.title}" required>
+					<br> 
+				<section class = "edit-section">
+					<p class ="bidding"> <em> Starting Price: $${auction.startingPrice} </em></p>
+					<p class ="bidding"> <em> Current Bid: $${auction.amount} </em></p>
+					<p class ="bidding"> <em> Highest Bidder: ${highestBidder.displayName} </em></p>
+					<p class ="bidding"> <em> Reserve: $${auction.reserve} </em></p>
+				</section>
+					<p>Auction Ends: ${auction.endTimestamp}</p>
+					
+					<hr width="100%" size="2">
+					
+					<p>Owner: ${ownerDisplayName}</p>
+
+					<button type="submit" class="save-btn">Save Changes</button>
+				</form>
+				
 				<!-- Remove Listing -->
 				<form action="RemoveArtwork" method="post"
 					onsubmit="return confirm('Are you sure you want to remove this listing?');">
 					<input type="hidden" name="artworkID" value="${artwork.id}">
-					<button type="submit" class="btn remove-btn">Remove
+					<button type="submit" class="remove-btn">Remove
 						Listing</button>
 				</form>
+				
+				<!-- Display tags -->
+				<c:if test="${! empty tags}">
+					<div class="tags-section">
+						<p><strong>Tags:</strong></p>
+						<div class="tags-container">
+							<c:forEach var="tag" items="${tags}">
+								<span class="tag">${tag},</span>
+							</c:forEach>
+						</div>
+					</div>
+				</c:if>
 			</div>
 
-			<!-- Display tags -->
-			<c:if test="${! empty tags}">
-				<div class="tags-section">
-					<p><strong>Tags:</strong></p>
-					<div class="tags-container">
-						<c:forEach var="tag" items="${tags}">
-							<span class="tag">${tag},</span>
-						</c:forEach>
-					</div>
-				</div>
-			</c:if>
 		</header>
 	</c:if>
 
@@ -136,7 +143,7 @@
 						</form>
 					</c:if>
 					<c:if test="${auction.result != 'ACTIVE'}">
-						<p class ="bidding">Bidding for this artwork is closed.</p>
+						<p class ="closed">Bidding for this artwork is closed.</p>
 					</c:if>
 				</section>
 				<p>Auction Ends: ${auction.endTimestamp}</p>

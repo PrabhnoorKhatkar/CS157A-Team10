@@ -94,15 +94,17 @@ body {
 	width: 65%;
 }
 
-.title1 {
+.title1, .title2, .title0 {
 	line-height: 0.5;
 	font-weight: 65;
 }
 
+.title0 {
+	top: 5px;
+}
+
 .title2 {
 	color: #696969;
-	line-height: 0.5;
-	font-weight: 65;
 }
 
 section {
@@ -115,6 +117,11 @@ section {
 
 .bidding {
 	margin-left: 1em;
+}
+
+.closed {
+	margin-left: 1em;
+	color: red;
 }
 
 .link {
@@ -159,7 +166,7 @@ hr {
 	margin-top: 4em;
 }
 
-.un-save-btn, .save-btn {
+.un-save-btn, .save-btn, .remove-btn {
 	width: 25%;
 	padding: 10px;
 	background-color: none;
@@ -170,4 +177,41 @@ hr {
 	cursor: pointer;
 	/*border-radius: 5px;*/
 	margin-top: 10px;
+}
+
+.edit-description textarea {
+	width: 97%;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	border: 1px solid #ccc;
+	/*border-radius: 5px;*/
+	font-size: 15px;
+	resize: vertical;
+	height: 100px;
+}
+
+.edit-artwork input[type="text"] {
+	width: 75%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	/*border-radius: 5px;*/
+	font-size: 15px;
+	resize: vertical;
+	height: 25px;
+}
+
+.edit-artwork label {
+	display: block;
+	line-height: 0.5;
+	font-weight: 65;
+}
+
+.edit-section {
+	align-items: center;
+	width: 78.3%;
+	height: 150px;
+	border: 1px solid #dedede;
+	background-color: #dedede;
 }
