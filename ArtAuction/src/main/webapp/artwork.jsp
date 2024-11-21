@@ -49,7 +49,8 @@
 				</c:forEach>
 			</div>
 			<div class="right">
-				<h2>Edit Artwork Details: ${artwork.title}</h2>
+				<h2>Edit Artwork Details: </h2>
+				<h2> ${artwork.title}</h2>
 				<form action="EditArtwork" method="post">
 					<input type="hidden" name="artworkID" value="${artwork.id}">
 
@@ -101,20 +102,43 @@
 	<!-- For non owner page-->
 	<!-- Iterate over the artwork list and display each artwork -->
 	<c:if test="${!isOwner}">
-		<section class="artwork-details">
-			<div class="container">
-				<h2>Title: ${artwork.title}</h2>
+		<header class="artwork-header">
+			<div class="left">
 				<c:forEach var="image" items="${artwork.images}">
 					<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
 				</c:forEach>
-				<p>
-					Owner: <a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>">${ownerDisplayName}</a>
-				</p>
-				<p>Artist: ${artwork.artist}</p>
-				<p>Description: ${artwork.description}</p>
-				<p>Starting Bid: $${auction.startingPrice}</p>
-				<p>Current Bid: $${auction.amount}</p>
-				<p>Highest Bidder: ${highestBidder.displayName}</p>
+				<br> 
+				<hr width="100%" size="2" class= "left-line">
+				<h2 class ="title1"> Item Overview</h2>
+				<p>Description:</p>
+				<p> ${artwork.description} </p>
+				<hr width="100%" size="2">
+			</div>
+			<div class = "right">
+				<h2 class = "title1">
+					${artwork.artist}
+				</h2>
+				<h2 class = "title2"><em>${artwork.title}</em></h2>
+				
+				<section>
+					<p class ="bidding"><em> Starting Bid: </em> $${auction.startingPrice}</p>
+					<p class ="bidding"><em> Current Bid: </em> $${auction.amount}</p>
+					<p class ="bidding"> <em>  Highest Bidder: </em>${highestBidder.displayName}</p>
+					<c:if test="${auction.result == 'ACTIVE'}">
+						<form action="PlaceBid" method="post" class="placebid">
+							<input type="hidden" name="artworkID" value="${artwork.id}">
+	
+							<label for="bidAmount" class = "bidding"> <em>Place Your Bid: </em></label> 
+							<input type="number" id="bidAmount" name="bidAmount"
+								min="${auction.startingPrice}" placeholder="Enter bid amount" required>
+	
+							<button type="submit" class="bid-btn">Place Bid</button>
+						</form>
+					</c:if>
+					<c:if test="${auction.result != 'ACTIVE'}">
+						<p class ="bidding">Bidding for this artwork is closed.</p>
+					</c:if>
+				</section>
 				<p>Auction Ends: ${auction.endTimestamp}</p>
 
 				<!-- Countdown Timer -->
@@ -123,6 +147,10 @@
 						Auction Ends In: <span id="countdown"></span>
 					</p>
 				</div>
+				<hr width="100%" size="2">
+				<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>" class ="link">${ownerDisplayName}</a></p>
+				
+				
 
 				<!-- save favorite artwork functionality -->
 				<form action="SaveArtwork" method="post">
@@ -131,8 +159,8 @@
 					<c:choose>
 						<c:when test="${checkSave}">
 							<button type="submit" name="action" value="unsave"
-								class="un-save-btn">Saved</button>
-							<p>Saved to Favorites</p>
+								class="un-save-btn">Unsave</button>
+							<!-- <p>Saved to Favorites</p> -->
 						</c:when>
 						<c:when test="${!checkSave}">
 							<button type="submit" name="action" value="save" class="save-btn">Save</button>
@@ -140,24 +168,6 @@
 					</c:choose>
 
 				</form>
-
-				<div class="bid-section">
-					<c:if test="${auction.result == 'ACTIVE'}">
-						<form action="PlaceBid" method="post">
-							<input type="hidden" name="artworkID" value="${artwork.id}">
-
-							<label for="bidAmount">Place Your Bid:</label> <input
-								type="number" id="bidAmount" name="bidAmount"
-								min="${auction.startingPrice}" placeholder="Enter bid amount"
-								required>
-
-							<button type="submit" class="btn bid-btn">Place Bid</button>
-						</form>
-					</c:if>
-					<c:if test="${auction.result != 'ACTIVE'}">
-						<p>Bidding for this artwork is closed.</p>
-					</c:if>
-				</div>
 
 				<c:if test="${winningUser}">
 					<p>You WON!!!</p>
@@ -184,7 +194,7 @@
 				</c:if>
 
 			</div>
-		</section>
+		</header>
 	</c:if>
 
 </body>
