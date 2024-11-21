@@ -41,7 +41,9 @@
 
 		<h2 class="name">Name: ${user.name}</h2>
 		<h2 class="display-name">Display Name: ${user.displayName}</h2>
-
+		
+		<c:if test="${sessionScope.admin}">Admin</c:if>
+		
 		<c:if test="${myProfile}">
 			<form action="UserProfile" method="POST" enctype="multipart/form-data">
 				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="file">
