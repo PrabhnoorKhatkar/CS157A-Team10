@@ -109,6 +109,6 @@
 		<button type="submit" class="pay-btn">Complete Payment</button>
 
 	</form>
-	<script src="myapp/payment.js"></script>
+	<script src="myapp/javascript/payment.js"></script>
 </body>
 </html>
