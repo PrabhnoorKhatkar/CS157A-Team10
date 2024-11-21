@@ -89,12 +89,13 @@ public class AuctionDAO extends DAO {
 		Connection con = getConnection();
 
         String result = "Not Succesfully Removed";
-
-        String sql = "UPDATE AuctionDetails SET result = 'WITHDRAWN' WHERE artworkID = ?;";
+		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        String sql = "UPDATE AuctionDetails SET result = 'WITHDRAWN', endTimestamp = ? WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, artworkID);
+			ps.setInt(2, artworkID);
+			ps.setTimestamp(1, currentTimestamp);
 
             int rowsAffected = ps.executeUpdate();
 

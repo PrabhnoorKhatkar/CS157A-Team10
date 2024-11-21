@@ -41,9 +41,7 @@ public class RemoveArtwork extends HttpServlet {
 
 		if (result.equals("Successfully Removed"))
 		{
-
-			// TODO 
-
+			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
 		}
 
 	}

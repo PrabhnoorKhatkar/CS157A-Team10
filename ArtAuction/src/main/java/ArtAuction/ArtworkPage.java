@@ -51,9 +51,9 @@ public class ArtworkPage extends HttpServlet {
 
 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-		// Check if auction is over and reserve not met
+		// Check if auction is over and reserve not met and is ACTIVE
 		// If so update to UNSOLD in DB
-		if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() < auction.getReserve())
+		if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() < auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
 			auctionDAO.endArtwork(artworkID);
 			auction = auctionDAO.getAuctionByArtworkID(artworkID);
@@ -79,7 +79,7 @@ public class ArtworkPage extends HttpServlet {
 		}
 		// Check if auction is over and reserve is met
 		// If so select winningUser and update to UNSOLD in DB
-		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve())
+		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
 			UserProfileDAO userDAO = new UserProfileDAO();
