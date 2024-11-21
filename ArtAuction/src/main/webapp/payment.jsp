@@ -21,9 +21,9 @@
 
 			<div class="art-info">
 
-				<h3>Art Title</h3>
+				<h3>Title ${artwork.title} </h3>
 
-				<p>$0.00</p>
+				<p>$${auction.amount}</p>
 
 			</div>
 		</div>
