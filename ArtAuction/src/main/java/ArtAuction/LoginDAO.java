@@ -48,4 +48,26 @@ public class LoginDAO extends DAO {
 
 		return userID;
 	}
+	
+	public boolean checkAdmin(Integer id) {
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+		String sql = "SELECT COUNT(*) FROM Admin WHERE userID = ?";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1) > 0;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 }

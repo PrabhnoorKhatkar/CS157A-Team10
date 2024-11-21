@@ -173,6 +173,7 @@
 					<p>You WON!!!</p>
 					<!-- purchase artwork functionality -->
 					<form action="PurchaseArtwork" method="post">
+						
 						<input type="hidden" name="artworkID" value="${artwork.id}">
 						<input type="hidden" name="userID" value="${userID}">
 						

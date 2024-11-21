@@ -51,6 +51,13 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userID", userID);
+			
+			if (loginDAO.checkAdmin(userID)) {
+				session.setAttribute("admin", true);
+			} else { 
+				session.setAttribute("admin", false);
+			}
+			
 			response.sendRedirect(request.getContextPath() + "/"); //redirect to home page
 		} else {
 			request.setAttribute("errorMessage", "Invalid email or password.");

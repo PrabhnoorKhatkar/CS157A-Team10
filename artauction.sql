@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.38, for macos14 (x86_64)
 --
 -- Host: localhost    Database: artauction
 -- ------------------------------------------------------
@@ -25,6 +25,8 @@ DROP TABLE IF EXISTS `Admin`;
 CREATE TABLE `Admin` (
   `userID` int NOT NULL,
   `name` varchar(100) NOT NULL,
+  `emailAddress` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL,
   PRIMARY KEY (`userID`),
   CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -36,7 +38,7 @@ CREATE TABLE `Admin` (
 
 LOCK TABLES `Admin` WRITE;
 /*!40000 ALTER TABLE `Admin` DISABLE KEYS */;
-INSERT INTO `Admin` VALUES (1,'John Doe - System Administrator'),(9,'Anonymous Admin - Privacy Administrator');
+INSERT INTO `Admin` VALUES (1,'John Doe','john.doe@email.com','System Administrator'),(2,'Sarah Smith','sarah.smith@email.com','Privacy Administrator'),(3,'Michael Johnson','mike.johnson@email.com','Security Administrator'),(4,'Emily Brown','emily.brown@email.com','Content Administrator');
 /*!40000 ALTER TABLE `Admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-20  0:55:57
+-- Dump completed on 2024-11-20 23:21:23

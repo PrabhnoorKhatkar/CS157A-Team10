@@ -110,4 +110,15 @@
     <servlet-name>PlaceBid</servlet-name>
     <url-pattern>/PlaceBid</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <description></description>
+    <display-name>PurchaseArtwork</display-name>
+    <servlet-name>PurchaseArtwork</servlet-name>
+    <servlet-class>ArtAuction.PurchaseArtwork</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchaseArtwork</servlet-name>
+    <url-pattern>/PurchaseArtwork</url-pattern>
+  </servlet-mapping>
 </web-app>
