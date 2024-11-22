@@ -1,4 +1,4 @@
-package ArtAuction;
+package ArtAuction.Auth;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

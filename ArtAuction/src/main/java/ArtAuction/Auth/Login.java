@@ -1,22 +1,23 @@
-package ArtAuction;
+package ArtAuction.Auth;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class Login
  */
-public class Register extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Register() {
+	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,31 +38,30 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String displayName = request.getParameter("displayName");
+		// get email & password
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String emailAddress = request.getParameter("emailAddress");
-		String address = request.getParameter("address");
-		String anonymousParam = request.getParameter("anonymous");
-		boolean anonymous = Boolean.parseBoolean(anonymousParam);
 		
-		User user = new User(name, displayName, password, emailAddress, address, anonymous);
+		// create new member object with data
+		LoginDAO loginDAO = new LoginDAO();
 		
-		RegisterDAO rdao = new RegisterDAO();
-		String result = rdao.insert(user);
-//		response.getWriter().println(result);
-		
-		if (result.equals("Data Entered Successfully")) {
+		if (loginDAO.validate(email, password)) {
+			int userID = loginDAO.getUserIDByEmail(email);
 			
-			request.getSession().setAttribute("successMessage", "Registered successfully. You can now log in.");
-
-			response.sendRedirect("login.jsp");
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
+			session.setAttribute("userID", userID);
+			
+			if (loginDAO.checkAdmin(userID)) {
+				session.setAttribute("admin", true);
+			} else { 
+				session.setAttribute("admin", false);
+			}
+			
+			response.sendRedirect(request.getContextPath() + "/"); //redirect to home page
 		} else {
-			
-			request.setAttribute("errorMessage", "Registered failed.");
-			
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			request.setAttribute("errorMessage", "Invalid email or password.");
+	        request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
-
 }

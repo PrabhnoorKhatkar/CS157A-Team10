@@ -1,4 +1,6 @@
-package ArtAuction;
+package ArtAuction.Auth;
+
+import ArtAuction.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
