@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ArtworkDAO extends DAO
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
+        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage NATURAL JOIN AuctionDetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -61,7 +62,16 @@ public class ArtworkDAO extends DAO
                 String description = resultSet.getString("description");
                 String artist = resultSet.getString("artist");
 
-                Artwork resultArtwork = new Artwork(id, title, description, artist);
+				Timestamp startTimestamp = resultSet.getTimestamp("startTimestamp");
+				Timestamp endTimestamp = resultSet.getTimestamp("endTimestamp");
+				Float amount = resultSet.getFloat("amount");
+				Float startingPrice = resultSet.getFloat("startingPrice");
+				Float reserve = resultSet.getFloat("reserve");
+				String result = resultSet.getString("result");
+
+                Auction auctionDetails = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve, result);
+
+                Artwork resultArtwork = new Artwork(id, title, description, artist, auctionDetails);
                 var images = new ArrayList<Image>();
                 images.add(new Image(resultSet.getInt("imageID")));
                 resultArtwork.setImages(images);

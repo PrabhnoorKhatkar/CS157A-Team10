@@ -9,6 +9,15 @@ public class Artwork {
     private String description;
     private String artist;
     private List<Image> images = new ArrayList<>();
+    private Auction auctionDetails;
+
+    public Artwork(Integer id, String title, String description, String artist, Auction auctionDetails) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.artist = artist;
+        this.auctionDetails = auctionDetails;
+    }
 
     public Artwork(Integer id, String title, String description, String artist) {
         this.id = id;
@@ -65,6 +74,14 @@ public class Artwork {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+    
+    public Auction getAuctionDetails() {
+        return auctionDetails;
+    }
+
+    public void setAuctionDetails(Auction auctionDetails) {
+        this.auctionDetails = auctionDetails;
     }
 
 }

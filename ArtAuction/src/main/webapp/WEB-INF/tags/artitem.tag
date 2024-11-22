@@ -22,5 +22,8 @@
 		</p>
 
 		<p>By: ${artwork.artist}</p>
+		<p> Result: ${artwork.auctionDetails.result}
+		<p> Amount: ${artwork.auctionDetails.amount}
+		<p> Ends in: ${artwork.auctionDetails.endTimestamp}
 	</a>
 </div>
