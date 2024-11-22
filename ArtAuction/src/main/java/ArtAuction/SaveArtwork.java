@@ -53,7 +53,7 @@ public class SaveArtwork extends HttpServlet {
 		Integer artworkID = Integer.parseInt(artworkIdParam);
 
 		if (action.equals("save")) {
-			saveArtworkDAO.insert(userID, artworkID);
+			saveArtworkDAO.favoriteArtwork(userID, artworkID);
 		} else if (action.equals("unsave")) {
 			saveArtworkDAO.removeSave(userID, artworkID);
 		}

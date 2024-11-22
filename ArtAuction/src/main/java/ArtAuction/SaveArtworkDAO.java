@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SaveArtworkDAO extends DAO {
-	public boolean insert(int userID, int artworkID) {
+	public boolean favoriteArtwork(int userID, int artworkID) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
