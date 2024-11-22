@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class PlaceBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -76,7 +75,7 @@ public class PlaceBid extends HttpServlet {
                     request.setAttribute("isOwner", false);
                 }
 
-                SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+                ArtworkDAO searchDAO = new ArtworkDAO();
                 Artwork artwork = searchDAO.getArtworkById(artworkID);
                 request.setAttribute("artwork", artwork);
 

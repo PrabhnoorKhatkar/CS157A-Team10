@@ -35,6 +35,7 @@ public class UserProfile extends HttpServlet {
 		// get logged in user id from the current session
 		int userID = (int) request.getSession().getAttribute("userID");
 
+		var artworkDAO = new ArtworkDAO();
 		UserProfileDAO userDAO = new UserProfileDAO();
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 
@@ -52,8 +53,8 @@ public class UserProfile extends HttpServlet {
 		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
 			user = userDAO.getUserById(userID);
-			artworkList = userDAO.getArtworkByuserID(userID);
-			favArtworkList = userDAO.getFavoritedArtworkByuserID(userID);
+			artworkList = artworkDAO.getArtworkByuserID(userID);
+			favArtworkList = artworkDAO.getFavoritedArtworkByuserID(userID);
 			followerCount = followUserDAO.getFollowerCount(userID);
 			followingCount = followUserDAO.getFollowingCount(userID);
 			
@@ -63,8 +64,8 @@ public class UserProfile extends HttpServlet {
 			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserById(otherID);
-			artworkList = userDAO.getArtworkByuserID(otherID);
-			favArtworkList = userDAO.getFavoritedArtworkByuserID(otherID);
+			artworkList = artworkDAO.getArtworkByuserID(otherID);
+			favArtworkList = artworkDAO.getFavoritedArtworkByuserID(otherID);
 			followerCount = followUserDAO.getFollowerCount(otherID);
 			followingCount = followUserDAO.getFollowingCount(otherID);
 			
@@ -101,14 +102,15 @@ public class UserProfile extends HttpServlet {
 		String action = request.getParameter("action");
 		Integer userID = (Integer) request.getSession().getAttribute("userID");
 		if (action.equals("editProfilePicture")) {
+			var imageDao = new ImageDAO();
 			UserProfileDAO userDAO = new UserProfileDAO();
 			var part = request.getPart("profilepicture");
 			var filename = String.format("profile-pic-%s-%s", ImageUploader.salt(8), part.getSubmittedFileName());
 			ImageUploader.upload(part.getInputStream(), filename);
-			var imageDao = new ImageDAO();
 			var img = new Image(filename, userID);
+			imageDao.insertImage(img);
             try {
-                userDAO.upsertProfilePicture(userID, imageDao.insertImage(img));
+                userDAO.upsertProfilePicture(userID, img);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

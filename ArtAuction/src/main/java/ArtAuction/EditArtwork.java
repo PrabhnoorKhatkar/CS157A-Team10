@@ -36,9 +36,10 @@ public class EditArtwork extends HttpServlet {
 
 		int artworkID = Integer.parseInt(request.getParameter("artworkID"));
 
-		SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+		ArtworkDAO searchDAO = new ArtworkDAO();
 
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
+		request.setAttribute("artwork", artwork);
 
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
@@ -55,53 +56,15 @@ public class EditArtwork extends HttpServlet {
 		}
 
 		// Process the update
-		EditArtworkDAO editDAO = new EditArtworkDAO();
+		ArtworkDAO editDAO = new ArtworkDAO();
 		Artwork updateArtwork = new Artwork(artworkID, title, description, artist);
 		String result = editDAO.updateArtwork(updateArtwork);
 
-		if (result.equals("Successfully Added"))
-		{
-
-			int userID = (int) request.getSession().getAttribute("userID");
-
-			ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-
-			if (artworkPage.checkArtworkAccount(userID, artworkID)) 
-			{
-				request.setAttribute("isOwner", true); // userID is owner
-			} 
-			else 
-			{
-				request.setAttribute("isOwner", false);
-			}
-
-			Artwork updatedArtwork = searchDAO.getArtworkById(artworkID);
-			request.setAttribute("artwork", updatedArtwork);
-
-			AuctionDAO auctionDAO = new AuctionDAO();
-			Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
-			request.setAttribute("auction", auction);
-
-			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-			request.setAttribute("ownerUserID", ownerUserID);
-
-			// Get the owner display name using the ArtworkPageDAO
-			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-
-			// Forward to the artwork details JSP page	
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ArtworkPage?id=" + artworkID);
-			dispatcher.forward(request, response);
-			
-			
-		} 
-		else 
-		{
+		System.out.println(result);
+		if (!result.equals("Successfully Updated")) {
 			request.setAttribute("message", "Failed to update artwork. Please try again.");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
-			dispatcher.forward(request, response);
 		}
-
+		response.sendRedirect(request.getContextPath() + "/ArtworkPage?id="+artworkID);
 	}
 
 }

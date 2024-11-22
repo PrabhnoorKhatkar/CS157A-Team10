@@ -43,7 +43,7 @@ public class ArtworkPage extends HttpServlet {
 			request.setAttribute("isOwner", false);
 		}
 
-		SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+		ArtworkDAO searchDAO = new ArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
 		request.setAttribute("artwork", artwork);
 

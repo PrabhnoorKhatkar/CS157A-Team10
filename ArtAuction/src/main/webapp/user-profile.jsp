@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%@taglib prefix="fn" uri="jakarta.tags.functions"%>
+<%@taglib prefix="ui" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,27 +118,7 @@
 			<c:choose>
 				<c:when test="${not empty requestScope.artworkList}">
 					<c:forEach var="artwork" items="${requestScope.artworkList}">
-						<div class="art-item">
-							<a href="ArtworkPage?id=${artwork.id}" class="art-item-link">
-								<c:forEach var="image" items="${artwork.images}">
-									<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
-								</c:forEach>
-								<h3>${artwork.title}</h3>
-								<p>
-									Description:
-									<c:choose>
-										<c:when test="${fn:length(artwork.description) > 45}">
-												${fn:substring(artwork.description, 0, 45)}...
-											</c:when>
-										<c:otherwise>
-												${artwork.description}
-											</c:otherwise>
-									</c:choose>
-								</p>
-
-								<p>By: ${artwork.artist}</p>
-							</a>
-						</div>
+						<ui:artitem artwork="${artwork}"/>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -163,30 +144,7 @@
 							<c:when test="${not empty requestScope.favArtworkList}">
 								<c:forEach var="favArtwork"
 									items="${requestScope.favArtworkList}">
-									<div class="art-item">
-										<a href="ArtworkPage?id=${favArtwork.id}"
-											class="art-item-link">
-
-											<c:forEach var="image" items="${favArtwork.images}">
-												<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
-											</c:forEach>
-											<h3>${favArtwork.title}</h3>
-											<p>
-												Description:
-												<c:choose>
-													<c:when
-														test="${fn:length(favArtwork.description) > 45}">
-												${fn:substring(favArtwork.description, 0, 45)}...
-											</c:when>
-													<c:otherwise>
-												${favArtwork.description}
-											</c:otherwise>
-												</c:choose>
-											</p>
-
-											<p>By: ${favArtwork.artist}</p>
-										</a>
-									</div>
+									<ui:artitem artwork="${favArtwork}"/>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

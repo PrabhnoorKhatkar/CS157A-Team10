@@ -27,7 +27,7 @@ public class SearchArtwork extends HttpServlet {
 
         String searchText = request.getParameter("searchText");
         
-        SearchArtworkDAO searchDAO = new SearchArtworkDAO();
+        ArtworkDAO searchDAO = new ArtworkDAO();
         
         List<Artwork> artworkList = searchDAO.query(searchText);
 
