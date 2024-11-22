@@ -167,13 +167,15 @@
 
 						<c:choose>
 							<c:when test="${checkSave}">
-								<button type="submit" name="action" value="unsave"
-										class="un-save-btn">Unsave
+								<button type="submit" name="action" value="unsave"class="un-save-btn">
+									<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto">
 								</button>
 								<!-- <p>Saved to Favorites</p> -->
 							</c:when>
 							<c:when test="${!checkSave}">
-								<button type="submit" name="action" value="save" class="save-btn">Save</button>
+								<button type="submit" name="action" value="save" class="save-btn">
+									<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto">
+								</button>
 							</c:when>
 						</c:choose>
 

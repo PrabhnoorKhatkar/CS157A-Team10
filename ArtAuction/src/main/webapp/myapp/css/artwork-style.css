@@ -170,7 +170,16 @@ hr {
 	margin-top: 4em;
 }
 
-.un-save-btn, .save-btn, .remove-btn {
+.un-save-btn, 
+.save-btn,
+form button.un-save-btn:hover,
+form button.save-btn:hover {
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+.remove-btn {
 	width: 25%;
 	padding: 10px;
 	background-color: none;

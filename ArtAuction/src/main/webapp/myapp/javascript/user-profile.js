@@ -4,10 +4,8 @@ function toggleFollowingList() {
 
 	if (list.style.display === 'none') {
 		list.style.display = 'block';
-		button.textContent = 'Following';
 	} else {
 		list.style.display = 'none';
-		button.textContent = 'Following';
 	}
 }
 
@@ -17,9 +15,7 @@ function toggleFollowersList() {
 
 	if (list.style.display === 'none') {
 		list.style.display = 'block';
-		button.textContent = 'Followers';
 	} else {
 		list.style.display = 'none';
-		button.textContent = 'Followers';
 	}
 }
