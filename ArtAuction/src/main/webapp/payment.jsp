@@ -17,7 +17,11 @@
 
 		<div class="artwork-preview-container">
 
-			<img src="myapp/temporary-pic.jpg" alt="profile pic" width="auto" height="130">
+			<!-- TODO GET IMAGE PATH WORKING -->
+			<c:forEach var="artImage" items="${artwork.images}">
+				<img src="<c:url value="/Uploads/${artImage.imageId}"/>">
+			</c:forEach>
+	
 
 			<div class="art-info">
 
@@ -30,15 +34,19 @@
 
 		<div class="price-container">
 			<p>
-				Subtotal: <span>$0.00</span>
+				Subtotal: <span>$${subTotal}</span>
 			</p>
 
 			<p>
-				Shipping: <span>$0.00</span>
+				Shipping: <span>$${shipping}</span>
 			</p>
 
 			<p>
-				Total Price: <span>$0.00</span>
+				Auction Fees: <span>$${fees}</span>
+			</p>
+
+			<p>
+				Total Price: <span>$${totalPrice}</span>
 			</p>
 
 		</div>

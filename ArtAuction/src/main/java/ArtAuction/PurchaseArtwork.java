@@ -56,6 +56,16 @@ public class PurchaseArtwork extends HttpServlet {
         request.setAttribute("auction", auction);
         request.setAttribute("userID", userID);
 
+		float subTotal = auction.getAmount();
+		float shipping = 500f;
+		float fees = subTotal * 0.10f;
+		float totalPrice = subTotal+shipping+fees;
+		
+		request.setAttribute("subTotal", subTotal);
+		request.setAttribute("shipping", shipping);
+		request.setAttribute("fees", fees);
+		request.setAttribute("totalPrice", totalPrice);
+
         request.getRequestDispatcher("/payment.jsp").forward(request, response);
 
 
