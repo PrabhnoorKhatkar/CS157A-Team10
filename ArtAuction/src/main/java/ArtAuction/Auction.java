@@ -8,7 +8,7 @@ public class Auction {
     private Timestamp startTimestamp;
     private Timestamp endTimestamp;
     private float amount;
-    private float startingPrice;
+    private double startingPrice;
     private float reserve;
     private String result;
 
@@ -17,7 +17,7 @@ public class Auction {
     }
     
     public Auction(Integer artworkID, Timestamp startTimestamp, Timestamp endTimestamp, float amount,
-            float startingPrice, float reserve, String result) {
+    double startingPrice, float reserve, String result) {
         this.artworkID = artworkID;
         this.startTimestamp = startTimestamp;
         this.endTimestamp = endTimestamp;
@@ -52,10 +52,10 @@ public class Auction {
     public void setAmount(float amount) {
         this.amount = amount;
     }
-    public float getStartingPrice() {
+    public double getStartingPrice() {
         return startingPrice;
     }
-    public void setStartingPrice(float startingPrice) {
+    public void setStartingPrice(double startingPrice) {
         this.startingPrice = startingPrice;
     }
     public float getReserve() {

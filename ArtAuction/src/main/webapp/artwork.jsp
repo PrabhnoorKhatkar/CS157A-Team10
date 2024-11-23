@@ -139,7 +139,7 @@
 
 								<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
 								<input type="number" id="bidAmount" name="bidAmount"
-									   min="${auction.startingPrice}" placeholder="Enter bid amount" required>
+									min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
 
 								<button type="submit" class="bid-btn">Place Bid</button>
 							</form>
