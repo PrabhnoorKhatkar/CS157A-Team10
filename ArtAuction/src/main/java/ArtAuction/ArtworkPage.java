@@ -132,6 +132,43 @@ public class ArtworkPage extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
 			dispatcher.forward(request, response);
 		}
+		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve() && auction.getResult().equals("UNSOLD"))
+		{
+			User winningUser = auctionDAO.getHighestBidder(artworkID);
+			UserProfileDAO userDAO = new UserProfileDAO();
+			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
+			auction = auctionDAO.getAuctionByArtworkID(artworkID);
+
+			if(winningUserID == userID)
+			{
+				request.setAttribute("winningUser", true);
+				request.setAttribute("userID", userID);
+			}
+			else
+			{
+				request.setAttribute("winningUser", false);
+			}
+
+			highestBidder = auctionDAO.getHighestBidder(artworkID);
+			request.setAttribute("auction", auction);
+			request.setAttribute("highestBidder", highestBidder);
+
+			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
+			request.setAttribute("ownerUserID", ownerUserID);
+
+			// Get the owner display name using the ArtworkPageDAO
+			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
+			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
+			
+			SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
+			boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
+			request.setAttribute("checkSave", checkSave);
+			
+			// Forward to the artwork details JSP page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
+			dispatcher.forward(request, response);
+
+		}
 		else
 		{
 			request.setAttribute("auction", auction);

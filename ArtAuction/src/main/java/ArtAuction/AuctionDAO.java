@@ -90,7 +90,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Removed";
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        String sql = "UPDATE AuctionDetails SET result = 'WITHDRAWN', endTimestamp = ? WHERE artworkID = ?;";
+        String sql = "UPDATE AuctionDetails SET result = 'REMOVED', endTimestamp = ? WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
