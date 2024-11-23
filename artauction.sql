@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.38, for macos14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
 --
 -- Host: localhost    Database: artauction
 -- ------------------------------------------------------
@@ -269,11 +269,11 @@ DROP TABLE IF EXISTS `Order`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Order` (
   `userID` int NOT NULL,
-  `orderDetailsID` int NOT NULL,
-  PRIMARY KEY (`userID`,`orderDetailsID`),
-  KEY `orderDetailsID` (`orderDetailsID`),
+  `orderID` int NOT NULL,
+  PRIMARY KEY (`userID`,`orderID`),
+  KEY `orderDetailsID` (`orderID`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`orderDetailsID`) REFERENCES `OrderDetails` (`ID`)
+  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`orderID`) REFERENCES `OrderDetails` (`orderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -295,12 +295,12 @@ DROP TABLE IF EXISTS `OrderDetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `OrderDetails` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+  `orderID` int NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `trackingNumber` varchar(50) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   `totalPaid` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`orderID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -322,11 +322,11 @@ DROP TABLE IF EXISTS `OrderItem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `OrderItem` (
-  `orderDetailsID` int NOT NULL,
+  `orderID` int NOT NULL,
   `artworkID` int NOT NULL,
-  PRIMARY KEY (`orderDetailsID`,`artworkID`),
+  PRIMARY KEY (`orderID`,`artworkID`),
   KEY `artworkID` (`artworkID`),
-  CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`orderDetailsID`) REFERENCES `OrderDetails` (`ID`),
+  CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `OrderDetails` (`orderID`),
   CONSTRAINT `orderitem_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `Artwork` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -432,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-20 23:21:23
+-- Dump completed on 2024-11-22 20:35:25
