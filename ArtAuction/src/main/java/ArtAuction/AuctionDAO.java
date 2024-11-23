@@ -168,6 +168,34 @@ public class AuctionDAO extends DAO {
 		return result;
     }
 
+	public String reserveNotMetArtwork(Integer artworkID)
+    {
+        loadDriver(dbdriver);
+		Connection con = getConnection();
+
+        String result = "Not Succesfully Sold";
+
+        String sql = "UPDATE AuctionDetails SET result = 'RESERVE NOT MET' WHERE artworkID = ?;";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, artworkID);
+
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if update was succesfull
+            if (rowsAffected > 0) {
+                result = "Successfully Sold";
+            }
+		
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return result;
+    }
+
 
 	public String placeBid(Integer userID, Float bidAmount, Integer artworkID)
 	{  

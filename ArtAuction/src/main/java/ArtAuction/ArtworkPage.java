@@ -15,9 +15,6 @@ public class ArtworkPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Update result on page for non winning users
-		// For winning user provide place to order the artwork
 		
 		// Check if user is logged in
 		if (request.getSession().getAttribute("userID") == null) 
@@ -67,10 +64,10 @@ public class ArtworkPage extends HttpServlet {
 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		// Check if auction is over and reserve not met and is ACTIVE
-		// If so update to UNSOLD in DB
+		// If so update to RESERVE NOT MET in DB
 		if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() < auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
-			auctionDAO.endArtwork(artworkID);
+			auctionDAO.reserveNotMetArtwork(artworkID);
 			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 			
 			request.setAttribute("auction", auction);
@@ -132,6 +129,8 @@ public class ArtworkPage extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
 			dispatcher.forward(request, response);
 		}
+		// Check if auction is over and reserve is met and is UNSOLD status
+		// If so select winningUser and display to auction losers
 		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve() && auction.getResult().equals("UNSOLD"))
 		{
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
@@ -169,6 +168,7 @@ public class ArtworkPage extends HttpServlet {
 			dispatcher.forward(request, response);
 
 		}
+		// Auction is ACTIVE and everyone can bid
 		else
 		{
 			request.setAttribute("auction", auction);
