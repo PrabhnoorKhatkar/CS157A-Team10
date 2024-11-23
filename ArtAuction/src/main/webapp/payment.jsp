@@ -11,7 +11,10 @@
 
 	<h1>Payment</h1>
 
-	<form action="Payment" method="post" class="payment-form">
+	<form action="PaymentProcess" method="post" class="payment-form">
+
+		<input type="hidden" name="artworkID" value="${artwork.id}">
+		<input type="hidden" name="totalPrice" value="${totalPrice}">
 
 		<!-- Total Price -->
 

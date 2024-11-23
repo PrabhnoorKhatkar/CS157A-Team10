@@ -121,4 +121,15 @@
     <servlet-name>PurchaseArtwork</servlet-name>
     <url-pattern>/PurchaseArtwork</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>PaymentProcess</display-name>
+    <servlet-name>PaymentProcess</servlet-name>
+    <servlet-class>ArtAuction.PaymentProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaymentProcess</servlet-name>
+    <url-pattern>/PaymentProcess</url-pattern>
+  </servlet-mapping>
 </web-app>

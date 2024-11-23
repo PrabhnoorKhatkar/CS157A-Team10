@@ -5,9 +5,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 public class OrderDAO extends DAO {
 
+
+	public String processOrder(int userID, int artworkID, float totalPaid)
+	{
+
+		String result = "Order Not Sucessfully Placed";
+		int orderID = createOrderID(userID);
+		if(orderID > -1)
+		{
+			result = insertOrderID(orderID, artworkID);
+			if(result.equals("Order Sucessfully Assigned"))
+			{
+				
+				result = insertOrderDetails(orderID, totalPaid);
+				if(result.equals("Order Sucessfully Assigned"))
+				{
+					return result;
+				}
+			}
+
+		}
+
+		return result;
+
+	}
 
     public int createOrderID(int userID) {
 		loadDriver(dbdriver);
@@ -65,15 +90,23 @@ public class OrderDAO extends DAO {
         String result = "Order Sucessfully Assigned";
 
 		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+			Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+			// TODO how to generate trackingNumber
+			PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, orderID);
+			ps.setTimestamp(2, currentTimestamp);
+			ps.setString(4, "PROCESSING");
+			ps.setDouble(5, totalPaid);
+
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
             return "Order Not Sucessfully Assigned";
 
+
 		}
+
         return result;
 	}
 
