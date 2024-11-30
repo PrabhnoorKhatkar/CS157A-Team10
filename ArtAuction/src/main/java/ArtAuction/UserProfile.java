@@ -38,21 +38,37 @@ public class UserProfile extends HttpServlet {
 		var artworkDAO = new ArtworkDAO();
 		UserProfileDAO userDAO = new UserProfileDAO();
 		FollowUserDAO followUserDAO = new FollowUserDAO();
+		ImageDAO imageDAO = new ImageDAO();
 
 		int otherID = userDAO.getUserIDByDisplayName(requestedUserDisplayName);
 		int followerCount = -1;
 		int followingCount = -1;
+		int imageID = -1;
+		int otherImageID = -1;
 		
 		User user = null;
+		Image image = null;
+		Image otherImage = null;
 		List<Artwork> artworkList = null;
 		List<Artwork> favArtworkList = null;
 		List<User> getFollowingUsersList = null;
 		List<User> getFollowerUsersList = null;
 		
+		try {
+			imageID = userDAO.getProfilePictureID(userID);
+			//System.out.println(imageID);
+			image = imageDAO.findImgByID(imageID);
+			//System.out.println(image.getFilename());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// if no parameter for display name it's others profile
 		// else it's the logged in user profile
 		if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
 			user = userDAO.getUserById(userID);
+			
 			artworkList = artworkDAO.getArtworkByuserID(userID);
 			favArtworkList = artworkDAO.getFavoritedArtworkByuserID(userID);
 			followerCount = followUserDAO.getFollowerCount(userID);
@@ -64,6 +80,16 @@ public class UserProfile extends HttpServlet {
 			request.setAttribute("myProfile", true);
 		} else {
 			user = userDAO.getUserById(otherID);
+			try {
+				otherImageID = userDAO.getProfilePictureID(otherID);
+				//System.out.println(otherImageID);
+				otherImage = imageDAO.findImgByID(otherImageID);
+				//System.out.println(otherImage.getFilename());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			artworkList = artworkDAO.getArtworkByuserID(otherID);
 			favArtworkList = artworkDAO.getFavoritedArtworkByuserID(otherID);
 			followerCount = followUserDAO.getFollowerCount(otherID);
@@ -84,6 +110,8 @@ public class UserProfile extends HttpServlet {
 		request.setAttribute("user", user);
 		request.setAttribute("artworkList", artworkList);
 		request.setAttribute("favArtworkList", favArtworkList);
+		request.setAttribute("image", image);
+		request.setAttribute("otherImage", otherImage);
 		
 
 		request.setAttribute("followingUsersList", getFollowingUsersList);

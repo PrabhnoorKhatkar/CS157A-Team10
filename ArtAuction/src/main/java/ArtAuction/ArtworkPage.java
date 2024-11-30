@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,6 +33,22 @@ public class ArtworkPage extends HttpServlet {
 		UserProfileDAO currUser = new UserProfileDAO();
 		curr = currUser.getUserById(userID);
 		request.setAttribute("current", curr);
+		
+		ImageDAO imageDAO = new ImageDAO();
+		int imageID = -1;
+		Image image = null;
+		
+		try {
+			imageID = currUser.getProfilePictureID(userID);
+			//System.out.println(imageID);
+			image = imageDAO.findImgByID(imageID);
+			//System.out.println(image.getFilename());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("image", image);
 		
 		// Check if visting user is owner
 		if (artworkPage.checkArtworkAccount(userID, artworkID)) {

@@ -28,7 +28,7 @@
 				</form>
 
 				<a href="<c:url value="/UserProfile"/>" class="profile-btn"> <img
-						src="<c:url value="/myapp/temporary-pic.jpg"/>" alt="profile pic" width="64"
+						src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64"
 						height="64">
 				</a>
 			</div>

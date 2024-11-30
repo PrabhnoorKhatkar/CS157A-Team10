@@ -27,6 +27,27 @@ public class Homepage extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	UserProfileDAO userDAO = new UserProfileDAO();
+    	ImageDAO imageDAO = new ImageDAO();
+    	Image image = null;
+    	
+    	int imageID = -1;
+    	// get logged in user id from the current session
+    	if (req.getSession().getAttribute("userID") != null) {
+    		int userID = (int) req.getSession().getAttribute("userID");
+        	
+        	try {
+    			imageID = userDAO.getProfilePictureID(userID);
+    			//System.out.println(imageID);
+    			image = imageDAO.findImgByID(imageID);
+    			//System.out.println(image.getFilename());
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	}
+    	
+    	req.setAttribute("image", image);
         addFeaturedArtworks(req);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }

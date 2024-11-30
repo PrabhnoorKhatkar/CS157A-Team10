@@ -49,6 +49,33 @@ public class ImageDAO extends DAO {
         }
         return null;
     }
+    
+    public Image findImgByID(int id) {
+        loadDriver(dbdriver);
+        var con = getConnection();
+        String sql = "SELECT imageID, filename FROM Image WHERE imageID = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            // Retrieve the generated artworkID
+            ResultSet rs = ps.executeQuery();
+            Image img = new Image();
+            if (rs.next()) {
+            	var imageID = rs.getInt(1);
+                //System.out.println(imageID);
+                var filename = rs.getString(2);
+                //System.out.println(filename);
+                img.setImageId(imageID);
+                img.setFilename(filename);
+            }
+            return img;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public ArrayList<Image> findByFilename(String filename) {
         loadDriver(dbdriver);
         var con = getConnection();
@@ -79,6 +106,7 @@ public class ImageDAO extends DAO {
         }
         return images;
     }
+    
     public ArrayList<Image> findByArtwork(Artwork artwork) {
         loadDriver(dbdriver);
         var con = getConnection();

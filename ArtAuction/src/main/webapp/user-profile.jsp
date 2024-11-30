@@ -30,22 +30,21 @@
 			</form>
 
 			<a href="UserProfile" class="profile-btn"> <img
-				src="myapp/temporary-pic.jpg" alt="profile pic" width="64"
+				src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64"
 				height="64">
 			</a>
 		</div>
 	</header>
 
 	<div class="profile-container">
-
-		<img src="<c:url value="${test}"/>" alt="Profile Picture" class="profile-pic">
-
-		<h2 class="name">Name: ${user.name}</h2>
-		<h2 class="display-name">Display Name: ${user.displayName}</h2>
-		
-		<c:if test="${sessionScope.admin}">Admin</c:if>
 		
 		<c:if test="${myProfile}">
+			<img src="<c:url value="myapp/images/${image.filename}"/>" alt="Profile Picture" class="profile-pic">
+
+			<h2 class="name">Name: ${user.name}</h2>
+			<h2 class="display-name">Display Name: ${user.displayName}</h2>
+			
+			<c:if test="${sessionScope.admin}">Admin</c:if>
 			<form action="UserProfile" method="POST" enctype="multipart/form-data">
 				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="file">
 				<button type="submit" name="action" value="editProfilePicture">Submit</button>
@@ -72,7 +71,12 @@
 		</c:if>
 
 		<c:if test="${!myProfile}">
+			<img src="<c:url value="myapp/images/${otherImage.filename}"/>" alt="Profile Picture" class="profile-pic">
 
+			<h2 class="name">Name: ${user.name}</h2>
+			<h2 class="display-name">Display Name: ${user.displayName}</h2>
+			
+			<c:if test="${sessionScope.admin}">Admin</c:if>
 			<button onclick="toggleFollowingList()" id="followingBtn">${followingCount} Following</button>
 			
 			<div id="followingList" style="display: none;">
