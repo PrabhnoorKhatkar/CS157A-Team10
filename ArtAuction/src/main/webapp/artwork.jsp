@@ -81,7 +81,7 @@
 
 							<p>Owner: ${ownerDisplayName}</p>
 
-							<button type="submit" class="save-btn">Save Changes</button>
+							<button type="submit" class="save-changes-btn">Save Changes</button>
 							<button type="submit" class="remove-btn" formaction="RemoveArtwork"
 									onsubmit="return confirm('Are you sure you want to remove this listing?');"
 							>Remove Listing
@@ -168,13 +168,13 @@
 						<c:choose>
 							<c:when test="${checkSave}">
 								<button type="submit" name="action" value="unsave"class="un-save-btn">
-									<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto">
+									<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
 								</button>
 								<!-- <p>Saved to Favorites</p> -->
 							</c:when>
 							<c:when test="${!checkSave}">
 								<button type="submit" name="action" value="save" class="save-btn">
-									<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto">
+									<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
 								</button>
 							</c:when>
 						</c:choose>

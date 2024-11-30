@@ -109,7 +109,7 @@ body {
 
 section {
 	align-items: center;
-	width: 65%;
+	width: 85%;
 	height: 300px;
 	border: 1px solid #dedede;
 	background-color: #dedede;
@@ -174,13 +174,21 @@ hr {
 .save-btn,
 form button.un-save-btn:hover,
 form button.save-btn:hover {
+	height: 30;
+	width: auto;
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
+	
 }
 
+.heart:hover {
+	opacity: 0.7;
+}
+
+.save-changes-btn, 
 .remove-btn {
-	width: 25%;
+	width: 40%;
 	padding: 10px;
 	background-color: none;
 	border: 1px solid #444;
@@ -223,7 +231,7 @@ form button.save-btn:hover {
 
 .edit-section {
 	align-items: center;
-	width: 78.3%;
+	width: 80%;
 	height: 150px;
 	border: 1px solid #dedede;
 	background-color: #dedede;
