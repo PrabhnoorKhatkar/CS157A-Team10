@@ -44,9 +44,9 @@
 																		placeholder="e.g., 500" min="0">
 
 			<!-- AUCTION DURATION IN HOURS -->
-			<label for="duration">Auction Duration (hours):</label> <input id="duration"
+			<label for="duration">Auction Duration (days):</label> <input id="duration"
 																		   type="number" name="duration"
-																		   placeholder="Enter duration in hours" min="1"
+																		   placeholder="Enter duration in days" min="1"
 																		   required>
 
 			<!-- SUBMIT BTN -->

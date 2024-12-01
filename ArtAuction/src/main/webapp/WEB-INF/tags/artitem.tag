@@ -23,7 +23,7 @@
 		</p>
 
 		<p>By: ${artwork.artist}</p>
-		<p>Result: ${artwork.auctionDetails.result}</p>
+		<p>Status: ${artwork.auctionDetails.result}</p>
 		<p>Amount: ${artwork.auctionDetails.amount}</p>
 
 		<p>

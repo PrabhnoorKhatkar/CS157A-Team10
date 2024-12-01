@@ -1,35 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Order Confirmation</title>
-		<link rel="stylesheet" href="myapp/css/art-upload-form-style.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="myapp/css/order-confirmation-style.css">
+	<title>Order Confirmation</title>
 	</head>
 	<body>
-			<h2>Order Confirmation</h2>
-
-            <p>Hey ${name}</p>
-            <p>Your order of </p>
-                
-                <p>${artwork.title} has been placed.</p>
-
-                <p>${email}</p>
-                <p>$${totalPaid}</p>
-
-                <p>Order Number: ${orderNumber}</p>
-
-
-
-              <p> has been confirmed</p>
-
-
-
-
-			<!-- RETURN BTN -->
-			<button type="submit" class="upload-btn">Return Homepage</button>
-			<a href="homepage.jsp" class="back-to-homepage">Back to Homepage</a>
-
+		<div class="order-confirmation">
+			<div class="order-info">
+				<h2>Order Confirmation</h2>
+			
+				<p>Hey ${name} your order of ${artwork.title} has been placed.</p>
+			
+				<p>Email: ${email}</p>
+				
+				<p>Delivery Address: ${address1}, ${address2}, ${city}, ${state }</p>
+			
+				<p>Total Paid: $${totalPaid}</p>
+			
+				<p>Order Number: ${orderNumber} has been confirmed</p>
+			</div>
+		
+		
+			<div class="back-homepage">
+				<a href="homepage.jsp" class="back-to-homepage">Back to Homepage</a>
+			</div>
+		</div>
 	</body>
 </html>

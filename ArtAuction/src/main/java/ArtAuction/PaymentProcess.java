@@ -57,7 +57,13 @@ public class PaymentProcess extends HttpServlet {
 		float totalPaid = Float.parseFloat(request.getParameter("totalPrice"));
 		String email = request.getParameter("email");
 		int artworkID = Integer.parseInt(request.getParameter("artworkID"));
-
+		
+		// address
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String city = request.getParameter("city");
+		String state = request.getParameter("state");
+		
 		OrderDAO orderDAO = new OrderDAO();
 		orderDAO.processOrder(userID, artworkID, totalPaid);
 
@@ -68,7 +74,10 @@ public class PaymentProcess extends HttpServlet {
 		request.setAttribute("name", name);
 		request.setAttribute("totalPaid", totalPaid);
 		request.setAttribute("email", email);
-
+		request.setAttribute("address1", address1);
+		request.setAttribute("address2", address2);
+		request.setAttribute("city", city);
+		request.setAttribute("state", state);
 		
 
 		// Forward to the artwork details JSP page
