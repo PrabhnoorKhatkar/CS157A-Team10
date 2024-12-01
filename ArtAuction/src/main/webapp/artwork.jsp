@@ -12,6 +12,8 @@
 	</head>
 	<body>
 
+		<script src="myapp/javascript/countdown.js"></script>
+
 		<header class="profile-header">
 			<div class="header-left">
 				<h2>
@@ -153,9 +155,19 @@
 					<!-- Countdown Timer -->
 					<div class="countdown-timer">
 						<p>
-							Auction Ends In: <span id="countdown"></span>
+							Auction Ends In: <span id="countdown-${artwork.id}"></span>
 						</p>
 					</div>
+
+					<script>
+						var timestamp = "${auction.endTimestamp}";
+						var artworkId = "${artwork.id}";
+						if (timestamp && !isNaN(Date.parse(timestamp))) {
+							countdown(timestamp, artworkId);
+						}
+					</script>
+				
+					
 					<hr width="100%" size="2">
 					<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
 						  class="link">${ownerDisplayName}</a></p>
