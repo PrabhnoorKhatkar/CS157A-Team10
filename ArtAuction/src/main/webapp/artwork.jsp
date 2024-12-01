@@ -43,7 +43,8 @@
 		<jsp:useBean id="isOwner" scope="request" type="java.lang.Boolean"/>
 		<jsp:useBean id="auction" scope="request" type="ArtAuction.Auction"/>
 		<jsp:useBean id="highestBidder" scope="request" type="ArtAuction.User"/>
-		<c:if test="${isOwner}">
+		<c:if test="${isOwner || sessionScope.admin}">
+			<c:if test="${sessionScope.admin}"><p>Admin</p></c:if>
 				<form action="EditArtwork" method="post" class="artwork-body">
 					<div class="left">
 						<c:forEach var="image" items="${artwork.images}">
@@ -109,7 +110,7 @@
 
 		<!-- For non owner page-->
 		<!-- Iterate over the artwork list and display each artwork -->
-		<c:if test="${!isOwner}">
+		<c:if test="${!isOwner && !sessionScope.admin}">
 			<div class="artwork-body">
 				<div class="left">
 					<c:forEach var="image" items="${artwork.images}">
