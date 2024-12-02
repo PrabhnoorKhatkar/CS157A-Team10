@@ -74,7 +74,7 @@ public class AuctionDAO extends DAO {
 			    
 			}
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 

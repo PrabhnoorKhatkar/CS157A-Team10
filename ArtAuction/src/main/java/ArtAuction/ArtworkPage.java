@@ -44,7 +44,7 @@ public class ArtworkPage extends HttpServlet {
 			image = imageDAO.findImgByID(imageID);
 			//System.out.println(image.getFilename());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		

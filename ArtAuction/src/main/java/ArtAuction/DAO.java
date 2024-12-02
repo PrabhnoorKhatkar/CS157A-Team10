@@ -14,7 +14,7 @@ public class DAO {
         try {
             Class.forName(dbDriver);
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -22,7 +22,7 @@ public class DAO {
         try {
             Class.forName(dbdriver);
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -32,7 +32,7 @@ public class DAO {
         try {
             con = DriverManager.getConnection(dburl, dbuname, dbpassword);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
         return con;

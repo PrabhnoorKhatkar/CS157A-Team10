@@ -27,7 +27,7 @@ public class UserProfileDAO extends DAO {
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 

@@ -26,7 +26,7 @@ public class UserProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		// get user name of current url
@@ -60,7 +60,7 @@ public class UserProfile extends HttpServlet {
 			image = imageDAO.findImgByID(imageID);
 			//System.out.println(image.getFilename());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -86,7 +86,7 @@ public class UserProfile extends HttpServlet {
 				otherImage = imageDAO.findImgByID(otherImageID);
 				//System.out.println(otherImage.getFilename());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			}
 			

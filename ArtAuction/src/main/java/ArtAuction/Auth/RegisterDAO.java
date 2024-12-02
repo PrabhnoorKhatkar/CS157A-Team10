@@ -24,7 +24,7 @@ public class RegisterDAO extends DAO {
 			ps.setBoolean(6, user.isAnonymous());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			result = "Data Not Entered Successfully";
 			e.printStackTrace();
 		}

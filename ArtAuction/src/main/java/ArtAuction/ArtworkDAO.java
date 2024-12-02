@@ -79,7 +79,7 @@ public class ArtworkDAO extends DAO
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -117,7 +117,7 @@ public class ArtworkDAO extends DAO
                 images.add(img);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -141,7 +141,7 @@ public class ArtworkDAO extends DAO
                 returnList.add(resultSet.getString("name"));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -174,7 +174,7 @@ public class ArtworkDAO extends DAO
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -208,7 +208,7 @@ public class ArtworkDAO extends DAO
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 

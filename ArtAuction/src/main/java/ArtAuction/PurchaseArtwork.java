@@ -18,7 +18,7 @@ public class PurchaseArtwork extends HttpServlet {
      */
     public PurchaseArtwork() {
         super();
-        // TODO Auto-generated constructor stub
+        // Auto-generated constructor stub
     }
 
 	/**

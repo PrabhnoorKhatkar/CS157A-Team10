@@ -21,7 +21,7 @@ public class ArtworkPageDAO extends DAO {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
