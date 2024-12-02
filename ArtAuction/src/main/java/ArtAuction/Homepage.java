@@ -11,17 +11,16 @@ import java.sql.SQLException;
 
 @WebServlet(name = "homepage", urlPatterns = {"/homepage.jsp"})
 public class Homepage extends HttpServlet {
-    private void addFeaturedArtworks(HttpServletRequest request) {
+    private void addFeaturedArtworks(HttpServletRequest request, int userID) {
         var dao = new FeaturedArtworkDAO();
         var imageDao = new ImageDAO();
         try {
-            // TODO CALL getFeatuedArtworksbyFollowing
-            var featuredArtworks = dao.getFeaturedArtworks(3);
+            var featuredArtworks = dao.getFeaturedArtworksByFollowing(userID, 3);
             for (var featuredArtwork: featuredArtworks) {
                 featuredArtwork.setImages(imageDao.findByArtwork(featuredArtwork));
             }
             request.setAttribute("featuredArtworks", featuredArtworks);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -30,11 +29,12 @@ public class Homepage extends HttpServlet {
     	UserProfileDAO userDAO = new UserProfileDAO();
     	ImageDAO imageDAO = new ImageDAO();
     	Image image = null;
+        int userID = -1;
     	
     	int imageID = -1;
     	// get logged in user id from the current session
     	if (req.getSession().getAttribute("userID") != null) {
-    		int userID = (int) req.getSession().getAttribute("userID");
+    		userID = (int) req.getSession().getAttribute("userID");
         	
         	try {
     			imageID = userDAO.getProfilePictureID(userID);
@@ -46,13 +46,24 @@ public class Homepage extends HttpServlet {
     			e.printStackTrace();
     		}
     	}
+       // TODO When not logged in prompt user to login to see featured artworks based on their followings.
     	
     	req.setAttribute("image", image);
-        addFeaturedArtworks(req);
+        addFeaturedArtworks(req, userID);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        addFeaturedArtworks(req);
+
+        int userID = -1;
+    	
+    	// get logged in user id from the current session
+    	if (req.getSession().getAttribute("userID") != null) {
+    		userID = (int) req.getSession().getAttribute("userID");
+        }
+        // TODO When not logged in prompt user to login to see featured artworks based on their followings.
+
+
+        addFeaturedArtworks(req, userID);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }
 }
