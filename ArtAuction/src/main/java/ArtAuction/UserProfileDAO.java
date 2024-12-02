@@ -12,7 +12,7 @@ public class UserProfileDAO extends DAO {
         var con = getConnection();
         User returnUser = new User();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE userID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE userID = ?");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -39,7 +39,7 @@ public class UserProfileDAO extends DAO {
         int userID = -1;
 
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM User WHERE displayName = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE displayName = ?");
             ps.setString(1, displayName);
             var resultSet = ps.executeQuery();
 
@@ -56,7 +56,7 @@ public class UserProfileDAO extends DAO {
     public void upsertProfilePicture(int userId, Image newProfilePicture) throws SQLException {
         loadDriver();
         var con = getConnection();
-        var sql = "INSERT INTO ProfilePicture(userID, imageID) VALUES (?, ?) ON DUPLICATE KEY UPDATE imageID = ?";
+        var sql = "INSERT INTO profilepicture(userID, imageID) VALUES (?, ?) ON DUPLICATE KEY UPDATE imageID = ?";
         try {
             var upsertSql = con.prepareStatement(sql);
             upsertSql.setInt(1, userId);
@@ -71,7 +71,7 @@ public class UserProfileDAO extends DAO {
     public int getProfilePictureID(int userID) throws SQLException {
         loadDriver();
         var con = getConnection();
-        var sql = "SELECT imageID FROM User NATURAL JOIN ProfilePicture NATURAL JOIN Image WHERE userID = ?;";
+        var sql = "SELECT imageID FROM user NATURAL JOIN profilepicture NATURAL JOIN image WHERE userID = ?;";
         try {
             var ps = con.prepareStatement(sql);
             ps.setInt(1, userID);

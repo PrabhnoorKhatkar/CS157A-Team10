@@ -9,7 +9,7 @@ public class SaveArtworkDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT into Favorite (userID, artworkID) VALUES (?,?)";
+		String sql = "INSERT into favorite (userID, artworkID) VALUES (?,?)";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -27,7 +27,7 @@ public class SaveArtworkDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "DELETE FROM Favorite WHERE userID = ? AND artworkID = ?";
+		String sql = "DELETE FROM favorite WHERE userID = ? AND artworkID = ?";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class SaveArtworkDAO extends DAO {
 	public boolean checkSave(int userID, int artworkID) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "SELECT COUNT(*) FROM Favorite WHERE userID = ? AND artworkID = ?";
+		String sql = "SELECT COUNT(*) FROM favorite WHERE userID = ? AND artworkID = ?";
 
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, userID);

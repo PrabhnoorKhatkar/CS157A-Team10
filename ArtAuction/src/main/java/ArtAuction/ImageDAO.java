@@ -15,7 +15,7 @@ public class ImageDAO extends DAO {
         loadDriver(dbdriver);
         System.err.println("inserting img");
         var con = getConnection();
-        var sql = "INSERT INTO Image(filename, uploaderID) VALUES (?, ?) ";
+        var sql = "INSERT INTO image(filename, uploaderID) VALUES (?, ?) ";
         try {
             PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, img.getFilename());
@@ -36,7 +36,7 @@ public class ImageDAO extends DAO {
     public ArrayList<Image> findByID(int id) {
         loadDriver(dbdriver);
         var con = getConnection();
-        String sql = "SELECT imageID, filename, uploaderID FROM Image WHERE imageID = ?";
+        String sql = "SELECT imageID, filename, uploaderID FROM image WHERE imageID = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class ImageDAO extends DAO {
     public Image findImgByID(int id) {
         loadDriver(dbdriver);
         var con = getConnection();
-        String sql = "SELECT imageID, filename FROM Image WHERE imageID = ?";
+        String sql = "SELECT imageID, filename FROM image WHERE imageID = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class ImageDAO extends DAO {
     public ArrayList<Image> findByFilename(String filename) {
         loadDriver(dbdriver);
         var con = getConnection();
-        String sql = "SELECT imageID, filename, uploaderID FROM Image WHERE filename = ?";
+        String sql = "SELECT imageID, filename, uploaderID FROM image WHERE filename = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class ImageDAO extends DAO {
     public ArrayList<Image> findByArtwork(Artwork artwork) {
         loadDriver(dbdriver);
         var con = getConnection();
-        String sql = "SELECT imageID, filename, uploaderID FROM ArtImage NATURAL JOIN Artwork NATURAL JOIN Image WHERE artworkID = ?";
+        String sql = "SELECT imageID, filename, uploaderID FROM artimage NATURAL JOIN artwork NATURAL JOIN image WHERE artworkID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, artwork.getId());

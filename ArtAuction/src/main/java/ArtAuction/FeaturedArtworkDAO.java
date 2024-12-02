@@ -12,7 +12,7 @@ public class FeaturedArtworkDAO extends DAO {
         loadDriver();
         var con = getConnection();
         // TODO: maybe select randomly or add attribute that can only be set by admins
-        String sql = "SELECT artworkID, title, description, artist FROM Artwork LIMIT ?";
+        String sql = "SELECT artworkID, title, description, artist FROM artwork LIMIT ?";
         var featuredArtworks = new Artwork[limit];
         var ps = con.prepareStatement(sql);
         try {
@@ -40,7 +40,7 @@ public class FeaturedArtworkDAO extends DAO {
         loadDriver();
         var con = getConnection();
 
-        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN AuctionDetails WHERE userID IN (SELECT followingID as userID FROM Follow WHERE ? = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC LIMIT ?;"; 
+        String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN auctiondetails WHERE userID IN (SELECT followingID as userID FROM follow WHERE ? = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC LIMIT ?;";
         List<Artwork> featuredArtworks = new ArrayList<>();
         
         try {

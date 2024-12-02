@@ -18,7 +18,7 @@ public class ArtworkDAO extends DAO
 
         String result = "Not Succesfully Updated";
 
-        String sql = "UPDATE Artwork SET title = ?, description = ?, artist = ? WHERE artworkID = ?;";
+        String sql = "UPDATE artwork SET title = ?, description = ?, artist = ? WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class ArtworkDAO extends DAO
     public List<Artwork> query(String keyword) {
         loadDriver(dbdriver);
         Connection con = getConnection();
-        String sql = "SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage NATURAL JOIN AuctionDetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
+        String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage NATURAL JOIN auctiondetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
         List<Artwork> searchList =  new ArrayList<>();
 
@@ -94,7 +94,7 @@ public class ArtworkDAO extends DAO
         var con = getConnection();
         Artwork returnArtwork = new Artwork();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT artworkID, title, description, artist, imageID FROM Artwork NATURAL JOIN ArtImage NATURAL JOIN Image WHERE artworkID = ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT artworkID, title, description, artist, imageID FROM artwork NATURAL JOIN artimage NATURAL JOIN image WHERE artworkID = ?;");
             ps.setInt(1, artworkId);
 
             var resultSet = ps.executeQuery();
@@ -130,7 +130,7 @@ public class ArtworkDAO extends DAO
         var con = getConnection();
         List<String> returnList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT name FROM Tag WHERE artworkID = ? ");
+            PreparedStatement ps = con.prepareStatement("SELECT name FROM tag WHERE artworkID = ? ");
             ps.setInt(1, artworkID);
 
             var resultSet = ps.executeQuery();
@@ -154,7 +154,7 @@ public class ArtworkDAO extends DAO
         var con = getConnection();
         List<Artwork> returnArtworkList = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Artwork NATURAL JOIN Auction NATURAL JOIN ArtImage WHERE userID = ?;");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage WHERE userID = ?;");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -187,7 +187,7 @@ public class ArtworkDAO extends DAO
         List<Artwork> returnArtworkList = new ArrayList<>();
         try {
             PreparedStatement ps = con
-                    .prepareStatement("SELECT * FROM Artwork NATURAL JOIN Favorite NATURAL JOIN ArtImage WHERE userID = ?;");
+                    .prepareStatement("SELECT * FROM artwork NATURAL JOIN favorite NATURAL JOIN artimage WHERE userID = ?;");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();

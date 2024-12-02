@@ -38,7 +38,7 @@ public class OrderDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO Order (userID, orderID) VALUES (?, ?)";
+		String sql = "INSERT INTO `order` (userID, orderID) VALUES (?, ?)";
 		int orderID = -1;
 
 		try {
@@ -65,7 +65,7 @@ public class OrderDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO OrderItem (orderID, artworkID) VALUES (?,?)";
+		String sql = "INSERT INTO orderitem (orderID, artworkID) VALUES (?,?)";
         String result = "Order Sucessfully Assigned";
 
 		try {
@@ -86,7 +86,7 @@ public class OrderDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO OrderDetails (orderID, timestamp, trackingNumber, status, totalPaid) VALUES (?, ?, ?. ?, ?)";
+		String sql = "INSERT INTO orderdetails (orderID, timestamp, trackingNumber, status, totalPaid) VALUES (?, ?, ?. ?, ?)";
         String result = "Order Sucessfully Assigned";
 
 		try {

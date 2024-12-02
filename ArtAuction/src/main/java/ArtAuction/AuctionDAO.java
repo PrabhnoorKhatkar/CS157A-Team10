@@ -11,8 +11,8 @@ public class AuctionDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO Auction (userID, artworkID) VALUES (?, ?)";
-		String sql2 = "INSERT INTO AuctionDetails (artworkID, startTimestamp, endTimestamp, startingPrice, reserve, result) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO auction (userID, artworkID) VALUES (?, ?)";
+		String sql2 = "INSERT INTO auctiondetails (artworkID, startTimestamp, endTimestamp, startingPrice, reserve, result) VALUES (?, ?, ?, ?, ?, ?)";
         String result = "Data Entered Successfully";
 
 		try {
@@ -50,7 +50,7 @@ public class AuctionDAO extends DAO {
 		var con = getConnection();
         Auction returnAuction = new Auction();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM AuctionDetails WHERE artworkID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM auctiondetails WHERE artworkID = ?");
             ps.setInt(1, artworkID);
 
             var resultSet = ps.executeQuery();
@@ -90,7 +90,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Removed";
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        String sql = "UPDATE AuctionDetails SET result = 'REMOVED', endTimestamp = ? WHERE artworkID = ?;";
+        String sql = "UPDATE auctiondetails SET result = 'REMOVED', endTimestamp = ? WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Ended";
 
-        String sql = "UPDATE AuctionDetails SET result = 'UNSOLD' WHERE artworkID = ?;";
+        String sql = "UPDATE auctiondetails SET result = 'UNSOLD' WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -147,7 +147,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Sold";
 
-        String sql = "UPDATE AuctionDetails SET result = 'SOLD' WHERE artworkID = ?;";
+        String sql = "UPDATE auctiondetails SET result = 'SOLD' WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -175,7 +175,7 @@ public class AuctionDAO extends DAO {
 
         String result = "Not Succesfully Sold";
 
-        String sql = "UPDATE AuctionDetails SET result = 'RESERVE NOT MET' WHERE artworkID = ?;";
+        String sql = "UPDATE auctiondetails SET result = 'RESERVE NOT MET' WHERE artworkID = ?;";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -204,8 +204,8 @@ public class AuctionDAO extends DAO {
 
         String result = "Bid Not Succesfully Placed";
 
-        String sql = "UPDATE AuctionDetails SET amount = ? WHERE artworkID = ? AND result = 'ACTIVE';";
-		String sql2 = "INSERT INTO Bid (userID, artworkID, timestamp, bidAmount) VALUES (?, ?, ?, ?)";
+        String sql = "UPDATE auctiondetails SET amount = ? WHERE artworkID = ? AND result = 'ACTIVE';";
+		String sql2 = "INSERT INTO bid (userID, artworkID, timestamp, bidAmount) VALUES (?, ?, ?, ?)";
 
 		try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -250,7 +250,7 @@ public class AuctionDAO extends DAO {
 
 		User highestBidder = new User();
 
-		String sql = "SELECT displayName FROM User WHERE userID = (SELECT userID FROM Bid WHERE artworkID = ? ORDER BY bidAmount DESC LIMIT 1);";
+		String sql = "SELECT displayName FROM user WHERE userID = (SELECT userID FROM bid WHERE artworkID = ? ORDER BY bidAmount DESC LIMIT 1);";
 		
 		try {
             PreparedStatement ps = con.prepareStatement(sql);

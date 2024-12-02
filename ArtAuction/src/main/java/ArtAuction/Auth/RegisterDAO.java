@@ -12,7 +12,7 @@ public class RegisterDAO extends DAO {
 	public String insert(User user) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "INSERT into User (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT into user (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
 		String result = "Data Entered Successfully";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);

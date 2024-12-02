@@ -13,7 +13,7 @@ public class LoginDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM User WHERE emailAddress = ? AND password = ?";
+		String sql = "SELECT * FROM user WHERE emailAddress = ? AND password = ?";
 		boolean status = false;
 
 		try {
@@ -35,7 +35,7 @@ public class LoginDAO extends DAO {
 
 		Connection con = getConnection();
 
-		String sql = "SELECT userID FROM User WHERE emailAddress = ?";
+		String sql = "SELECT userID FROM user WHERE emailAddress = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, email);
@@ -54,7 +54,7 @@ public class LoginDAO extends DAO {
 	public boolean checkAdmin(Integer id) {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
-		String sql = "SELECT COUNT(*) FROM Admin WHERE userID = ?";
+		String sql = "SELECT COUNT(*) FROM admin WHERE userID = ?";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);

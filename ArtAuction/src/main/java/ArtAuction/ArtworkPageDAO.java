@@ -11,7 +11,7 @@ public class ArtworkPageDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT 1 FROM Auction WHERE userID = ? AND artworkID = ?;");
+			PreparedStatement ps = con.prepareStatement("SELECT 1 FROM auction WHERE userID = ? AND artworkID = ?;");
 			ps.setInt(1, userID);
 			ps.setInt(2, artworkID);
 
@@ -34,7 +34,7 @@ public class ArtworkPageDAO extends DAO {
 		int userID = -1;
 
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT userID FROM Auction WHERE artworkID = ?;");
+			PreparedStatement ps = con.prepareStatement("SELECT userID FROM auction WHERE artworkID = ?;");
 			ps.setInt(1, artworkID);
 
 			var resultSet = ps.executeQuery();
@@ -56,7 +56,7 @@ public class ArtworkPageDAO extends DAO {
 		String displayName = null; // Default value when no user is found
 
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT displayName FROM User WHERE userID = ?;");
+			PreparedStatement ps = con.prepareStatement("SELECT displayName FROM user WHERE userID = ?;");
 			ps.setInt(1, userID);
 
 			var resultSet = ps.executeQuery();

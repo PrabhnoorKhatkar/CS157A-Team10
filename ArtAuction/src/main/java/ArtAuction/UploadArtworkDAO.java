@@ -13,7 +13,7 @@ public class UploadArtworkDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO Artwork (title, description, artist) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO artwork (title, description, artist) VALUES (?, ?, ?)";
 		int artworkID = -1;
 
 		try {
@@ -45,8 +45,8 @@ public class UploadArtworkDAO extends DAO {
 
 
 		// TODO prob split into 2 methods so profile pic upload can use the first sql
-		String sql = "INSERT INTO Image (filename, uploaderID) VALUES (?, ?)";
-		String sql2 = "INSERT INTO ArtImage (artworkID, imageID) VALUES (?, ?)";
+		String sql = "INSERT INTO image (filename, uploaderID) VALUES (?, ?)";
+		String sql2 = "INSERT INTO artimage (artworkID, imageID) VALUES (?, ?)";
 		String result = "Did Not Successfully Upload Image";
 		
 
@@ -89,7 +89,7 @@ public class UploadArtworkDAO extends DAO {
 		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO Tag (artworkID, name) VALUES (?, ?)";
+		String sql = "INSERT INTO tag (artworkID, name) VALUES (?, ?)";
 		String result = "Succesfully Added Tags";
 
 		try {
