@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<!--<p>homepage</p> -->
-
+	
 		<header class="header">
 			<div class="header-left">
 				<h2>
@@ -49,19 +49,35 @@
 
 			</div>
 		</header>
-		<header>
-			<section class="featured-artwork" id="gallery">
-				<h2>Featured Artwork</h2>
-				<div class="container">
-					<div class="art-grid">
-						<jsp:useBean id="featuredArtworks" scope="request" type="ArtAuction.Artwork[]"/>
-						<c:forEach var="artwork" items="${featuredArtworks}">
-							<ui:artitem artwork="${artwork}"/>
-						</c:forEach>
-					</div>
-				</div>
-			</section>
+		<br>
+		<header class = "slideshow-container">
+			<!-- <div class="featured-artwork" id="gallery"> -->
+				<!-- <h2>Featured Artwork</h2> -->
+			<!-- 	<div class="slideshow-container"> -->
+			<div>
+				<jsp:useBean id="featuredArtworks" scope="request" type="ArtAuction.Artwork[]"/>
+					<c:forEach var="artwork" items="${featuredArtworks}">
+						<ui:featured artwork="${artwork}"/>
+					</c:forEach>
+					
+			<!-- 	</div> -->
+				
+				
+			<!-- </div> -->
+			</div>
+			<br>
+			<br>
 		</header>
+		<br>
+			<a class="prev" onclick="plusSlides(-1)">❮</a>
+			<a class="next" onclick="plusSlides(1)">❯</a>
+			<div style = "text-align:center">
+				<span class="dot" onclick="currentSlide(1)"></span>
+				<span class="dot" onclick="currentSlide(2)"></span>
+				<span class="dot" onclick="currentSlide(3)"></span>
+			</div>
+			<script src="myapp/javascript/slideshow.js"></script>
+		
 		<header>
 			<section class="search-results" id="search-gallery">
 				<div class="container">
