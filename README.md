@@ -33,3 +33,7 @@ An online art auction platform designed for artists to showcase their work and f
 - OrderDetails(**ID**, timestamp, trackingNumber, status, totalPaid)
 - Order(**userID**, **orderDetailsID**)
 - OrderItem(**orderDetailsID**, **artworkID**)
+
+## Example user passwords:
+
+User passwords are 'password\_1' through 'password\_10' respectfully. They are hashed by SHA256.
