@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: artauction
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version	9.0.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,66 +16,66 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Admin`
+-- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `Admin`;
+DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Admin` (
+CREATE TABLE `admin` (
   `userID` int NOT NULL,
   `name` varchar(100) NOT NULL,
   `emailAddress` varchar(100) NOT NULL,
   `role` varchar(100) NOT NULL,
   PRIMARY KEY (`userID`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Admin`
+-- Dumping data for table `admin`
 --
 
-LOCK TABLES `Admin` WRITE;
-/*!40000 ALTER TABLE `Admin` DISABLE KEYS */;
-INSERT INTO `Admin` VALUES (1,'John Doe','john.doe@email.com','System Administrator'),(2,'Sarah Smith','sarah.smith@email.com','Privacy Administrator'),(3,'Michael Johnson','mike.johnson@email.com','Security Administrator'),(4,'Emily Brown','emily.brown@email.com','Content Administrator');
-/*!40000 ALTER TABLE `Admin` ENABLE KEYS */;
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'John Doe','john.doe@email.com','System Administrator'),(2,'Sarah Smith','sarah.smith@email.com','Privacy Administrator'),(3,'Michael Johnson','mike.johnson@email.com','Security Administrator'),(4,'Emily Brown','emily.brown@email.com','Content Administrator');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ArtImage`
+-- Table structure for table `artimage`
 --
 
-DROP TABLE IF EXISTS `ArtImage`;
+DROP TABLE IF EXISTS `artimage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ArtImage` (
+CREATE TABLE `artimage` (
   `artworkID` int NOT NULL,
   `imageID` int NOT NULL,
   PRIMARY KEY (`artworkID`),
   KEY `imageID` (`imageID`),
-  CONSTRAINT `artimage_ibfk_1` FOREIGN KEY (`imageID`) REFERENCES `Image` (`imageID`)
+  CONSTRAINT `artimage_ibfk_1` FOREIGN KEY (`imageID`) REFERENCES `image` (`imageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ArtImage`
+-- Dumping data for table `artimage`
 --
 
-LOCK TABLES `ArtImage` WRITE;
-/*!40000 ALTER TABLE `ArtImage` DISABLE KEYS */;
-INSERT INTO `ArtImage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
-/*!40000 ALTER TABLE `ArtImage` ENABLE KEYS */;
+LOCK TABLES `artimage` WRITE;
+/*!40000 ALTER TABLE `artimage` DISABLE KEYS */;
+INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
+/*!40000 ALTER TABLE `artimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Artwork`
+-- Table structure for table `artwork`
 --
 
-DROP TABLE IF EXISTS `Artwork`;
+DROP TABLE IF EXISTS `artwork`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Artwork` (
+CREATE TABLE `artwork` (
   `artworkID` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` text,
@@ -85,48 +85,48 @@ CREATE TABLE `Artwork` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Artwork`
+-- Dumping data for table `artwork`
 --
 
-LOCK TABLES `Artwork` WRITE;
-/*!40000 ALTER TABLE `Artwork` DISABLE KEYS */;
-INSERT INTO `Artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka');
-/*!40000 ALTER TABLE `Artwork` ENABLE KEYS */;
+LOCK TABLES `artwork` WRITE;
+/*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
+INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka');
+/*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Auction`
+-- Table structure for table `auction`
 --
 
-DROP TABLE IF EXISTS `Auction`;
+DROP TABLE IF EXISTS `auction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Auction` (
+CREATE TABLE `auction` (
   `userID` int NOT NULL,
   `artworkID` int NOT NULL,
   PRIMARY KEY (`userID`,`artworkID`),
-  CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`)
+  CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Auction`
+-- Dumping data for table `auction`
 --
 
-LOCK TABLES `Auction` WRITE;
-/*!40000 ALTER TABLE `Auction` DISABLE KEYS */;
-INSERT INTO `Auction` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
-/*!40000 ALTER TABLE `Auction` ENABLE KEYS */;
+LOCK TABLES `auction` WRITE;
+/*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+INSERT INTO `auction` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+/*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `AuctionDetails`
+-- Table structure for table `auctiondetails`
 --
 
-DROP TABLE IF EXISTS `AuctionDetails`;
+DROP TABLE IF EXISTS `auctiondetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `AuctionDetails` (
+CREATE TABLE `auctiondetails` (
   `artworkID` int NOT NULL AUTO_INCREMENT,
   `startTimestamp` timestamp NOT NULL,
   `endTimestamp` timestamp NOT NULL,
@@ -139,162 +139,162 @@ CREATE TABLE `AuctionDetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `AuctionDetails`
+-- Dumping data for table `auctiondetails`
 --
 
-LOCK TABLES `AuctionDetails` WRITE;
-/*!40000 ALTER TABLE `AuctionDetails` DISABLE KEYS */;
-INSERT INTO `AuctionDetails` VALUES (1,'2024-11-19 18:00:00','2024-11-23 18:00:00',1500.00,1000.00,1200.00,'ACTIVE'),(2,'2024-11-19 18:00:00','2024-11-23 18:00:00',2000.00,1500.00,1800.00,'REMOVED'),(3,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,2000.00,2500.00,'ACTIVE'),(4,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,1800.00,2000.00,'ACTIVE'),(5,'2024-11-19 18:00:00','2024-11-23 18:00:00',3000.00,2500.00,2800.00,'ACTIVE'),(6,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,1200.00,1500.00,'ACTIVE'),(7,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-11-24 18:00:00',2800.00,2000.00,2500.00,'ACTIVE'),(9,'2024-11-19 18:00:00','2024-11-20 18:20:00',NULL,1500.00,1800.00,'SOLD'),(10,'2024-11-17 18:00:00','2024-11-20 18:00:00',NULL,1700.00,2000.00,'UNSOLD');
-/*!40000 ALTER TABLE `AuctionDetails` ENABLE KEYS */;
+LOCK TABLES `auctiondetails` WRITE;
+/*!40000 ALTER TABLE `auctiondetails` DISABLE KEYS */;
+INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-11-23 18:00:00',1500.00,1000.00,1200.00,'UNSOLD'),(2,'2024-11-19 18:00:00','2024-11-23 18:00:00',2000.00,1500.00,1800.00,'REMOVED'),(3,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,2000.00,2500.00,'RESERVE NOT MET'),(4,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,1800.00,2000.00,'RESERVE NOT MET'),(5,'2024-11-19 18:00:00','2024-11-23 18:00:00',3000.00,2500.00,2800.00,'ACTIVE'),(6,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,1200.00,1500.00,'RESERVE NOT MET'),(7,'2024-11-19 18:00:00','2024-11-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-11-24 18:00:00',2800.00,2000.00,2500.00,'ACTIVE'),(9,'2024-11-19 18:00:00','2024-11-20 18:20:00',NULL,1500.00,1800.00,'SOLD'),(10,'2024-11-17 18:00:00','2024-11-20 18:00:00',NULL,1700.00,2000.00,'UNSOLD');
+/*!40000 ALTER TABLE `auctiondetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Bid`
+-- Table structure for table `bid`
 --
 
-DROP TABLE IF EXISTS `Bid`;
+DROP TABLE IF EXISTS `bid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Bid` (
+CREATE TABLE `bid` (
   `userID` int NOT NULL,
   `artworkID` int NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `bidAmount` decimal(10,2) NOT NULL,
   PRIMARY KEY (`userID`,`artworkID`,`timestamp`),
   KEY `auctionDetailsID` (`artworkID`),
-  CONSTRAINT `bid_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `bid_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `AuctionDetails` (`artworkID`)
+  CONSTRAINT `bid_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `bid_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `auctiondetails` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Bid`
+-- Dumping data for table `bid`
 --
 
-LOCK TABLES `Bid` WRITE;
-/*!40000 ALTER TABLE `Bid` DISABLE KEYS */;
-INSERT INTO `Bid` VALUES (1,1,'2024-11-19 20:00:00',1100.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(7,5,'2024-11-19 20:00:00',2600.00),(8,5,'2024-11-19 21:00:00',2800.00),(9,5,'2024-11-19 22:00:00',3000.00),(10,8,'2024-11-19 20:00:00',2800.00);
-/*!40000 ALTER TABLE `Bid` ENABLE KEYS */;
+LOCK TABLES `bid` WRITE;
+/*!40000 ALTER TABLE `bid` DISABLE KEYS */;
+INSERT INTO `bid` VALUES (1,1,'2024-11-19 20:00:00',1100.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(7,5,'2024-11-19 20:00:00',2600.00),(8,5,'2024-11-19 21:00:00',2800.00),(9,5,'2024-11-19 22:00:00',3000.00),(10,8,'2024-11-19 20:00:00',2800.00);
+/*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Favorite`
+-- Table structure for table `favorite`
 --
 
-DROP TABLE IF EXISTS `Favorite`;
+DROP TABLE IF EXISTS `favorite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Favorite` (
+CREATE TABLE `favorite` (
   `userID` int NOT NULL,
   `artworkID` int NOT NULL,
   PRIMARY KEY (`userID`,`artworkID`),
   KEY `artworkID` (`artworkID`),
-  CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `Artwork` (`artworkID`)
+  CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `artwork` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Favorite`
+-- Dumping data for table `favorite`
 --
 
-LOCK TABLES `Favorite` WRITE;
-/*!40000 ALTER TABLE `Favorite` DISABLE KEYS */;
-INSERT INTO `Favorite` VALUES (2,1),(1,2),(1,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
-/*!40000 ALTER TABLE `Favorite` ENABLE KEYS */;
+LOCK TABLES `favorite` WRITE;
+/*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
+INSERT INTO `favorite` VALUES (2,1),(1,2),(1,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
+/*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Follow`
+-- Table structure for table `follow`
 --
 
-DROP TABLE IF EXISTS `Follow`;
+DROP TABLE IF EXISTS `follow`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Follow` (
+CREATE TABLE `follow` (
   `followerID` int NOT NULL,
   `followingID` int NOT NULL,
   PRIMARY KEY (`followerID`,`followingID`),
   KEY `followingID` (`followingID`),
-  CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`followerID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`followingID`) REFERENCES `User` (`userID`),
+  CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`followerID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`followingID`) REFERENCES `user` (`userID`),
   CONSTRAINT `follow_chk_1` CHECK ((`followerID` <> `followingID`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Follow`
+-- Dumping data for table `follow`
 --
 
-LOCK TABLES `Follow` WRITE;
-/*!40000 ALTER TABLE `Follow` DISABLE KEYS */;
-INSERT INTO `Follow` VALUES (2,1),(4,1),(6,1),(4,2),(6,2),(8,2),(10,2),(1,3),(10,3),(2,4),(6,4),(10,4),(4,6),(7,6),(2,7),(4,7),(6,7),(8,7),(1,8),(1,9),(2,9),(6,9),(4,10),(7,10),(8,10);
-/*!40000 ALTER TABLE `Follow` ENABLE KEYS */;
+LOCK TABLES `follow` WRITE;
+/*!40000 ALTER TABLE `follow` DISABLE KEYS */;
+INSERT INTO `follow` VALUES (2,1),(4,1),(6,1),(4,2),(6,2),(8,2),(10,2),(1,3),(10,3),(2,4),(6,4),(10,4),(4,6),(7,6),(2,7),(4,7),(6,7),(8,7),(1,8),(1,9),(2,9),(6,9),(4,10),(7,10),(8,10);
+/*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Image`
+-- Table structure for table `image`
 --
 
-DROP TABLE IF EXISTS `Image`;
+DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Image` (
+CREATE TABLE `image` (
   `imageID` int NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   `uploaderID` int DEFAULT NULL,
   PRIMARY KEY (`imageID`),
   UNIQUE KEY `filename` (`filename`),
   KEY `uploaderID` (`uploaderID`),
-  CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uploaderID`) REFERENCES `User` (`userID`)
+  CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uploaderID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Image`
+-- Dumping data for table `image`
 --
 
-LOCK TABLES `Image` WRITE;
-/*!40000 ALTER TABLE `Image` DISABLE KEYS */;
-INSERT INTO `Image` VALUES (1,'art-0-XbY9lSMj.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-2-gn7ZIP02.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9);
-/*!40000 ALTER TABLE `Image` ENABLE KEYS */;
+LOCK TABLES `image` WRITE;
+/*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (1,'art-10-2467580-HSC00001-7.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-11-images.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9);
+/*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Order`
+-- Table structure for table `order`
 --
 
-DROP TABLE IF EXISTS `Order`;
+DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Order` (
+CREATE TABLE `order` (
   `userID` int NOT NULL,
   `orderID` int NOT NULL,
   PRIMARY KEY (`userID`,`orderID`),
   KEY `orderDetailsID` (`orderID`),
-  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`orderID`) REFERENCES `OrderDetails` (`orderID`)
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`orderID`) REFERENCES `orderdetails` (`orderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Order`
+-- Dumping data for table `order`
 --
 
-LOCK TABLES `Order` WRITE;
-/*!40000 ALTER TABLE `Order` DISABLE KEYS */;
-INSERT INTO `Order` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
-/*!40000 ALTER TABLE `Order` ENABLE KEYS */;
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `OrderDetails`
+-- Table structure for table `orderdetails`
 --
 
-DROP TABLE IF EXISTS `OrderDetails`;
+DROP TABLE IF EXISTS `orderdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `OrderDetails` (
+CREATE TABLE `orderdetails` (
   `orderID` int NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `trackingNumber` varchar(50) DEFAULT NULL,
@@ -305,102 +305,102 @@ CREATE TABLE `OrderDetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `OrderDetails`
+-- Dumping data for table `orderdetails`
 --
 
-LOCK TABLES `OrderDetails` WRITE;
-/*!40000 ALTER TABLE `OrderDetails` DISABLE KEYS */;
-INSERT INTO `OrderDetails` VALUES (1,'2024-11-01 22:00:00','TRK123456','DELIVERED',1500.00),(2,'2024-11-02 22:00:00','TRK123457','SHIPPED',2000.00),(3,'2024-11-03 23:00:00','TRK123458','PROCESSING',2500.00),(4,'2024-11-04 23:00:00','TRK123459','DELIVERED',1800.00),(5,'2024-11-05 23:00:00','TRK123460','SHIPPED',3000.00),(6,'2024-11-06 23:00:00','TRK123461','PROCESSING',1200.00),(7,'2024-11-07 23:00:00','TRK123462','DELIVERED',2200.00),(8,'2024-11-08 23:00:00','TRK123463','SHIPPED',2800.00),(9,'2024-11-09 23:00:00','TRK123464','PROCESSING',1500.00),(10,'2024-11-10 23:00:00','TRK123465','DELIVERED',1700.00);
-/*!40000 ALTER TABLE `OrderDetails` ENABLE KEYS */;
+LOCK TABLES `orderdetails` WRITE;
+/*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
+INSERT INTO `orderdetails` VALUES (1,'2024-11-01 22:00:00','TRK123456','DELIVERED',1500.00),(2,'2024-11-02 22:00:00','TRK123457','SHIPPED',2000.00),(3,'2024-11-03 23:00:00','TRK123458','PROCESSING',2500.00),(4,'2024-11-04 23:00:00','TRK123459','DELIVERED',1800.00),(5,'2024-11-05 23:00:00','TRK123460','SHIPPED',3000.00),(6,'2024-11-06 23:00:00','TRK123461','PROCESSING',1200.00),(7,'2024-11-07 23:00:00','TRK123462','DELIVERED',2200.00),(8,'2024-11-08 23:00:00','TRK123463','SHIPPED',2800.00),(9,'2024-11-09 23:00:00','TRK123464','PROCESSING',1500.00),(10,'2024-11-10 23:00:00','TRK123465','DELIVERED',1700.00);
+/*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `OrderItem`
+-- Table structure for table `orderitem`
 --
 
-DROP TABLE IF EXISTS `OrderItem`;
+DROP TABLE IF EXISTS `orderitem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `OrderItem` (
+CREATE TABLE `orderitem` (
   `orderID` int NOT NULL,
   `artworkID` int NOT NULL,
   PRIMARY KEY (`orderID`,`artworkID`),
   KEY `artworkID` (`artworkID`),
-  CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `OrderDetails` (`orderID`),
-  CONSTRAINT `orderitem_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `Artwork` (`artworkID`)
+  CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orderdetails` (`orderID`),
+  CONSTRAINT `orderitem_ibfk_2` FOREIGN KEY (`artworkID`) REFERENCES `artwork` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `OrderItem`
+-- Dumping data for table `orderitem`
 --
 
-LOCK TABLES `OrderItem` WRITE;
-/*!40000 ALTER TABLE `OrderItem` DISABLE KEYS */;
-INSERT INTO `OrderItem` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
-/*!40000 ALTER TABLE `OrderItem` ENABLE KEYS */;
+LOCK TABLES `orderitem` WRITE;
+/*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
+INSERT INTO `orderitem` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+/*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ProfilePicture`
+-- Table structure for table `profilepicture`
 --
 
-DROP TABLE IF EXISTS `ProfilePicture`;
+DROP TABLE IF EXISTS `profilepicture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ProfilePicture` (
+CREATE TABLE `profilepicture` (
   `userID` int NOT NULL,
   `imageID` int NOT NULL,
   PRIMARY KEY (`userID`),
   KEY `imageID` (`imageID`),
-  CONSTRAINT `profilepicture_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `User` (`userID`),
-  CONSTRAINT `profilepicture_ibfk_2` FOREIGN KEY (`imageID`) REFERENCES `Image` (`imageID`)
+  CONSTRAINT `profilepicture_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `profilepicture_ibfk_2` FOREIGN KEY (`imageID`) REFERENCES `image` (`imageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ProfilePicture`
+-- Dumping data for table `profilepicture`
 --
 
-LOCK TABLES `ProfilePicture` WRITE;
-/*!40000 ALTER TABLE `ProfilePicture` DISABLE KEYS */;
-INSERT INTO `ProfilePicture` VALUES (4,11),(1,12),(2,12),(5,13),(6,14),(3,15),(7,16),(8,17),(9,18),(10,19);
-/*!40000 ALTER TABLE `ProfilePicture` ENABLE KEYS */;
+LOCK TABLES `profilepicture` WRITE;
+/*!40000 ALTER TABLE `profilepicture` DISABLE KEYS */;
+INSERT INTO `profilepicture` VALUES (4,11),(1,12),(2,12),(5,13),(6,14),(3,15),(7,16),(8,17),(9,18),(10,19);
+/*!40000 ALTER TABLE `profilepicture` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Tag`
+-- Table structure for table `tag`
 --
 
-DROP TABLE IF EXISTS `Tag`;
+DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Tag` (
+CREATE TABLE `tag` (
   `artworkID` int NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`artworkID`,`name`),
-  CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`artworkID`) REFERENCES `Artwork` (`artworkID`)
+  CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`artworkID`) REFERENCES `artwork` (`artworkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Tag`
+-- Dumping data for table `tag`
 --
 
-LOCK TABLES `Tag` WRITE;
-/*!40000 ALTER TABLE `Tag` DISABLE KEYS */;
-INSERT INTO `Tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space');
-/*!40000 ALTER TABLE `Tag` ENABLE KEYS */;
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `User`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `userID` int NOT NULL AUTO_INCREMENT,
   `emailAddress` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -414,13 +414,13 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'john.doe@email.com','hashed_password_1','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','hashed_password_2','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','hashed_password_3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','hashed_password_4','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','hashed_password_5','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','hashed_password_6','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','hashed_password_7','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','hashed_password_8','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','hashed_password_9','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','hashed_password_10','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0);
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'john.doe@email.com','hashed_password_1','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','hashed_password_2','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','hashed_password_3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','hashed_password_4','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','hashed_password_5','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','hashed_password_6','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','hashed_password_7','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','hashed_password_8','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','hashed_password_9','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','hashed_password_10','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -432,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22 20:35:25
+-- Dump completed on 2024-12-02  2:38:37
