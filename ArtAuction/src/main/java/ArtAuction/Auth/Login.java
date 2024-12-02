@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		// get email & password
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String password = Encrypt.sha256(request.getParameter("password"));
 		
 		// create new member object with data
 		LoginDAO loginDAO = new LoginDAO();

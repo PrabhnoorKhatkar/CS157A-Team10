@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
 			throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String displayName = request.getParameter("displayName");
-		String password = request.getParameter("password");
+		String password = Encrypt.sha256(request.getParameter("password"));
 		String emailAddress = request.getParameter("emailAddress");
 		String address = request.getParameter("address");
 		String anonymousParam = request.getParameter("anonymous");
