@@ -1,16 +1,22 @@
 package ArtAuction;
 
 public class Image {
-    private Integer imageId;
+    private int imageId;
     private String filename;
-    private Integer uploaderId;
+    private int uploaderId;
+
+    public Image(int imageId, String filename, int uploaderId) {
+        this(filename, uploaderId);
+        this.imageId = imageId;
+    }
+
+    public Image(String filename, int uploaderId) {
+        this.filename = filename;
+        this.uploaderId = uploaderId;
+    }
 
     public Image(Integer imageId) {
         this.imageId = imageId;
-    }
-    public Image(String filename, Integer uploaderId) {
-        this.filename = filename;
-        this.uploaderId = uploaderId;
     }
 
     public Image() {
@@ -18,11 +24,11 @@ public class Image {
     }
 
 
-    public Integer getImageId() {
+    public int getImageId() {
         return this.imageId;
     }
 
-    public void setImageId(Integer imageId) {
+    public void setImageId(int imageId) {
         this.imageId = imageId;
     }
 
@@ -34,11 +40,11 @@ public class Image {
         this.filename = filename;
     }
 
-    public Integer getUploaderId() {
+    public int getUploaderId() {
         return this.uploaderId;
     }
 
-    public void setUploaderId(Integer uploaderId) {
+    public void setUploaderId(int uploaderId) {
         this.uploaderId = uploaderId;
     }
 }

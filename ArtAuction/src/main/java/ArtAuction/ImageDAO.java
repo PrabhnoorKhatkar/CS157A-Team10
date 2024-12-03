@@ -43,13 +43,15 @@ public class ImageDAO extends DAO {
             ps.setInt(1, id);
             // Retrieve the generated artworkID
             ResultSet rs = ps.executeQuery();
-            return extractFromResultSet(rs);
+            if (rs.next()) {
+                return extractFromResultSet(rs);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public Image findByFilename(String filename) {
         loadDriver(dbdriver);
         var con = getConnection();
@@ -59,7 +61,9 @@ public class ImageDAO extends DAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, filename);
             ResultSet rs = ps.executeQuery();
-            return extractFromResultSet(rs);
+            if (rs.next()) {
+                return extractFromResultSet(rs);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,18 +71,12 @@ public class ImageDAO extends DAO {
     }
 
     private Image extractFromResultSet(ResultSet rs) throws SQLException {
-        Image img = new Image();
-        if (rs.next()) {
-            var imageID = rs.getInt(1);
-            var filename = rs.getString(2);
-            var uploaderID = rs.getInt(3);
-            img.setImageId(imageID);
-            img.setFilename(filename);
-            img.setUploaderId(uploaderID);
-        }
-        return img;
+        var imageID = rs.getInt("imageID");
+        var filename = rs.getString("filename");
+        var uploaderID = rs.getInt("uploaderID");
+        return new Image(imageID, filename, uploaderID);
     }
-    
+
     public ArrayList<Image> findByArtwork(Artwork artwork) {
         loadDriver(dbdriver);
         var con = getConnection();
@@ -87,8 +85,6 @@ public class ImageDAO extends DAO {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, artwork.getId());
-
-            // Retrieve the generated artworkID
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
