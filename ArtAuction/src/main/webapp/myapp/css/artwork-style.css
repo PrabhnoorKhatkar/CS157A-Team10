@@ -1,5 +1,6 @@
 * {
 	font-family: Arial, sans-serif;
+	
 }
 
 body {
@@ -10,18 +11,15 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px 40px;
+	padding: 20px 20px;
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.header-left .logo {
+.logo {
 	font-size: 36px;
 	color: #333;
 	text-decoration: none;
-	display: flex;
-	align-items: center;
-	gap: 15px;
 }
 
 .header-right {
@@ -34,7 +32,7 @@ body {
 .logout-btn {
 	background-color: transparent;
 	color: #444;
-	padding: 10px 15px;
+	padding: 10px 10px;
 	margin: 0 5px;
 	border: 1px solid #444;
 	/*border-radius: 5px;*/
@@ -51,18 +49,6 @@ body {
 }
 
 .profile-btn img {
-	border-radius: 50%;
-}
-
-
-.profile-container {
-	text-align: center;
-	margin: 30px 0;
-}
-
-.profile-pic {
-	width: 150px;
-	height: 150px;
 	border-radius: 50%;
 }
 
@@ -235,4 +221,15 @@ form button.save-btn:hover {
 	height: 150px;
 	border: 1px solid #dedede;
 	background-color: #dedede;
+}
+
+.bid-input {
+	width: 85%;
+	padding: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 1em;
+	border: 1px solid #ccc;
+	/*border-radius: 5px;*/
+	font-size: 15px;
 }

@@ -23,7 +23,7 @@
 
 			<div class="header-right">
 
-				<a href="<c:url value="/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
+				<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
 
 				<form action="Logout" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
@@ -164,7 +164,7 @@
 										<input type="hidden" name="artworkID" value="${artwork.id}">
 		
 										<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
-										<input type="number" id="bidAmount" name="bidAmount"
+										<input type="number" id="bidAmount" name="bidAmount" class="bid-input"
 											min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
 		
 										<button type="submit" class="bid-btn">Place Bid</button>

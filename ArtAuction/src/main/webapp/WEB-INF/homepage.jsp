@@ -65,8 +65,6 @@
 				
 			<!-- </div> -->
 			</div>
-			<br>
-			<br>
 		</header>
 		<br>
 			<a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -76,7 +74,8 @@
 				<span class="dot" onclick="currentSlide(2)"></span>
 				<span class="dot" onclick="currentSlide(3)"></span>
 			</div>
-			<script src="myapp/javascript/slideshow.js"></script>
+			<script src="myapp/javascript/slideshow.js"></script> 
+		
 		
 		<header>
 			<section class="search-results" id="search-gallery">

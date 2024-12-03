@@ -17,6 +17,7 @@ public class Homepage extends HttpServlet {
         try {
             var featuredArtworks = dao.getFeaturedArtworksByFollowing(userID, 3);
             for (var featuredArtwork: featuredArtworks) {
+            	System.out.println(featuredArtwork.getTitle());
                 featuredArtwork.setImages(imageDao.findByArtwork(featuredArtwork));
             }
             request.setAttribute("featuredArtworks", featuredArtworks);
@@ -24,6 +25,22 @@ public class Homepage extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+    
+    private void addFeatureArtworksNoUser(HttpServletRequest request) {
+    	var dao = new FeaturedArtworkDAO();
+        var imageDao = new ImageDAO();
+        try {
+            var featuredArtworks = dao.getFeaturedArtworks(3);
+            for (var featuredArtwork: featuredArtworks) {
+            	//System.out.println(featuredArtwork.getTitle());
+                featuredArtwork.setImages(imageDao.findByArtwork(featuredArtwork));
+            }
+            request.setAttribute("featuredArtworks", featuredArtworks);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	UserProfileDAO userDAO = new UserProfileDAO();
@@ -40,16 +57,21 @@ public class Homepage extends HttpServlet {
     			imageID = userDAO.getProfilePictureID(userID);
     			//System.out.println(imageID);
     			image = imageDAO.findImgByID(imageID);
-    			//System.out.println(image.getFilename());
+    			System.out.println(userID);
+    			addFeaturedArtworks(req, userID);
     		} catch (SQLException e) {
     			// Auto-generated catch block
     			e.printStackTrace();
     		}
     	}
+    	else if (req.getSession().getAttribute("userID") == null) {
+    		//System.out.println("in else");
+    		addFeatureArtworksNoUser(req);
+    	}
        // TODO When not logged in prompt user to login to see featured artworks based on their followings.
     	
     	req.setAttribute("image", image);
-        addFeaturedArtworks(req, userID);
+        
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

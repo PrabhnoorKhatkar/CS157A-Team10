@@ -14,7 +14,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px 30px;
+	padding: 20px 20px;
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

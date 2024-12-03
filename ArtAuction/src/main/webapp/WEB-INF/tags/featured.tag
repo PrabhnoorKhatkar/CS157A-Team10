@@ -9,21 +9,14 @@
 		<a href="<c:url value="/ArtworkPage?id=${artwork.id}"/>"
 		class="art-item-link"> <c:forEach var="artImage"
 			items="${artwork.images}">
-			<img src="<c:url value="/Uploads/${artImage.imageId}"/>" class="featured-img" style="width:100%">
+			<img src="<c:url value="/Uploads/${artImage.imageId}"/>" class="featured-img" width="600" height="900">
 		</c:forEach>
 		</a>
 	</div>
 	<div class = "div-right">
   		<h3 class ="f-h3">${artwork.title}</h3>
 		<p class ="f-p">
-			<c:choose>
-				<c:when test="${fn:length(artwork.description) > 45}">
-					${fn:substring(artwork.description, 0, 45)}...
-				</c:when>
-				<c:otherwise>
-					${artwork.description}
-				</c:otherwise>
-			</c:choose>
+			${artwork.description}
 		</p>
 
 		<p class ="info">By: ${artwork.artist}</p>
@@ -38,41 +31,13 @@
 		<div id="countdown-${artwork.id}"></div>
 	</div>
 	</header>
-<!--
 	<script>
-		function countdown(inputDate, artworkId) {
-			console.log("Countdown function loaded for artwork:", artworkId);
-			var countDownDate = new Date(inputDate).getTime();
-
-			var x = setInterval(function() {
-				var now = new Date().getTime();
-				var distance = countDownDate - now;
-
-				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-				var countdownElement = document.getElementById("countdown-" + artworkId);
-				if (countdownElement) {
-					countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-				}
-
-				if (distance < 0) {
-					clearInterval(x);
-					if (countdownElement) {
-						countdownElement.innerHTML = "ENDED";
-					}
-				}
-			}, 1000);
-		}
-
-		var timestamp = "${timestamp}";
+		var timestamp = "${artwork.auctionDetails.endTimestamp}";
 		var artworkId = "${artwork.id}";
 		if (timestamp && !isNaN(Date.parse(timestamp))) {
 			countdown(timestamp, artworkId);
 		}
 	</script>
--->
+	<script src="myapp/javascript/countdown.js"></script>
 
 </div>
