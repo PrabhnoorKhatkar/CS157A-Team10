@@ -3,7 +3,7 @@
   <servlet>
     <display-name>Register</display-name>
     <servlet-name>Register</servlet-name>
-    <servlet-class>ArtAuction.Auth.Register</servlet-class>
+    <servlet-class>artauction.auth.Register</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -11,7 +11,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>ArtAuction.Auth.Login</servlet-class>
+    <servlet-class>artauction.auth.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>SearchArtwork</servlet-name>
-    <servlet-class>ArtAuction.SearchArtwork</servlet-class>
+    <servlet-class>artauction.SearchArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchArtwork</servlet-name>
@@ -34,7 +34,7 @@
     <description></description>
     <display-name>UploadArtwork</display-name>
     <servlet-name>UploadArtwork</servlet-name>
-    <servlet-class>ArtAuction.UploadArtwork</servlet-class>
+    <servlet-class>artauction.UploadArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadArtwork</servlet-name>
@@ -44,7 +44,7 @@
     <description></description>
     <display-name>Logout</display-name>
     <servlet-name>Logout</servlet-name>
-    <servlet-class>ArtAuction.Auth.Logout</servlet-class>
+    <servlet-class>artauction.auth.Logout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
@@ -54,7 +54,7 @@
     <description></description>
     <display-name>UserProfile</display-name>
     <servlet-name>UserProfile</servlet-name>
-    <servlet-class>ArtAuction.UserProfile</servlet-class>
+    <servlet-class>artauction.user.UserProfile</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserProfile</servlet-name>
@@ -62,7 +62,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ArtworkPage</servlet-name>
-    <servlet-class>ArtAuction.ArtworkPage</servlet-class>
+    <servlet-class>artauction.ArtworkPage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ArtworkPage</servlet-name>
@@ -72,7 +72,7 @@
     <description></description>
     <display-name>SaveArtwork</display-name>
     <servlet-name>SaveArtwork</servlet-name>
-    <servlet-class>ArtAuction.SaveArtwork</servlet-class>
+    <servlet-class>artauction.SaveArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SaveArtwork</servlet-name>
@@ -82,7 +82,7 @@
     <description></description>
     <display-name>EditArtwork</display-name>
     <servlet-name>EditArtwork</servlet-name>
-    <servlet-class>ArtAuction.EditArtwork</servlet-class>
+    <servlet-class>artauction.EditArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditArtwork</servlet-name>
@@ -93,7 +93,7 @@
     <description></description>
     <display-name>RemoveArtwork</display-name>
     <servlet-name>RemoveArtwork</servlet-name>
-    <servlet-class>ArtAuction.RemoveArtwork</servlet-class>
+    <servlet-class>artauction.RemoveArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RemoveArtwork</servlet-name>
@@ -104,7 +104,7 @@
     <description></description>
     <display-name>PlaceBid</display-name>
     <servlet-name>PlaceBid</servlet-name>
-    <servlet-class>ArtAuction.PlaceBid</servlet-class>
+    <servlet-class>artauction.auction.PlaceBid</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PlaceBid</servlet-name>
@@ -115,7 +115,7 @@
     <description></description>
     <display-name>PurchaseArtwork</display-name>
     <servlet-name>PurchaseArtwork</servlet-name>
-    <servlet-class>ArtAuction.PurchaseArtwork</servlet-class>
+    <servlet-class>artauction.order.PurchaseArtwork</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PurchaseArtwork</servlet-name>
@@ -126,7 +126,7 @@
     <description></description>
     <display-name>PaymentProcess</display-name>
     <servlet-name>PaymentProcess</servlet-name>
-    <servlet-class>ArtAuction.PaymentProcess</servlet-class>
+    <servlet-class>artauction.order.PaymentProcess</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PaymentProcess</servlet-name>

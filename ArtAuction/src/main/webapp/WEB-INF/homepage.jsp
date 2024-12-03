@@ -57,7 +57,7 @@
 				<!-- <h2>Featured Artwork</h2> -->
 			<!-- 	<div class="slideshow-container"> -->
 			<div>
-				<jsp:useBean id="featuredArtworks" scope="request" type="ArtAuction.Artwork[]"/>
+				<jsp:useBean id="featuredArtworks" scope="request" type="artauction.Artwork[]"/>
 					<c:forEach var="artwork" items="${featuredArtworks}">
 						<ui:featured artwork="${artwork}"/>
 					</c:forEach>

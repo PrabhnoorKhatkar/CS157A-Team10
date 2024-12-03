@@ -38,11 +38,11 @@
 
 
 		<!-- Check if user is the owner and admin (no shill bidding)-->
-		<jsp:useBean id="artwork" scope="request" type="ArtAuction.Artwork"/>
+		<jsp:useBean id="artwork" scope="request" type="artauction.Artwork"/>
 		<jsp:useBean id="ownerDisplayName" scope="request" type="java.lang.String"/>
 		<jsp:useBean id="isOwner" scope="request" type="java.lang.Boolean"/>
-		<jsp:useBean id="auction" scope="request" type="ArtAuction.Auction"/>
-		<jsp:useBean id="highestBidder" scope="request" type="ArtAuction.User"/>
+		<jsp:useBean id="auction" scope="request" type="artauction.Auction"/>
+		<jsp:useBean id="highestBidder" scope="request" type="artauction.user.User"/>
 		<c:if test="${isOwner && sessionScope.admin}">
 				<form action="EditArtwork" method="post" class="artwork-body">
 					<div class="left">
