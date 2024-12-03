@@ -1,10 +1,10 @@
 <%@ tag description="Displays an artwork as a vertical card"%>
-<%@ attribute name="artwork" required="true" type="ArtAuction.Artwork"%>
+<%@ attribute name="artwork" required="true" type="artauction.Artwork"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class="mySlides fade">
-	<header class ="header">
+	<div class ="featured-card">
 	<div class = "div-left">
 		<a href="<c:url value="/ArtworkPage?id=${artwork.id}"/>"
 		class="art-item-link"> <c:forEach var="artImage"
@@ -30,7 +30,7 @@
 		
 		<div id="countdown-${artwork.id}"></div>
 	</div>
-	</header>
+	</div>
 	<script>
 		var timestamp = "${artwork.auctionDetails.endTimestamp}";
 		var artworkId = "${artwork.id}";
@@ -38,6 +38,6 @@
 			countdown(timestamp, artworkId);
 		}
 	</script>
-	<script src="myapp/javascript/countdown.js"></script>
+	<script src="<c:url value="/myapp/javascript/countdown.js"/>"></script>
 
 </div>

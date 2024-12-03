@@ -1,0 +1,86 @@
+/* CSS HSL */
+:root {
+    /* some colors from coloors.co */
+    --whiteish: hsla(220, 8%, 92%, 1);
+    --cadet-gray: hsla(197, 21%, 70%, 1);
+    --moonstone: hsla(188, 99%, 38%, 1);
+    --teal: hsla(190, 64%, 34%, 1);
+    --cerulean: hsla(194, 100%, 27%, 1);
+    --gunmetal: hsla(196, 93%, 12%, 1);
+
+    /* some more */
+    --columbia-blue: hsla(210, 78%, 86%, 1);
+    --lavender-web: hsla(226, 40%, 92%, 1);
+    --bright-pink-crayola: hsla(349, 93%, 72%, 1);
+    --ultra-violet: hsla(238, 21%, 53%, 1);
+    --light-sky-blue: hsla(199, 87%, 68%, 1);
+    --light-green: hsla(117, 100%, 82%, 1);
+    --mindaro: hsla(74, 99%, 72%, 1);
+
+    --ayu-mirage-bg: hsla(220, 21%, 16%, 1);
+
+}
+
+body {
+    --primary-bg: var(--whiteish);
+    --fg: black;
+    background-color: var(--primary-bg);
+    color: var(--fg);
+}
+body.dark-mode {
+    --primary-bg: var(--ayu-mirage-bg);
+    --fg: white;
+}
+
+.text-whiteish { color: var(--whiteish); }
+.text-columbia-blue { color: var(--columbia-blue); }
+.text-lavender-web { color: var(--lavender-web); }
+.text-bright-pink-crayola { color: var(--bright-pink-crayola); }
+.text-ultra-violet { color: var(--ultra-violet); }
+.text-light-sky-blue { color: var(--light-sky-blue); }
+.text-light-green { color: var(--light-green); }
+.text-mindaro { color: var(--mindaro); }
+.text-black { color: black; }
+
+.bg-dark { background-color: var(--ayu-mirage-bg); }
+.bg-whiteish { background-color: var(--whiteish); }
+.bg-columbia-blue { background-color: var(--columbia-blue); }
+.bg-lavender-web { background-color: var(--lavender-web); }
+.bg-bright-pink-crayola { background-color: var(--bright-pink-crayola); }
+.bg-ultra-violet { background-color: var(--ultra-violet); }
+.bg-light-sky-blue { background-color: var(--light-sky-blue); }
+.bg-light-green { background-color: var(--light-green); }
+.bg-mindaro { background-color: var(--mindaro); }
+
+.flex {
+    display: flex;
+}
+.flex-row {
+    flex-direction: row;
+}
+.flex-column {
+    flex-direction: column;
+}
+.align-center {
+    align-items: center;
+}
+
+.animated-card {
+    transition-duration: 300ms;
+    transition-property: transform, box-shadow;
+    transition-timing-function: ease-out;
+    transform: rotate3d(0);
+
+    &:hover {
+        transition-duration: 150ms;
+        box-shadow: 0 5px 20px 10px #00000044;
+    }
+}
+.featured-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
