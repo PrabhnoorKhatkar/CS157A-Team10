@@ -30,8 +30,8 @@ public class ArtworkPage extends HttpServlet {
 
 		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
 		User curr = null;
-		UserDAO currUser = new UserDAO();
-		curr = currUser.getUserById(userID);
+		UserDAO userDao = new UserDAO();
+		curr = userDao.getFullUserById(userID);
 		request.setAttribute("current", curr);
 		
 		ImageDAO imageDAO = new ImageDAO();
@@ -39,7 +39,7 @@ public class ArtworkPage extends HttpServlet {
 		Image image = null;
 		
 		try {
-			imageID = currUser.getProfilePictureID(userID);
+			imageID = userDao.getProfilePictureID(userID);
 			//System.out.println(imageID);
 			image = imageDAO.findByID(imageID);
 			//System.out.println(image.getFilename());

@@ -5,32 +5,39 @@ import java.sql.SQLException;
 
 public class UserDAO extends DAO {
 
-    public User getUserById(int userID) {
+    public User getFullUserById(int userID) {
 
         var con = getConnection();
-        User returnUser = new User();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user JOIN profilepicture WHERE user.userID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM user LEFT OUTER JOIN profilepicture ON user.userID = profilepicture.userID WHERE user.userID = ?");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
-
                 // Retrieve data from the result set
-                String name = resultSet.getString("name");
-                String displayName = resultSet.getString("displayName");
+                var emailAddress = resultSet.getString("emailAddress");
+                var name = resultSet.getString("name");
+                var displayName = resultSet.getString("displayName");
+                var address = resultSet.getString("address");
+                var anonymous = resultSet.getBoolean("anonymous");
+                var profilePictureID = resultSet.getInt("imageID");
 
-                returnUser = new User(name, displayName);
-                returnUser.setProfilePictureID(resultSet.getInt("imageID"));
-
+                return new User(userID, name, displayName, emailAddress, address, anonymous, profilePictureID);
             }
         } catch (SQLException e) {
             // Auto-generated catch block
             e.printStackTrace();
         }
 
-        return returnUser;
+        return null;
+    }
+
+    public User getOtherUserById(int userID) {
+        var user = getFullUserById(userID);
+        if (user == null) return null;
+        if (user.isAnonymous()) return new User(user.getDisplayName());
+        return user;
     }
 
     public int getUserIDByDisplayName(String displayName) {

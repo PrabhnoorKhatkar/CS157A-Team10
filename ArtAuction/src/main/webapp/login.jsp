@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
 <html>
@@ -39,24 +40,18 @@
 
 				<!-- display register successful message -->
 
-				<%
-					String errorMessage = (String) request.getAttribute("errorMessage");
-					String successMessage = (String) request.getSession().getAttribute("successMessage");
-
-					if (errorMessage != null) {
-				%>
-				<div class="error"><%= errorMessage %>
-				</div>
-				<%
-					}
-					if (successMessage != null) {
-				%>
-				<div class="success"><%= successMessage %>
-				</div>
-				<%
-						request.getSession().removeAttribute("successMessage");
-					}
-				%>
+				<c:if test="${not empty requestScope.errorMessage}" >
+					<jsp:useBean id="errorMessage" scope="request" type="java.lang.String"/>
+					<div class="error">
+						<c:out value="${errorMessage}"/>
+					</div>
+				</c:if>
+				<c:if test="${not empty requestScope.successMessage}" >
+					<jsp:useBean id="successMessage" scope="request" type="java.lang.String"/>
+					<div class="success">
+						<c:out value="${successMessage}"/>
+					</div>
+				</c:if>
 			</table>
 		</form>
 	</body>

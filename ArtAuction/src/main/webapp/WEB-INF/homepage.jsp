@@ -2,7 +2,7 @@
 		 pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 <%@taglib prefix="fn" uri="jakarta.tags.functions" %>
-<%@taglib prefix="ui" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="ui" tagdir="/WEB-INF/tags/components"%>
 <!DOCTYPE html>
 
 <html>
@@ -23,15 +23,17 @@
 			</div>
 			<div class="header-mid">
 				<form action="SearchArtwork" method="post">
-					<input type="text" class="search-box" placeholder="Search..."
-						   name="searchText">
+					<label>
+						<input type="text" class="search-box" placeholder="Search..."
+							   name="searchText">
+					</label>
 					<button type="submit" class="search-button">Search</button>
 				</form>
 			</div>
 			<div class="header-right">
 				<!-- login is shown when first visit. change to logout + profile + upload when user is logged in  -->
 				<c:choose>
-					<c:when test="${not empty sessionScope.email}">
+					<c:when test="${not empty sessionScope.user}">
 						<a href="<c:url value="/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
 						<form action="Logout" method="post">
 							<button type="submit" class="logout-btn">Log Out</button>
@@ -74,9 +76,8 @@
 				<span class="dot" onclick="currentSlide(2)"></span>
 				<span class="dot" onclick="currentSlide(3)"></span>
 			</div>
-			<script src="myapp/javascript/slideshow.js"></script> 
-		
-		
+			<script src="<c:url value="myapp/javascript/slideshow.js"/>"></script>
+
 		<header>
 			<section class="search-results" id="search-gallery">
 				<div class="container">

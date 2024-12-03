@@ -1,90 +1,108 @@
 package ArtAuction;
 
-public class User
-{
-	private String name;
-	private String displayName;
-	private String password;
-	private String emailAddress;
-	private String address;
-	private boolean anonymous;
+public class User {
+    private int id;
+    private String name;
+    private String displayName;
+    private String password;
+    private String emailAddress;
+    private String address;
+    private boolean anonymous;
+    private int profilePictureID;
+    public User(int id, String name, String displayName, String emailAddress, String address,
+                boolean anonymous, int profilePictureID) {
+        // for storing in session, no need for password
+        this(name, displayName);
+        this.id = id;
+        this.emailAddress = emailAddress;
+        this.address = address;
+        this.anonymous = anonymous;
+        this.profilePictureID = profilePictureID;
+    }
+    public User(String name, String displayName, String password, String emailAddress, String address,
+                boolean anonymous) {
+        // for registration
+        this(name, displayName);
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.address = address;
+        this.anonymous = anonymous;
+    }
 
-	public User(String name, String displayName, String password, String emailAddress, String address,
-			boolean anonymous) {
-		super();
-		this.name = name;
-		this.displayName = displayName;
-		this.password = password;
-		this.emailAddress = emailAddress;
-		this.address = address;
-		this.anonymous = anonymous;
-	}
-	
-	public User(String name, String displayName) {
-		super();
-		this.name = name;
-		this.displayName = displayName;
-		
-	}
-	
-	public User(String displayName) {
-		super();
-		this.displayName = displayName;
-		
-	}
+    public User(String name, String displayName) {
+        this(displayName);
+        this.name = name;
+    }
 
-	public boolean isAnonymous() {
-		return anonymous;
-	}
+    public User(String displayName) {
+        this.displayName = displayName;
+    }
 
-	public void setAnonymous(boolean anonymous) {
-		this.anonymous = anonymous;
-	}
+    public User() {
+        super();
+    }
 
-	public User() {
-		super();
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public boolean isAnonymous() {
+        return anonymous;
+    }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
+    }
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public String getEmailAddress() {
-		return emailAddress;
-	}
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getProfilePictureID() {
+        return profilePictureID;
+    }
+
+    public void setProfilePictureID(int profilePictureID) {
+        this.profilePictureID = profilePictureID;
+    }
 }

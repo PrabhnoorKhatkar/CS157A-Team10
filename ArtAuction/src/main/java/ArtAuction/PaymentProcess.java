@@ -47,7 +47,7 @@ public class PaymentProcess extends HttpServlet {
 		
 
 		UserDAO currUser = new UserDAO();
-		User curr = currUser.getUserById(userID);
+		User curr = currUser.getFullUserById(userID);
 
 		String name = curr.getName();
 		float totalPaid = Float.parseFloat(request.getParameter("totalPrice"));
