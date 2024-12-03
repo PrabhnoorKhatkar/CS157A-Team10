@@ -87,7 +87,8 @@
 						<!-- Iterate over the artwork list and display each artwork -->
 						<c:choose>
 							<c:when test="${not empty requestScope.artworkList}">
-								<c:forEach var="artwork" items="${requestScope.artworkList}">
+								<jsp:useBean id="artworkList" scope="request" type="java.util.List<artauction.Artwork>"/>
+								<c:forEach var="artwork" items="${artworkList}">
 									<ui:artitem artwork="${artwork}"/>
 								</c:forEach>
 							</c:when>

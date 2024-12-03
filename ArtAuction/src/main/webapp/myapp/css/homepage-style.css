@@ -11,7 +11,7 @@ body {
 
 /* Navigation bar*/
 
-.header {
+.homepage-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -99,26 +99,38 @@ body {
 .slideshow-container {
 	max-width: 1200px;
 	margin: auto;
-	background-color: #fff;
+}
+
+.slideshow-slide {
+	position: relative;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+}
+
+.slideshow-controls {
+	margin-top: 8px;
+	padding: 0 100px;
 }
 
 .prev, .next {
 	cursor: pointer;
 	position: absolute;
 	top: 50%;
-	transform: translateY(80%);
-	padding: 16px;
+	padding: 20px;
 	color: black;
 	font-weight: bold;
 	font-size: 18px;
 	transition: 0.6s ease;
-	border-radius: 0 3px 3px 0;
 	user-select: none;
+	transform: translateY(-50%);
 }
 
 .next {
 	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+.prev {
+	left: 0;
 	border-radius: 3px 0 0 3px;
 }
 

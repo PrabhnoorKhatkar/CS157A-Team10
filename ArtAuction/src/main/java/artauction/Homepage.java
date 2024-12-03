@@ -64,13 +64,11 @@ public class Homepage extends HttpServlet {
                 if (featuredArtworks.length == 0) {
                     featuredArtworks = getFeaturedArtworksNoUser(req);
                 }
-                System.err.println("user");
             } catch (SQLException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
             }
         } else {
-            System.err.println("no user");
             featuredArtworks = getFeaturedArtworksNoUser(req);
         }
         // TODO When not logged in prompt user to login to see featured artworks based on their followings.

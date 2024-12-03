@@ -59,7 +59,7 @@
 
 		<div class="payment-method-container">
 
-			<label for="paymentOptions">Payment Options:</label> <select
+			<label for="paymentMethod">Payment Options:</label> <select
 				id="paymentMethod" name="paymentMethod" required>
 
 				<option value="credit">Credit/Debit Card</option>

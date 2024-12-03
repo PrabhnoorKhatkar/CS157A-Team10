@@ -108,6 +108,7 @@
 						<!-- Remove Listing -->
 
 						<!-- Display tags -->
+						<jsp:useBean id="tags" scope="request" type="java.util.List<java.lang.String>"/>
 						<c:if test="${! empty tags}">
 							<div class="tags-section">
 								<p><strong>Tags:</strong></p>

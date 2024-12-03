@@ -17,7 +17,7 @@
 	<header class="profile-header">
 		<div class="header-left">
 			<h2>
-				<a href="/ArtAuction" class="logo">ART AUCTION</a>
+				<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
 			</h2>
 		</div>
 
