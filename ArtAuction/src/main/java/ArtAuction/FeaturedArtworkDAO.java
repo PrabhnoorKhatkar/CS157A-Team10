@@ -34,15 +34,14 @@ public class FeaturedArtworkDAO extends DAO {
         return featuredArtworks;
     }
 
-    public Artwork[] getFeaturedArtworksByFollowing(int loggedInUserID, int limit) 
-    {
+    public Artwork[] getFeaturedArtworksByFollowing(int loggedInUserID, int limit) {
 
         loadDriver();
         var con = getConnection();
 
         String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN auctiondetails WHERE userID IN (SELECT followingID as userID FROM follow WHERE ? = followerID) AND result = 'ACTIVE' ORDER BY endTimestamp ASC LIMIT ?;";
         List<Artwork> featuredArtworks = new ArrayList<>();
-        
+
         try {
             var ps = con.prepareStatement(sql);
             ps.setInt(1, loggedInUserID);

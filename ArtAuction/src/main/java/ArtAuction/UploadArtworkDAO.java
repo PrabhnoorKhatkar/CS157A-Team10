@@ -1,115 +1,107 @@
 package ArtAuction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class UploadArtworkDAO extends DAO {
 
-	public int insert(Artwork artwork) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
+    public int insert(Artwork artwork) {
+        loadDriver(dbdriver);
+        Connection con = getConnection();
 
-		String sql = "INSERT INTO artwork (title, description, artist) VALUES (?, ?, ?)";
-		int artworkID = -1;
+        String sql = "INSERT INTO artwork (title, description, artist) VALUES (?, ?, ?)";
+        int artworkID = -1;
 
-		try {
-			PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, artwork.getTitle());
-			ps.setString(2, artwork.getDescription());
-			ps.setString(3, artwork.getArtist());
-			
-			ps.executeUpdate();
-			
-			// Retrieve the generated artworkID
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				artworkID = rs.getInt(1);
-			}
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, artwork.getTitle());
+            ps.setString(2, artwork.getDescription());
+            ps.setString(3, artwork.getArtist());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            ps.executeUpdate();
 
-		return artworkID;
-	}
+            // Retrieve the generated artworkID
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                artworkID = rs.getInt(1);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	public String insertArtImage(String filename, Integer userID, Integer artworkID){
-
-		loadDriver(dbdriver);
-		Connection con = getConnection();
+        return artworkID;
+    }
 
 
-		// TODO prob split into 2 methods so profile pic upload can use the first sql
-		String sql = "INSERT INTO image (filename, uploaderID) VALUES (?, ?)";
-		String sql2 = "INSERT INTO artimage (artworkID, imageID) VALUES (?, ?)";
-		String result = "Did Not Successfully Upload Image";
-		
+    public String insertArtImage(String filename, Integer userID, Integer artworkID) {
 
-		try {
-			PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, filename);
-			ps.setInt(2, userID);
-	
-			ps.executeUpdate();
-			
-			// Retrieve the generated imageID
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				int imageID = rs.getInt(1);
-				PreparedStatement ps2 = con.prepareStatement(sql2);
-				ps2.setInt(1, artworkID);
-				ps2.setInt(2, imageID);
-		
-				var rowCountDelta = ps2.executeUpdate();
+        loadDriver(dbdriver);
+        Connection con = getConnection();
 
-				if (rowCountDelta > 0)
-				{
-					result = "Successfully Upload Image";
-				}
-				else {
-					result = "Uploading failed";
-				}
 
-			}
+        // TODO prob split into 2 methods so profile pic upload can use the first sql
+        String sql = "INSERT INTO image (filename, uploaderID) VALUES (?, ?)";
+        String sql2 = "INSERT INTO artimage (artworkID, imageID) VALUES (?, ?)";
+        String result = "Did Not Successfully Upload Image";
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
-		return result;
-	}
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, filename);
+            ps.setInt(2, userID);
 
-	public String insertTag(int artworkID, List<String> tags)
-	{
-		loadDriver(dbdriver);
-		Connection con = getConnection();
+            ps.executeUpdate();
 
-		String sql = "INSERT INTO tag (artworkID, name) VALUES (?, ?)";
-		String result = "Succesfully Added Tags";
+            // Retrieve the generated imageID
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int imageID = rs.getInt(1);
+                PreparedStatement ps2 = con.prepareStatement(sql2);
+                ps2.setInt(1, artworkID);
+                ps2.setInt(2, imageID);
 
-		try {
-			PreparedStatement ps = con.prepareStatement(sql);
+                var rowCountDelta = ps2.executeUpdate();
 
-			for(String tagName : tags)
-			{
-				ps.setInt(1, artworkID);
-				ps.setString(2, tagName);
-			
-				ps.executeUpdate();
+                if (rowCountDelta > 0) {
+                    result = "Successfully Upload Image";
+                } else {
+                    result = "Uploading failed";
+                }
 
-			}
-	
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            }
 
-		return result;
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	
+        return result;
+    }
+
+    public String insertTag(int artworkID, List<String> tags) {
+        loadDriver(dbdriver);
+        Connection con = getConnection();
+
+        String sql = "INSERT INTO tag (artworkID, name) VALUES (?, ?)";
+        String result = "Succesfully Added Tags";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            for (String tagName : tags) {
+                ps.setInt(1, artworkID);
+                ps.setString(2, tagName);
+
+                ps.executeUpdate();
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
 }
