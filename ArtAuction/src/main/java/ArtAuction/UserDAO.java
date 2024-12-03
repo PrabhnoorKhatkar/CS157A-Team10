@@ -2,17 +2,15 @@ package ArtAuction;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class UserProfileDAO extends DAO {
+public class UserDAO extends DAO {
 
     public User getUserById(int userID) {
 
         var con = getConnection();
         User returnUser = new User();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE userID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM user JOIN profilepicture WHERE user.userID = ?");
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();
@@ -24,6 +22,7 @@ public class UserProfileDAO extends DAO {
                 String displayName = resultSet.getString("displayName");
 
                 returnUser = new User(name, displayName);
+                returnUser.setProfilePictureID(resultSet.getInt("imageID"));
 
             }
         } catch (SQLException e) {

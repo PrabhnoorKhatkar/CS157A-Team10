@@ -30,7 +30,7 @@ public class ArtworkPage extends HttpServlet {
 
 		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
 		User curr = null;
-		UserProfileDAO currUser = new UserProfileDAO();
+		UserDAO currUser = new UserDAO();
 		curr = currUser.getUserById(userID);
 		request.setAttribute("current", curr);
 		
@@ -41,7 +41,7 @@ public class ArtworkPage extends HttpServlet {
 		try {
 			imageID = currUser.getProfilePictureID(userID);
 			//System.out.println(imageID);
-			image = imageDAO.findImgByID(imageID);
+			image = imageDAO.findByID(imageID);
 			//System.out.println(image.getFilename());
 		} catch (SQLException e) {
 			// Auto-generated catch block
@@ -112,7 +112,7 @@ public class ArtworkPage extends HttpServlet {
 		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
-			UserProfileDAO userDAO = new UserProfileDAO();
+			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
 			auctionDAO.endArtwork(artworkID);
 			auction = auctionDAO.getAuctionByArtworkID(artworkID);
@@ -151,7 +151,7 @@ public class ArtworkPage extends HttpServlet {
 		else if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() >= auction.getReserve() && auction.getResult().equals("UNSOLD"))
 		{
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
-			UserProfileDAO userDAO = new UserProfileDAO();
+			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
 			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 

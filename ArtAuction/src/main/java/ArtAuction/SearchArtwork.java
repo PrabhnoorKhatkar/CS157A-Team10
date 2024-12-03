@@ -25,8 +25,8 @@ public class SearchArtwork extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    	UserProfileDAO userDAO = new UserProfileDAO();
-    	ImageDAO imageDAO = new ImageDAO();
+    	var userDAO = new UserDAO();
+    	var imageDAO = new ImageDAO();
     	Image image = null;
         int userID = -1;
     	
@@ -39,7 +39,7 @@ public class SearchArtwork extends HttpServlet {
         	try {
     			imageID = userDAO.getProfilePictureID(userID);
     			//System.out.println(imageID);
-    			image = imageDAO.findImgByID(imageID);
+    			image = imageDAO.findByID(imageID);
     			//System.out.println(image.getFilename());
     		} catch (SQLException e) {
     			// Auto-generated catch block

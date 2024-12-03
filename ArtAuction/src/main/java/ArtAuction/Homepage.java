@@ -43,7 +43,7 @@ public class Homepage extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	UserProfileDAO userDAO = new UserProfileDAO();
+    	UserDAO userDAO = new UserDAO();
     	ImageDAO imageDAO = new ImageDAO();
     	Image image = null;
         int userID = -1;
@@ -56,7 +56,7 @@ public class Homepage extends HttpServlet {
         	try {
     			imageID = userDAO.getProfilePictureID(userID);
     			//System.out.println(imageID);
-    			image = imageDAO.findImgByID(imageID);
+    			image = imageDAO.findByID(imageID);
     			System.out.println(userID);
     			addFeaturedArtworks(req, userID);
     		} catch (SQLException e) {

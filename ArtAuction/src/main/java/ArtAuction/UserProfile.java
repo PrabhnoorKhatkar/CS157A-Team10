@@ -36,7 +36,7 @@ public class UserProfile extends HttpServlet {
 		int userID = (int) request.getSession().getAttribute("userID");
 
 		var artworkDAO = new ArtworkDAO();
-		UserProfileDAO userDAO = new UserProfileDAO();
+		UserDAO userDAO = new UserDAO();
 		FollowUserDAO followUserDAO = new FollowUserDAO();
 		ImageDAO imageDAO = new ImageDAO();
 
@@ -57,7 +57,7 @@ public class UserProfile extends HttpServlet {
 		try {
 			imageID = userDAO.getProfilePictureID(userID);
 			//System.out.println(imageID);
-			image = imageDAO.findImgByID(imageID);
+			image = imageDAO.findByID(imageID);
 			//System.out.println(image.getFilename());
 		} catch (SQLException e) {
 			// Auto-generated catch block
@@ -83,7 +83,7 @@ public class UserProfile extends HttpServlet {
 			try {
 				otherImageID = userDAO.getProfilePictureID(otherID);
 				//System.out.println(otherImageID);
-				otherImage = imageDAO.findImgByID(otherImageID);
+				otherImage = imageDAO.findByID(otherImageID);
 				//System.out.println(otherImage.getFilename());
 			} catch (SQLException e) {
 				// Auto-generated catch block
@@ -131,7 +131,7 @@ public class UserProfile extends HttpServlet {
 		Integer userID = (Integer) request.getSession().getAttribute("userID");
 		if (action.equals("editProfilePicture")) {
 			var imageDao = new ImageDAO();
-			UserProfileDAO userDAO = new UserProfileDAO();
+			UserDAO userDAO = new UserDAO();
 			var part = request.getPart("profilepicture");
 			var filename = String.format("profile-pic-%s-%s", ImageUploader.salt(8), part.getSubmittedFileName());
 			ImageUploader.upload(part.getInputStream(), filename);
@@ -142,26 +142,27 @@ public class UserProfile extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-			return;
         }
-		String followUserStr = request.getParameter("followedUserId");
-		
+		else {
+			String followUserStr = request.getParameter("followedUserId");
 
-		FollowUserDAO followUserDAO = new FollowUserDAO();
-		
-		if (followUserStr == null || followUserStr.isEmpty()) {
-			response.getWriter().append("Invalid followed user ID.");
-			return;
-		}
-		
-		Integer followedUserID = Integer.parseInt(followUserStr);
-		
-		if (action.equals("follow")) {
-			followUserDAO.followUser(userID, followedUserID);
-		} else if (action.equals("unfollow")) {
-			followUserDAO.unfollowUser(userID, followedUserID);
-		}
 
+			FollowUserDAO followUserDAO = new FollowUserDAO();
+
+			if (followUserStr == null || followUserStr.isEmpty()) {
+				response.getWriter().append("Invalid followed user ID.");
+				return;
+			}
+
+			int followedUserID = Integer.parseInt(followUserStr);
+
+			if (action.equals("follow")) {
+				followUserDAO.followUser(userID, followedUserID);
+			} else if (action.equals("unfollow")) {
+				followUserDAO.unfollowUser(userID, followedUserID);
+			}
+
+		}
 		String displayName = request.getParameter("displayName");
 		response.sendRedirect(request.getContextPath() +"/UserProfile?user=" + displayName);
 	}

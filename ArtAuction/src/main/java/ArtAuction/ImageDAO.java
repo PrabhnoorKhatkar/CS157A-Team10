@@ -33,7 +33,7 @@ public class ImageDAO extends DAO {
         }
         return null;
     }
-    public ArrayList<Image> findByID(int id) {
+    public Image findByID(int id) {
         loadDriver(dbdriver);
         var con = getConnection();
         String sql = "SELECT imageID, filename, uploaderID FROM image WHERE imageID = ?";
@@ -50,33 +50,7 @@ public class ImageDAO extends DAO {
         return null;
     }
     
-    public Image findImgByID(int id) {
-        loadDriver(dbdriver);
-        var con = getConnection();
-        String sql = "SELECT imageID, filename FROM image WHERE imageID = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            // Retrieve the generated artworkID
-            ResultSet rs = ps.executeQuery();
-            Image img = new Image();
-            if (rs.next()) {
-            	var imageID = rs.getInt(1);
-                //System.out.println(imageID);
-                var filename = rs.getString(2);
-                //System.out.println(filename);
-                img.setImageId(imageID);
-                img.setFilename(filename);
-            }
-            return img;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public ArrayList<Image> findByFilename(String filename) {
+    public Image findByFilename(String filename) {
         loadDriver(dbdriver);
         var con = getConnection();
         String sql = "SELECT imageID, filename, uploaderID FROM image WHERE filename = ?";
@@ -92,25 +66,24 @@ public class ImageDAO extends DAO {
         return null;
     }
 
-    private ArrayList<Image> extractFromResultSet(ResultSet rs) throws SQLException {
-        var images = new ArrayList<Image>();
-        while (rs.next()) {
+    private Image extractFromResultSet(ResultSet rs) throws SQLException {
+        Image img = new Image();
+        if (rs.next()) {
             var imageID = rs.getInt(1);
             var filename = rs.getString(2);
             var uploaderID = rs.getInt(3);
-            Image img = new Image();
             img.setImageId(imageID);
             img.setFilename(filename);
             img.setUploaderId(uploaderID);
-            images.add(img);
         }
-        return images;
+        return img;
     }
     
     public ArrayList<Image> findByArtwork(Artwork artwork) {
         loadDriver(dbdriver);
         var con = getConnection();
         String sql = "SELECT imageID, filename, uploaderID FROM artimage NATURAL JOIN artwork NATURAL JOIN image WHERE artworkID = ?";
+        ArrayList<Image> images = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, artwork.getId());
@@ -118,17 +91,12 @@ public class ImageDAO extends DAO {
             // Retrieve the generated artworkID
             ResultSet rs = ps.executeQuery();
 
-            return extractFromResultSet(rs);
+            while (rs.next()) {
+                images.add(extractFromResultSet(rs));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-    public void loadImagesIntoArtwork(Artwork artwork) {
-        // unused but might be a cleaner approach
-        artwork.setImages(findByArtwork(artwork));
-    }
-    public void loadImagesIntoProfile(User user) {
-        // TODO?
+        return images;
     }
 }

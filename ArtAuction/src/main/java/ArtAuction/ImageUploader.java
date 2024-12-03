@@ -79,7 +79,7 @@ public class ImageUploader extends HttpServlet {
      * @return A file representing the Image on-disk, or null if the ID is invalid.
      */
     public static File retrieveById(int id) {
-        var img = dao.findByID(id).get(0);
+        var img = dao.findByID(id);
         if (img == null) {
             return null;
         }

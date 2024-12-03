@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Encrypt {
+public class Hash {
     public static String sha256(String text) {
         try {
             var messageDigest = MessageDigest.getInstance("SHA-256");

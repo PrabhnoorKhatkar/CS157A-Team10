@@ -1,5 +1,6 @@
 package ArtAuction.Auth;
 
+import ArtAuction.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,18 +41,21 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		// get email & password
 		String email = request.getParameter("email");
-		String password = Encrypt.sha256(request.getParameter("password"));
-		
+		String password = Hash.sha256(request.getParameter("password"));
+
 		// create new member object with data
 		LoginDAO loginDAO = new LoginDAO();
+		var userDAO = new UserDAO();
 		
 		if (loginDAO.validate(email, password)) {
 			int userID = loginDAO.getUserIDByEmail(email);
+			var user = userDAO.getUserById(userID);
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userID", userID);
-			
+			session.setAttribute("user", user);
+
 			if (loginDAO.checkAdmin(userID)) {
 				session.setAttribute("admin", true);
 			} else { 
