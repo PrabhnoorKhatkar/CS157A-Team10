@@ -86,7 +86,7 @@ public class ImageUploader extends HttpServlet {
         return Path.of(localUploadDirectory.getAbsolutePath(), img.getFilename()).toFile();
     }
     public static File retrieveByName(String filename) {
-        var img = dao.findByFilename(filename).get(0);
+        var img = dao.findByFilename(filename);
         if (img == null) {
             return null;
         }
