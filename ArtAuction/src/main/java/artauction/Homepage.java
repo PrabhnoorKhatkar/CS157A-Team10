@@ -74,13 +74,13 @@ public class Homepage extends HttpServlet {
         // TODO When not logged in prompt user to login to see featured artworks based on their followings.
 
         req.setAttribute("image", image);
-        for (var featuredArtwork : featuredArtworks) {
-            System.err.println(featuredArtwork.getTitle());
-            for (var img : featuredArtwork.getImages()) {
-                System.err.println(img.getImageId());
-                System.err.println(img.getFilename());
-            }
-        }
+//        for (var featuredArtwork : featuredArtworks) {
+//            System.err.println(featuredArtwork.getTitle());
+//            for (var img : featuredArtwork.getImages()) {
+//                System.err.println(img.getImageId());
+//                System.err.println(img.getFilename());
+//            }
+//        }
         req.setAttribute("featuredArtworks", featuredArtworks);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }
