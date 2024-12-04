@@ -115,9 +115,15 @@
 	</div>
 
 	<div class="user-artwork">
-		<h2>My Artwork</h2>
+		<c:choose>
+			<c:when test="${myProfile}">
+				<h2>My Artwork</h2>
+			</c:when>
+			<c:otherwise>
+				<h2>${user.displayName}'s Artwork</h2>
+			</c:otherwise>
+		</c:choose>
 		<div class="art-grid">
-
 			<!-- Iterate over the artwork list and display each artwork -->
 			<c:choose>
 				<c:when test="${not empty requestScope.artworkList}">
@@ -129,9 +135,6 @@
 					<div>(no artworks)</div>
 				</c:otherwise>
 			</c:choose>
-
-
-
 		</div>
 	</div>
 
