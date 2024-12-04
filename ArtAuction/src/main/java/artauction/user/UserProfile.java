@@ -126,6 +126,9 @@ public class UserProfile extends HttpServlet {
                 e.printStackTrace();
                 throw new RuntimeException(e);
             }
+            var updatedUser = userDAO.getFullUserById(userID);
+            request.getSession().setAttribute("user", updatedUser);
+            response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + updatedUser.getDisplayName());
         } else {
             String followUserStr = request.getParameter("followedUserId");
 
@@ -144,11 +147,10 @@ public class UserProfile extends HttpServlet {
             } else if (action.equals("unfollow")) {
                 followUserDAO.unfollowUser(userID, followedUserID);
             }
+            response.sendRedirect(request.getContextPath() +"/UserProfile?user=" + request.getParameter("displayName"));
 
         }
-        var updatedUser = userDAO.getFullUserById(userID);
-        request.getSession().setAttribute("user", updatedUser);
-        response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + updatedUser.getDisplayName());
+        
     }
 
 }
