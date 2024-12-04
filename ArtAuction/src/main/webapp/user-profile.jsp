@@ -37,81 +37,98 @@
 	</header>
 
 	<div class="profile-container">
-		
+		<!-- Profile Card -->
+		<div class = "profile-card">
 		<c:if test="${myProfile}">
-			<img src="<c:url value="myapp/images/${image.filename}"/>" alt="Profile Picture" class="profile-pic">
-
-			<h2 class="name">Name: ${user.name}</h2>
-			<h2 class="display-name">Display Name: ${user.displayName}</h2>
-			
-			<c:if test="${sessionScope.admin}">Admin</c:if>
-			<form action="UserProfile" method="POST" enctype="multipart/form-data">
-				<label for="profilepicture">New profile picture:</label><input id="profilepicture" name="profilepicture" accept="image/*" type="file">
-				<button type="submit" name="action" value="editProfilePicture">Submit</button>
-			</form>
-			
-			
-			<button onclick="toggleFollowingList()" id="followingBtn">${followingCount} Following</button>
-			
-			<div id="followingList" style="display: none;">
-			
-				<c:forEach items="${followingUsersList}" var="user">
-					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
-				</c:forEach>
-				
+			<div class = "profile-img">
+				<img src="<c:url value="myapp/images/${image.filename}"/>" alt="Profile Picture" class="profile-pic">
 			</div>
-			
-			<button onclick="toggleFollowersList()" id="followersBtn">${followerCount} Followers</button>
-			
-			<div id="followersList" style="display: none;">
-				<c:forEach items="${getFollowerUsersList}" var="user">
-					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
-				</c:forEach>
+			<div class = "profile-details">
+				<h2 class="display-name">${user.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if></h2>
+				<h2 class="name">${user.name} </h2>
+				
+				<br>
+				<hr width="100%" size="2">
+				<br>
+				
+				<form action="UserProfile" method="POST" enctype="multipart/form-data" class="new-pfp">
+					<label for="profilepicture">New profile picture:</label>
+					<input id="profilepicture" name="profilepicture" accept="image/*" type="file">
+					<br>
+					<button type="submit" name="action" value="editProfilePicture" class ="submit-pfp">Submit</button>
+				</form>
+				
+				
+				<button onclick="toggleFollowingList()" id="followingBtn" class ="follow">${followingCount} <br> Following</button>
+				
+				<button onclick="toggleFollowersList()" id="followersBtn" class ="follow">${followerCount} <br> Followers</button>
+				<br>
+				<br>
+				<div id="followingList" style="display: none;">
+				
+					<c:forEach items="${followingUsersList}" var="user">
+						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+					</c:forEach>
+					
+				</div>
+				<div id="followersList" style="display: none;">
+					<c:forEach items="${getFollowerUsersList}" var="user">
+						<a href="<c:url value="UserProfile?user=${user.displayName}"/>" class = "display-follow">${user.displayName}</a>
+					</c:forEach>
+				</div>
 			</div>
 		</c:if>
 
 		<c:if test="${!myProfile}">
-			<img src="<c:url value="myapp/images/${otherImage.filename}"/>" alt="Profile Picture" class="profile-pic">
-
-			<h2 class="name">Name: ${user.name}</h2>
-			<h2 class="display-name">Display Name: ${user.displayName}</h2>
-			
-			<c:if test="${sessionScope.admin}">Admin</c:if>
-			<button onclick="toggleFollowingList()" id="followingBtn">${followingCount} Following</button>
-			
-			<div id="followingList" style="display: none;">
-				<c:forEach items="${followingUsersList}" var="user">
-					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
-				</c:forEach>
+			<div class = "profile-img">
+				<img src="<c:url value="myapp/images/${otherImage.filename}"/>" alt="Profile Picture" class="profile-pic">
 			</div>
 			
-			<button onclick="toggleFollowersList()" id="followersBtn">${followerCount} Followers</button>
-			
-			<div id="followersList" style="display: none;">
-				<c:forEach items="${getFollowerUsersList}" var="user">
-					<a href="<c:url value="UserProfile?user=${user.displayName}"/>">${user.displayName}</a>
-				</c:forEach>
-			</div>
-			
-			<form action="UserProfile" method="post">
-				<input type="hidden" name="followedUserId" value="${otherID}">
-				<input type="hidden" name="displayName" value="${user.displayName}">
-
-				<c:choose>
-					<c:when test="${isFollowed}">
-						<!-- Submit form to unfollow when clicked -->
-						<button type="submit" name="action" value="unfollow"
-							class="follow-btn">Unfollow</button>
-					</c:when>
-					<c:otherwise>
-						<!-- Submit form to follow when clicked -->
-						<button type="submit" name="action" value="follow"
-							class="follow-btn">Follow</button>
-					</c:otherwise>
-				</c:choose>
-			</form>
-
+			<div class = "profile-details">
+				<h2 class="display-name">${user.displayName}</h2>
+				<h2 class="name">${user.name}</h2>
+				
+				<br>
+				<hr width="100%" size="2">
+				<br>
+				
+				<button onclick="toggleFollowingList()" id="followingBtn" class ="follow">${followingCount}  <br> Following</button>
+				
+				<button onclick="toggleFollowersList()" id="followersBtn" class ="follow">${followerCount} <br> Followers</button>
+				<br>
+				<br>
+				<div id="followingList" style="display: none;">
+					<c:forEach items="${followingUsersList}" var="user">
+						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+					</c:forEach>
+				</div>
+				
+				<div id="followersList" style="display: none;">
+					<c:forEach items="${getFollowerUsersList}" var="user">
+						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+					</c:forEach>
+				</div>
+				
+				<form action="UserProfile" method="post">
+					<input type="hidden" name="followedUserId" value="${otherID}">
+					<input type="hidden" name="displayName" value="${user.displayName}">
+	
+					<c:choose>
+						<c:when test="${isFollowed}">
+							<!-- Submit form to unfollow when clicked -->
+							<button type="submit" name="action" value="unfollow"
+								class="follow">Unfollow</button>
+						</c:when>
+						<c:otherwise>
+							<!-- Submit form to follow when clicked -->
+							<button type="submit" name="action" value="follow"
+								class="follow">Follow</button>
+						</c:otherwise>
+					</c:choose>
+				</form>
+				</div>
 		</c:if>
+		</div>
 	</div>
 
 	<div class="user-artwork">
