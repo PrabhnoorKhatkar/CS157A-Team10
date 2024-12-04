@@ -36,7 +36,8 @@
 		<header>
 			<section class="search-results" id="search-gallery">
 				<div class="container">
-					<h2>Search Results</h2>
+					<h2>Auctions</h2>
+					<hr width="100%" size="2">
 					<div class="art-grid">
 
 						<!-- Iterate over the artwork list and display each artwork -->

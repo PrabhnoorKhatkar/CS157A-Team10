@@ -227,6 +227,7 @@ public class EditArtwork extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int artworkID = Integer.parseInt(request.getParameter("artworkID"));
+        //System.out.println("artworkid: " + artworkID);
 
         ArtworkDAO searchDAO = new ArtworkDAO();
 
@@ -241,8 +242,7 @@ public class EditArtwork extends HttpServlet {
         if (title.equals(artwork.getTitle()) && description.equals(artwork.getDescription()) && artist.equals(artwork.getArtist())) {
             // No changes made, forward back to the same page with a message
             request.setAttribute("message", "No changes were made to the artwork.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/ArtworkPage?id=" + artworkID);
             return;
         }
 
