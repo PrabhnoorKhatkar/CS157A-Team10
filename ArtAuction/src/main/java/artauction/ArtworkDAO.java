@@ -10,59 +10,55 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtworkDAO extends DAO
-{
-	
-    public String updateArtwork(Artwork newArtwork)
-    {
-        loadDriver(dbdriver);
+public class ArtworkDAO extends DAO {
+
+	public String updateArtwork(Artwork newArtwork) {
+		loadDriver(dbdriver);
 		Connection con = getConnection();
 
-        String result = "Not Succesfully Updated";
+		String result = "Not Succesfully Updated";
 
-        String sql = "UPDATE artwork SET title = ?, description = ?, artist = ? WHERE artworkID = ?;";
+		String sql = "UPDATE artwork SET title = ?, description = ?, artist = ? WHERE artworkID = ?;";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, newArtwork.getTitle());
 			ps.setString(2, newArtwork.getDescription());
-            ps.setString(3, newArtwork.getArtist());
-            ps.setInt(4, newArtwork.getId());
-            ps.executeUpdate();
-            result = "Successfully Updated";
+			ps.setString(3, newArtwork.getArtist());
+			ps.setInt(4, newArtwork.getId());
+			ps.executeUpdate();
+			result = "Successfully Updated";
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
 
 		return result;
-    }
+	}
 
-    public List<Artwork> query(String keyword) {
-        loadDriver(dbdriver);
-        Connection con = getConnection();
-        String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage NATURAL JOIN auctiondetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
+	public List<Artwork> query(String keyword) {
+		loadDriver(dbdriver);
+		Connection con = getConnection();
+		String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage NATURAL JOIN auctiondetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
-        List<Artwork> searchList =  new ArrayList<>();
+		List<Artwork> searchList = new ArrayList<>();
 
-        ResultSet resultSet = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, "%" + keyword + "%");
-            ps.setString(2, "%" + keyword + "%");
-            ps.setString(3, "%" + keyword + "%");
+		ResultSet resultSet = null;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, "%" + keyword + "%");
+			ps.setString(2, "%" + keyword + "%");
+			ps.setString(3, "%" + keyword + "%");
 
-            resultSet = ps.executeQuery();
+			resultSet = ps.executeQuery();
 
+			while (resultSet.next()) {
 
-            while (resultSet.next())
-            {
-
-                // Retrieve data from the result set
-                int id = resultSet.getInt("artworkID");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String artist = resultSet.getString("artist");
+				// Retrieve data from the result set
+				int id = resultSet.getInt("artworkID");
+				String title = resultSet.getString("title");
+				String description = resultSet.getString("description");
+				String artist = resultSet.getString("artist");
 
 				Timestamp startTimestamp = resultSet.getTimestamp("startTimestamp");
 				Timestamp endTimestamp = resultSet.getTimestamp("endTimestamp");
@@ -71,151 +67,155 @@ public class ArtworkDAO extends DAO
 				Float reserve = resultSet.getFloat("reserve");
 				String result = resultSet.getString("result");
 
-                Auction auctionDetails = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve, result);
+				Auction auctionDetails = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve,
+						result);
 
-                Artwork resultArtwork = new Artwork(id, title, description, artist, auctionDetails);
-                var images = new ArrayList<Image>();
-                images.add(new Image(resultSet.getInt("imageID")));
-                resultArtwork.setImages(images);
-                searchList.add(resultArtwork);
+				Artwork resultArtwork = new Artwork(id, title, description, artist, auctionDetails);
+				var images = new ArrayList<Image>();
+				images.add(new Image(resultSet.getInt("imageID")));
+				resultArtwork.setImages(images);
+				searchList.add(resultArtwork);
 
-            }
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		return searchList;
 
-        return searchList;
+	}
 
+	public Artwork getArtworkById(int artworkId) {
+		var con = getConnection();
+		Artwork returnArtwork = new Artwork();
+		try {
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT artworkID, title, description, artist, imageID FROM artwork NATURAL JOIN artimage NATURAL JOIN image WHERE artworkID = ?;");
+			ps.setInt(1, artworkId);
 
-    }
+			var resultSet = ps.executeQuery();
+			var images = new ArrayList<Image>();
 
-    public Artwork getArtworkById(int artworkId)
-    {
-        var con = getConnection();
-        Artwork returnArtwork = new Artwork();
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT artworkID, title, description, artist, imageID FROM artwork NATURAL JOIN artimage NATURAL JOIN image WHERE artworkID = ?;");
-            ps.setInt(1, artworkId);
+			if (resultSet.next()) {
+				// Retrieve data from the result set
+				int id = resultSet.getInt("artworkID");
+				String title = resultSet.getString("title");
+				String description = resultSet.getString("description");
+				String artist = resultSet.getString("artist");
+				var img = new Image(resultSet.getInt("imageID"));
+				returnArtwork = new Artwork(id, title, description, artist);
+				returnArtwork.setImages(images);
+				images.add(img);
+			}
+			while (resultSet.next()) {
+				var img = new Image(resultSet.getInt("imageID"));
+				images.add(img);
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 
-            var resultSet = ps.executeQuery();
-            var images = new ArrayList<Image>();
+		return returnArtwork;
+	}
 
-            if (resultSet.next())
-            {
-                // Retrieve data from the result set
-                int id = resultSet.getInt("artworkID");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String artist = resultSet.getString("artist");
-                var img = new Image(resultSet.getInt("imageID"));
-                returnArtwork = new Artwork(id, title, description, artist);
-                returnArtwork.setImages(images);
-                images.add(img);
-            }
-            while (resultSet.next()) {
-                var img = new Image(resultSet.getInt("imageID"));
-                images.add(img);
-            }
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
+	public List<String> getTagsByArtworkID(int artworkID) {
+		var con = getConnection();
+		List<String> returnList = new ArrayList<>();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT name FROM tag WHERE artworkID = ? ");
+			ps.setInt(1, artworkID);
 
+			var resultSet = ps.executeQuery();
 
-        return returnArtwork;
-    }
+			while (resultSet.next()) {
+				// Retrieve data from the result set
+				returnList.add(resultSet.getString("name"));
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    public List<String> getTagsByArtworkID(int artworkID)
-    {
-        var con = getConnection();
-        List<String> returnList = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT name FROM tag WHERE artworkID = ? ");
-            ps.setInt(1, artworkID);
+		return returnList;
 
-            var resultSet = ps.executeQuery();
+	}
 
-            while (resultSet.next())
-            {
-                // Retrieve data from the result set
-                returnList.add(resultSet.getString("name"));
-            }
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
+	public List<Artwork> getArtworkByuserID(int userID) {
 
+		var con = getConnection();
+		List<Artwork> returnArtworkList = new ArrayList<>();
+		try {
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage WHERE userID = ?;");
+			ps.setInt(1, userID);
 
-        return returnList;
+			var resultSet = ps.executeQuery();
 
-    }
-    public List<Artwork> getArtworkByuserID(int userID) {
+			while (resultSet.next()) {
 
-        var con = getConnection();
-        List<Artwork> returnArtworkList = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage WHERE userID = ?;");
-            ps.setInt(1, userID);
+				// Retrieve data from the result set
+				int id = resultSet.getInt("artworkID");
+				String title = resultSet.getString("title");
+				String description = resultSet.getString("description");
+				String artist = resultSet.getString("artist");
+				var artwork = new Artwork(id, title, description, artist);
+				var images = new ArrayList<Image>();
+				images.add(new Image(resultSet.getInt("imageID")));
+				artwork.setImages(images);
+				returnArtworkList.add(artwork);
 
-            var resultSet = ps.executeQuery();
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 
-            while (resultSet.next()) {
+		return returnArtworkList;
+	}
 
-                // Retrieve data from the result set
-                int id = resultSet.getInt("artworkID");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String artist = resultSet.getString("artist");
-                var artwork = new Artwork(id, title, description, artist);
-                var images = new ArrayList<Image>();
-                images.add(new Image(resultSet.getInt("imageID")));
-                artwork.setImages(images);
-                returnArtworkList.add(artwork);
+	public List<Artwork> getFavoritedArtworkByuserID(int userID) {
 
-            }
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
+		var con = getConnection();
+		List<Artwork> returnArtworkList = new ArrayList<>();
+		String sql = "SELECT favorite.userID, artwork.artworkID, artwork.title, artwork.description, artwork.artist, auctiondetails.amount, auctiondetails.startingPrice, auctiondetails.reserve, auctiondetails.result, auctiondetails.startTimestamp, auctiondetails.endTimestamp, artimage.imageID FROM artwork JOIN favorite ON favorite.artworkID = artwork.artworkID JOIN auctiondetails ON auctiondetails.artworkID = artwork.artworkID JOIN artimage ON artimage.artworkID = artwork.artworkID WHERE favorite.userID = ?;";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
 
-        return returnArtworkList;
-    }
+			var resultSet = ps.executeQuery();
 
-    public List<Artwork> getFavoritedArtworkByuserID(int userID) {
+			while (resultSet.next()) {
 
-        var con = getConnection();
-        List<Artwork> returnArtworkList = new ArrayList<>();
-        try {
-            PreparedStatement ps = con
-                    .prepareStatement("SELECT * FROM artwork NATURAL JOIN favorite NATURAL JOIN artimage WHERE userID = ?;");
-            ps.setInt(1, userID);
+				int id = resultSet.getInt("artworkID");
+				String title = resultSet.getString("title");
+				String description = resultSet.getString("description");
+				String artist = resultSet.getString("artist");
 
-            var resultSet = ps.executeQuery();
+				Timestamp startTimestamp = resultSet.getTimestamp("startTimestamp");
+				Timestamp endTimestamp = resultSet.getTimestamp("endTimestamp");
+				Float amount = resultSet.getFloat("amount");
+				Float startingPrice = resultSet.getFloat("startingPrice");
+				Float reserve = resultSet.getFloat("reserve");
+				String result = resultSet.getString("result");
 
-            while (resultSet.next()) {
+				Auction auctionDetails = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve, result);
 
-                // Retrieve data from the result set
-                int id = resultSet.getInt("artworkID");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String artist = resultSet.getString("artist");
-                var artwork = new Artwork(id, title, description, artist);
-                var images = new ArrayList<Image>();
-                images.add(new Image(resultSet.getInt("imageID")));
-                artwork.setImages(images);
+				Artwork resultArtwork = new Artwork(id, title, description, artist, auctionDetails);
+				var images = new ArrayList<Image>();
+				images.add(new Image(resultSet.getInt("imageID")));
+				resultArtwork.setImages(images);
+				returnArtworkList.add(resultArtwork);
 
-                returnArtworkList.add(artwork);
+			}
+		} catch (SQLException e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 
-            }
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
+		return returnArtworkList;
 
-        return returnArtworkList;
-
-    }
+	}
 
 }

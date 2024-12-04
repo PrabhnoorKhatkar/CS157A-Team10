@@ -149,16 +149,15 @@
 						<!-- Iterate over the artwork list and display each artwork -->
 						<c:choose>
 							<c:when test="${not empty requestScope.favArtworkList}">
-								<c:forEach var="favArtwork"
-									items="${requestScope.favArtworkList}">
+								<jsp:useBean id="artworkList" scope="request" type="java.util.List<artauction.Artwork>"/>
+								<c:forEach var="favArtwork" items="${favArtworkList}">
 									<ui:artitem artwork="${favArtwork}"/>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<div>(no saved artworks)</div>
+								<div>(no artwork)</div>
 							</c:otherwise>
 						</c:choose>
-
 
 
 					</div>
