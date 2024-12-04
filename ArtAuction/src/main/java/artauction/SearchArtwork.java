@@ -53,7 +53,10 @@ public class SearchArtwork extends HttpServlet {
     	
     	request.setAttribute("image", image);
 
-        String searchText = request.getParameter("searchText");
+		String searchText = request.getParameter("searchText");
+		if (searchText == null || searchText.trim().isEmpty()) {
+			searchText = ""; 
+		}
         
         ArtworkDAO searchDAO = new ArtworkDAO();
         
