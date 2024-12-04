@@ -2,6 +2,8 @@ package artauction.order;
 
 import artauction.Artwork;
 import artauction.ArtworkDAO;
+import artauction.Auction;
+import artauction.AuctionDAO;
 import artauction.user.User;
 import artauction.user.UserDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -65,8 +67,14 @@ public class PaymentProcess extends HttpServlet {
 		String state = request.getParameter("state");
 		
 		OrderDAO orderDAO = new OrderDAO();
-		orderDAO.processOrder(userID, artworkID, totalPaid);
+		String result = orderDAO.processOrder(userID, artworkID, totalPaid);
 
+		if(result.equals("Order Sucessfully Assigned"))
+		{
+			AuctionDAO auctionDAO = new AuctionDAO();
+			auctionDAO.sellArtwork(artworkID);
+		}
+		
 		ArtworkDAO searchDAO = new ArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
 		request.setAttribute("artwork", artwork);

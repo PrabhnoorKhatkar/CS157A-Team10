@@ -15,7 +15,7 @@ public class OrderDAO extends DAO {
             result = insertOrderID(orderID, userID);
             if (result.equals("Order Sucessfully Assigned")) {
 
-               // TODO round totalPaid to 2 decimal place
+            	totalPaid = Math.round(totalPaid * 100) / 100.0f;
                 result = insertOrderDetails(orderID, totalPaid);
                 if (result.equals("Order Sucessfully Assigned")) {
                     return result;
@@ -80,7 +80,7 @@ public class OrderDAO extends DAO {
         loadDriver(dbdriver);
         Connection con = getConnection();
 
-        String sql = "INSERT INTO orderdetails (orderID, timestamp, status, totalPaid) VALUES (?, ?, ?. ?)";
+        String sql = "INSERT INTO orderdetails (orderID, timestamp, status, totalPaid) VALUES (?, ?, ?, ?)";
         String result = "Order Sucessfully Assigned";
 
         try {
@@ -91,7 +91,7 @@ public class OrderDAO extends DAO {
             ps.setTimestamp(2, currentTimestamp);
             
             ps.setString(3, "PROCESSING");
-            ps.setDouble(4, totalPaid);
+            ps.setFloat(4, totalPaid);
 
             ps.executeUpdate();
 
