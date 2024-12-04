@@ -33,6 +33,8 @@
 		<div id="countdown-${artwork.id}"></div>
 	</a>
 
+	
+	<script src="myapp/javascript/countdown.js"></script>
 	<script>
 		var timestamp = "${artwork.auctionDetails.endTimestamp}";
 		var artworkId = "${artwork.id}";
@@ -40,7 +42,6 @@
 			countdown(timestamp, artworkId);
 		}
 	</script>
-	<script src="myapp/javascript/countdown.js"></script>
 
 
 </div>
