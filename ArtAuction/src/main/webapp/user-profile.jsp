@@ -1,4 +1,5 @@
 <jsp:useBean id="viewedUser" scope="request" type="artauction.user.User"/>
+<jsp:useBean id="myProfile" scope="request" type="java.lang.Boolean"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
@@ -70,7 +71,7 @@
 					</div>
 
 					<form action="UserProfile" method="post">
-						<input type="hidden" name="followedUserId" value="${otherID}">
+						<input type="hidden" name="followedUserId" value="${viewedUser.id}">
 						<input type="hidden" name="displayName" value="${viewedUser.displayName}">
 
 						<c:choose>
@@ -96,7 +97,7 @@
 						<h2>My Artwork</h2>
 					</c:when>
 					<c:otherwise>
-						<h2>${user.displayName}'s Artwork</h2>
+						<h2>${viewedUser.displayName}'s Artwork</h2>
 					</c:otherwise>
 				</c:choose>
 				<div class="art-grid">
