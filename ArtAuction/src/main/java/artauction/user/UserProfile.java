@@ -82,6 +82,15 @@ public class UserProfile extends HttpServlet {
 
             getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
             getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
+            
+            try {
+				otherID = userDAO.getProfilePictureID(viewedID);
+				otherImage = imageDAO.findByID(otherID);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
 
         request.setAttribute("myProfile", myProfile);
         boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
