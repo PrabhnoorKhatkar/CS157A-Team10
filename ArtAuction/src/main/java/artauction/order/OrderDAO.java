@@ -10,11 +10,12 @@ public class OrderDAO extends DAO {
     public String processOrder(int userID, int artworkID, float totalPaid) {
 
         String result = "Order Not Sucessfully Placed";
-        int orderID = createOrderID(userID);
+        int orderID = createOrderID(artworkID);
         if (orderID > -1) {
-            result = insertOrderID(orderID, artworkID);
+            result = insertOrderID(orderID, userID);
             if (result.equals("Order Sucessfully Assigned")) {
 
+               // TODO round totalPaid to 2 decimal place
                 result = insertOrderDetails(orderID, totalPaid);
                 if (result.equals("Order Sucessfully Assigned")) {
                     return result;
@@ -27,16 +28,16 @@ public class OrderDAO extends DAO {
 
     }
 
-    public int createOrderID(int userID) {
+    public int createOrderID(int artworkID) {
         loadDriver(dbdriver);
         Connection con = getConnection();
 
-        String sql = "INSERT INTO `order` (userID, orderID) VALUES (?, ?)";
+        String sql = "INSERT INTO orderitem (artworkID) VALUES (?)";
         int orderID = -1;
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, userID);
+            ps.setInt(1, artworkID);
 
             ps.executeUpdate();
 
@@ -54,17 +55,17 @@ public class OrderDAO extends DAO {
     }
 
 
-    public String insertOrderID(int orderID, int artworkID) {
+    public String insertOrderID(int orderID, int userID) {
         loadDriver(dbdriver);
         Connection con = getConnection();
 
-        String sql = "INSERT INTO orderitem (orderID, artworkID) VALUES (?,?)";
+        String sql = "INSERT INTO artauction.order (userID, orderID) VALUES (?,?)";
         String result = "Order Sucessfully Assigned";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, orderID);
-            ps.setInt(2, artworkID);
+            ps.setInt(1, userID);
+            ps.setInt(2, orderID);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -79,7 +80,7 @@ public class OrderDAO extends DAO {
         loadDriver(dbdriver);
         Connection con = getConnection();
 
-        String sql = "INSERT INTO orderdetails (orderID, timestamp, trackingNumber, status, totalPaid) VALUES (?, ?, ?. ?, ?)";
+        String sql = "INSERT INTO orderdetails (orderID, timestamp, status, totalPaid) VALUES (?, ?, ?. ?)";
         String result = "Order Sucessfully Assigned";
 
         try {
@@ -88,8 +89,9 @@ public class OrderDAO extends DAO {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, orderID);
             ps.setTimestamp(2, currentTimestamp);
-            ps.setString(4, "PROCESSING");
-            ps.setDouble(5, totalPaid);
+            
+            ps.setString(3, "PROCESSING");
+            ps.setDouble(4, totalPaid);
 
             ps.executeUpdate();
 
