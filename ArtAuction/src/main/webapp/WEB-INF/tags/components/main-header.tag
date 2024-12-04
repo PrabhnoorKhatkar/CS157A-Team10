@@ -26,7 +26,8 @@
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
 				<a href="UserProfile" class="profile-btn">
-					<img src="<c:url value="/myapp/images/${user.profilePictureID}"/>" alt="profile picture" width="64" height="64">
+					<%-- <img src="<c:url value="/myapp/images/${user.profilePictureID}"/>" alt="profile picture" width="64" height="64"> --%>
+					<img src="<c:url value="myapp/images/${image.filename}"/>" alt="Profile Picture" class="profile-pic" width="64" height="64">
 				</a>
 			</c:when>
 			<c:otherwise>
