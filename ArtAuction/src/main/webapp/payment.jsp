@@ -1,5 +1,7 @@
+<jsp:useBean id="artwork" scope="request" type="artauction.Artwork"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +24,7 @@
 
 			<!-- TODO GET IMAGE PATH WORKING -->
 			<c:forEach var="artImage" items="${artwork.images}">
-				<img src="<c:url value="/Uploads/${artImage.imageId}"/>">
+				<img src="<c:url value="/Uploads/${artImage.imageId}"/>" width="96" height="96"/>
 			</c:forEach>
 	
 
