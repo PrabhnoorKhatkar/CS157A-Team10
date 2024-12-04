@@ -4,8 +4,6 @@
 <%@taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@taglib prefix="ui" tagdir="/WEB-INF/tags/components"%>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts"%>
-<!DOCTYPE html>
-
 <layout:base>
 	<jsp:attribute name="head">
 		<link rel="stylesheet" href="<c:url value="/myapp/css/homepage-style.css"/>" type="text/css"/>

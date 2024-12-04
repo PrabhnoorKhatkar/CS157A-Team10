@@ -102,7 +102,7 @@
 		
 		<div class="billing">
 			<input type="checkbox" id="billingAddress" name="billingAddress" value="billingAddress">
-			<label for="address">Billing address is the same as shipping address</label>
+			<label for="billingAddress">Billing address is the same as shipping address</label>
 		</div>
 
 		<!-- Delivery Information -->
