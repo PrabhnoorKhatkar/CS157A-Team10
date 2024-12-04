@@ -15,7 +15,7 @@
 			<label for="title">Title:</label> <input type="text" id="title"
 													 name="title" placeholder="Artwork title" required>
 
-			<!-- TITLE -->
+			<!-- ARTIST -->
 			<label for="artist">Artist:</label> <input type="text" id="artist"
 													   name="artist" placeholder="Artist name" required>
 
@@ -41,7 +41,7 @@
 			<!-- RESERVE PRICE -->
 			<label for="reservePrice">Reserve Price ($):</label> <input id="reservePrice"
 																		type="number" name="reservePrice"
-																		placeholder="e.g., 500" min="0">
+																		placeholder="e.g., 500" min="0" required>
 
 			<!-- AUCTION DURATION IN HOURS -->
 			<label for="duration">Auction Duration (days):</label> <input id="duration"
