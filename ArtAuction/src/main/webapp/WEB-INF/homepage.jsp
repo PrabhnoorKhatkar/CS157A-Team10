@@ -14,7 +14,6 @@
 	<jsp:body>
 		<!--<p>homepage</p> -->
 		<div class="flex flex-column align-center">
-			<h1>Featured artworks:</h1>
 			<div class="slideshow-container">
 				<div class="slideshow-slide">
 					<jsp:useBean id="featuredArtworks" scope="request" type="artauction.Artwork[]"/>
@@ -24,6 +23,7 @@
 					<a class="prev" onclick="plusSlides(-1)">❮</a>
 					<a class="next" onclick="plusSlides(1)">❯</a>
 				</div>
+				<br>
 				<div class="slideshow-controls" style = "text-align:center">
 					<span class="dot" onclick="currentSlide(1)"></span>
 					<span class="dot" onclick="currentSlide(2)"></span>
@@ -31,7 +31,6 @@
 				</div>
 			</div>
 		</div>
-		<br>
 		<script src="<c:url value="myapp/javascript/slideshow.js"/>"></script>
 
 		<header>

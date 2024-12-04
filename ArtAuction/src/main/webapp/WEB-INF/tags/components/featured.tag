@@ -14,6 +14,7 @@
 		</a>
 	</div>
 	<div class = "div-right">
+		<h5>Featured Artwork</h5>
   		<h3 class ="f-h3">${artwork.title}</h3>
 		<p class ="f-p">
 			${artwork.description}
