@@ -119,6 +119,7 @@
 						<h2>${viewedUser.displayName}'s Artwork</h2>
 					</c:otherwise>
 				</c:choose>
+<<<<<<< HEAD
 				<div class="art-grid">
 					<!-- Iterate over the artwork list and display each artwork -->
 					<c:choose>
@@ -131,6 +132,62 @@
 							<div>(no artworks)</div>
 						</c:otherwise>
 					</c:choose>
+=======
+			</form>
+
+		</c:if>
+	</div>
+
+	<div class="user-artwork">
+		<c:choose>
+			<c:when test="${myProfile}">
+				<h2>My Artwork</h2>
+			</c:when>
+			<c:otherwise>
+				<h2>${user.displayName}'s Artwork</h2>
+			</c:otherwise>
+		</c:choose>
+		<div class="art-grid">
+			<!-- Iterate over the artwork list and display each artwork -->
+			<c:choose>
+				<c:when test="${not empty requestScope.artworkList}">
+					<jsp:useBean id="artworkList" scope="request" type="java.util.List<artauction.Artwork>"/>
+					<c:forEach var="artwork" items="${requestScope.artworkList}">
+						<ui:artitem artwork="${artwork}"/>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div>(no artwork)</div>
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
+	</div>
+
+	<jsp:useBean id="myProfile" scope="request" type="java.lang.Boolean"/>
+	<c:if test="${myProfile}">
+		<div class="saved-artwork">
+			<section class="search-results" id="gallery">
+				<div class="container">
+					<h2>Favorites</h2>
+					<div class="art-grid">
+
+						<!-- Iterate over the artwork list and display each artwork -->
+						<c:choose>
+							<c:when test="${not empty requestScope.favArtworkList}">
+								<jsp:useBean id="favArtworkList" scope="request" type="java.util.List<artauction.Artwork>"/>
+								<c:forEach var="favArtwork" items="${favArtworkList}">
+									<ui:artitem artwork="${favArtwork}"/>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div>(no artwork)</div>
+							</c:otherwise>
+						</c:choose>
+
+
+					</div>
+>>>>>>> eb0625b (Fixed profile artwork cards)
 				</div>
 			</div>
 

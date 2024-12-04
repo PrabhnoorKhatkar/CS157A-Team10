@@ -86,8 +86,6 @@ public class UserProfile extends HttpServlet {
         request.setAttribute("myProfile", myProfile);
         boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
 
-        System.out.println(favArtworkList);
-
         request.setAttribute("otherID", otherID);
         request.setAttribute("isFollowed", isFollowed);
         request.setAttribute("followerCount", followerCount);

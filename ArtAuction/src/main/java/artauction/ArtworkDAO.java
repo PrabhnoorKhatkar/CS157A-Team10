@@ -146,25 +146,34 @@ public class ArtworkDAO extends DAO {
 
 		var con = getConnection();
 		List<Artwork> returnArtworkList = new ArrayList<>();
+		String sql = "SELECT auction.userID, artwork.artworkID, artwork.title, artwork.description, artwork.artist, auctiondetails.amount, auctiondetails.startingPrice, auctiondetails.reserve, auctiondetails.result, auctiondetails.startTimestamp, auctiondetails.endTimestamp, artimage.imageID FROM artwork JOIN auction ON auction.artworkID = artwork.artworkID JOIN auctiondetails ON auctiondetails.artworkID = artwork.artworkID JOIN artimage ON artimage.artworkID = artwork.artworkID WHERE auction.userID = ?;";
 		try {
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage WHERE userID = ?;");
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userID);
 
 			var resultSet = ps.executeQuery();
 
 			while (resultSet.next()) {
 
-				// Retrieve data from the result set
 				int id = resultSet.getInt("artworkID");
 				String title = resultSet.getString("title");
 				String description = resultSet.getString("description");
 				String artist = resultSet.getString("artist");
-				var artwork = new Artwork(id, title, description, artist);
+
+				Timestamp startTimestamp = resultSet.getTimestamp("startTimestamp");
+				Timestamp endTimestamp = resultSet.getTimestamp("endTimestamp");
+				Float amount = resultSet.getFloat("amount");
+				Float startingPrice = resultSet.getFloat("startingPrice");
+				Float reserve = resultSet.getFloat("reserve");
+				String result = resultSet.getString("result");
+
+				Auction auctionDetails = new Auction(id, startTimestamp, endTimestamp, amount, startingPrice, reserve, result);
+
+				Artwork resultArtwork = new Artwork(id, title, description, artist, auctionDetails);
 				var images = new ArrayList<Image>();
 				images.add(new Image(resultSet.getInt("imageID")));
-				artwork.setImages(images);
-				returnArtworkList.add(artwork);
+				resultArtwork.setImages(images);
+				returnArtworkList.add(resultArtwork);
 
 			}
 		} catch (SQLException e) {
