@@ -314,8 +314,6 @@
 									<span class="tag">${tag},</span>
 								</c:forEach>
 							</div>
-<<<<<<< HEAD
-=======
 		
 							<script>
 								var timestamp = "${auction.endTimestamp}";
@@ -355,7 +353,6 @@
 									onsubmit="return confirm('Are you sure you want to remove this listing?');"
 							>Remove Listing
 							</button>
->>>>>>> 3e6dcf51493c6207ad06e2e36e09512b46ec9067
 						</div>
 					</c:if>
 
