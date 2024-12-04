@@ -64,7 +64,7 @@ CREATE TABLE `artimage` (
 
 LOCK TABLES `artimage` WRITE;
 /*!40000 ALTER TABLE `artimage` DISABLE KEYS */;
-INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10),(11,21);
+INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
 /*!40000 ALTER TABLE `artimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka'),(11,'test','please work','test123');
+INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +144,7 @@ CREATE TABLE `auctiondetails` (
 
 LOCK TABLES `auctiondetails` WRITE;
 /*!40000 ALTER TABLE `auctiondetails` DISABLE KEYS */;
-INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-23 18:00:00',1500.00,1000.00,1200.00,'UNSOLD'),(2,'2024-11-19 18:00:00','2024-12-23 18:00:00',2000.00,1500.00,1800.00,'REMOVED'),(3,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2000.00,2500.00,'RESERVE NOT MET'),(4,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1800.00,2000.00,'RESERVE NOT MET'),(5,'2024-11-19 18:00:00','2024-12-23 18:00:00',3000.00,2500.00,2800.00,'ACTIVE'),(6,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1200.00,1500.00,'RESERVE NOT MET'),(7,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-12-24 18:00:00',2800.00,2000.00,2500.00,'ACTIVE'),(9,'2024-11-19 18:00:00','2024-12-28 18:20:00',NULL,1500.00,1800.00,'SOLD'),(10,'2024-11-17 18:00:00','2024-12-28 18:00:00',NULL,1700.00,2000.00,'UNSOLD'),(11,'2024-12-04 11:03:54','2024-12-04 11:06:54',101.00,1.00,2.00,'UNSOLD');
+INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-23 18:00:00',1500.00,1000.00,1200.00,'ACTIVE'),(2,'2024-11-19 18:00:00','2024-12-03 18:00:00',2000.00,1500.00,1800.00,'SOLD'),(3,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2000.00,2500.00,'ACTIVE'),(4,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1800.00,2000.00,'ACTIVE'),(5,'2024-11-19 18:00:00','2024-12-03 18:00:00',2600.00,2500.00,2800.00,'RESERVE NOT MET'),(6,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1200.00,1500.00,'ACTIVE'),(7,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-12-03 18:00:00',2800.00,2000.00,2500.00,'UNSOLD'),(9,'2024-11-19 18:00:00','2024-12-28 18:20:00',NULL,1500.00,1800.00,'ACTIVE'),(10,'2024-11-17 18:00:00','2024-12-28 18:00:00',NULL,1700.00,2000.00,'ACTIVE');
 /*!40000 ALTER TABLE `auctiondetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `bid` (
 
 LOCK TABLES `bid` WRITE;
 /*!40000 ALTER TABLE `bid` DISABLE KEYS */;
-INSERT INTO `bid` VALUES (1,1,'2024-11-19 20:00:00',1100.00),(1,11,'2024-12-04 11:04:09',100.00),(1,11,'2024-12-04 11:04:28',101.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(7,5,'2024-11-19 20:00:00',2600.00),(8,5,'2024-11-19 21:00:00',2800.00),(9,5,'2024-11-19 22:00:00',3000.00),(10,8,'2024-11-19 20:00:00',2800.00);
+INSERT INTO `bid` VALUES (1,1,'2024-11-19 20:00:00',1100.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(6,8,'2024-11-19 20:00:00',2800.00),(7,5,'2024-11-19 20:00:00',2600.00),(8,5,'2024-11-19 21:00:00',2800.00),(9,5,'2024-11-19 22:00:00',3000.00);
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +283,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+INSERT INTO `order` VALUES (6,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +310,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` VALUES (1,'2024-11-01 22:00:00','TRK123456','DELIVERED',1500.00),(2,'2024-11-02 22:00:00','TRK123457','SHIPPED',2000.00),(3,'2024-11-03 23:00:00','TRK123458','PROCESSING',2500.00),(4,'2024-11-04 23:00:00','TRK123459','DELIVERED',1800.00),(5,'2024-11-05 23:00:00','TRK123460','SHIPPED',3000.00),(6,'2024-11-06 23:00:00','TRK123461','PROCESSING',1200.00),(7,'2024-11-07 23:00:00','TRK123462','DELIVERED',2200.00),(8,'2024-11-08 23:00:00','TRK123463','SHIPPED',2800.00),(9,'2024-11-09 23:00:00','TRK123464','PROCESSING',1500.00),(10,'2024-11-10 23:00:00','TRK123465','DELIVERED',1700.00);
+INSERT INTO `orderdetails` VALUES (1,'2024-12-03 19:10:00','TRK123456','PROCESSING',2000.00);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +336,7 @@ CREATE TABLE `orderitem` (
 
 LOCK TABLES `orderitem` WRITE;
 /*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
-INSERT INTO `orderitem` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+INSERT INTO `orderitem` VALUES (1,2);
 /*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,7 +388,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space'),(11,'dsds'),(11,'sdds');
+INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,4 +431,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-04  3:37:11
+-- Dump completed on 2024-12-04 15:10:51
