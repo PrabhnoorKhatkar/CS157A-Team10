@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "homepage", urlPatterns = {"/homepage.jsp"})
 public class Homepage extends HttpServlet {
@@ -81,6 +82,18 @@ public class Homepage extends HttpServlet {
 //                System.err.println(img.getFilename());
 //            }
 //        }
+
+        String searchText = req.getParameter("searchText");
+		if (searchText == null || searchText.trim().isEmpty()) {
+			searchText = ""; 
+		}
+        
+        ArtworkDAO searchDAO = new ArtworkDAO();
+        
+        List<Artwork> artworkList = searchDAO.query(searchText);
+
+        req.setAttribute("artworkList", artworkList);
+
         req.setAttribute("featuredArtworks", featuredArtworks);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }

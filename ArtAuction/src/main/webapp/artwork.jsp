@@ -314,6 +314,48 @@
 									<span class="tag">${tag},</span>
 								</c:forEach>
 							</div>
+<<<<<<< HEAD
+=======
+		
+							<script>
+								var timestamp = "${auction.endTimestamp}";
+								var artworkId = "${artwork.id}";
+								if (timestamp && !isNaN(Date.parse(timestamp))) {
+									countdown(timestamp, artworkId);
+								}
+							</script>
+
+							<hr width="100%" size="2">
+							<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
+								  class="link">${ownerDisplayName}</a></p>
+	
+
+									<!-- save favorite artwork functionality -->
+									<form action="SaveArtwork" method="post">
+										<input type="hidden" name="artworkID" value="${artwork.id}">
+									
+										<c:choose>
+											<c:when test="${checkSave}">
+												<button type="submit" name="action" value="unsave" class="un-save-btn">
+													<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class="heart">
+												</button>
+												<!-- <p>Saved to Favorites</p> -->
+											</c:when>
+											<c:when test="${!checkSave}">
+												<button type="submit" name="action" value="save" class="save-btn">
+													<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
+												</button>
+											</c:when>
+										</c:choose>
+									
+									</form>
+
+							<button type="submit" class="save-changes-btn">Save Changes</button>
+							<button type="submit" class="remove-btn" formaction="RemoveArtwork"
+									onsubmit="return confirm('Are you sure you want to remove this listing?');"
+							>Remove Listing
+							</button>
+>>>>>>> 3e6dcf51493c6207ad06e2e36e09512b46ec9067
 						</div>
 					</c:if>
 
