@@ -105,14 +105,17 @@ public class ImageUploader extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getPathInfo().substring(1);
-        File file = placeholder;
+        File file;
         try {
             int id = Integer.parseInt(idStr);
             file = retrieveById(id);
         } catch (NumberFormatException e) {
             file = retrieveByName(idStr);
         }
-        assert file != null;
+        if (file == null) {
+            System.err.printf("File %s was not found, using placeholder%n", idStr);
+            file = placeholder;
+        }
         response.setContentType(Files.probeContentType(file.toPath()));
         response.setContentLength((int) file.length());
         response.getOutputStream().write(Files.readAllBytes(file.toPath()));

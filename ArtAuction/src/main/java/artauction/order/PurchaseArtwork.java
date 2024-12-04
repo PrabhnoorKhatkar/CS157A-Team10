@@ -46,7 +46,7 @@ public class PurchaseArtwork extends HttpServlet {
         }
 
         int artworkID = Integer.parseInt(request.getParameter("artworkID"));
-        int userID = (int) request.getSession().getAttribute("userID");
+        Integer userID = (Integer) request.getSession().getAttribute("userID");
 
         ArtworkDAO searchDAO = new ArtworkDAO();
         Artwork artwork = searchDAO.getArtworkById(artworkID);

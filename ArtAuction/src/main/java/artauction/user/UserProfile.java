@@ -38,7 +38,8 @@ public class UserProfile extends HttpServlet {
         String requestedUserDisplayName = request.getParameter("user");
 
         // get logged in user id from the current session
-        int userID = (int) request.getSession().getAttribute("userID");
+        var session = request.getSession();
+        Integer userID = (Integer) session.getAttribute("userID");
 
         var artworkDAO = new ArtworkDAO();
         UserDAO userDAO = new UserDAO();
@@ -49,9 +50,8 @@ public class UserProfile extends HttpServlet {
         int followerCount = -1;
         int followingCount = -1;
         int imageID = -1;
-        int otherImageID = -1;
 
-        User user = null;
+        User viewedUser = null;
         Image image = null;
         Image otherImage = null;
         List<Artwork> artworkList = null;
@@ -71,48 +71,28 @@ public class UserProfile extends HttpServlet {
 
         // if no parameter for display name it's others profile
         // else it's the logged in user profile
-        if (requestedUserDisplayName == null || requestedUserDisplayName.isEmpty()) {
-            user = userDAO.getFullUserById(userID);
+        var myProfile = requestedUserDisplayName == null || requestedUserDisplayName.isEmpty();
+        var viewedID = myProfile ? userID : otherID;
+            viewedUser = userDAO.getFullUserById(viewedID);
 
-            artworkList = artworkDAO.getArtworkByuserID(userID);
-            favArtworkList = artworkDAO.getFavoritedArtworkByuserID(userID);
-            followerCount = followUserDAO.getFollowerCount(userID);
-            followingCount = followUserDAO.getFollowingCount(userID);
+            artworkList = artworkDAO.getArtworkByuserID(viewedID);
+            favArtworkList = artworkDAO.getFavoritedArtworkByuserID(viewedID);
+            followerCount = followUserDAO.getFollowerCount(viewedID);
+            followingCount = followUserDAO.getFollowingCount(viewedID);
 
-            getFollowingUsersList = followUserDAO.getFollowingUsersList(userID);
-            getFollowerUsersList = followUserDAO.getFollowerUsersList(userID);
+            getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
+            getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
 
-            request.setAttribute("myProfile", true);
-        } else {
-            user = userDAO.getFullUserById(otherID);
-            try {
-                otherImageID = userDAO.getProfilePictureID(otherID);
-                //System.out.println(otherImageID);
-                otherImage = imageDAO.findByID(otherImageID);
-                //System.out.println(otherImage.getFilename());
-            } catch (SQLException e) {
-                // Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            artworkList = artworkDAO.getArtworkByuserID(otherID);
-            favArtworkList = artworkDAO.getFavoritedArtworkByuserID(otherID);
-            followerCount = followUserDAO.getFollowerCount(otherID);
-            followingCount = followUserDAO.getFollowingCount(otherID);
-
-            getFollowingUsersList = followUserDAO.getFollowingUsersList(otherID);
-            getFollowerUsersList = followUserDAO.getFollowerUsersList(otherID);
-
-            request.setAttribute("myProfile", false);
-        }
+        request.setAttribute("myProfile", myProfile);
         boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
 
+        System.out.println(favArtworkList);
 
         request.setAttribute("otherID", otherID);
         request.setAttribute("isFollowed", isFollowed);
         request.setAttribute("followerCount", followerCount);
         request.setAttribute("followingCount", followingCount);
-        request.setAttribute("user", user);
+        request.setAttribute("viewedUser", viewedUser);
         request.setAttribute("artworkList", artworkList);
         request.setAttribute("favArtworkList", favArtworkList);
         request.setAttribute("image", image);
@@ -145,6 +125,7 @@ public class UserProfile extends HttpServlet {
             try {
                 userDAO.upsertProfilePicture(userID, img);
             } catch (SQLException e) {
+                e.printStackTrace();
                 throw new RuntimeException(e);
             }
         } else {
@@ -167,9 +148,9 @@ public class UserProfile extends HttpServlet {
             }
 
         }
-        request.getSession().setAttribute("user", userDAO.getFullUserById(userID));
-        String displayName = request.getParameter("displayName");
-        response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + displayName);
+        var updatedUser = userDAO.getFullUserById(userID);
+        request.getSession().setAttribute("user", updatedUser);
+        response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + updatedUser.getDisplayName());
     }
 
 }

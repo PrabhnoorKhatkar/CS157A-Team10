@@ -1,7 +1,8 @@
 <%@tag description="Header" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%@taglib prefix="ui" tagdir="/WEB-INF/tags/components" %>
 
-<header class="homepage-header">
+<header class="main-header">
 	<div class="header-left">
 		<h2>
 			<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
@@ -25,9 +26,9 @@
 				<form action="Logout" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
-				<a href="UserProfile" class="profile-btn"> 
-					<img src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64" height="64">
-			</a>
+				<a href="UserProfile" class="profile-btn">
+					<ui:avatar user="${user}"/>
+				</a>
 			</c:when>
 			<c:otherwise>
 				<a href="<c:url value="/login.jsp"/>" class="login-btn">Log In</a>

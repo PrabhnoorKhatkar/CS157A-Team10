@@ -1,51 +1,29 @@
-<jsp:useBean id="user" scope="request" type="artauction.user.User"/>
+<jsp:useBean id="viewedUser" scope="request" type="artauction.user.User"/>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%@taglib prefix="fn" uri="jakarta.tags.functions"%>
 <%@taglib prefix="ui" tagdir="/WEB-INF/tags/components"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="myapp/css/user-profile-style.css"
-	type="text/css" />
-<title>My Profile</title>
-</head>
-<body>
-
-	<header class="profile-header">
-		<div class="header-left">
-			<h2>
-				<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
-			</h2>
-		</div>
-
-		<div class="header-right">
-
-			<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
-
-			<form action="Logout" method="post">
-				<button type="submit" class="logout-btn">Log Out</button>
-			</form>
-
-			<a href="UserProfile" class="profile-btn"> <img
-				src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64"
-				height="64">
-			</a>
-		</div>
-	</header>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts"%>
+<layout:base>
+		<jsp:attribute name="head">
+			<link rel="stylesheet" href="myapp/css/user-profile-style.css" type="text/css" />
+			<title>My Profile</title>
+		</jsp:attribute>
+		<jsp:body>
 
 	<div class="profile-container">
 		<!-- Profile Card -->
 		<div class = "profile-card">
 		<c:if test="${myProfile}">
+			<!--<ui:avatar user="${viewedUser}"/> -->
 			<div class = "profile-img">
 				<img src="<c:url value="myapp/images/${image.filename}"/>" alt="Profile Picture" class="profile-pic">
 			</div>
 			<div class = "profile-details">
-				<h2 class="display-name">${user.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if></h2>
-				<h2 class="name">${user.name} </h2>
+				<h2 class="display-name">${viewedUser.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if></h2>
+				<h2 class="name">${viewedUser.name} </h2>
 				
 				<br>
 				<hr width="100%" size="2">
@@ -67,26 +45,27 @@
 				<div id="followingList" style="display: none;">
 				
 					<c:forEach items="${followingUsersList}" var="user">
-						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+						<a href="<c:url value="UserProfile?user=${followingUser.displayName}"/>"class = "display-follow">${followingUser.displayName}</a>
 					</c:forEach>
 					
 				</div>
 				<div id="followersList" style="display: none;">
 					<c:forEach items="${getFollowerUsersList}" var="user">
-						<a href="<c:url value="UserProfile?user=${user.displayName}"/>" class = "display-follow">${user.displayName}</a>
+						<a href="<c:url value="UserProfile?user=${follower.displayName}"/>" class = "display-follow">${follower.displayName}</a>
 					</c:forEach>
 				</div>
 			</div>
 		</c:if>
 
 		<c:if test="${!myProfile}">
+			<!--<ui:avatar user="${viewedUser}"/>-->
 			<div class = "profile-img">
 				<img src="<c:url value="myapp/images/${otherImage.filename}"/>" alt="Profile Picture" class="profile-pic">
 			</div>
 			
 			<div class = "profile-details">
-				<h2 class="display-name">${user.displayName}</h2>
-				<h2 class="name">${user.name}</h2>
+				<h2 class="display-name">${viewedUser.displayName}</h2>
+				<h2 class="name">${viewedUser.name}</h2>
 				
 				<br>
 				<hr width="100%" size="2">
@@ -99,19 +78,19 @@
 				<br>
 				<div id="followingList" style="display: none;">
 					<c:forEach items="${followingUsersList}" var="user">
-						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+						<a href="<c:url value="UserProfile?user=${followingUser.displayName}"/>"class = "display-follow">${followingUser.displayName}</a>
 					</c:forEach>
 				</div>
 				
 				<div id="followersList" style="display: none;">
 					<c:forEach items="${getFollowerUsersList}" var="user">
-						<a href="<c:url value="UserProfile?user=${user.displayName}"/>"class = "display-follow">${user.displayName}</a>
+						<a href="<c:url value="UserProfile?user=${follower.displayName}"/>"class = "display-follow">${follower.displayName}</a>
 					</c:forEach>
 				</div>
 				
 				<form action="UserProfile" method="post">
-					<input type="hidden" name="followedUserId" value="${otherID}">
-					<input type="hidden" name="displayName" value="${user.displayName}">
+					<input type="hidden" name="followedUserId" value="${viewedUser.id}">
+					<input type="hidden" name="displayName" value="${viewedUser.displayName}">
 	
 					<c:choose>
 						<c:when test="${isFollowed}">
@@ -131,59 +110,60 @@
 		</div>
 	</div>
 
-	<div class="user-artwork">
-		<c:choose>
-			<c:when test="${myProfile}">
-				<h2>My Artwork</h2>
-			</c:when>
-			<c:otherwise>
-				<h2>${user.displayName}'s Artwork</h2>
-			</c:otherwise>
-		</c:choose>
-		<div class="art-grid">
-			<!-- Iterate over the artwork list and display each artwork -->
-			<c:choose>
-				<c:when test="${not empty requestScope.artworkList}">
-					<c:forEach var="artwork" items="${requestScope.artworkList}">
-						<ui:artitem artwork="${artwork}"/>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<div>(no artworks)</div>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
-
-	<jsp:useBean id="myProfile" scope="request" type="java.lang.Boolean"/>
-	<c:if test="${myProfile}">
-		<div class="saved-artwork">
-			<section class="search-results" id="gallery">
-				<div class="container">
-					<h2>Favorites</h2>
-					<div class="art-grid">
-
-						<!-- Iterate over the artwork list and display each artwork -->
-						<c:choose>
-							<c:when test="${not empty requestScope.favArtworkList}">
-								<c:forEach var="favArtwork"
-									items="${requestScope.favArtworkList}">
-									<ui:artitem artwork="${favArtwork}"/>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<div>(no saved artworks)</div>
-							</c:otherwise>
-						</c:choose>
-
-
-
-					</div>
+			<div class="user-artwork">
+				<c:choose>
+					<c:when test="${myProfile}">
+						<h2>My Artwork</h2>
+					</c:when>
+					<c:otherwise>
+						<h2>${viewedUser.displayName}'s Artwork</h2>
+					</c:otherwise>
+				</c:choose>
+				<div class="art-grid">
+					<!-- Iterate over the artwork list and display each artwork -->
+					<c:choose>
+						<c:when test="${not empty requestScope.artworkList}">
+							<c:forEach var="artwork" items="${requestScope.artworkList}">
+								<ui:artitem artwork="${artwork}"/>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<div>(no artworks)</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
-			</section>
-		</div>
-	</c:if>
-	
-	<script src="myapp/javascript/user-profile.js"></script>
-</body>
-</html>
+			</div>
+
+			<jsp:useBean id="myProfile" scope="request" type="java.lang.Boolean"/>
+			<c:if test="${myProfile}">
+				<div class="saved-artwork">
+					<section class="search-results" id="gallery">
+						<div class="container">
+							<h2>Favorites</h2>
+							<div class="art-grid">
+
+								<!-- Iterate over the artwork list and display each artwork -->
+								<c:choose>
+									<c:when test="${not empty requestScope.favArtworkList}">
+										<jsp:useBean id="artworkList" scope="request" type="java.util.List<artauction.Artwork>"/>
+								<c:forEach var="favArtwork"
+												   items="${favArtworkList}">
+											<ui:artitem artwork="${favArtwork}"/>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div>(no artwork)</div>
+									</c:otherwise>
+								</c:choose>
+
+
+
+							</div>
+						</div>
+					</section>
+				</div>
+			</c:if>
+
+			<script src="myapp/javascript/user-profile.js"></script>
+		</jsp:body>
+</layout:base>
