@@ -13,6 +13,10 @@
     text-decoration: none;
 }
 
+.header-mid {
+	margin-top: 18px;
+}
+
 .header-right {
     display: flex;
     align-items: center;

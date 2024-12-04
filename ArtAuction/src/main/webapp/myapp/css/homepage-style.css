@@ -46,6 +46,10 @@ body {
 	text-decoration: none;
 }
 
+.logout-btn {
+	margin-top: 16px;
+}
+
 .upload-btn:hover,
 .logout-btn:hover {
 	/*background-color: #444;*/
