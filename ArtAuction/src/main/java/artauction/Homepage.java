@@ -17,12 +17,10 @@ import java.util.List;
 public class Homepage extends HttpServlet {
     private Artwork[] getFeaturedArtworks(HttpServletRequest request, int userID) {
         var dao = new FeaturedArtworkDAO();
-        var imageDao = new ImageDAO();
+ 
         try {
             var featuredArtworks = dao.getFeaturedArtworksByFollowing(userID, 3);
-            for (var featuredArtwork : featuredArtworks) {
-                featuredArtwork.setImages(imageDao.findByArtwork(featuredArtwork));
-            }
+            
             return featuredArtworks;
         } catch (Exception e) {
             throw new RuntimeException(e);

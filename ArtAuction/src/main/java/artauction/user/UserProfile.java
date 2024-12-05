@@ -87,7 +87,7 @@ public class UserProfile extends HttpServlet {
 				otherID = userDAO.getProfilePictureID(viewedID);
 				otherImage = imageDAO.findByID(otherID);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			}
             

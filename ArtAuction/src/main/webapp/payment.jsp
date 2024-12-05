@@ -22,7 +22,6 @@
 
 		<div class="artwork-preview-container">
 
-			<!-- TODO GET IMAGE PATH WORKING -->
 			<c:forEach var="artImage" items="${artwork.images}">
 				<img src="<c:url value="/Uploads/${artImage.imageId}"/>" width="96" height="96"/>
 			</c:forEach>
