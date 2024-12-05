@@ -29,8 +29,9 @@
 		<p>
 			<c:set var="timestamp" value="${artwork.auctionDetails.endTimestamp}" />
 		</p>
-		
+
 		<div id="countdown-${artwork.id}"></div>
+		<div class="glow"></div>
 	</a>
 
 	

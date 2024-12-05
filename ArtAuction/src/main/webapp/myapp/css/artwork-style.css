@@ -133,7 +133,7 @@ section {
 	width: 90.5%;
 	padding: 10px;
 	margin-left: 1em;
-	background-color: none;
+	background: none;
 	border: 1px solid #444;
 	color: #444;
 	font-size: 15px;
@@ -160,7 +160,7 @@ hr {
 .save-btn,
 form button.un-save-btn:hover,
 form button.save-btn:hover {
-	height: 30;
+	height: 30px;
 	width: auto;
 	background-color: transparent;
 	border: none;
@@ -176,7 +176,7 @@ form button.save-btn:hover {
 .remove-btn {
 	width: 40%;
 	padding: 10px;
-	background-color: none;
+	background: none;
 	border: 1px solid #444;
 	color: #444;
 	font-size: 15px;
@@ -248,4 +248,10 @@ form button.save-btn:hover {
 
 .edit-button:hover {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tag:not(:last-child) {
+	&:after {
+		content: ","
+	}
 }

@@ -2,41 +2,18 @@
 		 pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 <%@taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts" %>
+<%@taglib prefix="ui" tagdir="/WEB-INF/tags/components" %>
 <!DOCTYPE html>
 
-<html>
-	<head>
-		<meta charset="UTF-8">
+<layout:base>
+	<jsp:attribute name="head">
 		<link rel="stylesheet" href="<c:url value="/myapp/css/artwork-style.css"/>">
 		<title>Artwork</title>
-	</head>
-	<body>
-
+	</jsp:attribute>
+	<jsp:body>
+		<ui:main-header/>
 		<script src="myapp/javascript/countdown.js"></script>
-
-		<header class="profile-header">
-			<div class="header-left">
-				<h2>
-					<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
-				</h2>
-			</div>
-
-			<div class="header-right">
-
-				<a href="art-upload-form.jsp" class="upload-btn">Artwork Upload</a>
-
-				<form action="Logout" method="post">
-					<button type="submit" class="logout-btn">Log Out</button>
-				</form>
-
-				<a href="<c:url value="/UserProfile"/>" class="profile-btn"> <img
-						src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64"
-						height="64">
-				</a>
-			</div>
-		</header>
-
-
 		<!-- Check if user is the owner and admin (no shill bidding)-->
 		<jsp:useBean id="artwork" scope="request" type="artauction.Artwork"/>
 		<jsp:useBean id="ownerDisplayName" scope="request" type="java.lang.String"/>
@@ -44,163 +21,163 @@
 		<jsp:useBean id="auction" scope="request" type="artauction.Auction"/>
 		<jsp:useBean id="highestBidder" scope="request" type="artauction.user.User"/>
 		<c:if test="${isOwner && sessionScope.admin}">
-				<form action="EditArtwork" method="post" class="artwork-body">
-					<div class="left">
-						<c:forEach var="image" items="${artwork.images}">
-							<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
-						</c:forEach>
+			<form action="EditArtwork" method="post" class="artwork-body">
+				<div class="left">
+					<c:forEach var="image" items="${artwork.images}">
+						<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
+					</c:forEach>
+					<br>
+					<hr width="100%" size="2" class="left-line">
+					<h2 class="title1"> Item Overview</h2>
+
+					<div class="edit-description">
+						<label for="description">Description:</label>
+						<textarea id="description" name="description" required>${artwork.description}</textarea>
+					</div>
+
+					<hr width="100%" size="2">
+				</div>
+				<div class="right">
+					<div class="edit-artwork">
+
+						<input type="hidden" name="artworkID" value="${artwork.id}">
+						<h2 class="title0">Edit Artwork Details </h2>
+						<label for="artist"> <em>Artist: </em></label> <br>
+						<input type="text" id="artist" name="artist" value="${artwork.artist}" required>
 						<br>
-						<hr width="100%" size="2" class="left-line">
-						<h2 class="title1"> Item Overview</h2>
+						<label for="title"> <em> Title: </em></label> <br>
+						<input type="text" id="title" name="title" value="${artwork.title}" required>
+						<br>
+						<section class="edit-section">
+							<p class="bidding"><em> Starting Price: $${auction.startingPrice} </em></p>
+							<p class="bidding"><em> Current Bid: $${auction.amount} </em></p>
+							<p class="bidding"><em> Highest Bidder: ${highestBidder.displayName} </em></p>
+							<p class="bidding"><em> Reserve: $${auction.reserve} </em></p>
+						</section>
+						<p>Auction Ends: ${auction.endTimestamp}</p>
 
-						<div class="edit-description">
-							<label for="description">Description:</label>
-							<textarea id="description" name="description" required>${artwork.description}</textarea>
+						<!-- Countdown Timer -->
+						<div class="countdown-timer">
+							<p>
+								Auction Ends In: <span id="countdown-${artwork.id}"></span>
+							</p>
 						</div>
 
-						<hr width="100%" size="2">
+						<script>
+                            var timestamp = "${auction.endTimestamp}";
+                            var artworkId = "${artwork.id}";
+                            if (timestamp && !isNaN(Date.parse(timestamp))) {
+                                countdown(timestamp, artworkId);
+                            }
+						</script>
+
+						<hr>
+
+						<p>Owner: ${ownerDisplayName}</p>
+
+						<button type="submit" class="save-changes-btn">Save Changes</button>
+
+						<!-- Remove Listing -->
+						<button type="submit" class="remove-btn" formaction="RemoveArtwork"
+								onsubmit="return confirm('Are you sure you want to remove this listing?');">
+							Remove Listing
+						</button>
 					</div>
-					<div class="right">
-						<div class="edit-artwork">
 
-							<input type="hidden" name="artworkID" value="${artwork.id}">
-							<h2 class="title0">Edit Artwork Details </h2>
-							<label for="artist"> <em>Artist: </em></label> <br>
-							<input type="text" id="artist" name="artist" value="${artwork.artist}" required>
-							<br>
-							<label for="title"> <em> Title: </em></label> <br>
-							<input type="text" id="title" name="title" value="${artwork.title}" required>
-							<br>
-							<section class="edit-section">
-								<p class="bidding"><em> Starting Price: $${auction.startingPrice} </em></p>
-								<p class="bidding"><em> Current Bid: $${auction.amount} </em></p>
-								<p class="bidding"><em> Highest Bidder: ${highestBidder.displayName} </em></p>
-								<p class="bidding"><em> Reserve: $${auction.reserve} </em></p>
-							</section>
-							<p>Auction Ends: ${auction.endTimestamp}</p>
-
-							<!-- Countdown Timer -->
-							<div class="countdown-timer">
-								<p>
-									Auction Ends In: <span id="countdown-${artwork.id}"></span>
-								</p>
-							</div>
-		
-							<script>
-								var timestamp = "${auction.endTimestamp}";
-								var artworkId = "${artwork.id}";
-								if (timestamp && !isNaN(Date.parse(timestamp))) {
-									countdown(timestamp, artworkId);
-								}
-							</script>
-
-							<hr>
-
-							<p>Owner: ${ownerDisplayName}</p>
-
-							<button type="submit" class="save-changes-btn">Save Changes</button>
-							
-							<!-- Remove Listing -->
-							<button type="submit" class="remove-btn" formaction="RemoveArtwork"
-									onsubmit="return confirm('Are you sure you want to remove this listing?');">
-									Remove Listing
-							</button>
-						</div>
-
-						<!-- Display tags -->
+					<!-- Display tags -->
 						<%-- <jsp:useBean id="tags" scope="request" type="java.util.List<java.lang.String>"/> --%>
-						<c:if test="${! empty tags}">
-							<div class="tags-section">
-								<p><strong>Tags:</strong></p>
-								<div class="tags-container">
-									<c:forEach var="tag" items="${tags}">
-										<span class="tag">${tag},</span>
-									</c:forEach>
-								</div>
+					<c:if test="${! empty tags}">
+						<div class="tags-section">
+							<p><strong>Tags:</strong></p>
+							<div class="tags-container">
+								<c:forEach var="tag" items="${tags}">
+									<span class="tag">${tag}</span>
+								</c:forEach>
 							</div>
-						</c:if>
-					</div>
-				</form>
+						</div>
+					</c:if>
+				</div>
+			</form>
 		</c:if>
-		
+
 		<c:if test="${isOwner && !sessionScope.admin}">
 			<form action="EditArtwork" method="post" class="artwork-body">
-					<div class="left">
-						<c:forEach var="image" items="${artwork.images}">
-							<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
-						</c:forEach>
+				<div class="left">
+					<c:forEach var="image" items="${artwork.images}">
+						<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
+					</c:forEach>
+					<br>
+					<hr width="100%" size="2" class="left-line">
+					<h2 class="title1"> Item Overview</h2>
+
+					<div class="edit-description">
+						<label for="description">Description:</label>
+						<textarea id="description" name="description" required>${artwork.description}</textarea>
+					</div>
+
+					<hr width="100%" size="2">
+				</div>
+				<div class="right">
+					<div class="edit-artwork">
+
+						<input type="hidden" name="artworkID" value="${artwork.id}">
+						<h2 class="title0">Edit Artwork Details </h2>
+						<label for="artist"> <em>Artist: </em></label> <br>
+						<input type="text" id="artist" name="artist" value="${artwork.artist}" required>
 						<br>
-						<hr width="100%" size="2" class="left-line">
-						<h2 class="title1"> Item Overview</h2>
+						<label for="title"> <em> Title: </em></label> <br>
+						<input type="text" id="title" name="title" value="${artwork.title}" required>
+						<br>
+						<section class="edit-section">
+							<p class="bidding"><em> Starting Price: $${auction.startingPrice} </em></p>
+							<p class="bidding"><em> Current Bid: $${auction.amount} </em></p>
+							<p class="bidding"><em> Highest Bidder: ${highestBidder.displayName} </em></p>
+							<p class="bidding"><em> Reserve: $${auction.reserve} </em></p>
+						</section>
+						<p>Auction Ends: ${auction.endTimestamp}</p>
 
-						<div class="edit-description">
-							<label for="description">Description:</label>
-							<textarea id="description" name="description" required>${artwork.description}</textarea>
+						<!-- Countdown Timer -->
+						<div class="countdown-timer">
+							<p>
+								Auction Ends In: <span id="countdown-${artwork.id}"></span>
+							</p>
 						</div>
 
-						<hr width="100%" size="2">
+						<script>
+                            var timestamp = "${auction.endTimestamp}";
+                            var artworkId = "${artwork.id}";
+                            if (timestamp && !isNaN(Date.parse(timestamp))) {
+                                countdown(timestamp, artworkId);
+                            }
+						</script>
+
+						<hr>
+
+						<p>Owner: ${ownerDisplayName}</p>
+
+						<button type="submit" class="save-changes-btn">Save Changes</button>
+
+						<!-- Remove Listing -->
+						<button type="submit" class="remove-btn" formaction="RemoveArtwork"
+								onsubmit="return confirm('Are you sure you want to remove this listing?');">
+							Remove Listing
+						</button>
 					</div>
-					<div class="right">
-						<div class="edit-artwork">
 
-							<input type="hidden" name="artworkID" value="${artwork.id}">
-							<h2 class="title0">Edit Artwork Details </h2>
-							<label for="artist"> <em>Artist: </em></label> <br>
-							<input type="text" id="artist" name="artist" value="${artwork.artist}" required>
-							<br>
-							<label for="title"> <em> Title: </em></label> <br>
-							<input type="text" id="title" name="title" value="${artwork.title}" required>
-							<br>
-							<section class="edit-section">
-								<p class="bidding"><em> Starting Price: $${auction.startingPrice} </em></p>
-								<p class="bidding"><em> Current Bid: $${auction.amount} </em></p>
-								<p class="bidding"><em> Highest Bidder: ${highestBidder.displayName} </em></p>
-								<p class="bidding"><em> Reserve: $${auction.reserve} </em></p>
-							</section>
-							<p>Auction Ends: ${auction.endTimestamp}</p>
-
-							<!-- Countdown Timer -->
-							<div class="countdown-timer">
-								<p>
-									Auction Ends In: <span id="countdown-${artwork.id}"></span>
-								</p>
-							</div>
-		
-							<script>
-								var timestamp = "${auction.endTimestamp}";
-								var artworkId = "${artwork.id}";
-								if (timestamp && !isNaN(Date.parse(timestamp))) {
-									countdown(timestamp, artworkId);
-								}
-							</script>
-
-							<hr>
-
-							<p>Owner: ${ownerDisplayName}</p>
-
-							<button type="submit" class="save-changes-btn">Save Changes</button>
-							
-							<!-- Remove Listing -->
-							<button type="submit" class="remove-btn" formaction="RemoveArtwork"
-									onsubmit="return confirm('Are you sure you want to remove this listing?');">
-									Remove Listing
-							</button>
-						</div>
-
-						<!-- Display tags -->
+					<!-- Display tags -->
 						<%-- <jsp:useBean id="tags" scope="request" type="java.util.List<java.lang.String>"/> --%>
-						<c:if test="${! empty tags}">
-							<div class="tags-section">
-								<p><strong>Tags:</strong></p>
-								<div class="tags-container">
-									<c:forEach var="tag" items="${tags}">
-										<span class="tag">${tag},</span>
-									</c:forEach>
-								</div>
+					<c:if test="${! empty tags}">
+						<div class="tags-section">
+							<p><strong>Tags:</strong></p>
+							<div class="tags-container">
+								<c:forEach var="tag" items="${tags}">
+									<span class="tag">${tag}</span>
+								</c:forEach>
 							</div>
-						</c:if>
-					</div>
-				</form>
+						</div>
+					</c:if>
+				</div>
+			</form>
 		</c:if>
 
 		<!-- Check if user is admin and not owner (allowed bidding) -->
@@ -236,7 +213,7 @@
 
 								<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
 								<input type="number" id="bidAmount" name="bidAmount"
-									min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
+									   min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
 
 								<button type="submit" class="bid-btn">Place Bid</button>
 							</form>
@@ -255,14 +232,14 @@
 					</div>
 
 					<script>
-						var timestamp = "${auction.endTimestamp}";
-						var artworkId = "${artwork.id}";
-						if (timestamp && !isNaN(Date.parse(timestamp))) {
-							countdown(timestamp, artworkId);
-						}
+                        var timestamp = "${auction.endTimestamp}";
+                        var artworkId = "${artwork.id}";
+                        if (timestamp && !isNaN(Date.parse(timestamp))) {
+                            countdown(timestamp, artworkId);
+                        }
 					</script>
-				
-					
+
+
 					<hr width="100%" size="2">
 					<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
 						  class="link">${ownerDisplayName}</a></p>
@@ -270,26 +247,26 @@
 
 					<!-- save favorite artwork functionality -->
 					<div>
-					<form action="SaveArtwork" method="post">
-						<input type="hidden" name="artworkID" value="${artwork.id}">
+						<form action="SaveArtwork" method="post">
+							<input type="hidden" name="artworkID" value="${artwork.id}">
 
-						<c:choose>
-							<c:when test="${checkSave}">
-								<button type="submit" name="action" value="unsave"class="un-save-btn">
-									<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
-								</button>
-								<!-- <p>Saved to Favorites</p> -->
-							</c:when>
-							<c:when test="${!checkSave}">
-								<button type="submit" name="action" value="save" class="save-btn">
-									<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
-								</button>
-							</c:when>
-						</c:choose>
-						
-					</form>
-					<br>
-					<a href="<c:url value="EditArtwork?id=${artwork.id }"/>" class="edit-button">Edit Artwork</a>
+							<c:choose>
+								<c:when test="${checkSave}">
+									<button type="submit" name="action" value="unsave"class="un-save-btn">
+										<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
+									</button>
+									<!-- <p>Saved to Favorites</p> -->
+								</c:when>
+								<c:when test="${!checkSave}">
+									<button type="submit" name="action" value="save" class="save-btn">
+										<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
+									</button>
+								</c:when>
+							</c:choose>
+
+						</form>
+						<br>
+						<a href="<c:url value="EditArtwork?id=${artwork.id }"/>" class="edit-button">Edit Artwork</a>
 					</div>
 					<hr width="100%" size="2">
 					<c:if test="${winningUser}">
@@ -311,16 +288,16 @@
 							<p><strong>Tags:</strong></p>
 							<div class="tags-container">
 								<c:forEach var="tag" items="${tags}">
-									<span class="tag">${tag},</span>
+									<span class="tag">${tag}</span>
 								</c:forEach>
 							</div>
-		
+
 							<script>
-								var timestamp = "${auction.endTimestamp}";
-								var artworkId = "${artwork.id}";
-								if (timestamp && !isNaN(Date.parse(timestamp))) {
-									countdown(timestamp, artworkId);
-								}
+                                var timestamp = "${auction.endTimestamp}";
+                                var artworkId = "${artwork.id}";
+                                if (timestamp && !isNaN(Date.parse(timestamp))) {
+                                    countdown(timestamp, artworkId);
+                                }
 							</script>
 
 						</div>
@@ -364,7 +341,7 @@
 
 								<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
 								<input type="number" id="bidAmount" name="bidAmount"
-									min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
+									   min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
 
 								<button type="submit" class="bid-btn">Place Bid</button>
 							</form>
@@ -383,14 +360,14 @@
 					</div>
 
 					<script>
-						var timestamp = "${auction.endTimestamp}";
-						var artworkId = "${artwork.id}";
-						if (timestamp && !isNaN(Date.parse(timestamp))) {
-							countdown(timestamp, artworkId);
-						}
+                        var timestamp = "${auction.endTimestamp}";
+                        var artworkId = "${artwork.id}";
+                        if (timestamp && !isNaN(Date.parse(timestamp))) {
+                            countdown(timestamp, artworkId);
+                        }
 					</script>
-				
-					
+
+
 					<hr width="100%" size="2">
 					<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
 						  class="link">${ownerDisplayName}</a></p>
@@ -415,7 +392,7 @@
 						</c:choose>
 
 					</form>
-					
+
 					<c:if test="${winningUser}">
 						<p>You WON!!!</p>
 						<!-- purchase artwork functionality -->
@@ -435,7 +412,7 @@
 							<p><strong>Tags:</strong></p>
 							<div class="tags-container">
 								<c:forEach var="tag" items="${tags}">
-									<span class="tag">${tag},</span>
+									<span class="tag">${tag}</span>
 								</c:forEach>
 							</div>
 						</div>
@@ -445,6 +422,5 @@
 			</div>
 		</c:if>
 
-	</body>
-
-</html>
+	</jsp:body>
+</layout:base>
