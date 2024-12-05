@@ -102,7 +102,7 @@ public class EditArtwork extends HttpServlet {
         boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
         request.setAttribute("checkSave", checkSave);
         // Forward to the artwork details JSP page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/App/artwork.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/App/edit-artwork.jsp");
         dispatcher.forward(request, response);
     }
 
