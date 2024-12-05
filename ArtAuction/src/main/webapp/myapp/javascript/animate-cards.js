@@ -23,6 +23,7 @@ cards.forEach((card) => {
 	    )
 	  `;
 
+/*
     card.querySelector(".glow").style.backgroundImage = `
 	    radial-gradient(
 	      circle at
@@ -32,6 +33,7 @@ cards.forEach((card) => {
 	      #0000000f
 	    )
 	  `;
+*/
   }
 
   card.addEventListener("mouseenter", () => {

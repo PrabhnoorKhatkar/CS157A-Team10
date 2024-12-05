@@ -185,38 +185,6 @@ body {
 	flex-wrap: wrap;
 }
 
-.art-item {
-	background-color: transparent;
-	/*border-radius: 35px;*/
-	padding: 20px;
-	margin: 15px;
-	width: 250px;
-	text-align: center;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	border: 1px solid #444;
-}
-
-.art-item:hover {
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.art-item a {
-	text-decoration: none;
-	color: inherit;
-}
-
-.art-item img {
-	width: 100%;
-	height: auto;
-	/*border-radius: 35px*/;
-}
-
-.art-item p {
-	font-size: 13px;
-	color: rgb(58, 59, 59);
-	text-decoration: none;
-}
-
 .saved-artwork {
 	margin: 20px;
 	text-align: center;

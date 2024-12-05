@@ -38,6 +38,6 @@ public class SearchArtwork extends HttpServlet {
 
         request.setAttribute("artworkList", artworkList);
 
-        response.sendRedirect("/");
+        response.sendRedirect(request.getContextPath() + "/");
     }
 }

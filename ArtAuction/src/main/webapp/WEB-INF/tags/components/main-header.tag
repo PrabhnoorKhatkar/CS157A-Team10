@@ -5,16 +5,27 @@
 <header class="main-header">
 	<div class="header-left">
 		<h2>
-			<a href="<c:url value="/"/>" class="logo">ART AUCTION</a>
+			<a href="<c:url value="/"/>" class="logo flex flex-row items-center">
+				<sl-icon name="brush" style="font-size: 48px;"></sl-icon>
+				<span class="flex flex-col">
+					<span>
+						Brushstroke
+					</span>
+					<span>
+						Bargains
+					</span>
+				</span>
+			</a>
 		</h2>
 	</div>
 	<div class="header-mid">
-		<form action="<c:url value="/SearchArtwork"/>" method="post">
+		<form action="<c:url value="/SearchArtwork"/>" method="post" class="flex flex-row flex-nowrap items-center m-0">
 			<label>
-				<input type="text" class="search-box" placeholder="Search..."
-					   name="searchText">
+				<sl-input type="text" placeholder="Search artworks..." name="searchText">
+					<sl-icon name="search" slot="prefix"></sl-icon>
+				</sl-input>
 			</label>
-			<button type="submit" class="search-button">Search</button>
+			<sl-button type="submit" >Search</sl-button>
 		</form>
 	</div>
 	<div class="header-right">
@@ -31,8 +42,8 @@
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<c:url value="/login.jsp"/>" class="login-btn">Log In</a>
-				<a href="<c:url value="/register.jsp"/>" class="signup-btn">Sign Up</a>
+				<sl-button href="<c:url value="/login.jsp"/>" class="login-btn">Log In</sl-button>
+				<sl-button href="<c:url value="/register.jsp"/>" class="signup-btn">Sign Up</sl-button>
 			</c:otherwise>
 		</c:choose>
 

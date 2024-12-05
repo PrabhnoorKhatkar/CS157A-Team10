@@ -11,9 +11,8 @@
 	</jsp:attribute>
 	<jsp:body>
 		<ui:main-header/>
-		<br>
 		<!--<p>homepage</p> -->
-		<div class="flex flex-column align-center">
+		<div class="flex flex-col align-center mt-8">
 			<div class="slideshow-container">
 				<div class="slideshow-slide">
 					<jsp:useBean id="featuredArtworks" scope="request" type="artauction.Artwork[]"/>
@@ -36,8 +35,7 @@
 		<header>
 			<section class="search-results" id="search-gallery">
 				<div class="container">
-					<h2>Auctions</h2>
-					<hr width="100%" size="2">
+					<h2 class="font-bold text-xl">Auctions</h2>
 					<div class="art-grid">
 
 						<!-- Iterate over the artwork list and display each artwork -->

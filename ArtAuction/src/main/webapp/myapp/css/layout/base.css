@@ -1,4 +1,8 @@
 /* CSS HSL */
+
+:not(:defined) {
+    visibility: hidden; /* for shoelace */
+}
 :root {
     /* some colors from coloors.co */
     --whiteish: hsla(220, 8%, 92%, 1);
@@ -18,7 +22,44 @@
     --mindaro: hsla(74, 99%, 72%, 1);
 
     --ayu-mirage-bg: hsla(220, 21%, 16%, 1);
-    font-family: sans-serif;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 1.2;
+}
+
+.titillium-web-regular {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.titillium-web-semibold {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+jtitillium-web-bold {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.titillium-web-regular-italic {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.titillium-web-semibold-italic {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.titillium-web-bold-italic {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 700;
+    font-style: italic;
 }
 
 body {
@@ -43,7 +84,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;
+    padding: 0;
     background-color: #FFFFFF;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -81,72 +122,60 @@ footer {
 .bg-light-green { background-color: var(--light-green); }
 .bg-mindaro { background-color: var(--mindaro); }
 
-.flex {
-    display: flex;
-}
-.flex-row {
-    flex-direction: row;
-}
-.flex-column {
-    flex-direction: column;
-}
-.align-center {
-    align-items: center;
-}
-
 .logo {
-    font-size: 36px;
+    font-size: 24px;
     color: #333;
     text-decoration: none;
-}
-
-.header-mid {
-	margin-top: 18px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 20px;
 }
 
 .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-right: 15px;
 }
 
-.upload-btn,
-.logout-btn {
-    background-color: transparent;
-    color: #444;
-    padding: 10px 10px;
-    margin: 0 5px;
-    border: 1px solid #444;
-    /*border-radius: 5px;*/
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-}
+/*.upload-btn,*/
+/*.logout-btn {*/
+/*    background-color: transparent;*/
+/*    color: #444;*/
+/*    padding: 10px 10px;*/
+/*    margin: 0 5px;*/
+/*    border: 1px solid #444;*/
+/*    !*border-radius: 5px;*!*/
+/*    cursor: pointer;*/
+/*    font-size: 16px;*/
+/*    font-weight: 700;*/
+/*    text-decoration: none;*/
+/*}*/
 
-.upload-btn:hover,
-.logout-btn:hover {
-    /*background-color: #444;*/
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+/*.upload-btn:hover,*/
+/*.logout-btn:hover {*/
+/*    !*background-color: #444;*!*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
+/*}*/
 
-.login-btn,
-.signup-btn {
-    background-color: transparent;
-    color: #444;
-    padding: 10px 15px;
-    margin: 0 5px;
-    border: 1px solid #444;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-}
+/*.login-btn,*/
+/*.signup-btn {*/
+/*    background-color: transparent;*/
+/*    color: #444;*/
+/*    padding: 10px 15px;*/
+/*    margin: 0 5px;*/
+/*    border: 1px solid #444;*/
+/*    cursor: pointer;*/
+/*    font-size: 16px;*/
+/*    font-weight: 700;*/
+/*    text-decoration: none;*/
+/*}*/
 
-.login-btn:hover,
-.signup-btn:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+/*.login-btn:hover,*/
+/*.signup-btn:hover {*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);*/
+/*}*/
 
 .profile-btn img {
     border-radius: 50%;
@@ -181,7 +210,7 @@ footer {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-div:has(> .animated-card) {
+div:has(> a >.animated-card) {
     perspective: 1500px;
 }
 .animated-card {
@@ -196,13 +225,18 @@ div:has(> .animated-card) {
         transition-duration: 150ms;
         box-shadow: 0 5px 20px 5px #00000044;
     }
-    .glow {
-         position: absolute;
-         width: 100%;
-         height: 100%;
-         left: 0;
-         top: 0;
+    /*.glow {*/
+    /*     position: absolute;*/
+    /*     width: 100%;*/
+    /*     height: 100%;*/
+    /*     left: 0;*/
+    /*     top: 0;*/
 
-         background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
-     }
+    /*     background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);*/
+    /* }*/
+}
+.art-item {
+    background-color: transparent;
+    margin: 15px;
+    width: 250px;
 }

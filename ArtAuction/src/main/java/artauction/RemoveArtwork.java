@@ -43,7 +43,7 @@ public class RemoveArtwork extends HttpServlet {
         String result = auctionDAO.removeArtwork(artworkID);
 
         if (result.equals("Successfully Removed")) {
-            request.getRequestDispatcher("/").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/");
         }
 
     }
