@@ -80,19 +80,12 @@ body {
 }
 
 .profile-img {
-	width: 150px;
-	height: 150px;
+	width: max-content;
+	height: max-content;
 	border-radius: 50%;
 	overflow: hidden;
 	border: 5px solid #e5e5e5;
 	margin-right: 30px;
-}
-
-.profile-pic {
-	width: 150px;
-	height: 150px;
-	object-fit: cover;
-	/*border-radius: 50%;*/
 }
 
 .profile-details {
