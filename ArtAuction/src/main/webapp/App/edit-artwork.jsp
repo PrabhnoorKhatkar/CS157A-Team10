@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 <%@taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts" %>
+<%@taglib prefix="ui" tagdir="/WEB-INF/tags/components" %>
 
 <layout:base>
 	<jsp:attribute name="head">
@@ -10,6 +11,7 @@
 		<title>Edit Artwork</title>
 	</jsp:attribute>
 	<jsp:body>
+		<ui:main-header/>
 		<script src="<c:url value='myapp/javascript/countdown.js'/>"></script>
 		<jsp:useBean id="artwork" scope="request" type="artauction.Artwork"/>
 		<jsp:useBean id="ownerDisplayName" scope="request" type="java.lang.String"/>
@@ -70,11 +72,11 @@
 
 					<p>Owner: ${ownerDisplayName}</p>
 
-					<button type="submit" class="save-changes-btn">Save Changes</button>
-					<button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
+					<sl-button type="submit" class="save-changes-btn">Save Changes</sl-button>
+					<sl-button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
 							onsubmit="return confirm('Are you sure you want to remove this listing?');"
 					>Remove Listing
-					</button>
+					</sl-button>
 				</div>
 
 				<!-- Remove Listing -->
