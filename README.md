@@ -3,6 +3,10 @@
 ## Art Auction
 An online art auction platform designed for artists to showcase their work and for users to bid on artworks.
 
+## Current dependencies:
+
+- Shoelace (for web components)
+
 ## Relations:
 
 - User(**ID**, emailAddress, password, name, displayName, address, anonymous)
