@@ -23,14 +23,14 @@
 					<ui:avatar user="${viewedUser}" size="150px"/>
 				</div>
 				<div class="profile-details">
-					<h2 class="display-name">
-							${viewedUser.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if>
-					</h2>
-					<h2 class="name">${viewedUser.name}</h2>
-					<br>
-					<hr width="100%" size="2">
-					<br>
 					<c:if test="${myProfile}">
+						<h2 class="display-name">
+							${viewedUser.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if>
+						</h2>
+						<h2 class="name">${viewedUser.name}</h2>
+						<br>
+						<hr width="100%" size="2">
+						<br>
 						<form action="UserProfile" method="POST"
 							  enctype="multipart/form-data" class="new-pfp">
 							<label for="profilepicture">New profile picture:</label>
@@ -43,6 +43,13 @@
 						</form>
 					</c:if>
 					<c:if test="${!myProfile}">
+						<h2 class="display-name">
+							${viewedUser.displayName}
+						</h2>
+						<h2 class="name">${viewedUser.name}</h2>
+						<br>
+						<hr width="100%" size="2">
+						<br>
 						<form action="UserProfile" method="post">
 							<input type="hidden" name="followedUserId"
 								   value="${viewedUser.id}">
