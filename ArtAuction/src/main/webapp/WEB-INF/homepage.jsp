@@ -10,6 +10,8 @@
 		<title>Homepage</title>
 	</jsp:attribute>
 	<jsp:body>
+		<ui:main-header/>
+		<br>
 		<!--<p>homepage</p> -->
 		<div class="flex flex-column align-center">
 			<div class="slideshow-container">

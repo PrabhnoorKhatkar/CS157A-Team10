@@ -201,39 +201,6 @@ body {
 	display: block;
 }
 
-/* Searching */
-
-.search-form-container {
-	display: flex;
-	justify-content: center;
-	margin: 20px 0;
-}
-
-.search-box {
-	
-	padding: 10px;
-	/*border-radius: 5px;*/
-	border: 1px solid #444;
-	width: 650px;
-	font-size: 16px;
-}
-
-.search-button {
-	padding: 10px 20px;
-	background-color: transparent;
-	border: 1px solid #444;
-	color: #444;
-	/*border-radius: 5px;*/
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: 700;
-}
-
-.search-button:hover {
-	/*background-color: #444;*/
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
 .search-results {
 	padding: 40px 20px;
 }
