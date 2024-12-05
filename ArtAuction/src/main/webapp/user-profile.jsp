@@ -20,7 +20,7 @@
 			<!-- Profile Card -->
 			<div class="profile-card">
 				<div class="profile-img">
-					<ui:avatar user="${viewedUser}" size="inherit"/>
+					<ui:avatar user="${viewedUser}" size="150px"/>
 				</div>
 				<div class="profile-details">
 					<h2 class="display-name">
