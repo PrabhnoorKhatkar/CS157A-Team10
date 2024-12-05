@@ -20,7 +20,6 @@
 		<jsp:useBean id="isOwner" scope="request" type="java.lang.Boolean"/>
 		<jsp:useBean id="auction" scope="request" type="artauction.Auction"/>
 		<jsp:useBean id="highestBidder" scope="request" type="artauction.user.User"/>
-		<jsp:useBean id="isHighest" scope="request" type="java.lang.Boolean"/>
 
 			<div class="artwork-body">
 				<div class="left">
@@ -56,7 +55,7 @@
 									<input type="number" id="bidAmount" name="bidAmount"
 										   min="${Math.max(auction.startingPrice, auction.amount + 1)}"  placeholder="Enter bid amount" required>
 
-									<button type="submit" class="bid-btn">Place Bid</button>
+									<sl-button type="submit">Place Bid</sl-button>
 								</form>
 							</c:if>
 							<c:if test="${auction.result != 'ACTIVE'}">
@@ -114,16 +113,14 @@
 							<input type="hidden" name="artworkID" value="${artwork.id}">
 							<input type="hidden" name="userID" value="${userID}">
 
-							<button type="submit" name="action" value="Purchase" class="purchase-btn">Purchase</button>
+							<sl-button type="submit" name="action" value="Purchase">Purchase</sl-button>
 						</form>
 					</c:if>
 
 					<c:if test="${isOwner || admin}">
 						<form action="<c:url value="/App/EditArtwork"/>" method="get">
 							<input type="hidden" name="id" value="${artwork.id}">
-							<sl-button type="submit">
-								Edit listing
-							</sl-button>
+							<sl-button type="submit"> Edit listing </sl-button>
 						</form>
 					</c:if>
 

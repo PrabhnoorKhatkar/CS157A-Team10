@@ -41,9 +41,7 @@ public class ArtworkPage extends HttpServlet {
         User highestBidder = auctionDAO.getHighestBidder(artworkID);
 
         // Check if current user is highest bidder
-        if (highestBidder.getDisplayName() != null) {
-            request.setAttribute("isHighest", highestBidder.getId() == (user.getId()));
-        }
+        request.setAttribute("isHighest", highestBidder != null && highestBidder.getId() == (user.getId()));
 
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         // Check if auction is over and reserve not met and is ACTIVE
