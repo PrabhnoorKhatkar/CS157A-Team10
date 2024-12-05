@@ -1,5 +1,6 @@
 package artauction;
 
+import artauction.user.Admin;
 import artauction.user.User;
 import artauction.user.UserDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -39,7 +40,14 @@ public class EditArtwork extends HttpServlet {
 
         // Check if visting user is owner
         ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-        request.setAttribute("isOwner", artworkPage.checkArtworkAccount(userID, artworkID)); // userID is owner
+        var isOwner = artworkPage.checkArtworkAccount(userID, artworkID);
+        request.setAttribute("isOwner", isOwner);
+        var allowedToEdit = isOwner || user instanceof Admin;
+        if (!allowedToEdit) {
+            request.setAttribute("message", "You are not allowed to edit this artwork"); // not used
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
 
         ArtworkDAO searchDAO = new ArtworkDAO();
         Artwork artwork = searchDAO.getArtworkById(artworkID);
