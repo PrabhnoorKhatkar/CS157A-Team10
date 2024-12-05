@@ -5,7 +5,7 @@
 
 <c:set var="size" value="${(not empty size) ? size : '64px'}" />
 <sl-avatar
-		<c:if test="${not empty user.profilePictureID}">
+		<c:if test="${not empty user.profilePictureID and user.profilePictureID ne 0}">
 			image="<c:url value="/Uploads/${user.profilePictureID}"/>"
 		</c:if>
 		<c:if test="${not user.anonymous}">
