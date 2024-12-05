@@ -75,13 +75,11 @@
 
 						<p>Owner: ${ownerDisplayName}</p>
 
-						<button type="submit" class="save-changes-btn">Save Changes</button>
-
-						<!-- Remove Listing -->
-						<button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
-								onsubmit="return confirm('Are you sure you want to remove this listing?');">
-							Remove Listing
-						</button>
+						<sl-button type="submit" class="save-changes-btn">Save Changes</sl-button>
+					<sl-button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
+							onsubmit="return confirm('Are you sure you want to remove this listing?');"
+					>Remove Listing
+					</sl-button>
 					</div>
 
 					<!-- Display tags -->
@@ -155,13 +153,11 @@
 
 						<p>Owner: ${ownerDisplayName}</p>
 
-						<button type="submit" class="save-changes-btn">Save Changes</button>
-
-						<!-- Remove Listing -->
-						<button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
-								onsubmit="return confirm('Are you sure you want to remove this listing?');">
-							Remove Listing
-						</button>
+						<sl-button type="submit" class="save-changes-btn">Save Changes</sl-button>
+					<sl-button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
+							onsubmit="return confirm('Are you sure you want to remove this listing?');"
+					>Remove Listing
+					</sl-button>
 					</div>
 
 					<!-- Display tags -->
@@ -199,7 +195,7 @@
 							${artwork.artist}
 					</h2>
 					<h2 class="title2"><em>${artwork.title}</em></h2>
-
+					<br>
 					<section>
 						<p class="bidding"><em> Starting Bid: </em> $${auction.startingPrice}</p>
 						<p class="bidding"><em> Current Bid: </em> $${auction.amount}</p>
@@ -268,6 +264,7 @@
 						<br>
 						<a href="<c:url value="EditArtwork?id=${artwork.id }"/>" class="edit-button">Edit Artwork</a>
 					</div>
+					<br>
 					<hr width="100%" size="2">
 					<c:if test="${winningUser}">
 						<p>You WON!!!</p>
