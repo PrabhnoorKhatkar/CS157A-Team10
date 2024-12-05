@@ -67,7 +67,7 @@ public class ImageUploader extends HttpServlet {
 
     public static String salt(int length) {
         String saltChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789";
-        StringBuilder sb = new StringBuilder(8);
+        StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < 8; i++) {
             sb.append(saltChars.charAt(random.nextInt(saltChars.length())));
         }

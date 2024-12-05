@@ -23,10 +23,10 @@
 			<c:when test="${not empty sessionScope.user}">
 				<jsp:useBean id="user" scope="session" type="artauction.user.User"/>
 				<a href="<c:url value="/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
-				<form action="Logout" method="post">
+				<form action="<c:url value="/Logout"/>" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
-				<a href="UserProfile" class="profile-btn">
+				<a href="<c:url value="/App/UserProfile"/>" class="profile-btn">
 					<ui:avatar user="${user}"/>
 				</a>
 			</c:when>

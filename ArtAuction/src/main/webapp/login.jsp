@@ -12,10 +12,18 @@
 	<body>
 		<form action="Login" method="post" style="background-color: rgba(0, 0, 0, 0.6);">
 			<h1 style="color: white;">Welcome to Online Art Auction</h1>
-			<h2 style="color: white;">Login</h2>
+			<h2 style="color: white;">
+			<c:choose>
+				<c:when test="${not empty param.from}">
+					Please login to access "<c:out value="${param.from}"/>".
+				</c:when>
+				<c:otherwise>
+					Welcome to Online Art Auctions.
+				</c:otherwise>
+			</c:choose>
+			</h2>
 			<table>
-
-
+				<input type="hidden" value="${param.from}" name="from"/>
 				<tr>
 					<td><label>
 						<input type="text" name="email" placeholder="email address">

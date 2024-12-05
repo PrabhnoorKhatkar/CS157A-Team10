@@ -241,7 +241,7 @@
 
 
 					<hr width="100%" size="2">
-					<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
+					<p><a href="<c:url value="/App/UserProfile?user=${ownerDisplayName}"/>"
 						  class="link">${ownerDisplayName}</a></p>
 
 
@@ -369,7 +369,7 @@
 
 
 					<hr width="100%" size="2">
-					<p><a href="<c:url value="UserProfile?user=${ownerDisplayName}"/>"
+					<p><a href="<c:url value="/App/UserProfile?user=${ownerDisplayName}"/>"
 						  class="link">${ownerDisplayName}</a></p>
 
 

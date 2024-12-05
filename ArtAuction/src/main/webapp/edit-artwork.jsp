@@ -28,7 +28,7 @@
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>
 
-				<a href="<c:url value="/UserProfile"/>" class="profile-btn"> <img
+				<a href="<c:url value="/App/UserProfile"/>" class="profile-btn"> <img
 						src="<c:url value="myapp/images/${image.filename}"/>" alt="profile pic" width="64"
 						height="64">
 				</a>

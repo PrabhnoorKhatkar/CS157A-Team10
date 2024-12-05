@@ -105,4 +105,16 @@ public class User {
     public void setProfilePictureID(int profilePictureID) {
         this.profilePictureID = profilePictureID;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        var other = (User) obj;
+        return other.id == this.id;
+    }
 }

@@ -4,7 +4,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="myapp/css/order-confirmation-style.css">
+	<link rel="stylesheet" href="../myapp/css/order-confirmation-style.css">
 	<title>Order Confirmation</title>
 	</head>
 	<body>

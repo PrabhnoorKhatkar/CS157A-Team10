@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="<c:url value="myapp/javascript/slideshow.js"/>"></script>
+		<script src="<c:url value="/myapp/javascript/slideshow.js"/>"></script>
 
 		<header>
 			<section class="search-results" id="search-gallery">

@@ -12,8 +12,7 @@ public class Hash {
             var hash = messageDigest.digest(text.getBytes(StandardCharsets.UTF_8));
 
             return String.format("%064x", new BigInteger(1, hash));
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
         }

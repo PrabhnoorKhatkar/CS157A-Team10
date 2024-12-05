@@ -24,11 +24,14 @@ DROP TABLE IF EXISTS `admin`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin` (
   `userID` int NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `emailAddress` varchar(100) NOT NULL,
   `role` varchar(100) NOT NULL,
+  `referralCode` varchar(50) NOT NULL,
+  `referralCodeUsed` varchar(50) NOT NULL,
   PRIMARY KEY (`userID`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
+  UNIQUE KEY `admin_pk` (`referralCode`),
+  KEY `referralCode_fk` (`referralCodeUsed`),
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `referralCode_fk` FOREIGN KEY (`referralCodeUsed`) REFERENCES `admin` (`referralCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +41,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'John Doe','john.doe@email.com','System Administrator'),(2,'Sarah Smith','sarah.smith@email.com','Privacy Administrator'),(3,'Michael Johnson','mike.johnson@email.com','Security Administrator'),(4,'Emily Brown','emily.brown@email.com','Content Administrator');
+INSERT INTO `admin` VALUES (1,'System Administrator','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(2,'Privacy Administrator','szd9x9d5aok0fke67qrut94kd8dvfaif','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(3,'Security Administrator','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(4,'Content Administrator','hpbni89izmfxau7h94yvn99gpzyqn2yg','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 

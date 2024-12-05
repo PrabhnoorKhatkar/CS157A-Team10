@@ -1,5 +1,6 @@
 package artauction.auth;
 
+import artauction.user.Admin;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import java.io.IOException;
  * Servlet implementation class Login
  */
 public class Login extends HttpServlet {
+    public static final String PAGE = "login.jsp";
     private static final long serialVersionUID = 1L;
 
     /**
@@ -41,26 +43,25 @@ public class Login extends HttpServlet {
         // get email & password
         String email = request.getParameter("email");
         String password = Hash.sha256(request.getParameter("password"));
+        String fromURL = request.getParameter("from");
 
         // create new member object with data
-        LoginDAO loginDAO = new LoginDAO();
-        var user = loginDAO.findUserByLogin(email, password);
+        AuthDAO authDAO = new AuthDAO();
+        var user = authDAO.findUserByLogin(email, password);
         if (user != null) {
-
             HttpSession session = request.getSession();
             session.setAttribute("userID", user.getId());
             session.setAttribute("user", user);
+            session.setAttribute("admin", user instanceof Admin);
 
-            if (loginDAO.checkAdmin(user.getId())) {
-                session.setAttribute("admin", true);
-            } else {
-                session.setAttribute("admin", false);
+            if (fromURL == null || fromURL.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/"); //redirect to home page
+                return;
             }
-
-            response.sendRedirect(request.getContextPath() + "/"); //redirect to home page
+            response.sendRedirect(fromURL);
         } else {
             request.setAttribute("errorMessage", "Invalid email or password.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher(PAGE).forward(request, response);
         }
     }
 }

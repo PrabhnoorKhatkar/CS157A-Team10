@@ -63,16 +63,6 @@ public class UserProfile extends HttpServlet {
         List<User> getFollowerUsersList = null;
         List<OrderDetails> getOrderList = null;
 
-        try {
-            imageID = userDAO.getProfilePictureID(userID);
-            //System.out.println(imageID);
-            image = imageDAO.findByID(imageID);
-            //System.out.println(image.getFilename());
-        } catch (SQLException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
-
         // if no parameter for display name it's others profile
         // else it's the logged in user profile
         var myProfile = requestedUserDisplayName == null || requestedUserDisplayName.isEmpty();
@@ -92,7 +82,6 @@ public class UserProfile extends HttpServlet {
             
             try {
 				otherID = userDAO.getProfilePictureID(viewedID);
-				otherImage = imageDAO.findByID(otherID);
 			} catch (SQLException e) {
 				// Auto-generated catch block
 				e.printStackTrace();
@@ -109,8 +98,6 @@ public class UserProfile extends HttpServlet {
         request.setAttribute("viewedUser", viewedUser);
         request.setAttribute("artworkList", artworkList);
         request.setAttribute("favArtworkList", favArtworkList);
-        request.setAttribute("image", image);
-        request.setAttribute("otherImage", otherImage);
 
         request.setAttribute("followingUsersList", getFollowingUsersList);
         request.setAttribute("getFollowerUsersList", getFollowerUsersList);
@@ -145,7 +132,7 @@ public class UserProfile extends HttpServlet {
             }
             var updatedUser = userDAO.getFullUserById(userID);
             request.getSession().setAttribute("user", updatedUser);
-            response.sendRedirect(request.getContextPath() + "/UserProfile?user=" + updatedUser.getDisplayName());
+            response.sendRedirect(request.getContextPath() + "/App/UserProfile?user=" + updatedUser.getDisplayName());
         } else {
             String followUserStr = request.getParameter("followedUserId");
 
@@ -164,7 +151,7 @@ public class UserProfile extends HttpServlet {
             } else if (action.equals("unfollow")) {
                 followUserDAO.unfollowUser(userID, followedUserID);
             }
-            response.sendRedirect(request.getContextPath() +"/UserProfile?user=" + request.getParameter("displayName"));
+            response.sendRedirect(request.getContextPath() +"/App/UserProfile?user=" + request.getParameter("displayName"));
 
         }
         

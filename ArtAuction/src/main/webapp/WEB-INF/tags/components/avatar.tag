@@ -4,6 +4,7 @@
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 
 <c:set var="size" value="${(not empty size) ? size : '64px'}" />
+<a href="<c:url value="/App/UserProfile"/>" class="profile-btn">
 <sl-avatar
 		<c:if test="${not empty user.profilePictureID and user.profilePictureID ne 0}">
 			image="<c:url value="/Uploads/${user.profilePictureID}"/>"
@@ -14,3 +15,4 @@
 		label="Profile picture for ${user.displayName}"
 		style="--size: ${size};"
 ></sl-avatar>
+</a>

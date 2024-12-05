@@ -48,15 +48,15 @@ public class Register extends HttpServlet {
 
         User user = new User(name, displayName, password, emailAddress, address, anonymous);
 
-        RegisterDAO rdao = new RegisterDAO();
-        String result = rdao.insert(user);
+        var rdao = new AuthDAO();
+        String result = rdao.insertNewUser(user);
         //		response.getWriter().println(result);
 
         if (result.equals("Data Entered Successfully")) {
 
             request.setAttribute("successMessage", "Registered successfully. You can now log in.");
 
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(Login.PAGE);
         } else {
 
             request.setAttribute("errorMessage", String.format("Registration failed: %s", result));
