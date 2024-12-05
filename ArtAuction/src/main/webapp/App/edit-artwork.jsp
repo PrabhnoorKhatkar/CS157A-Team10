@@ -7,7 +7,7 @@
 
 <layout:base>
 	<jsp:attribute name="head">
-		<link rel="stylesheet" href="<c:url value='/myapp/css/edit-artwork-style.css'/>">
+		<link rel="stylesheet" href="<c:url value='/myapp/css/artwork-style.css'/>">
 		<title>Edit Artwork</title>
 	</jsp:attribute>
 	<jsp:body>
