@@ -94,3 +94,32 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+div:has(> .animated-card) {
+    perspective: 1500px;
+}
+.animated-card {
+    border-radius: 10px;
+    position: relative;
+
+    transition-duration: 300ms;
+    transition-property: transform, box-shadow;
+    transition-timing-function: ease-out;
+    transform: rotate3d(0, 0, 0, 0);
+}
+.animated-card:hover {
+    * {
+
+    }
+    transition-duration: 150ms;
+    box-shadow: 0 5px 20px 5px #00000044;
+}
+
+.animated-card .glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
+}
