@@ -10,9 +10,11 @@ public class UserDAO extends DAO {
 
     public User getFullUserById(int userID) {
 
-        var con = getConnection();
-        try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM user LEFT OUTER JOIN profilepicture ON user.userID = profilepicture.userID WHERE user.userID = ?");
+        var sql = "SELECT * FROM user LEFT OUTER JOIN profilepicture ON user.userID = profilepicture.userID WHERE user.userID = ?";
+        try (
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, userID);
 
             var resultSet = ps.executeQuery();

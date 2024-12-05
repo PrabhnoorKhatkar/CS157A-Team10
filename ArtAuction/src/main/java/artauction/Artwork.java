@@ -77,7 +77,7 @@ public class Artwork {
     public void setArtist(String artist) {
         this.artist = artist;
     }
-    
+
     public Auction getAuctionDetails() {
         return auctionDetails;
     }

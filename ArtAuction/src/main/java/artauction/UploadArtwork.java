@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Servlet implementation class ArtAuction.UploadArtwork
  */
-@WebServlet(name = "UploadArtwork", urlPatterns={"/App/UploadArtwork"})
+@WebServlet(name = "UploadArtwork", urlPatterns = {"/App/UploadArtwork"})
 @MultipartConfig
 public class UploadArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;

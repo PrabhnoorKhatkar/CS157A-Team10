@@ -1,7 +1,6 @@
 package artauction.order;
 
 import artauction.DAO;
-import artauction.order.OrderDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class OrderDAO extends DAO {
             result = insertOrderID(orderID, userID);
             if (result.equals("Order Sucessfully Assigned")) {
 
-            	totalPaid = Math.round(totalPaid * 100) / 100.0f;
+                totalPaid = Math.round(totalPaid * 100) / 100.0f;
                 result = insertOrderDetails(orderID, totalPaid);
                 if (result.equals("Order Sucessfully Assigned")) {
                     return result;
@@ -33,13 +32,14 @@ public class OrderDAO extends DAO {
 
     public int createOrderID(int artworkID) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = "INSERT INTO orderitem (artworkID) VALUES (?)";
         int orderID = -1;
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try (
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+        ) {
             ps.setInt(1, artworkID);
 
             ps.executeUpdate();
@@ -60,13 +60,15 @@ public class OrderDAO extends DAO {
 
     public String insertOrderID(int orderID, int userID) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = "INSERT INTO artauction.order (userID, orderID) VALUES (?,?)";
         String result = "Order Sucessfully Assigned";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, userID);
             ps.setInt(2, orderID);
             ps.executeUpdate();
@@ -81,18 +83,20 @@ public class OrderDAO extends DAO {
 
     public String insertOrderDetails(int orderID, float totalPaid) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = "INSERT INTO orderdetails (orderID, timestamp, status, totalPaid) VALUES (?, ?, ?, ?)";
         String result = "Order Sucessfully Assigned";
 
-        try {
+        try (
+
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
-            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, orderID);
             ps.setTimestamp(2, currentTimestamp);
-            
+
             ps.setString(3, "PROCESSING");
             ps.setFloat(4, totalPaid);
 
@@ -107,43 +111,45 @@ public class OrderDAO extends DAO {
 
         return result;
     }
-    
+
     public List<OrderDetails> getOrderHistory(int userID) {
-    	var con = getConnection();
-    	
-    	List<OrderDetails> orderList = new ArrayList<>();
-    	String sql = "SELECT `order`.userID, orderdetails.orderID, orderdetails.timestamp, "
+
+        List<OrderDetails> orderList = new ArrayList<>();
+        String sql = "SELECT `order`.userID, orderdetails.orderID, orderdetails.timestamp, "
                 + "orderdetails.trackingNumber, orderdetails.status, orderdetails.totalPaid "
                 + "FROM `order` "
                 + "JOIN orderdetails ON orderdetails.orderID = `order`.orderID "
                 + "WHERE `order`.userID = ?";
-    	
-    	try {
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, userID);
-			
-			var resultSet = ps.executeQuery();
-			
-			while (resultSet.next()) {
-				int id = resultSet.getInt("orderID");
-				System.out.println(id);
-				Timestamp timestamp = resultSet.getTimestamp("timestamp");
-				String tracking = resultSet.getString("trackingNumber");
-				System.out.println(tracking);
-				String status = resultSet.getString("status");
-				Float paid = resultSet.getFloat("totalPaid");
-				
-				OrderDetails order = new OrderDetails(id, timestamp, tracking, status, paid);
-				
-				orderList.add(order);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	return orderList;
+
+        try (
+
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setInt(1, userID);
+
+            var resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("orderID");
+                System.out.println(id);
+                Timestamp timestamp = resultSet.getTimestamp("timestamp");
+                String tracking = resultSet.getString("trackingNumber");
+                System.out.println(tracking);
+                String status = resultSet.getString("status");
+                Float paid = resultSet.getFloat("totalPaid");
+
+                OrderDetails order = new OrderDetails(id, timestamp, tracking, status, paid);
+
+                orderList.add(order);
+            }
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return orderList;
     }
 
 

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "UserProfile", urlPatterns={"/App/UserProfile"})
+@WebServlet(name = "UserProfile", urlPatterns = {"/App/UserProfile"})
 @MultipartConfig
 public class UserProfile extends HttpServlet {
 
@@ -69,25 +69,25 @@ public class UserProfile extends HttpServlet {
         // else it's the logged in user profile
         var myProfile = requestedUserDisplayName == null || requestedUserDisplayName.isEmpty();
         var viewedID = myProfile ? userID : otherID;
-            viewedUser = userDAO.getFullUserById(viewedID);
+        viewedUser = userDAO.getFullUserById(viewedID);
 
-            artworkList = artworkDAO.getArtworkByuserID(viewedID);
-            favArtworkList = artworkDAO.getFavoritedArtworkByuserID(viewedID);
-            followerCount = followUserDAO.getFollowerCount(viewedID);
-            followingCount = followUserDAO.getFollowingCount(viewedID);
+        artworkList = artworkDAO.getArtworkByuserID(viewedID);
+        favArtworkList = artworkDAO.getFavoritedArtworkByuserID(viewedID);
+        followerCount = followUserDAO.getFollowerCount(viewedID);
+        followingCount = followUserDAO.getFollowingCount(viewedID);
 
-            getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
-            getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
+        getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
+        getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
 
-            getOrderList = orderDAO.getOrderHistory(userID);
-            System.out.println(getOrderList);
+        getOrderList = orderDAO.getOrderHistory(userID);
+        System.out.println(getOrderList);
 
-            try {
-				otherID = userDAO.getProfilePictureID(viewedID);
-			} catch (SQLException e) {
-				// Auto-generated catch block
-				e.printStackTrace();
-			}
+        try {
+            otherID = userDAO.getProfilePictureID(viewedID);
+        } catch (SQLException e) {
+            // Auto-generated catch block
+            e.printStackTrace();
+        }
 
 
         request.setAttribute("myProfile", myProfile);
@@ -153,7 +153,7 @@ public class UserProfile extends HttpServlet {
             } else if (action.equals("unfollow")) {
                 followUserDAO.unfollowUser(userID, followedUserID);
             }
-            response.sendRedirect(request.getContextPath() +"/App/UserProfile?user=" + request.getParameter("displayName"));
+            response.sendRedirect(request.getContextPath() + "/App/UserProfile?user=" + request.getParameter("displayName"));
 
         }
 

@@ -6,69 +6,75 @@ import java.sql.SQLException;
 
 public class ArtworkPageDAO extends DAO {
 
-	public boolean checkArtworkAccount(int userID, int artworkID) {
+    public boolean checkArtworkAccount(int userID, int artworkID) {
 
-		loadDriver(dbdriver);
-		Connection con = getConnection();
-		try {
-			PreparedStatement ps = con.prepareStatement("SELECT 1 FROM auction WHERE userID = ? AND artworkID = ?;");
-			ps.setInt(1, userID);
-			ps.setInt(2, artworkID);
+        loadDriver(dbdriver);
+        try (
 
-			var resultSet = ps.executeQuery();
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT 1 FROM auction WHERE userID = ? AND artworkID = ?;")
+        ) {
+            ps.setInt(1, userID);
+            ps.setInt(2, artworkID);
 
-			if (resultSet.next()) {
-				return true;
-			}
-		} catch (SQLException e) {
-			// Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
+            var resultSet = ps.executeQuery();
 
-	// get owner userID by artworkID
-	public int getUserIDByArtworkID(int artworkID) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
-		int userID = -1;
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            // Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
 
-		try {
-			PreparedStatement ps = con.prepareStatement("SELECT userID FROM auction WHERE artworkID = ?;");
-			ps.setInt(1, artworkID);
+    // get owner userID by artworkID
+    public int getUserIDByArtworkID(int artworkID) {
+        loadDriver(dbdriver);
+        int userID = -1;
 
-			var resultSet = ps.executeQuery();
+        try (
 
-			if (resultSet.next()) {
-				userID = resultSet.getInt("userID");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT userID FROM auction WHERE artworkID = ?;")
+        ) {
+            ps.setInt(1, artworkID);
 
-		return userID;
+            var resultSet = ps.executeQuery();
 
-	}
+            if (resultSet.next()) {
+                userID = resultSet.getInt("userID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	public String getUserDisplayNameByUserID(int userID) {
-		loadDriver(dbdriver);
-		Connection con = getConnection();
-		String displayName = null; // Default value when no user is found
+        return userID;
 
-		try {
-			PreparedStatement ps = con.prepareStatement("SELECT displayName FROM user WHERE userID = ?;");
-			ps.setInt(1, userID);
+    }
 
-			var resultSet = ps.executeQuery();
+    public String getUserDisplayNameByUserID(int userID) {
+        loadDriver(dbdriver);
+        String displayName = null; // Default value when no user is found
 
-			if (resultSet.next()) {
-				displayName = resultSet.getString("displayName");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        try (
 
-		return displayName;
-	}
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT displayName FROM user WHERE userID = ?;")
+        ) {
+            ps.setInt(1, userID);
+
+            var resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                displayName = resultSet.getString("displayName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return displayName;
+    }
 
 }

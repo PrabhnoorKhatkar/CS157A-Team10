@@ -9,11 +9,13 @@ import java.util.List;
 
 public class FollowUserDAO extends DAO {
     public boolean followUser(int followerID, int followingID) {
-        var con = getConnection();
         String sql = "INSERT INTO follow (followerID, followingID) VALUES (?,?);";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, followerID);
             ps.setInt(2, followingID);
             int resultSet = ps.executeUpdate();
@@ -27,10 +29,11 @@ public class FollowUserDAO extends DAO {
     }
 
     public boolean unfollowUser(int followerID, int followingID) {
-        var con = getConnection();
         String sql = "DELETE FROM follow WHERE followerID = ? AND followingID = ?;";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, followerID);
             ps.setInt(2, followingID);
             int resultSet = ps.executeUpdate();

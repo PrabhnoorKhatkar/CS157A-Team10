@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class SaveArtwork
  */
-@WebServlet(name = "SaveArtwork", urlPatterns={"/App/SaveArtwork"})
+@WebServlet(name = "SaveArtwork", urlPatterns = {"/App/SaveArtwork"})
 public class SaveArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

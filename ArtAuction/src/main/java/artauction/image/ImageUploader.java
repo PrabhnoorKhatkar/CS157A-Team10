@@ -23,38 +23,14 @@ import java.util.Set;
 @WebServlet(name = "ImageUpload", urlPatterns = {"/Uploads/*"}, loadOnStartup = 1)
 @MultipartConfig()
 public class ImageUploader extends HttpServlet {
-    private static File localUploadDirectory;
     private static final ImageDAO dao = new ImageDAO();
     private static final SecureRandom random = new SecureRandom();
+    private static File localUploadDirectory;
     private static File placeholder;
-
-    @Override
-    public void init() {
-        // Get the file location where it would be stored.
-        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir"), "artauction").toFile();
-        localUploadDirectory.mkdirs();
-
-        System.err.printf("Storing images in: %s%n", localUploadDirectory);
-        var context = getServletContext();
-        placeholder = new File(context.getRealPath("/myapp/temporary-pic.jpg"));
-        Set<String> resourcePaths = context.getResourcePaths("/myapp/images");
-        System.err.println("Uploaded initial images:");
-        // We assume that the files listed in the database are also in sorted order
-        var sortedPaths = resourcePaths.stream().sorted().toList();
-        for (var s: sortedPaths) {
-            var realpath = Path.of(context.getRealPath(s));
-            try (var stream = new FileInputStream(realpath.toFile())) {
-                var filename = realpath.getFileName().toString();
-                var uploaded = upload(stream, filename);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
     /**
      * @param inputStream The stream of contents to be uploaded into a file.
-     * @param filename The name of the file where the contents should go.
+     * @param filename    The name of the file where the contents should go.
      * @return The File on-disk where the contents were uploaded to.
      * @throws java.io.IOException If copying fails.
      */
@@ -85,12 +61,37 @@ public class ImageUploader extends HttpServlet {
         }
         return Path.of(localUploadDirectory.getAbsolutePath(), img.getFilename()).toFile();
     }
+
     public static File retrieveByName(String filename) {
         var img = dao.findByFilename(filename);
         if (img == null) {
             return null;
         }
         return Path.of(localUploadDirectory.getAbsolutePath(), img.getFilename()).toFile();
+    }
+
+    @Override
+    public void init() {
+        // Get the file location where it would be stored.
+        localUploadDirectory = Path.of(System.getProperty("java.io.tmpdir"), "artauction").toFile();
+        localUploadDirectory.mkdirs();
+
+        System.err.printf("Storing images in: %s%n", localUploadDirectory);
+        var context = getServletContext();
+        placeholder = new File(context.getRealPath("/myapp/temporary-pic.jpg"));
+        Set<String> resourcePaths = context.getResourcePaths("/myapp/images");
+        System.err.println("Uploaded initial images:");
+        // We assume that the files listed in the database are also in sorted order
+        var sortedPaths = resourcePaths.stream().sorted().toList();
+        for (var s : sortedPaths) {
+            var realpath = Path.of(context.getRealPath(s));
+            try (var stream = new FileInputStream(realpath.toFile())) {
+                var filename = realpath.getFileName().toString();
+                var uploaded = upload(stream, filename);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /***

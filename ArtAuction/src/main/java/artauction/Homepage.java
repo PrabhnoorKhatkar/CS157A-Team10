@@ -7,17 +7,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "Homepage", urlPatterns = {"/Homepage"})
 public class Homepage extends HttpServlet {
     private Artwork[] getFeaturedArtworks(HttpServletRequest request, int userID) {
         var dao = new FeaturedArtworkDAO();
- 
+
         try {
             var featuredArtworks = dao.getFeaturedArtworksByFollowing(userID, 3);
-            
+
             return featuredArtworks;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -55,12 +54,12 @@ public class Homepage extends HttpServlet {
         // TODO When not logged in prompt user to login to see featured artworks based on their followings.
 
         String searchText = req.getParameter("searchText");
-		if (searchText == null || searchText.trim().isEmpty()) {
-			searchText = ""; 
-		}
-        
+        if (searchText == null || searchText.trim().isEmpty()) {
+            searchText = "";
+        }
+
         ArtworkDAO searchDAO = new ArtworkDAO();
-        
+
         List<Artwork> artworkList = searchDAO.query(searchText);
 
         req.setAttribute("artworkList", artworkList);

@@ -12,20 +12,24 @@ import java.sql.SQLException;
 public class AuthDAO extends DAO {
     public Admin upgradeUserToAdmin(User user, String role, String referralCode, String referralCodeUsed) throws SQLException {
         loadDriver(dbdriver);
-        Connection con = getConnection();
         var sql = "INSERT INTO admin(userID, role, referralCode, referralCodeUsed) VALUES (?, ?, ?, ?)";
-        var ps = con.prepareStatement(sql);
-        ps.setInt(1, user.getId());
-        ps.setString(2, role);
-        ps.setString(3, referralCode);
-        ps.setString(4, referralCodeUsed);
-        var rs = ps.executeUpdate();
+        try (
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setInt(1, user.getId());
+            ps.setString(2, role);
+            ps.setString(3, referralCode);
+            ps.setString(4, referralCodeUsed);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        }
         return new Admin(user, role, referralCode, referralCodeUsed);
     }
 
     public User findUserByLogin(String email, String password) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = """
                 SELECT * FROM
@@ -35,8 +39,10 @@ public class AuthDAO extends DAO {
                 WHERE emailAddress = ? AND password = ?
                 """;
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setString(1, email);
             ps.setString(2, password);
 
@@ -69,11 +75,12 @@ public class AuthDAO extends DAO {
 
     public String insertNewUser(User user) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
         String sql = "INSERT into user (displayName, Name, emailAddress, password, address, anonymous) VALUES (?,?,?,?,?,?)";
         String result = "Data Entered Successfully";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setString(1, user.getDisplayName());
             ps.setString(2, user.getName());
             ps.setString(3, user.getEmailAddress());

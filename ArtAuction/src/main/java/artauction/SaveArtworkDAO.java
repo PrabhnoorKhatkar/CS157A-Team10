@@ -7,12 +7,14 @@ import java.sql.SQLException;
 public class SaveArtworkDAO extends DAO {
     public boolean favoriteArtwork(int userID, int artworkID) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = "INSERT into favorite (userID, artworkID) VALUES (?,?)";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, userID);
             ps.setInt(2, artworkID);
             ps.executeUpdate();
@@ -25,12 +27,14 @@ public class SaveArtworkDAO extends DAO {
 
     public boolean removeSave(int userID, int artworkID) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
 
         String sql = "DELETE FROM favorite WHERE userID = ? AND artworkID = ?";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, userID);
             ps.setInt(2, artworkID);
             ps.executeUpdate();
@@ -43,10 +47,11 @@ public class SaveArtworkDAO extends DAO {
 
     public boolean checkSave(int userID, int artworkID) {
         loadDriver(dbdriver);
-        Connection con = getConnection();
         String sql = "SELECT COUNT(*) FROM favorite WHERE userID = ? AND artworkID = ?";
 
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
+        try (
+                Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, userID);
             ps.setInt(2, artworkID);
 

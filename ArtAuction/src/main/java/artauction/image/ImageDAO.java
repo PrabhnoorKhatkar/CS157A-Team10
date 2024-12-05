@@ -17,10 +17,11 @@ public class ImageDAO extends DAO {
     public Image insertImage(Image img) {
         loadDriver(dbdriver);
         System.err.println("inserting img");
-        var con = getConnection();
         var sql = "INSERT INTO image(filename, uploaderID) VALUES (?, ?) ";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
             ps.setString(1, img.getFilename());
             ps.setInt(2, img.getUploaderId());
 
@@ -37,13 +38,16 @@ public class ImageDAO extends DAO {
         }
         return null;
     }
+
     public Image findByID(int id) {
         loadDriver(dbdriver);
-        var con = getConnection();
         String sql = "SELECT imageID, filename, uploaderID FROM image WHERE imageID = ?";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try (
+
+                var con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
             ps.setInt(1, id);
             // Retrieve the generated artworkID
             ResultSet rs = ps.executeQuery();

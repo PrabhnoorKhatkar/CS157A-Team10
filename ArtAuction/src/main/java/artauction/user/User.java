@@ -9,6 +9,7 @@ public class User {
     private String address;
     private boolean anonymous;
     private int profilePictureID;
+
     public User(int id, String name, String displayName, String emailAddress, String address,
                 boolean anonymous, int profilePictureID) {
         // for storing in session, no need for password
@@ -19,6 +20,7 @@ public class User {
         this.anonymous = anonymous;
         this.profilePictureID = profilePictureID;
     }
+
     public User(String name, String displayName, String password, String emailAddress, String address,
                 boolean anonymous) {
         // for registration

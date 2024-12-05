@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebFilter("/Admin/*")
 public class AdminFilter extends HttpFilter {
     @Override
-    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException, IOException {
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpSession session = request.getSession();
         var user = session.getAttribute("user");
         if (user == null) {
