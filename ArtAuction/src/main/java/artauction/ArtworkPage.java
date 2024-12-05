@@ -23,11 +23,6 @@ public class ArtworkPage extends HttpServlet {
 
 		int artworkID = Integer.parseInt(request.getParameter("id"));
 		Integer userID = (Integer) request.getSession().getAttribute("userID");
-		if (userID == null) {
-			// TODO: move artwork to App/
-			response.sendRedirect("login.jsp");
-			return;
-		}
 		var user = (User) request.getSession().getAttribute("user");
 
 		// Check if visting user is owner
