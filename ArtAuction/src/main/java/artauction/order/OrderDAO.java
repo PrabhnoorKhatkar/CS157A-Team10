@@ -85,8 +85,8 @@ public class OrderDAO extends DAO {
 
         try {
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-            // TODO how to generate trackingNumber
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, orderID);
             ps.setTimestamp(2, currentTimestamp);
             
