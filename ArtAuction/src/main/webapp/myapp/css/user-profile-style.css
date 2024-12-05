@@ -112,7 +112,7 @@ body {
 }
 
 .setting-btn,
-.edit-profile-btn {
+.edit-profile-btn, .artwork-btn, .favorite-btn {
 	background-color: transparent;
 	color: #444;
 	border: 1px solid #444;
@@ -156,7 +156,8 @@ body {
 	margin-top: 10px;
 }
 
-.follow:hover, .submit-pfp:hover, .display-follow:hover{
+.follow:hover, .submit-pfp:hover, .display-follow:hover, 
+.artwork-btn:hover, .favorite-btn:hover{
 	color: white;
 	background-color: rgb(58, 59, 59);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);

@@ -17,3 +17,23 @@ function toggleFollowersList() {
 		list.style.display = 'none';
 	}
 }
+
+function toggleArtworkList() {
+	const list = document.getElementById('artworkList');
+
+	if (list.style.display === 'none') {
+		list.style.display = 'block';
+	} else {
+		list.style.display = 'none';
+	}
+}
+
+function toggleFavoriteList() {
+	const list = document.getElementById('favoriteList');
+
+	if (list.style.display === 'none') {
+		list.style.display = 'block';
+	} else {
+		list.style.display = 'none';
+	}
+}

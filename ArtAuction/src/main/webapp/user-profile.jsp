@@ -119,19 +119,29 @@
         <div class="user-artwork">
             <c:choose>
                 <c:when test="${myProfile}">
-                    <h2>My Artwork</h2>
+                	<button onclick="toggleArtworkList()"
+							id="artworkBtn" class="artwork-btn">My Artwork</button>
+					<button onclick="toggleFavoriteList()"
+							id="favoriteBtn" class="favorite-btn">Favorites</button>
+					<button onclick="toggleFavoriteList()"
+							id="favoriteBtn" class="favorite-btn">Orders</button>
+               <!--       <h2>My Artwork</h2>-->
                 </c:when>
                 <c:otherwise>
-                    <h2>${viewedUser.displayName}'s Artwork</h2>
+                	<button onclick="toggleArtworkList()"
+							id="artworkBtn" class="artwork-btn">${viewedUser.displayName}'s Artwork</button>
+                  <!--   <h2>${viewedUser.displayName}'s Artwork</h2> --> 
                 </c:otherwise>
             </c:choose>
             <div class="art-grid">
                 <c:choose>
                     <c:when test="${not empty requestScope.artworkList}">
+                    <div id="artworkList">
                         <c:forEach var="artwork"
 							items="${requestScope.artworkList}">
                             <ui:artitem artwork="${artwork}" />
                         </c:forEach>
+                        </div>
                     </c:when>
                     <c:otherwise>
                         <div>(no artworks)</div>
@@ -142,17 +152,20 @@
         <c:if test="${myProfile}">
             <div class="saved-artwork">
                 <section class="search-results" id="gallery">
-                    <div class="container">
-                        <h2>Favorites</h2>
+                    <div class="container" id="favoriteList" style="display: none;">
+                    
+                     <!--    <h2>Favorites</h2> --> 
                         <div class="art-grid">
                             <c:choose>
-                                <c:when
-									test="${not empty requestScope.favArtworkList}">
+                        
+                                <c:when test="${not empty requestScope.favArtworkList}">
+                                
                                     <c:forEach var="favArtwork"
 										items="${favArtworkList}">
                                         <ui:artitem
 											artwork="${favArtwork}" />
                                     </c:forEach>
+                                
                                 </c:when>
                                 <c:otherwise>
                                     <div>(no artworks)</div>
