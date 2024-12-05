@@ -87,7 +87,7 @@ public class UploadArtwork extends HttpServlet {
             String result = uploadDAO.insertArtImage(uploaded.getName(), userID, artworkID);
 
 
-            response.sendRedirect("/App/UserProfile"); // redirect to homepage
+            response.sendRedirect(request.getContextPath() + "/App/UserProfile"); // redirect to homepage
         } else {
             response.getWriter().println("Failed to upload artwork.");
         }

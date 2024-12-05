@@ -173,7 +173,7 @@ footer {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-div:has(> a >.animated-card) {
+a:has(> .animated-card) {
     perspective: 1500px;
 }
 .animated-card {
@@ -188,18 +188,13 @@ div:has(> a >.animated-card) {
         transition-duration: 150ms;
         box-shadow: 0 5px 20px 5px #00000044;
     }
-    /*.glow {*/
-    /*     position: absolute;*/
-    /*     width: 100%;*/
-    /*     height: 100%;*/
-    /*     left: 0;*/
-    /*     top: 0;*/
-
-    /*     background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);*/
-    /* }*/
 }
 .art-item {
     background-color: transparent;
     margin: 15px;
     width: 250px;
+}
+
+form {
+    margin: 0;
 }

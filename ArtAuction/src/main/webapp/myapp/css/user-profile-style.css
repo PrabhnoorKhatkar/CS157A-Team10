@@ -1,66 +1,11 @@
 * {
 	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	font-family: Arial, sans-serif;
 	letter-spacing: 1px;
 }
 
 body {
 	background-color: #F9F9F9;
 }
-
-.profile-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px 20px;
-	background-color: #FFFFFF;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-	font-size: 36px;
-	color: #333;
-	text-decoration: none;
-}
-
-.header-mid {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 17px;
-}
-
-.header-right {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-}
-
-.upload-btn,
-.logout-btn {
-	background-color: transparent;
-	color: #444;
-	padding: 10px 10px;
-	margin: 0 5px;
-	border: 1px solid #444;
-	/*border-radius: 5px;*/
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: 700;
-	text-decoration: none;
-}
-
-.upload-btn:hover,
-.logout-btn:hover {
-	/*background-color: rgb(58, 59, 59);*/
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.profile-btn img {
-	border-radius: 50%;
-}
-
 
 .profile-container {
 	max-width: 750px;
@@ -172,7 +117,6 @@ body {
 
 .user-artwork {
 	margin: 20px;
-	text-align: center;
 }
 
 .user-artwork h2 {

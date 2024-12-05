@@ -33,9 +33,11 @@
 		<c:choose>
 			<c:when test="${not empty sessionScope.user}">
 				<jsp:useBean id="user" scope="session" type="artauction.user.User"/>
-				<a href="<c:url value="/App/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
+				<sl-button href="<c:url value="/App/art-upload-form.jsp"/>">
+					Artwork Upload
+				</sl-button>
 				<form action="<c:url value="/Logout"/>" method="post">
-					<button type="submit" class="logout-btn">Log Out</button>
+					<sl-button type="submit" class="logout-btn">Log Out</sl-button>
 				</form>
 				<a href="<c:url value="/App/UserProfile"/>" class="profile-btn">
 					<ui:avatar user="${user}"/>

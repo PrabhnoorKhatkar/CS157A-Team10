@@ -17,15 +17,15 @@
 								<sl-input type="text" name="displayName" placeholder="Display Name" required></sl-input>
 
 					<sl-input type="email" name="emailAddress" placeholder="Email" required>
-						<sl-icon name="envelope" slot="prefix" class="ml-4"></sl-icon>
+						<sl-icon name="envelope" slot="prefix"></sl-icon>
 					</sl-input>
 
 							<sl-input type="password" name="password" placeholder="Password" required password-toggle>
-								<sl-icon name="lock" slot="prefix" class="ml-4"></sl-icon>
+								<sl-icon name="lock" slot="prefix"></sl-icon>
 							</sl-input>
 
 							<sl-input type="text" name="address" placeholder="Address" required>
-								<sl-icon name="house" slot="prefix" class="ml-4"></sl-icon>
+								<sl-icon name="house" slot="prefix"></sl-icon>
 							</sl-input>
 
 								<label>

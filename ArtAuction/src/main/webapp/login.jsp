@@ -26,8 +26,8 @@
 				<tr>
 
 					<td><label>
-						<sl-input type="email" name="email" placeholder="Email" required>
-							<sl-icon name="envelope" slot="prefix" class="ml-4"></sl-icon>
+						<sl-input type="email" name="email" placeholder="Email" required autocomplete="username">
+							<sl-icon name="envelope" slot="prefix"></sl-icon>
 						</sl-input>
 					</label></td>
 				</tr>
@@ -35,7 +35,7 @@
 				<tr>
 					<td><label>
 						<sl-input type="password" name="password" placeholder="Password" required password-toggle>
-							<sl-icon name="lock" slot="prefix" class="ml-4"></sl-icon>
+							<sl-icon name="lock" slot="prefix"></sl-icon>
 						</sl-input>
 					</label></td>
 				</tr>
