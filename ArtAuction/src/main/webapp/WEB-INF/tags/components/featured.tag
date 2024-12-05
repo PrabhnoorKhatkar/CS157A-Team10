@@ -21,12 +21,11 @@
 		</p>
 
 		<p class ="info">By: ${artwork.artist}</p>
-		<p class ="info">Result: ${artwork.auctionDetails.result}</p>
+		<p class ="info">Status: ${artwork.auctionDetails.result}</p>
 		<p class ="info">Amount: ${artwork.auctionDetails.amount}</p>
 
 		<p class ="info"> 
 			<c:set var="timestamp" value="${artwork.auctionDetails.endTimestamp}" />
-			<c:out value="${timestamp}" />
 		</p>
 		
 		<div id="countdown-${artwork.id}"></div>
