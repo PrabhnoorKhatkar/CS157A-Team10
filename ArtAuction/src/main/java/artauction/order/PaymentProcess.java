@@ -78,7 +78,7 @@ public class PaymentProcess extends HttpServlet {
 
 
         // Forward to the artwork details JSP page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("User/order-confirmation.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/App/order-confirmation.jsp");
         dispatcher.forward(request, response);
 
 
