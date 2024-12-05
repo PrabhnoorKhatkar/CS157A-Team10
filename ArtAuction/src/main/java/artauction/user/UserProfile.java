@@ -93,7 +93,7 @@ public class UserProfile extends HttpServlet {
             
 
         request.setAttribute("myProfile", myProfile);
-        boolean isFollowed = followUserDAO.isFollowing(userID, otherID);
+        boolean isFollowed = followUserDAO.isFollowing(userID, viewedID);
 
         request.setAttribute("otherID", otherID);
         request.setAttribute("isFollowed", isFollowed);
