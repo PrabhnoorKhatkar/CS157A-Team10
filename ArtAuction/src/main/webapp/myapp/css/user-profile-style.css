@@ -25,6 +25,12 @@ body {
 	text-decoration: none;
 }
 
+.header-mid {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 17px;
+}
+
 .header-right {
 	display: flex;
 	align-items: center;
