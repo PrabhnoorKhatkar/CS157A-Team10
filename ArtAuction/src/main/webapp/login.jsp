@@ -26,7 +26,7 @@
 				<tr>
 
 					<td><label>
-						<sl-input type="email" name="email" placeholder="Email" required autocomplete="username">
+						<sl-input type="email" name="email" placeholder="Email" required>
 							<sl-icon name="envelope" slot="prefix"></sl-icon>
 						</sl-input>
 					</label></td>

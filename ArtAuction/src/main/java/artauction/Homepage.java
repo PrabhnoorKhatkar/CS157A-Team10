@@ -67,4 +67,9 @@ public class Homepage extends HttpServlet {
         req.setAttribute("featuredArtworks", featuredArtworks);
         req.getRequestDispatcher("/WEB-INF/homepage.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }

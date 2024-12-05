@@ -38,6 +38,7 @@ public class ArtworkDAO extends DAO {
         loadDriver(dbdriver);
         String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN artimage NATURAL JOIN auctiondetails WHERE title LIKE ? OR description LIKE ? OR artist LIKE ?;";
 
+        keyword = keyword.trim();
         List<Artwork> searchList = new ArrayList<>();
 
         ResultSet resultSet = null;

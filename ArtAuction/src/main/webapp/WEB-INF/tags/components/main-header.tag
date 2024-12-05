@@ -19,7 +19,7 @@
 		</h2>
 	</div>
 	<div class="header-mid">
-		<form action="<c:url value="/SearchArtwork"/>" method="post" class="flex flex-row flex-nowrap items-center m-0">
+		<form action="<c:url value="/Homepage"/>" method="get" class="flex flex-row flex-nowrap items-center m-0">
 			<label>
 				<sl-input type="text" placeholder="Search artworks..." name="searchText">
 					<sl-icon name="search" slot="prefix"></sl-icon>
