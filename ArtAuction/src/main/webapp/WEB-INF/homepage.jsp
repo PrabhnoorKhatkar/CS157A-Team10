@@ -34,7 +34,7 @@
 
 		<header>
 			<section class="search-results" id="search-gallery">
-				<div class="container">
+				<div class="register-card">
 					<h2 class="font-bold text-xl">Auctions</h2>
 					<div class="art-grid">
 

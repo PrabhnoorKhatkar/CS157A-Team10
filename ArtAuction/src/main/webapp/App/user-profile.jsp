@@ -130,7 +130,7 @@
 		<c:if test="${myProfile}">
 			<div class="saved-artwork">
 				<section class="search-results" id="gallery">
-					<div class="container" id="favoriteList" style="display: none;">
+					<div class="register-card" id="favoriteList" style="display: none;">
 
 						<!--    <h2>Favorites</h2> -->
 						<div class="art-grid">

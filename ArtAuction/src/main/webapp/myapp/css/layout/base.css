@@ -4,7 +4,7 @@
     visibility: hidden; /* for shoelace */
 }
 :root {
-    /* some colors from coloors.co */
+   /* some colors from coloors.co */
     --whiteish: hsla(220, 8%, 92%, 1);
     --cadet-gray: hsla(197, 21%, 70%, 1);
     --moonstone: hsla(188, 99%, 38%, 1);
@@ -25,43 +25,6 @@
     font-family: "Titillium Web", sans-serif;
     line-height: 1.2;
 }
-
-.titillium-web-regular {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.titillium-web-semibold {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
-
-jtitillium-web-bold {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.titillium-web-regular-italic {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-}
-
-.titillium-web-semibold-italic {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.titillium-web-bold-italic {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 700;
-    font-style: italic;
-}
-
 body {
     --primary-bg: var(--whiteish);
     --fg: black;
