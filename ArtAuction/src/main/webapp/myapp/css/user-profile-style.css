@@ -1,6 +1,5 @@
 * {
 	box-sizing: border-box;
-	letter-spacing: 1px;
 }
 
 body {
@@ -49,25 +48,6 @@ body {
 	font-size: 18px;
 }
 
-.setting-btn,
-.edit-profile-btn, .artwork-btn, .favorite-btn, .order-btn {
-	background-color: transparent;
-	color: #444;
-	border: 1px solid #444;
-	padding: 10px 15px;
-	/*border-radius: 5px;*/
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: 700;
-	text-decoration: none;
-	margin: 10px;
-}
-
-.setting-btn:hover,
-.edit-profile-btn:hover {
-	/*background-color: rgb(58, 59, 59);*/
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
 
 @media (max-width: 768px) {
 	.profile-card {
@@ -79,40 +59,6 @@ body {
 	.profile-img {
 		margin-bottom: 20px;
 	}
-}
-
-.submit-pfp, .follow {
-	width: 25%;
-	padding: 5px;
-	background-color: none;
-	border: 1px solid #444;
-	color: #444;
-	font-size: 15px;
-	font-weight: bold;
-	cursor: pointer;
-	/*border-radius: 5px;*/
-	margin-top: 10px;
-}
-
-.follow:hover, .submit-pfp:hover, .display-follow:hover, 
-.artwork-btn:hover, .favorite-btn:hover, .order-btn:hover{
-	color: white;
-	background-color: rgb(58, 59, 59);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.display-follow {
-	text-decoration: none;
-	width: 25%;
-	padding: 5px;
-	background-color: none;
-	border: 1px solid #444;
-	color: #444;
-	font-size: 15px;
-	font-weight: bold;
-	cursor: pointer;
-	/*border-radius: 5px;*/
-	margin-top: 10px;
 }
 
 .user-artwork {

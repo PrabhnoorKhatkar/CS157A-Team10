@@ -35,12 +35,12 @@
 						<form action="<c:url value="/App/UserProfile"/>" method="POST"
 							  enctype="multipart/form-data" class="new-pfp">
 							<label for="profilepicture">New profile picture:</label>
-							<input id="profilepicture"
-								   name="profilepicture" accept="image/*" type="file">
-							<br>
-							<button type="submit" name="action"
-									value="editProfilePicture" class="submit-pfp">Submit
-							</button>
+							<div class="flex flex-row justify-between">
+								<input id="profilepicture" name="profilepicture" accept="image/*" type="file">
+								<sl-button type="submit" name="action" value="editProfilePicture" class="submit-pfp">
+									Submit
+								</sl-button>
+							</div>
 						</form>
 					</c:if>
 					<c:if test="${!myProfile}">
@@ -51,24 +51,24 @@
 								   value="${viewedUser.displayName}">
 							<c:choose>
 								<c:when test="${isFollowed}">
-									<button type="submit" name="action"
+									<sl-button type="submit" name="action"
 											value="unfollow" class="follow">Unfollow
-									</button>
+									</sl-button>
 								</c:when>
 								<c:otherwise>
-									<button type="submit" name="action"
+									<sl-button type="submit" name="action"
 											value="follow" class="follow">Follow
-									</button>
+									</sl-button>
 								</c:otherwise>
 							</c:choose>
 						</form>
 					</c:if>
-					<button onclick="toggleFollowingList()"
-							id="followingBtn" class="follow">${followingCount} <br> Following
-					</button>
-					<button onclick="toggleFollowersList()"
-							id="followersBtn" class="follow">${followerCount} <br> Followers
-					</button>
+					<sl-button onclick="toggleFollowingList()"
+							id="followingBtn" class="follow">${followingCount} Following
+					</sl-button>
+					<sl-button onclick="toggleFollowersList()"
+							id="followersBtn" class="follow">${followerCount} Followers
+					</sl-button>
 					<br><br>
 					<div id="followingList" style="display: none;">
 						<c:forEach items="${followingUsersList}"
@@ -90,26 +90,30 @@
 			</div>
 		</div>
 		<div class="user-artwork">
-			<c:choose>
-				<c:when test="${myProfile}">
-					<button onclick="toggleArtworkList()"
-							id="artworkBtn" class="artwork-btn">My Artwork
-					</button>
-					<button onclick="toggleFavoriteList()"
-							id="favoriteBtn" class="favorite-btn">Favorites
-					</button>
-					<button onclick="toggleOrderList()"
-							id="orderBtn" class="order-btn">Order History
-					</button>
-					<!-- <h2>My Artwork</h2>-->
-				</c:when>
-				<c:otherwise>
-					<button onclick="toggleArtworkList()"
-							id="artworkBtn" class="artwork-btn">${viewedUser.displayName}'s Artwork
-					</button>
-					<!-- <h2>${viewedUser.displayName}'s Artwork</h2> -->
-				</c:otherwise>
-			</c:choose>
+			<div class="buttons flex flex-row justify-center gap-4">
+				<sl-button-group>
+					<c:choose>
+						<c:when test="${myProfile}">
+							<sl-button onclick="toggleArtworkList()"
+									   id="artworkBtn" class="artwork-btn">My Artwork
+							</sl-button>
+							<sl-button onclick="toggleFavoriteList()"
+									   id="favoriteBtn" class="favorite-btn">Favorites
+							</sl-button>
+							<sl-button onclick="toggleOrderList()"
+									   id="orderBtn" class="order-btn">Order History
+							</sl-button>
+							<!-- <h2>My Artwork</h2>-->
+						</c:when>
+						<c:otherwise>
+							<sl-button onclick="toggleArtworkList()"
+									   id="artworkBtn" class="artwork-btn">${viewedUser.displayName}'s Artwork
+							</sl-button>
+							<!-- <h2>${viewedUser.displayName}'s Artwork</h2> -->
+						</c:otherwise>
+					</c:choose>
+				</sl-button-group>
+			</div>
 			<div class="art-grid">
 				<c:choose>
 					<c:when test="${not empty requestScope.artworkList}">

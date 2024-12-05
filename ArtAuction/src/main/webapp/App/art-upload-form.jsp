@@ -1,14 +1,15 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-	<head>
+<%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts" %>
+<layout:base>
+
+	<jsp:attribute name="head">
 		<meta charset="UTF-8">
 		<title>Artwork Upload Form</title>
 		<link rel="stylesheet" href="<c:url value="/myapp/css/art-upload-form-style.css"/>">
-	</head>
-	<body>
+	</jsp:attribute>
+	<jsp:body>
 		<form action="<c:url value="/App/UploadArtwork"/>" method="post" class="upload-form" enctype="multipart/form-data">
 			<h2>Upload Artwork for Auction</h2>
 
@@ -23,7 +24,7 @@
 
 			<!-- Tags -->
 			<sl-textarea id="tags" name="tags" label="Tags:"
-					  placeholder="Tags: list them" ></sl-textarea>
+						 placeholder="Tags: list them" ></sl-textarea>
 
 			<!-- IMAGE UPLOAD -->
 			<label for="image">Upload Image:</label> <input type="file" id="image"
@@ -31,19 +32,22 @@
 
 			<!-- STARTING PRICE -->
 			<sl-input
-				label="Starting Price ($):"
-				type="number" name="startingPrice" id="startingPrice"
-				placeholder="e.g., 500" min="0" required></sl-input>
+					label="Starting Price ($):"
+					type="number" name="startingPrice" id="startingPrice"
+					placeholder="e.g., 500" min="0" required></sl-input>
 
 			<!-- RESERVE PRICE -->
-			<sl-input id="reservePrice" label="Reserve Price ($):" type="number" name="reservePrice" placeholder="e.g., 500" min="0" required>
+			<sl-input id="reservePrice" label="Reserve Price ($):" type="number" name="reservePrice" placeholder="e.g., 500" min="0" required></sl-input>
 
-			<!-- AUCTION DURATION IN HOURS -->
-			<sl-input id="duration" label="Auction Duration (days):" type="number" name="duration" placeholder="Enter duration in days" min="1" required></sl-input>
+				<!-- AUCTION DURATION IN HOURS -->
+				<sl-input id="duration" label="Auction Duration (days):" type="number" name="duration" placeholder="Enter duration in days" min="1" required></sl-input>
 
-			<!-- SUBMIT BTN -->
-			<sl-button type="submit">Upload Artwork</sl-button>
-			<a href="<c:url value="/"/>" class="back-to-homepage">Back to Homepage</a>
+				<!-- SUBMIT BTN -->
+			<div class="flex flex-row justify-center">
+
+				<sl-button type="submit">Upload Artwork</sl-button>
+			</div>
+				<a href="<c:url value="/"/>" class="back-to-homepage">Back to Homepage</a>
 		</form>
-	</body>
-</html>
+	</jsp:body>
+</layout:base>
