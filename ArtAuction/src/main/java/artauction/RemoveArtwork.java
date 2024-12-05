@@ -1,6 +1,7 @@
 package artauction;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,9 +10,10 @@ import java.io.IOException;
 /**
  * Servlet implementation class EditArtwork
  */
+@WebServlet(name = "RemoveArtwork", urlPatterns={"/App/RemoveArtwork"})
 public class RemoveArtwork extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,7 +43,7 @@ public class RemoveArtwork extends HttpServlet {
 
 		if (result.equals("Successfully Removed"))
 		{
-			request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+			request.getRequestDispatcher("/").forward(request, response);
 		}
 
 	}

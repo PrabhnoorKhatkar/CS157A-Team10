@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div class="art-item animated-card">
-	<a href="<c:url value="/ArtworkPage?id=${artwork.id}"/>"
+	<a href="<c:url value="/App/ArtworkPage?id=${artwork.id}"/>"
 		class="art-item-link"> <c:forEach var="artImage"
 			items="${artwork.images}">
 			<img src="<c:url value="/Uploads/${artImage.imageId}"/>">

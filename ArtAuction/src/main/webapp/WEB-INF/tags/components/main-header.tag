@@ -9,7 +9,7 @@
 		</h2>
 	</div>
 	<div class="header-mid">
-		<form action="SearchArtwork" method="post">
+		<form action="<c:url value="/SearchArtwork"/>" method="post">
 			<label>
 				<input type="text" class="search-box" placeholder="Search..."
 					   name="searchText">
@@ -22,7 +22,7 @@
 		<c:choose>
 			<c:when test="${not empty sessionScope.user}">
 				<jsp:useBean id="user" scope="session" type="artauction.user.User"/>
-				<a href="<c:url value="/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
+				<a href="<c:url value="/App/art-upload-form.jsp"/>" class="upload-btn">Artwork Upload</a>
 				<form action="<c:url value="/Logout"/>" method="post">
 					<button type="submit" class="logout-btn">Log Out</button>
 				</form>

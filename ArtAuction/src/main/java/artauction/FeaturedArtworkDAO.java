@@ -16,7 +16,12 @@ public class FeaturedArtworkDAO extends DAO {
         loadDriver();
         var con = getConnection();
 
-        String sql = "SELECT * FROM artwork NATURAL JOIN auction NATURAL JOIN auctiondetails NATURAL JOIN artimage WHERE result = 'ACTIVE' ORDER BY endTimestamp ASC LIMIT ?;";
+        String sql = """
+                SELECT * FROM artwork
+                NATURAL JOIN auction
+                NATURAL JOIN auctiondetails
+                NATURAL JOIN artimage WHERE result = 'ACTIVE' ORDER BY endTimestamp LIMIT ?;
+                """;
         List<Artwork> featuredArtworks = new ArrayList<>();
 
         try {

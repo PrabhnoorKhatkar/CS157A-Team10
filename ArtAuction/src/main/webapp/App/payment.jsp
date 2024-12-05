@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="myapp/css/payment-style.css" type="text/css" />
+<link rel="stylesheet" href="<c:url value='/myapp/css/payment-style.css'/>" type="text/css"/>
 <title>Payment</title>
 </head>
 <body>
 
 	<h1>Payment</h1>
 
-	<form action="PaymentProcess" method="post" class="payment-form">
+	<form action="<c:url value="/App/PaymentProcess"/>" method="post" class="payment-form">
 
 		<input type="hidden" name="artworkID" value="${artwork.id}">
 		<input type="hidden" name="totalPrice" value="${totalPrice}">
@@ -25,7 +25,7 @@
 			<c:forEach var="artImage" items="${artwork.images}">
 				<img src="<c:url value="/Uploads/${artImage.imageId}"/>" width="96" height="96"/>
 			</c:forEach>
-	
+
 
 			<div class="art-info">
 
@@ -69,14 +69,14 @@
 
 				<option value="paypal" disabled>PayPal</option>
 
-			</select> 
-			
-			<label for="name">NAME ON CARD:</label> 
-			
-			<input type="text" id="name" name="name" placeholder="Enter name on card" required> 
-				
-				<label for="cardNumber">Card Number:</label> 
-				
+			</select>
+
+			<label for="name">NAME ON CARD:</label>
+
+			<input type="text" id="name" name="name" placeholder="Enter name on card" required>
+
+				<label for="cardNumber">Card Number:</label>
+
 				<input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" maxlength="16" required>
 
 		</div>
@@ -100,7 +100,7 @@
 			</div>
 
 		</div>
-		
+
 		<div class="billing">
 			<input type="checkbox" id="billingAddress" name="billingAddress" value="billingAddress">
 			<label for="billingAddress">Billing address is the same as shipping address</label>
@@ -111,24 +111,24 @@
 
 		<div class="delivery-info-container">
 
-			<label for="email">Email:</label> 
+			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" placeholder="Enter your email" required>
 
 	        <label for="address1">Address Line 1:</label>
 	        <input type="text" id="address1" name="address1" placeholder="123 Main St" required>
-	        
+
 	        <label for="address2">Address Line 2 (Optional):</label>
 	        <input type="text" id="address2" name="address2" placeholder="Apartment, Suite, etc.">
-	
+
 	        <label for="city">City:</label>
 	        <input type="text" id="city" name="city" placeholder="Enter city" required>
-	        
+
 	        <label for="state">State:</label>
 	        <input type="text" id="state" name="state" placeholder="Enter state" required>
-	
+
 	        <label for="zip">Zip Code:</label>
 	        <input type="text" id="zip" name="zip" placeholder="Enter zip code" required>
-	
+
 	        <label for="country">Country:</label>
 	        <select id="country" name="country" required>
 	            <option value="US">United States</option>
@@ -140,6 +140,6 @@
 		<button type="submit" class="pay-btn">Complete Payment</button>
 
 	</form>
-	<script src="myapp/javascript/payment.js"></script>
+	<script src="<c:url value='/myapp/javascript/payment.js'/>"></script>
 </body>
 </html>

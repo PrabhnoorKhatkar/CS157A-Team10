@@ -6,7 +6,7 @@
 <div class="mySlides fade">
 	<div class ="featured-card">
 	<div class = "div-left">
-		<a href="<c:url value="/ArtworkPage?id=${artwork.id}"/>"
+		<a href="<c:url value="/App/ArtworkPage?id=${artwork.id}"/>"
 		class="art-item-link"> <c:forEach var="artImage"
 			items="${artwork.images}">
 			<img src="<c:url value="/Uploads/${artImage.imageId}"/>" class="featured-img" width="600" height="900">

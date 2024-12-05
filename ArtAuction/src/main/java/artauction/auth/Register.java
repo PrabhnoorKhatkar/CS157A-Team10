@@ -2,6 +2,7 @@ package artauction.auth;
 
 import artauction.user.User;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Register
  */
+@WebServlet(name = "Register", urlPatterns = "/Register")
 public class Register extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

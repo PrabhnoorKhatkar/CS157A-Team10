@@ -23,7 +23,7 @@ public class LoginFilter extends HttpFilter {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             // e.g. ArtAuction/login.jsp?from=ArtAuction/test
-            var url = String.format("%s/%s?from=%s", request.getContextPath(), Login.PAGE, request.getRequestURI());
+            var url = String.format("%s/%s?from=%s?%s", request.getContextPath(), Login.PAGE, request.getRequestURI(), request.getQueryString());
             response.sendRedirect(url); // No logged-in user found, so redirect to login page.
         } else {
             chain.doFilter(request, response); // Logged-in user found, so just continue request.

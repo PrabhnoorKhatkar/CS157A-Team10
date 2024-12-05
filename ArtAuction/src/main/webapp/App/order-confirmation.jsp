@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../myapp/css/order-confirmation-style.css">
+	<link rel="stylesheet" href="<c:url value="/myapp/css/order-confirmation-style.css"/>">
 	<title>Order Confirmation</title>
 	</head>
 	<body>
@@ -25,7 +26,7 @@
 		
 		
 			<div class="back-homepage">
-				<a href="homepage.jsp" class="back-to-homepage">Back to Homepage</a>
+				<a href="<c:url value="/"/>" class="back-to-homepage">Back to Homepage</a>
 			</div>
 		</div>
 	</body>

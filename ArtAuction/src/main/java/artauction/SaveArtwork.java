@@ -1,6 +1,7 @@
 package artauction;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class SaveArtwork
  */
+@WebServlet(name = "SaveArtwork", urlPatterns={"/App/SaveArtwork"})
 public class SaveArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -59,8 +61,7 @@ public class SaveArtwork extends HttpServlet {
             saveArtworkDAO.removeSave(userID, artworkID);
         }
 
-
-        response.sendRedirect(request.getContextPath() + "/ArtworkPage?id=" + artworkID);
+        response.sendRedirect(request.getContextPath() + "/App/ArtworkPage?id=" + artworkID);
     }
 
 }

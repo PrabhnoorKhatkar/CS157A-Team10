@@ -6,7 +6,7 @@
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts"%>
 <layout:base>
 	<jsp:attribute name="head">
-		<link rel="stylesheet" href="<c:url value="/myapp/css/homepage-style.css"/>" type="text/css"/>
+		<link rel="stylesheet" href="<c:url value='/myapp/css/homepage-style.css'/>" type="text/css"/>
 		<title>Homepage</title>
 	</jsp:attribute>
 	<jsp:body>
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="<c:url value="/myapp/javascript/slideshow.js"/>"></script>
+		<script src="<c:url value='/myapp/javascript/slideshow.js'/>"></script>
 
 		<header>
 			<section class="search-results" id="search-gallery">

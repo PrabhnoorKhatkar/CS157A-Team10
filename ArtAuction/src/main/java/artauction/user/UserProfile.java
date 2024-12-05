@@ -9,6 +9,7 @@ import artauction.order.OrderDAO;
 import artauction.order.OrderDetails;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+@WebServlet(name = "UserProfile", urlPatterns={"/App/UserProfile"})
 @MultipartConfig
 public class UserProfile extends HttpServlet {
 
@@ -76,17 +78,17 @@ public class UserProfile extends HttpServlet {
 
             getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
             getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
-            
+
             getOrderList = orderDAO.getOrderHistory(userID);
             System.out.println(getOrderList);
-            
+
             try {
 				otherID = userDAO.getProfilePictureID(viewedID);
 			} catch (SQLException e) {
 				// Auto-generated catch block
 				e.printStackTrace();
 			}
-            
+
 
         request.setAttribute("myProfile", myProfile);
         boolean isFollowed = followUserDAO.isFollowing(userID, viewedID);
@@ -101,10 +103,10 @@ public class UserProfile extends HttpServlet {
 
         request.setAttribute("followingUsersList", getFollowingUsersList);
         request.setAttribute("getFollowerUsersList", getFollowerUsersList);
-        
+
         request.setAttribute("getOrderList", getOrderList);
 
-        request.getRequestDispatcher("user-profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/App/user-profile.jsp").forward(request, response);
 
     }
 
@@ -154,7 +156,7 @@ public class UserProfile extends HttpServlet {
             response.sendRedirect(request.getContextPath() +"/App/UserProfile?user=" + request.getParameter("displayName"));
 
         }
-        
+
     }
 
 }

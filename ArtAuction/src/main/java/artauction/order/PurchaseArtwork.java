@@ -5,6 +5,7 @@ import artauction.ArtworkDAO;
 import artauction.Auction;
 import artauction.AuctionDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class EditArtwork
  */
+@WebServlet(name = "PurchaseArtwork", urlPatterns={"/App/PurchaseArtwork"})
 public class PurchaseArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -37,14 +39,6 @@ public class PurchaseArtwork extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        // Check if user is logged in
-        if (request.getSession().getAttribute("userID") == null) {
-            // User is not logged in, redirect to login
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
         int artworkID = Integer.parseInt(request.getParameter("artworkID"));
         Integer userID = (Integer) request.getSession().getAttribute("userID");
 
@@ -69,7 +63,7 @@ public class PurchaseArtwork extends HttpServlet {
         request.setAttribute("fees", fees);
         request.setAttribute("totalPrice", totalPrice);
 
-        request.getRequestDispatcher("/payment.jsp").forward(request, response);
+        request.getRequestDispatcher("/App/payment.jsp").forward(request, response);
 
 
     }

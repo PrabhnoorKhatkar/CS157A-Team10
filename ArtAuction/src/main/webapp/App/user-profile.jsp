@@ -9,8 +9,7 @@
 
 <layout:base>
 	<jsp:attribute name="head">
-        <link rel="stylesheet" href="../myapp/css/user-profile-style.css"
-			  type="text/css"/>
+        <link rel="stylesheet" href="<c:url value='/myapp/css/user-profile-style.css'/>" type="text/css"/>
         <title>My Profile</title>
     </jsp:attribute>
 	<jsp:body>
@@ -33,7 +32,7 @@
 					<hr width="100%" size="2">
 					<br>
 					<c:if test="${myProfile}">
-						<form action="/App/UserProfile" method="POST"
+						<form action="<c:url value="/App/UserProfile"/>" method="POST"
 							  enctype="multipart/form-data" class="new-pfp">
 							<label for="profilepicture">New profile picture:</label>
 							<input id="profilepicture"
@@ -45,7 +44,7 @@
 						</form>
 					</c:if>
 					<c:if test="${!myProfile}">
-						<form action="/App/UserProfile" method="post">
+					<form action="<c:url value="/App/UserProfile"/>" method="post">
 							<input type="hidden" name="followedUserId"
 								   value="${viewedUser.id}">
 							<input type="hidden" name="displayName"
@@ -187,7 +186,7 @@
 			</c:choose>
 			</div>
 		</c:if>
-		<script src="<c:url value="/myapp/javascript/user-profile.js"/>"></script></script>
+		<script src="<c:url value='/myapp/javascript/user-profile.js'/>"></script>
 		</main>
 		<footer>
 		<jsp:useBean id="admin" scope="session" type="java.lang.Boolean"/>

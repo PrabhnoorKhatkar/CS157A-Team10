@@ -2,6 +2,7 @@ package artauction.auth;
 
 import artauction.user.Admin;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Login
  */
+@WebServlet(name = "Login", urlPatterns = "/Login")
 public class Login extends HttpServlet {
     public static final String PAGE = "login.jsp";
     private static final long serialVersionUID = 1L;

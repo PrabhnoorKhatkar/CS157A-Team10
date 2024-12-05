@@ -8,12 +8,12 @@
 
 <layout:base>
 	<jsp:attribute name="head">
-		<link rel="stylesheet" href="<c:url value="/myapp/css/artwork-style.css"/>">
+		<link rel="stylesheet" href="<c:url value='/myapp/css/artwork-style.css'/>">
 		<title>Artwork</title>
 	</jsp:attribute>
 	<jsp:body>
 		<ui:main-header/>
-		<script src="myapp/javascript/countdown.js"></script>
+		<script src="<c:url value='myapp/javascript/countdown.js'/>"></script>
 		<!-- Check if user is the owner and admin (no shill bidding)-->
 		<jsp:useBean id="artwork" scope="request" type="artauction.Artwork"/>
 		<jsp:useBean id="ownerDisplayName" scope="request" type="java.lang.String"/>
@@ -21,7 +21,7 @@
 		<jsp:useBean id="auction" scope="request" type="artauction.Auction"/>
 		<jsp:useBean id="highestBidder" scope="request" type="artauction.user.User"/>
 		<c:if test="${isOwner && sessionScope.admin}">
-			<form action="EditArtwork" method="post" class="artwork-body">
+			<form action="<c:url value="/App/EditArtwork"/>" method="post" class="artwork-body">
 				<div class="left">
 					<c:forEach var="image" items="${artwork.images}">
 						<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
@@ -78,7 +78,7 @@
 						<button type="submit" class="save-changes-btn">Save Changes</button>
 
 						<!-- Remove Listing -->
-						<button type="submit" class="remove-btn" formaction="RemoveArtwork"
+						<button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
 								onsubmit="return confirm('Are you sure you want to remove this listing?');">
 							Remove Listing
 						</button>
@@ -101,7 +101,7 @@
 		</c:if>
 
 		<c:if test="${isOwner && !sessionScope.admin}">
-			<form action="EditArtwork" method="post" class="artwork-body">
+			<form action="<c:url value="/App/EditArtwork"/>" method="post" class="artwork-body">
 				<div class="left">
 					<c:forEach var="image" items="${artwork.images}">
 						<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
@@ -158,7 +158,7 @@
 						<button type="submit" class="save-changes-btn">Save Changes</button>
 
 						<!-- Remove Listing -->
-						<button type="submit" class="remove-btn" formaction="RemoveArtwork"
+						<button type="submit" class="remove-btn" formaction="<c:url value="/App/RemoveArtwork"/>"
 								onsubmit="return confirm('Are you sure you want to remove this listing?');">
 							Remove Listing
 						</button>
@@ -208,7 +208,7 @@
 							<p class="highest"> You are currently the highest bidder</p>
 						</c:if>
 						<c:if test="${auction.result == 'ACTIVE'}">
-							<form action="PlaceBid" method="post" class="placebid">
+							<form action="<c:url value="/App/PlaceBid"/>" method="post" class="placebid">
 								<input type="hidden" name="artworkID" value="${artwork.id}">
 
 								<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
@@ -247,19 +247,19 @@
 
 					<!-- save favorite artwork functionality -->
 					<div>
-						<form action="SaveArtwork" method="post">
+						<form action="<c:url value="/App/SaveArtwork"/>" method="post">
 							<input type="hidden" name="artworkID" value="${artwork.id}">
 
 							<c:choose>
 								<c:when test="${checkSave}">
 									<button type="submit" name="action" value="unsave"class="un-save-btn">
-										<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
+										<img src="../myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
 									</button>
 									<!-- <p>Saved to Favorites</p> -->
 								</c:when>
 								<c:when test="${!checkSave}">
 									<button type="submit" name="action" value="save" class="save-btn">
-										<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
+										<img src="../myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
 									</button>
 								</c:when>
 							</c:choose>
@@ -272,7 +272,7 @@
 					<c:if test="${winningUser}">
 						<p>You WON!!!</p>
 						<!-- purchase artwork functionality -->
-						<form action="PurchaseArtwork" method="post">
+						<form action="<c:url value="/App/PurchaseArtwork"/>" method="post">
 
 							<input type="hidden" name="artworkID" value="${artwork.id}">
 							<input type="hidden" name="userID" value="${userID}">
@@ -336,7 +336,7 @@
 							<p class="highest"> You are currently the highest bidder</p>
 						</c:if>
 						<c:if test="${auction.result == 'ACTIVE'}">
-							<form action="PlaceBid" method="post" class="placebid">
+							<form action="<c:url value="/App/PlaceBid"/>" method="post" class="placebid">
 								<input type="hidden" name="artworkID" value="${artwork.id}">
 
 								<label for="bidAmount" class="bidding"> <em>Place Your Bid: </em></label>
@@ -374,19 +374,19 @@
 
 
 					<!-- save favorite artwork functionality -->
-					<form action="SaveArtwork" method="post">
+					<form action="<c:url value="/App/SaveArtwork"/>" method="post">
 						<input type="hidden" name="artworkID" value="${artwork.id}">
 
 						<c:choose>
 							<c:when test="${checkSave}">
 								<button type="submit" name="action" value="unsave"class="un-save-btn">
-									<img src="myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
+									<img src="../myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
 								</button>
 								<!-- <p>Saved to Favorites</p> -->
 							</c:when>
 							<c:when test="${!checkSave}">
 								<button type="submit" name="action" value="save" class="save-btn">
-									<img src="myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
+									<img src="../myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
 								</button>
 							</c:when>
 						</c:choose>
@@ -396,7 +396,7 @@
 					<c:if test="${winningUser}">
 						<p>You WON!!!</p>
 						<!-- purchase artwork functionality -->
-						<form action="PurchaseArtwork" method="post">
+						<form action="<c:url value="/App/PurchaseArtwork"/>" method="post">
 
 							<input type="hidden" name="artworkID" value="${artwork.id}">
 							<input type="hidden" name="userID" value="${userID}">

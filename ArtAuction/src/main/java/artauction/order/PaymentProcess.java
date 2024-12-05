@@ -8,6 +8,7 @@ import artauction.user.User;
 import artauction.user.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class EditArtwork
  */
+@WebServlet(name = "PaymentProcess", urlPatterns={"/App/PaymentProcess"})
 public class PaymentProcess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
@@ -38,20 +40,7 @@ public class PaymentProcess extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// Check if user is logged in
-		if (request.getSession().getAttribute("userID") == null) 
-		{
-			// User is not logged in, redirect to login
-			response.sendRedirect("login.jsp");
-			return;
-		}
-
 		int userID = (int) request.getSession().getAttribute("userID");
-
-
-		
-
 		UserDAO currUser = new UserDAO();
 		User curr = currUser.getFullUserById(userID);
 
@@ -59,13 +48,13 @@ public class PaymentProcess extends HttpServlet {
 		float totalPaid = Float.parseFloat(request.getParameter("totalPrice"));
 		String email = request.getParameter("email");
 		int artworkID = Integer.parseInt(request.getParameter("artworkID"));
-		
+
 		// address
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
-		
+
 		OrderDAO orderDAO = new OrderDAO();
 		String result = orderDAO.processOrder(userID, artworkID, totalPaid);
 
@@ -74,7 +63,7 @@ public class PaymentProcess extends HttpServlet {
 			AuctionDAO auctionDAO = new AuctionDAO();
 			auctionDAO.sellArtwork(artworkID);
 		}
-		
+
 		ArtworkDAO searchDAO = new ArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
 		request.setAttribute("artwork", artwork);
@@ -86,14 +75,14 @@ public class PaymentProcess extends HttpServlet {
 		request.setAttribute("address2", address2);
 		request.setAttribute("city", city);
 		request.setAttribute("state", state);
-		
+
 
 		// Forward to the artwork details JSP page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("User/order-confirmation.jsp");
 		dispatcher.forward(request, response);
-		
 
-		
+
+
 
 
 	}

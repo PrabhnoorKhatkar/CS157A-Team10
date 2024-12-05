@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -5,10 +6,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Artwork Upload Form</title>
-		<link rel="stylesheet" href="myapp/css/art-upload-form-style.css">
+		<link rel="stylesheet" href="<c:url value="/myapp/css/art-upload-form-style.css"/>">
 	</head>
 	<body>
-		<form action="UploadArtwork" method="post" class="upload-form" enctype="multipart/form-data">
+		<form action="<c:url value="/App/UploadArtwork"/>" method="post" class="upload-form" enctype="multipart/form-data">
 			<h2>Upload Artwork for Auction</h2>
 
 			<!-- TITLE -->
@@ -51,7 +52,7 @@
 
 			<!-- SUBMIT BTN -->
 			<button type="submit" class="upload-btn">Upload Artwork</button>
-			<a href="homepage.jsp" class="back-to-homepage">Back to Homepage</a>
+			<a href="<c:url value="/"/>" class="back-to-homepage">Back to Homepage</a>
 		</form>
 	</body>
 </html>

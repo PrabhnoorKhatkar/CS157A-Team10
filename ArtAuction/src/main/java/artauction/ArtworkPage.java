@@ -6,6 +6,7 @@ import artauction.image.Image;
 import artauction.image.ImageDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+@WebServlet(name = "ArtworkPage", urlPatterns={"/App/ArtworkPage"})
 public class ArtworkPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,11 +29,7 @@ public class ArtworkPage extends HttpServlet {
 
 		// Check if visting user is owner
 		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-		if (artworkPage.checkArtworkAccount(userID, artworkID)) {
-			request.setAttribute("isOwner", true); // userID is owner
-		} else {
-			request.setAttribute("isOwner", false);
-		}
+		request.setAttribute("isOwner", artworkPage.checkArtworkAccount(userID, artworkID)); // userID is owner
 
 		ArtworkDAO searchDAO = new ArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
@@ -42,9 +40,9 @@ public class ArtworkPage extends HttpServlet {
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
-		
+
 		User highestBidder = auctionDAO.getHighestBidder(artworkID);
-		
+
 		// Check if current user is highest bidder
 		if (highestBidder.getDisplayName() != null) {
 			request.setAttribute("isHighest", highestBidder.getId() == (user.getId()));
@@ -56,8 +54,6 @@ public class ArtworkPage extends HttpServlet {
 		if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() < auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
 			auctionDAO.reserveNotMetArtwork(artworkID);
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
-			
 		}
 		// Check if auction is over and reserve is met
 		// If so select winningUser and update to UNSOLD in DB
@@ -67,7 +63,6 @@ public class ArtworkPage extends HttpServlet {
 			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
 			auctionDAO.endArtwork(artworkID);
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
 			request.setAttribute("winningUser", winningUserID == userID);
 
@@ -80,12 +75,12 @@ public class ArtworkPage extends HttpServlet {
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
 			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
 			request.setAttribute("winningUser", winningUserID == userID);
 
 			highestBidder = auctionDAO.getHighestBidder(artworkID);
 		}
+		auction = auctionDAO.getAuctionByArtworkID(artworkID);
 		request.setAttribute("auction", auction);
 		request.setAttribute("highestBidder", highestBidder);
 
@@ -100,7 +95,7 @@ public class ArtworkPage extends HttpServlet {
 		boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
 		request.setAttribute("checkSave", checkSave);
 		// Forward to the artwork details JSP page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/App/artwork.jsp");
 		dispatcher.forward(request, response);
 	}
 

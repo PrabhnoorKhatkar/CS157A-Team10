@@ -2,6 +2,7 @@ package artauction;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import artauction.user.UserDAO;
 /**
  * Servlet implementation class EditArtwork
  */
+@WebServlet(name = "EditArtwork", urlPatterns={"/App/EditArtwork"})
 public class EditArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -35,38 +37,13 @@ public class EditArtwork extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-        int artworkID = Integer.parseInt(request.getParameter("id"));
-		int userID = (int) request.getSession().getAttribute("userID");
+		int artworkID = Integer.parseInt(request.getParameter("id"));
+		Integer userID = (Integer) request.getSession().getAttribute("userID");
+		var user = (User) request.getSession().getAttribute("user");
 
-		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-		User curr = null;
-		UserDAO userDao = new UserDAO();
-		curr = userDao.getFullUserById(userID);
-		request.setAttribute("current", curr);
-		
-		ImageDAO imageDAO = new ImageDAO();
-		int imageID = -1;
-		Image image = null;
-		
-		try {
-			imageID = userDao.getProfilePictureID(userID);
-			//System.out.println(imageID);
-			image = imageDAO.findByID(imageID);
-			//System.out.println(image.getFilename());
-		} catch (SQLException e) {
-			// Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		request.setAttribute("image", image);
-		
 		// Check if visting user is owner
-		if (artworkPage.checkArtworkAccount(userID, artworkID)) {
-			request.setAttribute("isOwner", true); // userID is owner
-		} else {
-			request.setAttribute("isOwner", false);
-		}
+		ArtworkPageDAO artworkPage = new ArtworkPageDAO();
+		request.setAttribute("isOwner", artworkPage.checkArtworkAccount(userID, artworkID)); // userID is owner
 
 		ArtworkDAO searchDAO = new ArtworkDAO();
 		Artwork artwork = searchDAO.getArtworkById(artworkID);
@@ -77,17 +54,12 @@ public class EditArtwork extends HttpServlet {
 
 		AuctionDAO auctionDAO = new AuctionDAO();
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
-		
+
 		User highestBidder = auctionDAO.getHighestBidder(artworkID);
-		
+
 		// Check if current user is highest bidder
 		if (highestBidder.getDisplayName() != null) {
-			if (highestBidder.getDisplayName().equals(curr.getDisplayName())) {
-				request.setAttribute("isHighest", true);
-			}
-			else {
-				request.setAttribute("isHighest", false);
-			}
+			request.setAttribute("isHighest", highestBidder.getId() == (user.getId()));
 		}
 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
@@ -96,27 +68,6 @@ public class EditArtwork extends HttpServlet {
 		if(currentTimestamp.after(auction.getEndTimestamp()) && auction.getAmount() < auction.getReserve() && auction.getResult().equals("ACTIVE"))
 		{
 			auctionDAO.reserveNotMetArtwork(artworkID);
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
-			
-			request.setAttribute("auction", auction);
-			request.setAttribute("highestBidder", highestBidder);
-			
-	
-			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-			request.setAttribute("ownerUserID", ownerUserID);
-	
-			// Get the owner display name using the ArtworkPageDAO
-			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-			
-			SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-			boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
-			request.setAttribute("checkSave", checkSave);
-			
-			// Forward to the artwork details JSP page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("edit-artwork.jsp");
-			dispatcher.forward(request, response);
-
 		}
 		// Check if auction is over and reserve is met
 		// If so select winningUser and update to UNSOLD in DB
@@ -126,36 +77,10 @@ public class EditArtwork extends HttpServlet {
 			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
 			auctionDAO.endArtwork(artworkID);
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
-			if(winningUserID == userID)
-			{
-				request.setAttribute("winningUser", true);
-				request.setAttribute("userID", userID);
-			}
-			else
-			{
-				request.setAttribute("winningUser", false);
-			}
+			request.setAttribute("winningUser", winningUserID == userID);
 
 			highestBidder = auctionDAO.getHighestBidder(artworkID);
-			request.setAttribute("auction", auction);
-			request.setAttribute("highestBidder", highestBidder);
-
-			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-			request.setAttribute("ownerUserID", ownerUserID);
-
-			// Get the owner display name using the ArtworkPageDAO
-			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-			
-			SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-			boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
-			request.setAttribute("checkSave", checkSave);
-			
-			// Forward to the artwork details JSP page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("edit-artwork.jsp");
-			dispatcher.forward(request, response);
 		}
 		// Check if auction is over and reserve is met and is UNSOLD status
 		// If so select winningUser and display to auction losers
@@ -164,61 +89,28 @@ public class EditArtwork extends HttpServlet {
 			User winningUser = auctionDAO.getHighestBidder(artworkID);
 			UserDAO userDAO = new UserDAO();
 			int winningUserID = userDAO.getUserIDByDisplayName(winningUser.getDisplayName());
-			auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
-			if(winningUserID == userID)
-			{
-				request.setAttribute("winningUser", true);
-				request.setAttribute("userID", userID);
-			}
-			else
-			{
-				request.setAttribute("winningUser", false);
-			}
+			request.setAttribute("winningUser", winningUserID == userID);
 
 			highestBidder = auctionDAO.getHighestBidder(artworkID);
-			request.setAttribute("auction", auction);
-			request.setAttribute("highestBidder", highestBidder);
-
-			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-			request.setAttribute("ownerUserID", ownerUserID);
-
-			// Get the owner display name using the ArtworkPageDAO
-			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-			
-			SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-			boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
-			request.setAttribute("checkSave", checkSave);
-			
-			// Forward to the artwork details JSP page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("edit-artwork.jsp");
-			dispatcher.forward(request, response);
-
 		}
-		// Auction is ACTIVE and everyone can bid
-		else
-		{
-			request.setAttribute("auction", auction);
-			request.setAttribute("highestBidder", highestBidder);
+		auction = auctionDAO.getAuctionByArtworkID(artworkID);
+		request.setAttribute("auction", auction);
+		request.setAttribute("highestBidder", highestBidder);
 
-			int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-			request.setAttribute("ownerUserID", ownerUserID);
+		int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
+		request.setAttribute("ownerUserID", ownerUserID);
 
-			// Get the owner display name using the ArtworkPageDAO
-			String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-			request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-			
-			SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-			boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
-			request.setAttribute("checkSave", checkSave);
-			
-			// Forward to the artwork details JSP page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("edit-artwork.jsp");
-			dispatcher.forward(request, response);
+		// Get the owner display name using the ArtworkPageDAO
+		String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
+		request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
 
-		}
-        
+		SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
+		boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
+		request.setAttribute("checkSave", checkSave);
+		// Forward to the artwork details JSP page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/App/artwork.jsp");
+		dispatcher.forward(request, response);
     }
 
     /**
@@ -242,20 +134,19 @@ public class EditArtwork extends HttpServlet {
         if (title.equals(artwork.getTitle()) && description.equals(artwork.getDescription()) && artist.equals(artwork.getArtist())) {
             // No changes made, forward back to the same page with a message
             request.setAttribute("message", "No changes were made to the artwork.");
-            response.sendRedirect(request.getContextPath() + "/ArtworkPage?id=" + artworkID);
-            return;
         }
+		else {
+			// Process the update
+			ArtworkDAO editDAO = new ArtworkDAO();
+			Artwork updateArtwork = new Artwork(artworkID, title, description, artist);
+			String result = editDAO.updateArtwork(updateArtwork);
 
-        // Process the update
-        ArtworkDAO editDAO = new ArtworkDAO();
-        Artwork updateArtwork = new Artwork(artworkID, title, description, artist);
-        String result = editDAO.updateArtwork(updateArtwork);
-
-        System.out.println(result);
-        if (!result.equals("Successfully Updated")) {
-            request.setAttribute("message", "Failed to update artwork. Please try again.");
-        }
-        response.sendRedirect(request.getContextPath() + "/ArtworkPage?id=" + artworkID);
+			System.err.println(result);
+			if (!result.equals("Successfully Updated")) {
+				request.setAttribute("message", "Failed to update artwork. Please try again.");
+			}
+		}
+        response.sendRedirect(request.getContextPath() + "/App/ArtworkPage?id=" + artworkID);
     }
 
 }

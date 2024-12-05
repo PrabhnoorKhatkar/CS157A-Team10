@@ -1,9 +1,11 @@
 package artauction.auction;
 
 import artauction.*;
+import artauction.auth.Login;
 import artauction.user.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import java.util.List;
 /**
  * Servlet implementation class EditArtwork
  */
+@WebServlet(name = "PlaceBid", urlPatterns={"/App/PlaceBid"})
 public class PlaceBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
@@ -48,63 +51,11 @@ public class PlaceBid extends HttpServlet {
 		Auction auction = auctionDAO.getAuctionByArtworkID(artworkID);
 
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        if(currentTimestamp.before(auction.getEndTimestamp()))
-        {
+        if(currentTimestamp.before(auction.getEndTimestamp())) {
             String result = auctionDAO.placeBid(userID, bidAmount, artworkID);
-           
-            if (result.equals("Bid Succesfully Placed")) 
-            {
-
-                Auction updatedAuction = auctionDAO.getAuctionByArtworkID(artworkID);
-                User highestBidder = auctionDAO.getHighestBidder(artworkID);
-    
-                // Set updated attributes
-                request.setAttribute("auction", updatedAuction);
-                request.setAttribute("highestBidder", highestBidder);
-            
-                if (request.getSession().getAttribute("userID") == null) 
-                {
-                    // User is not logged in, redirect to login
-                    response.sendRedirect("login.jsp");
-                    return;
-                }
-
-                ArtworkPageDAO artworkPage = new ArtworkPageDAO();
-
-                if (artworkPage.checkArtworkAccount(userID, artworkID)) {
-                    request.setAttribute("isOwner", true); // userID is owner
-                } else {
-                    request.setAttribute("isOwner", false);
-                }
-
-                ArtworkDAO searchDAO = new ArtworkDAO();
-                Artwork artwork = searchDAO.getArtworkById(artworkID);
-                request.setAttribute("artwork", artwork);
-
-                List<String> tags = searchDAO.getTagsByArtworkID(artworkID);
-		        request.setAttribute("tags", tags);
-
-
-                int ownerUserID = artworkPage.getUserIDByArtworkID(artworkID);
-                request.setAttribute("ownerUserID", ownerUserID);
-
-                // Get the owner display name using the ArtworkPageDAO
-                String ownerDisplayName = artworkPage.getUserDisplayNameByUserID(ownerUserID);
-                request.setAttribute("ownerDisplayName", ownerDisplayName); // Add the owner display name to the request
-                
-                SaveArtworkDAO saveArtworkDAO = new SaveArtworkDAO();
-                boolean checkSave = saveArtworkDAO.checkSave(userID, artworkID);
-                request.setAttribute("checkSave", checkSave);
-                
-                // Forward to the artwork details JSP page
-                RequestDispatcher dispatcher = request.getRequestDispatcher("artwork.jsp");
-                dispatcher.forward(request, response);
-                }
-            }
-
-
-
-
+        }
+		var originalArtworkUrl = String.format("%s?%s", request.getRequestURI(), request.getQueryString());
+		response.sendRedirect(request.getContextPath() + "/App/ArtworkPage?id=" + artworkID);
 	}
 
 }

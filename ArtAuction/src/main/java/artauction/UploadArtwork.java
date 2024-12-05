@@ -3,6 +3,7 @@ package artauction;
 import artauction.image.ImageUploader;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Servlet implementation class ArtAuction.UploadArtwork
  */
+@WebServlet(name = "UploadArtwork", urlPatterns={"/App/UploadArtwork"})
 @MultipartConfig
 public class UploadArtwork extends HttpServlet {
     private static final long serialVersionUID = 1L;

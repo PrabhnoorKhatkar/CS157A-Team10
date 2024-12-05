@@ -31,6 +31,7 @@ public class ImageDAO extends DAO {
                 img.setImageId(id);
                 return img;
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
