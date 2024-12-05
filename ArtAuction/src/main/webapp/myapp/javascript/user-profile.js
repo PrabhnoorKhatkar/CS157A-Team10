@@ -37,3 +37,13 @@ function toggleFavoriteList() {
 		list.style.display = 'none';
 	}
 }
+
+function toggleOrderList() {
+	const list = document.getElementById('orderList');
+
+	if (list.style.display === 'none') {
+		list.style.display = 'block';
+	} else {
+		list.style.display = 'none';
+	}
+}

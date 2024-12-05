@@ -1,8 +1,11 @@
 package artauction.order;
 
 import artauction.DAO;
+import artauction.order.OrderDetails;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO extends DAO {
 
@@ -103,6 +106,44 @@ public class OrderDAO extends DAO {
         }
 
         return result;
+    }
+    
+    public List<OrderDetails> getOrderHistory(int userID) {
+    	var con = getConnection();
+    	
+    	List<OrderDetails> orderList = new ArrayList<>();
+    	String sql = "SELECT `order`.userID, orderdetails.orderID, orderdetails.timestamp, "
+                + "orderdetails.trackingNumber, orderdetails.status, orderdetails.totalPaid "
+                + "FROM `order` "
+                + "JOIN orderdetails ON orderdetails.orderID = `order`.orderID "
+                + "WHERE `order`.userID = ?";
+    	
+    	try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
+			
+			var resultSet = ps.executeQuery();
+			
+			while (resultSet.next()) {
+				int id = resultSet.getInt("orderID");
+				System.out.println(id);
+				Timestamp timestamp = resultSet.getTimestamp("timestamp");
+				String tracking = resultSet.getString("trackingNumber");
+				System.out.println(tracking);
+				String status = resultSet.getString("status");
+				Float paid = resultSet.getFloat("totalPaid");
+				
+				OrderDetails order = new OrderDetails(id, timestamp, tracking, status, paid);
+				
+				orderList.add(order);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return orderList;
     }
 
 

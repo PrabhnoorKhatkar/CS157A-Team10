@@ -5,6 +5,8 @@ import artauction.ArtworkDAO;
 import artauction.image.Image;
 import artauction.image.ImageDAO;
 import artauction.image.ImageUploader;
+import artauction.order.OrderDAO;
+import artauction.order.OrderDetails;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -45,6 +47,7 @@ public class UserProfile extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         FollowUserDAO followUserDAO = new FollowUserDAO();
         ImageDAO imageDAO = new ImageDAO();
+        OrderDAO orderDAO = new OrderDAO();
 
         int otherID = userDAO.getUserIDByDisplayName(requestedUserDisplayName);
         int followerCount = -1;
@@ -58,6 +61,7 @@ public class UserProfile extends HttpServlet {
         List<Artwork> favArtworkList = null;
         List<User> getFollowingUsersList = null;
         List<User> getFollowerUsersList = null;
+        List<OrderDetails> getOrderList = null;
 
         try {
             imageID = userDAO.getProfilePictureID(userID);
@@ -83,6 +87,9 @@ public class UserProfile extends HttpServlet {
             getFollowingUsersList = followUserDAO.getFollowingUsersList(viewedID);
             getFollowerUsersList = followUserDAO.getFollowerUsersList(viewedID);
             
+            getOrderList = orderDAO.getOrderHistory(userID);
+            System.out.println(getOrderList);
+            
             try {
 				otherID = userDAO.getProfilePictureID(viewedID);
 				otherImage = imageDAO.findByID(otherID);
@@ -105,9 +112,10 @@ public class UserProfile extends HttpServlet {
         request.setAttribute("image", image);
         request.setAttribute("otherImage", otherImage);
 
-
         request.setAttribute("followingUsersList", getFollowingUsersList);
         request.setAttribute("getFollowerUsersList", getFollowerUsersList);
+        
+        request.setAttribute("getOrderList", getOrderList);
 
         request.getRequestDispatcher("user-profile.jsp").forward(request, response);
 

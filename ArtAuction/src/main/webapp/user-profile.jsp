@@ -97,8 +97,8 @@
 					<button onclick="toggleFavoriteList()"
 							id="favoriteBtn" class="favorite-btn">Favorites
 					</button>
-					<button onclick="toggleFavoriteList()"
-							id="favoriteBtn" class="favorite-btn">Orders
+					<button onclick="toggleOrderList()"
+							id="orderBtn" class="order-btn">Order History
 					</button>
 					<!-- <h2>My Artwork</h2>-->
 				</c:when>
@@ -124,6 +124,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			
 		</div>
 		<c:if test="${myProfile}">
 			<div class="saved-artwork">
@@ -150,6 +151,38 @@
 						</div>
 					</div>
 				</section>
+			</div>
+			<div class="order-history" id="orderList" style="display: none;">
+			<c:choose>
+					<c:when test="${not empty requestScope.getOrderList}">
+						<table class="tbl-order">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Tracking Number</th>
+									<th>Status</th>
+									<th>Total Paid</th>
+								</tr>
+							</thead>
+							<c:forEach items="${requestScope.getOrderList}"
+									   var="order">
+								<tbody>
+									<tr>
+										<td>${order.orderID}</td>
+										<td>${order.purchasedTime}</td>
+										<td>${order.tracking}</td>
+										<td>${order.status}</td>
+										<td>${order.total}</td>
+									</tr>
+								</tbody>
+							</c:forEach>
+						</table>
+					</c:when>
+					<c:otherwise>
+						<div>(no orders)</div>
+					</c:otherwise>
+			</c:choose>
 			</div>
 		</c:if>
 		<footer>
