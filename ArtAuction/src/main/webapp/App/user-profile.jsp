@@ -27,14 +27,14 @@
 					<h2 class="display-name">
 							${viewedUser.displayName} <c:if test="${sessionScope.admin}">[Admin]</c:if>
 					</h2>
-					<h2 class="name">${viewedUser.name}</h2>
+					<h2 class="name font-bold">${viewedUser.name}</h2>
 					<br>
 					<hr width="100%" size="2">
 					<br>
 					<c:if test="${myProfile}">
 						<form action="<c:url value="/App/UserProfile"/>" method="POST"
 							  enctype="multipart/form-data" class="new-pfp">
-							<label for="profilepicture">New profile picture:</label>
+							<label for="profilepicture" class="font-bold">New profile picture:</label>
 							<div class="flex flex-row justify-between">
 								<input id="profilepicture" name="profilepicture" accept="image/*" type="file">
 								<sl-button type="submit" name="action" value="editProfilePicture" class="submit-pfp">

@@ -27,17 +27,45 @@
 						<img class="art" src="<c:url value="/Uploads/${image.imageId}"/>">
 					</c:forEach>
 					<br>
-					<hr width="100%" size="2" class="left-line">
-					<h2 class="title1"> Item Overview</h2>
+					<hr width="100%" size="2" class="left-line my-2">
+					<h2 class="title1 font-bold text-2xl"> Item Overview</h2>
 					<p>Description:</p>
 					<p> ${artwork.description} </p>
-					<hr width="100%" size="2">
+					<hr class="my-2">
 				</div>
 				<div class="right">
-					<h2 class="title1">
+					<h2 class="title2 font-bold text-2xl flex justify-between flex-row">
+						<em>${artwork.title}</em>
+						<!-- save favorite artwork functionality -->
+						<form action="<c:url value="/App/SaveArtwork"/>" method="post">
+							<input type="hidden" name="artworkID" value="${artwork.id}">
+
+							<c:choose>
+								<c:when test="${checkSave}">
+									<button type="submit" name="action" value="unsave"class="un-save-btn">
+										<img src="../myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
+									</button>
+									<!-- <p>Saved to Favorites</p> -->
+								</c:when>
+								<c:when test="${!checkSave}">
+									<button type="submit" name="action" value="save" class="save-btn">
+										<img src="../myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
+									</button>
+								</c:when>
+							</c:choose>
+
+						</form>
+					</h2>
+					<h2 class="title1 font-bold text-xl">
 							${artwork.artist}
 					</h2>
-					<h2 class="title2"><em>${artwork.title}</em></h2>
+					<p>
+						<a href="<c:url value="/App/UserProfile?user=${ownerDisplayName}"/>" class="link">
+							Posted by: ${ownerDisplayName}
+						</a>
+					</p>
+					<hr class="my-2">
+
 
 					<c:if test="${not isOwner}">
 						<section>
@@ -65,8 +93,8 @@
 					</c:if>
 					<p>Auction Ends: ${auction.endTimestamp}</p>
 
-					<!-- Countdown Timer -->
-					<div class="countdown-timer">
+					<!-- Countdown Timer (TODO: not working!!1)-->
+					<div class="countdown-timer" style="display:none;">
 						<p>
 							Auction Ends In: <span id="countdown-${artwork.id}"></span>
 						</p>
@@ -81,29 +109,7 @@
 					</script>
 
 
-					<hr width="100%" size="2">
-					<p><a href="<c:url value="/App/UserProfile?user=${ownerDisplayName}"/>" class="link">${ownerDisplayName}</a></p>
 
-
-					<!-- save favorite artwork functionality -->
-					<form action="<c:url value="/App/SaveArtwork"/>" method="post">
-						<input type="hidden" name="artworkID" value="${artwork.id}">
-
-						<c:choose>
-							<c:when test="${checkSave}">
-								<button type="submit" name="action" value="unsave"class="un-save-btn">
-									<img src="../myapp/icons/heart-fill.svg" alt="heart-fill" height="30" width="auto" class = "heart">
-								</button>
-								<!-- <p>Saved to Favorites</p> -->
-							</c:when>
-							<c:when test="${!checkSave}">
-								<button type="submit" name="action" value="save" class="save-btn">
-									<img src="../myapp/icons/heart.svg" alt="heart" height="30" width="auto" class="heart">
-								</button>
-							</c:when>
-						</c:choose>
-
-					</form>
 
 					<c:if test="${winningUser}">
 						<p>You WON!!!</p>
@@ -123,6 +129,7 @@
 							<sl-button type="submit"> Edit listing </sl-button>
 						</form>
 					</c:if>
+					<hr class="my-2">
 
 					<!-- Display tags -->
 					<c:if test="${! empty tags}">
@@ -130,7 +137,7 @@
 							<p><strong>Tags:</strong></p>
 							<div class="tags-container">
 								<c:forEach var="tag" items="${tags}">
-									<span class="tag">${tag}</span>
+									<sl-badge variant="primary">${tag}</sl-badge>
 								</c:forEach>
 							</div>
 						</div>
