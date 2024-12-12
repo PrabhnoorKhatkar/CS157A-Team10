@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 9.0.1, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
 --
 -- Host: localhost    Database: artauction
 -- ------------------------------------------------------
@@ -67,7 +67,7 @@ CREATE TABLE `artimage` (
 
 LOCK TABLES `artimage` WRITE;
 /*!40000 ALTER TABLE `artimage` DISABLE KEYS */;
-INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
+INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10),(11,22),(12,23),(13,24),(14,25),(15,26);
 /*!40000 ALTER TABLE `artimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `artwork` (
   `description` text,
   `artist` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`artworkID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka');
+INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka'),(11,'Minimalism Nature','Minimalism take on nature and trees','Zachariah Wilkinson'),(12,'Glass Fish','Mosaic Fish made with glass tiles','Lara Golden'),(13,'Marble Blue','Marble pattern blue shades, modern abstract elegant brushstrokes','Buck Barrett'),(14,'Boots','Boots','Jackson Christian'),(15,'Bird over water','White seagull over water body','Randi Donovan');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (1,1),(2,2),(3,3),(4,4),(4,11),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10);
+INSERT INTO `auction` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `auctiondetails` (
   `reserve` decimal(10,2) DEFAULT NULL,
   `result` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`artworkID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `auctiondetails` (
 
 LOCK TABLES `auctiondetails` WRITE;
 /*!40000 ALTER TABLE `auctiondetails` DISABLE KEYS */;
-INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-23 18:00:00',1500.00,1000.00,1200.00,'ACTIVE'),(2,'2024-11-19 18:00:00','2024-12-03 18:00:00',2000.00,1500.00,1800.00,'SOLD'),(3,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2000.00,2500.00,'ACTIVE'),(4,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1800.00,2000.00,'ACTIVE'),(5,'2024-11-19 18:00:00','2024-12-03 18:00:00',2600.00,2500.00,2800.00,'RESERVE NOT MET'),(6,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1200.00,1500.00,'ACTIVE'),(7,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-12-03 18:00:00',2800.00,2000.00,2500.00,'UNSOLD'),(9,'2024-11-19 18:00:00','2024-12-28 18:20:00',NULL,1500.00,1800.00,'ACTIVE'),(10,'2024-11-17 18:00:00','2024-12-28 18:00:00',NULL,1700.00,2000.00,'ACTIVE');
+INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-23 18:00:00',1500.00,1000.00,1200.00,'ACTIVE'),(2,'2024-11-19 18:00:00','2024-12-03 18:00:00',2000.00,1500.00,1800.00,'SOLD'),(3,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2000.00,2500.00,'ACTIVE'),(4,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1800.00,2000.00,'ACTIVE'),(5,'2024-11-19 18:00:00','2024-12-03 18:00:00',2600.00,2500.00,2800.00,'RESERVE NOT MET'),(6,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1200.00,1500.00,'ACTIVE'),(7,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-12-03 18:00:00',2800.00,2000.00,2500.00,'UNSOLD'),(9,'2024-11-19 18:00:00','2024-12-28 18:20:00',NULL,1500.00,1800.00,'ACTIVE'),(10,'2024-11-17 18:00:00','2024-12-28 18:00:00',NULL,1700.00,2000.00,'ACTIVE'),(11,'2024-12-12 08:44:57','2024-12-22 08:44:57',NULL,750.00,1100.00,'ACTIVE'),(12,'2024-12-12 08:46:07','2025-01-01 08:46:07',NULL,1200.00,2500.00,'ACTIVE'),(13,'2024-12-12 08:49:41','2025-01-01 08:49:41',NULL,1.00,5000.00,'ACTIVE'),(14,'2024-12-12 08:50:55','2025-01-01 08:50:55',NULL,100.00,250.00,'ACTIVE'),(15,'2024-12-12 08:51:59','2025-01-01 08:51:59',NULL,10000.00,20000.00,'ACTIVE');
 /*!40000 ALTER TABLE `auctiondetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `favorite` (
 
 LOCK TABLES `favorite` WRITE;
 /*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
-INSERT INTO `favorite` VALUES (2,1),(1,2),(1,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10);
+INSERT INTO `favorite` VALUES (2,1),(8,1),(15,1),(1,2),(9,2),(14,2),(1,3),(2,3),(9,3),(3,4),(10,4),(15,4),(1,5),(3,5),(4,5),(2,6),(5,6),(11,6),(4,7),(6,7),(10,7),(7,8),(12,8),(3,9),(5,9),(8,9),(11,9),(4,10),(9,10),(13,10),(6,11),(10,11),(12,11),(11,12),(14,12),(5,13),(7,13),(12,13),(13,13),(6,14),(13,14),(15,14),(7,15),(8,15),(14,15);
 /*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +231,7 @@ CREATE TABLE `follow` (
 
 LOCK TABLES `follow` WRITE;
 /*!40000 ALTER TABLE `follow` DISABLE KEYS */;
-INSERT INTO `follow` VALUES (2,1),(4,1),(6,1),(4,2),(6,2),(8,2),(10,2),(1,3),(10,3),(2,4),(6,4),(10,4),(4,6),(7,6),(2,7),(4,7),(6,7),(8,7),(1,8),(1,9),(2,9),(6,9),(4,10),(7,10),(8,10);
+INSERT INTO `follow` VALUES (2,1),(4,1),(6,1),(11,1),(13,1),(4,2),(6,2),(8,2),(10,2),(11,2),(14,2),(15,2),(1,3),(10,3),(11,3),(15,3),(2,4),(6,4),(10,4),(12,4),(13,4),(15,4),(12,5),(15,5),(4,6),(7,6),(11,6),(13,6),(2,7),(4,7),(6,7),(8,7),(13,7),(14,7),(1,8),(12,8),(13,8),(14,8),(1,9),(2,9),(6,9),(11,9),(14,9),(4,10),(7,10),(8,10),(12,10),(14,10),(1,11),(6,11),(15,11),(2,12),(7,12),(11,12),(3,13),(8,13),(12,13),(4,14),(9,14),(13,14),(5,15),(10,15),(14,15);
 /*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `image` (
   UNIQUE KEY `filename` (`filename`),
   KEY `uploaderID` (`uploaderID`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uploaderID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'art-10-2467580-HSC00001-7.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-11-images.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9),(21,'art-kvM2Bog4-images.jpeg',4);
+INSERT INTO `image` VALUES (1,'art-10-2467580-HSC00001-7.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-11-images.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9),(21,'art-kvM2Bog4-images.jpeg',4),(22,'art-Xl6ePW6J-boho-art-7289600_1280.jpeg',6),(23,'art-CmDR6Iq9-mosaic-200864_1280.jpg',6),(24,'art-HqWULmSX-marbling-8620587_1280.jpeg',6),(25,'art-aD062T7e-boots-8338072_1280.jpg',6),(26,'art-JYJFWBLm-bird-3342446_1280.jpeg',6),(27,'profile-pic-6UAU9Jxu-images (3).jpeg',11),(28,'profile-pic-dZQgILQU-images (2).jpeg',12),(29,'profile-pic-k8HMwZUW-images (1).jpeg',13),(30,'profile-pic-c1APPKPG-images.jpeg',14),(31,'profile-pic-IJXys0Yp-download.jpeg',15);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +362,7 @@ CREATE TABLE `profilepicture` (
 
 LOCK TABLES `profilepicture` WRITE;
 /*!40000 ALTER TABLE `profilepicture` DISABLE KEYS */;
-INSERT INTO `profilepicture` VALUES (4,11),(1,12),(2,12),(5,13),(6,14),(3,15),(7,16),(8,17),(9,18),(10,19);
+INSERT INTO `profilepicture` VALUES (4,11),(1,12),(2,12),(5,13),(6,14),(3,15),(7,16),(8,17),(9,18),(10,19),(11,27),(12,28),(13,29),(14,30),(15,31);
 /*!40000 ALTER TABLE `profilepicture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +387,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space');
+INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space'),(11,'minimalism'),(11,'nature'),(11,'tree'),(12,'abstract'),(12,'fish'),(12,'glass'),(12,'mosaic'),(12,'tiles'),(13,'abstract'),(13,'bling'),(13,'blue'),(13,'marble'),(13,'modern'),(14,'boots'),(14,'brush'),(14,'laces'),(14,'paint'),(15,'bird'),(15,'ocean'),(15,'sea'),(15,'seagull'),(15,'water');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,7 +408,7 @@ CREATE TABLE `user` (
   `anonymous` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`userID`),
   UNIQUE KEY `emailAddress` (`emailAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,7 +417,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'john.doe@email.com','38c5ae2bcd1f12aa269e45ae8c8762f030630a5137dd6d1c799c019626f33096','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','ea76b1e251a0c876b3d96d2c81f12736df3bed36ecb293f79c493c089924cbdc','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','12313e7066d59b17cb8387c4d27ef847e39bc7b23ec48c9bbb6a08bac39252f3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','334ddbbc1437d63a0bf14657fb9c584d6af8697701c726febb7d8a833d9bdf27','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','43eb28aba4577b8655cca86b084c8421660e50c40cdc1a3aad61dea941fdca05','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','e3af2e502923051d802c608b7b7b31cbc978883f06cde3eb7bc0154e28a3e539','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','ad395fe6c161f463caebc59851ce565ad032ff30e3c71cd04a5356ebe05a4eb5','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','c62bb6b2345916b31d96d21b6d0a305936895bb8eef035cd15404cbd5fd4fb22','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','1a17e7d0d8c634f6812090d7dd1b5c7161e409c4ac5806c1197664345b8bc3e8','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','2811ee3c73ce17dfd398133f7207d4f8d7edbb97a54013880bf8fef8d930be2b','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0);
+INSERT INTO `user` VALUES (1,'john.doe@email.com','38c5ae2bcd1f12aa269e45ae8c8762f030630a5137dd6d1c799c019626f33096','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','ea76b1e251a0c876b3d96d2c81f12736df3bed36ecb293f79c493c089924cbdc','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','12313e7066d59b17cb8387c4d27ef847e39bc7b23ec48c9bbb6a08bac39252f3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','334ddbbc1437d63a0bf14657fb9c584d6af8697701c726febb7d8a833d9bdf27','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','43eb28aba4577b8655cca86b084c8421660e50c40cdc1a3aad61dea941fdca05','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','e3af2e502923051d802c608b7b7b31cbc978883f06cde3eb7bc0154e28a3e539','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','ad395fe6c161f463caebc59851ce565ad032ff30e3c71cd04a5356ebe05a4eb5','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','c62bb6b2345916b31d96d21b6d0a305936895bb8eef035cd15404cbd5fd4fb22','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','1a17e7d0d8c634f6812090d7dd1b5c7161e409c4ac5806c1197664345b8bc3e8','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','2811ee3c73ce17dfd398133f7207d4f8d7edbb97a54013880bf8fef8d930be2b','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0),(11,'fransico@email.com','47bb0fb013b151d5210f7cdf0819157d5e3f0d73b4576f724fd4e16b3f34c5f4','Francisca Owens','Ciscoa','3937 Oxford Court, Jackson, MS 39201',0),(12,'nich@email.com','f3b85859a45a8578b31a8fbeac54195f3ad6339507fc5316f9c176fe16c0a58b','Nichole Morrow','TommorowN','3202 Camden Place, Myrtle Beach, SC, 2957',0),(13,'kris.f@email.com','87de00b83184fe5513aa2ee4c73f2fcee13d6b23ecda3e1db98f312f2833b862','Kris Foster','Krisy','2844 Khale Street, Walterboro, SC 29488',0),(14,'long.rodrigo@email.com','e78b85ec36b1a26f0a08b2aa84814c1a23f2102ef4143713c090a3598b260306','Rodrigo Long','LongoD','2060 Rockford Mountain Lane, Milwaukee, WI 53202',0),(15,'choi.cliff@email.com','c9cd11537b30c2927618c2e6fdee76b907a033759a8907a40dc30e1f4b55c289','Cliff Choi','cliffbar','1705 Formula Lane, Farmers Branch, TX 75244',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -430,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-05  4:06:43
+-- Dump completed on 2024-12-12  1:23:10
