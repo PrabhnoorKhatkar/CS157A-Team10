@@ -67,7 +67,7 @@ CREATE TABLE `artimage` (
 
 LOCK TABLES `artimage` WRITE;
 /*!40000 ALTER TABLE `artimage` DISABLE KEYS */;
-INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10),(11,22),(12,23),(13,24),(14,25),(15,26);
+INSERT INTO `artimage` VALUES (1,1),(10,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10),(11,22),(12,23),(13,24),(14,25),(15,26),(16,32),(17,33),(18,34),(19,35),(20,36),(21,37),(22,38);
 /*!40000 ALTER TABLE `artimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `artwork` (
   `description` text,
   `artist` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`artworkID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka'),(11,'Minimalism Nature','Minimalism take on nature and trees','Zachariah Wilkinson'),(12,'Glass Fish','Mosaic Fish made with glass tiles','Lara Golden'),(13,'Marble Blue','Marble pattern blue shades, modern abstract elegant brushstrokes','Buck Barrett'),(14,'Boots','Boots','Jackson Christian'),(15,'Bird over water','White seagull over water body','Randi Donovan');
+INSERT INTO `artwork` VALUES (1,'Dancing in the Rain','An impressionistic piece capturing the joy of dancing in a summer rain shower. Created using oil paints with vibrant blues and purples.','Emily Chen'),(2,'Urban Solitude','A contemporary urban landscape showing a quiet city street at dawn. Painted in muted tones with watercolor and ink.','Marcus Rodriguez'),(3,'Wildflower Dreams','Abstract representation of a wildflower meadow in spring. Mixed media piece combining acrylics and pressed flowers.','Sarah O\'Connor'),(4,'Digital Dystopia','Digital art piece exploring themes of technology and isolation in modern society. Created using 3D modeling and digital painting.','Alex Kim'),(5,'Mountain Whispers','Traditional landscape painting of the Rocky Mountains at sunset. Oil on canvas with detailed foreground elements.','James Morrison'),(6,'Fragments of Memory','Abstract collage combining photography and paint to explore themes of memory and time. Mixed media on canvas.','Lisa Wong'),(7,'Ocean\'s Symphony','Large-scale seascape capturing the power and movement of ocean waves. Created with oil paints in various shades of blue.','David Thompson'),(8,'Neon Dreams','Contemporary piece featuring bright neon colors and geometric patterns. Acrylic and spray paint on canvas.','Maria Garcia'),(9,'Silent Forest','Minimalist representation of a winter forest scene. Created using charcoal and white chalk on toned paper.','Thomas Wright'),(10,'Cultural Fusion','Mixed media artwork combining traditional Eastern patterns with Western abstract expressionism. Incorporates gold leaf and acrylics.','Yuki Tanaka'),(11,'Minimalism Nature','Minimalism take on nature and trees','Zachariah Wilkinson'),(12,'Glass Fish','Mosaic Fish made with glass tiles','Lara Golden'),(13,'Marble Blue','Marble pattern blue shades, modern abstract elegant brushstrokes','Buck Barrett'),(14,'Boots','Boots','Jackson Christian'),(15,'Bird over water','White seagull over water body','Randi Donovan'),(16,'Colorful Shoes','Colorful shoes oil painting','Kyle Hess'),(17,'Tales of Women','Abstract art of women, oil painting','Neil Rosario'),(18,'Divine Love','Abstract art','Melody Lynn'),(19,'Peaceful Village Town','Peaceful Village Town with a night sky in background','Allen Alexander'),(20,'Scared Bunny','Bunny and Bear in forest, on a oil water painting','Charlene Simmons'),(21,'Brush Color','Colorful, vibrant brushstrokes modern art','Tonia Barrett'),(22,'African Ladies','African ladies depicted with fruits on their heads','Deana Gibson');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15);
+INSERT INTO `auction` VALUES (1,1),(2,2),(2,17),(3,3),(4,4),(5,5),(6,6),(7,7),(7,16),(8,8),(9,9),(10,10),(11,11),(11,19),(11,20),(12,12),(12,21),(13,13),(13,18),(14,14),(15,15),(15,22);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `auctiondetails` (
   `reserve` decimal(10,2) DEFAULT NULL,
   `result` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`artworkID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `auctiondetails` (
 
 LOCK TABLES `auctiondetails` WRITE;
 /*!40000 ALTER TABLE `auctiondetails` DISABLE KEYS */;
-INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-23 18:00:00',1500.00,1000.00,1200.00,'ACTIVE'),(2,'2024-11-19 18:00:00','2024-12-03 18:00:00',2000.00,1500.00,1800.00,'SOLD'),(3,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2000.00,2500.00,'ACTIVE'),(4,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1800.00,2000.00,'ACTIVE'),(5,'2024-11-19 18:00:00','2024-12-03 18:00:00',2600.00,2500.00,2800.00,'RESERVE NOT MET'),(6,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,1200.00,1500.00,'ACTIVE'),(7,'2024-11-19 18:00:00','2024-12-23 18:00:00',NULL,2200.00,2500.00,'ACTIVE'),(8,'2024-11-20 18:00:00','2024-12-03 18:00:00',2800.00,2000.00,2500.00,'UNSOLD'),(9,'2024-11-19 18:00:00','2024-12-28 18:20:00',NULL,1500.00,1800.00,'ACTIVE'),(10,'2024-11-17 18:00:00','2024-12-28 18:00:00',NULL,1700.00,2000.00,'ACTIVE'),(11,'2024-12-12 08:44:57','2024-12-22 08:44:57',NULL,750.00,1100.00,'ACTIVE'),(12,'2024-12-12 08:46:07','2025-01-01 08:46:07',NULL,1200.00,2500.00,'ACTIVE'),(13,'2024-12-12 08:49:41','2025-01-01 08:49:41',NULL,1.00,5000.00,'ACTIVE'),(14,'2024-12-12 08:50:55','2025-01-01 08:50:55',NULL,100.00,250.00,'ACTIVE'),(15,'2024-12-12 08:51:59','2025-01-01 08:51:59',NULL,10000.00,20000.00,'ACTIVE');
+INSERT INTO `auctiondetails` VALUES (1,'2024-11-19 18:00:00','2024-12-11 18:00:00',1500.00,1000.00,1200.00,'UNSOLD'),(2,'2024-11-19 18:00:00','2024-12-03 18:00:00',2000.00,1500.00,1800.00,'SOLD'),(3,'2024-11-19 18:00:00','2024-12-11 18:00:00',2600.00,2000.00,2500.00,'UNSOLD'),(4,'2024-11-19 18:00:00','2024-12-09 18:00:00',3500.00,1800.00,2000.00,'UNSOLD'),(5,'2024-11-19 18:00:00','2024-12-03 18:00:00',2600.00,2500.00,2800.00,'RESERVE NOT MET'),(6,'2024-11-19 18:00:00','2024-12-11 18:00:00',2654.00,1200.00,1500.00,'UNSOLD'),(7,'2024-11-19 18:00:00','2024-12-11 18:00:00',2933.00,2200.00,2500.00,'UNSOLD'),(8,'2024-11-20 18:00:00','2024-12-03 18:00:00',2800.00,2000.00,2500.00,'UNSOLD'),(9,'2024-11-19 18:00:00','2024-12-11 18:20:00',10000.00,1500.00,1800.00,'UNSOLD'),(10,'2024-11-17 18:00:00','2024-12-11 18:00:00',5644.00,1700.00,2000.00,'UNSOLD'),(11,'2024-12-06 08:44:57','2024-12-11 08:44:57',1200.00,750.00,1100.00,'UNSOLD'),(12,'2024-12-10 08:46:07','2024-12-11 08:46:07',6555.00,1200.00,2500.00,'UNSOLD'),(13,'2024-12-10 08:49:41','2024-12-11 08:46:07',7777.00,1.00,5000.00,'UNSOLD'),(14,'2024-12-02 08:50:55','2024-12-11 08:46:07',4500.00,100.00,250.00,'UNSOLD'),(15,'2024-12-10 08:51:59','2024-12-11 08:46:07',100000.00,10000.00,20000.00,'UNSOLD'),(16,'2024-12-07 10:01:02','2024-12-11 08:46:07',12000.00,100.00,2000.00,'UNSOLD'),(17,'2024-12-04 10:02:16','2024-12-11 08:46:07',1000.00,750.00,999.00,'UNSOLD'),(18,'2024-12-12 10:03:22','2025-01-01 10:03:22',NULL,1750.00,3500.00,'ACTIVE'),(19,'2024-12-12 10:04:42','2025-01-01 10:04:42',NULL,7000.00,7777.00,'ACTIVE'),(20,'2024-12-04 10:05:57','2024-12-22 10:05:57',NULL,5000.00,10000.00,'ACTIVE'),(21,'2024-12-04 10:07:03','2025-01-01 10:07:03',NULL,1000.00,2000.00,'ACTIVE'),(22,'2024-12-12 10:08:05','2025-01-01 10:08:05',NULL,12000.00,15000.00,'ACTIVE');
 /*!40000 ALTER TABLE `auctiondetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `bid` (
 
 LOCK TABLES `bid` WRITE;
 /*!40000 ALTER TABLE `bid` DISABLE KEYS */;
-INSERT INTO `bid` VALUES (1,1,'2024-11-19 20:00:00',1100.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(6,8,'2024-11-19 20:00:00',2800.00),(7,5,'2024-11-19 20:00:00',2600.00),(8,5,'2024-11-19 21:00:00',2800.00),(9,5,'2024-11-19 22:00:00',3000.00);
+INSERT INTO `bid` VALUES (2,1,'2024-11-19 20:00:00',1100.00),(2,1,'2024-11-19 21:00:00',1200.00),(3,1,'2024-11-19 22:00:00',1500.00),(4,2,'2024-11-19 20:00:00',1600.00),(5,2,'2024-11-19 21:00:00',1800.00),(6,2,'2024-11-19 22:00:00',2000.00),(6,8,'2024-11-19 20:00:00',2800.00),(6,10,'2024-12-02 19:00:00',5644.00),(7,5,'2024-11-19 20:00:00',2600.00),(7,11,'2024-12-06 18:00:00',1200.00),(7,12,'2024-12-10 20:00:00',6555.00),(7,13,'2024-12-10 20:00:00',7777.00),(7,14,'2024-12-08 20:00:00',4500.00),(7,15,'2024-12-10 20:00:00',100000.00),(7,17,'2024-12-09 20:00:00',1000.00),(8,5,'2024-11-19 21:00:00',2800.00),(8,6,'2024-12-02 18:00:00',2654.00),(8,7,'2024-12-02 18:00:00',2933.00),(9,5,'2024-11-19 22:00:00',3000.00),(9,16,'2024-12-09 20:00:00',12000.00),(11,4,'2024-12-02 18:00:00',3500.00),(12,3,'2024-12-02 18:00:00',2600.00),(14,8,'2024-12-02 10:00:00',2800.00),(14,9,'2024-12-02 17:00:00',10000.00);
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `image` (
   UNIQUE KEY `filename` (`filename`),
   KEY `uploaderID` (`uploaderID`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`uploaderID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'art-10-2467580-HSC00001-7.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-11-images.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9),(21,'art-kvM2Bog4-images.jpeg',4),(22,'art-Xl6ePW6J-boho-art-7289600_1280.jpeg',6),(23,'art-CmDR6Iq9-mosaic-200864_1280.jpg',6),(24,'art-HqWULmSX-marbling-8620587_1280.jpeg',6),(25,'art-aD062T7e-boots-8338072_1280.jpg',6),(26,'art-JYJFWBLm-bird-3342446_1280.jpeg',6),(27,'profile-pic-6UAU9Jxu-images (3).jpeg',11),(28,'profile-pic-dZQgILQU-images (2).jpeg',12),(29,'profile-pic-k8HMwZUW-images (1).jpeg',13),(30,'profile-pic-c1APPKPG-images.jpeg',14),(31,'profile-pic-IJXys0Yp-download.jpeg',15);
+INSERT INTO `image` VALUES (1,'art-10-2467580-HSC00001-7.jpg',1),(2,'art-1-5NRmIQHz.jpg',3),(3,'art-11-images.jpg',3),(4,'art-3-PjEcbylw.jpg',5),(5,'art-4-Kcgd4weU.jpg',5),(6,'art-5-o6dBd600.jpg',6),(7,'art-6-r2lPywol.jpg',6),(8,'art-7-F2uWnkV1.jpg',7),(9,'art-8-evk9wj9J.jpg',7),(10,'art-9-64ebf4RM.jpg',8),(11,'profile-pic-0-KspewSnw.jpg',1),(12,'profile-pic-1-ZeBM90Sw.jpg',2),(13,'profile-pic-2-LZM2PdOD.jpg',3),(14,'profile-pic-3-8ilzL4dz.jpg',4),(15,'profile-pic-4-cYG3BuZ2.jpg',5),(16,'profile-pic-5-h5mqegh2.jpg',6),(17,'profile-pic-6-Qjt95p3G.jpg',7),(18,'profile-pic-7-17KKLjiL.jpg',8),(19,'profile-pic-8-RYPfQSGn.jpg',8),(20,'profile-pic-9-mH33ltOO.jpg',9),(21,'art-kvM2Bog4-images.jpeg',4),(22,'art-Xl6ePW6J-boho-art-7289600_1280.jpeg',6),(23,'art-CmDR6Iq9-mosaic-200864_1280.jpg',6),(24,'art-HqWULmSX-marbling-8620587_1280.jpeg',6),(25,'art-aD062T7e-boots-8338072_1280.jpg',6),(26,'art-JYJFWBLm-bird-3342446_1280.jpeg',6),(27,'profile-pic-6UAU9Jxu-images (3).jpeg',11),(28,'profile-pic-dZQgILQU-images (2).jpeg',12),(29,'profile-pic-k8HMwZUW-images (1).jpeg',13),(30,'profile-pic-c1APPKPG-images.jpeg',14),(31,'profile-pic-IJXys0Yp-download.jpeg',15),(32,'art-cGYvqqtK-concept-art-8338074_1280.jpg',6),(33,'art-VEj8scY1-art-1905711_1280.jpg',6),(34,'art-PTSgt9bh-art-8324765_1280.jpeg',6),(35,'art-BFn6vdmS-art-8396377_1280.jpeg',6),(36,'art-YMRt2Lcs-forest-7383165_1280.jpeg',6),(37,'art-zdqUgszG-colourful-4804818_1280.jpeg',6),(38,'art-t6xMvUNR-african-art-1732252_1280.jpeg',6);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +387,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space'),(11,'minimalism'),(11,'nature'),(11,'tree'),(12,'abstract'),(12,'fish'),(12,'glass'),(12,'mosaic'),(12,'tiles'),(13,'abstract'),(13,'bling'),(13,'blue'),(13,'marble'),(13,'modern'),(14,'boots'),(14,'brush'),(14,'laces'),(14,'paint'),(15,'bird'),(15,'ocean'),(15,'sea'),(15,'seagull'),(15,'water');
+INSERT INTO `tag` VALUES (1,'landscape'),(1,'sunset'),(2,'abstract'),(3,'nature'),(4,'urban'),(5,'nature'),(6,'seascape'),(7,'digital'),(8,'flowers'),(9,'space'),(11,'minimalism'),(11,'nature'),(11,'tree'),(12,'abstract'),(12,'fish'),(12,'glass'),(12,'mosaic'),(12,'tiles'),(13,'abstract'),(13,'bling'),(13,'blue'),(13,'marble'),(13,'modern'),(14,'boots'),(14,'brush'),(14,'laces'),(14,'paint'),(15,'bird'),(15,'ocean'),(15,'sea'),(15,'seagull'),(15,'water'),(16,'art'),(16,'colorful'),(16,'laces'),(16,'shoes'),(17,'brush'),(17,'oil'),(17,'painting'),(17,'strokes'),(18,'abstract'),(18,'brush'),(18,'canvas'),(18,'colorful'),(18,'colors'),(18,'oil'),(18,'painting'),(18,'vibrant'),(19,'cabin'),(19,'calm'),(19,'dark'),(19,'night'),(19,'peaceful'),(19,'sky'),(19,'village'),(20,'bear'),(20,'brush'),(20,'bunny'),(20,'canvas'),(20,'forest'),(20,'oil'),(20,'painting'),(21,'brush'),(21,'canvas'),(21,'color'),(21,'colorful'),(21,'modern'),(21,'painting'),(21,'vibrant'),(22,'acrylic'),(22,'africa'),(22,'african'),(22,'brush'),(22,'canvas'),(22,'fruit'),(22,'oil'),(22,'vibrant');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12  1:23:10
+-- Dump completed on 2024-12-12  2:38:47
