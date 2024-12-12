@@ -18,7 +18,7 @@ public class OrderDAO extends DAO {
             if (result.equals("Order Sucessfully Assigned")) {
 
                 totalPaid = Math.round(totalPaid * 100) / 100.0f;
-                return insertOrderDetails(orderID, totalPaid);
+                return insertOrderDetails(orderID, "PROCESSING", totalPaid);
             }
         }
 
@@ -81,7 +81,7 @@ public class OrderDAO extends DAO {
         var random = new SecureRandom();
         return String.format("TRK%dUS", random.nextInt() % (int)Math.pow(10, 8));
     }
-    public OrderDetails insertOrderDetails(int orderID, float totalPaid) {
+    public OrderDetails insertOrderDetails(int orderID, String status, float totalPaid) {
         loadDriver(dbdriver);
 
         String sql = "INSERT INTO orderdetails (orderID, timestamp, trackingNumber, status, totalPaid) VALUES (?, ?, ?, ?, ?)";
@@ -93,7 +93,7 @@ public class OrderDAO extends DAO {
         ) {
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
-            OrderDetails order = new OrderDetails(orderID, currentTimestamp, generateTrackingNumber(), "PROCESSING", totalPaid);
+            OrderDetails order = new OrderDetails(orderID, currentTimestamp, generateTrackingNumber(), status, totalPaid);
             ps.setInt(1, order.getOrderID());
             ps.setTimestamp(2, order.getPurchasedTime());
             ps.setString(3, order.getTracking());

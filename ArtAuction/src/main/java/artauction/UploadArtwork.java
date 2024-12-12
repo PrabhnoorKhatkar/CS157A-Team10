@@ -60,9 +60,6 @@ public class UploadArtwork extends HttpServlet {
         Integer startingPrice = Integer.parseInt(startingPriceString);
         Integer reservePrice = Integer.parseInt(reservePriceString);
         Integer duration = Integer.parseInt(durationString);
-        var uploaded = ImageUploader.upload(image.getInputStream(), String.format("art-%s-%s", ImageUploader.salt(8), image.getSubmittedFileName()));
-
-        UploadArtworkDAO uploadDAO = new UploadArtworkDAO();
 
         String[] tagsArray = tags.split("[,\\s]+");
 
@@ -77,7 +74,10 @@ public class UploadArtwork extends HttpServlet {
 
         Artwork artwork = new Artwork(title, description, artist);
 
+        UploadArtworkDAO uploadDAO = new UploadArtworkDAO();
         Integer artworkID = uploadDAO.insert(artwork);
+        var uploaded = ImageUploader.upload(image.getInputStream(), String.format("art-%s-%s-%s", artworkID, ImageUploader.salt(8), image.getSubmittedFileName()));
+
         uploadDAO.insertTag(artworkID, tagsList);
 
         if (artworkID > 0) {
