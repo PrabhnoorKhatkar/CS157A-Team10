@@ -57,9 +57,9 @@ public class PaymentProcess extends HttpServlet {
         String state = request.getParameter("state");
 
         OrderDAO orderDAO = new OrderDAO();
-        String result = orderDAO.processOrder(userID, artworkID, totalPaid);
+        OrderDetails orderDetails = orderDAO.processOrder(userID, artworkID, totalPaid);
 
-        if (result.equals("Order Sucessfully Assigned")) {
+        if (orderDetails != null) {
             AuctionDAO auctionDAO = new AuctionDAO();
             auctionDAO.sellArtwork(artworkID);
         }
@@ -75,6 +75,7 @@ public class PaymentProcess extends HttpServlet {
         request.setAttribute("address2", address2);
         request.setAttribute("city", city);
         request.setAttribute("state", state);
+        request.setAttribute("orderDetails", orderDetails);
 
 
         // Forward to the artwork details JSP page
