@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'System Administrator','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(2,'Privacy Administrator','szd9x9d5aok0fke67qrut94kd8dvfaif','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(3,'Security Administrator','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(4,'Content Administrator','hpbni89izmfxau7h94yvn99gpzyqn2yg','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m');
+INSERT INTO `admin` VALUES (1,'System Administrator','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(2,'Privacy Administrator','szd9x9d5aok0fke67qrut94kd8dvfaif','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(3,'Security Administrator','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(4,'Content Administrator','hpbni89izmfxau7h94yvn99gpzyqn2yg','lmlu3jjbkqx37lnjc71zn9vm9zl2jx2m'),(5,'Content Administrator','lmlu3jjbkqx37lnjc71df9343m9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(6,'Content Administrator','lmlu387jhqx37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(7,'Content Administrator','lmlu3jjbkqx37ln242bsidsdsdsl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(8,'Content Administrator','lmldsdskj83ds7lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(9,'Content Administrator','lmlu3jjbkqx37lnjc71zn9vmr3uhdkjndf','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(10,'Content Administrator','lmlu3jj23484jnsdhgssdf9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(11,'Content Administrator','3usdjnisdgqx37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(12,'Content Administrator','8hsdjnsdoija37lnjc71zn9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(13,'Content Administrator','lmlu3jjbkqia9sdkjndsuinavm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(14,'Content Administrator','lmlu3jjb9djsdsiubas9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv'),(15,'Content Administrator','lmlu3jj9ns9nsdfjndfsdfs9vm9zl2jx2m','vs9nlgiyjxiwdzeh1g3r1wtsenhrxyuv');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +284,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (6,1);
+INSERT INTO `order` VALUES (3,1),(6,2),(6,9),(7,10),(7,11),(7,12),(7,13),(7,14),(7,16),(8,5),(8,6),(9,15),(11,4),(12,3),(14,7),(14,8);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +311,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` VALUES (1,'2024-12-03 19:10:00','TRK123456','PROCESSING',2000.00);
+INSERT INTO `orderdetails` VALUES (1,'2024-12-03 19:10:00','TRK34567812US','PROCESSING',2000.00),(2,'2024-12-03 18:00:00','TRK23456789US','PROCESSING',2700.00),(3,'2024-12-11 18:00:00','TRK9876543US','PROCESSING',3360.00),(4,'2024-12-11 18:00:00','TRK45612345US','PROCESSING',4350.00),(5,'2024-12-11 18:00:00','TRK65478932US','PROCESSING',3360.00),(6,'2024-12-11 18:00:00','TRK31234567US','PROCESSING',3419.40),(7,'2024-12-11 18:00:00','TRK7654321US','PROCESSING',3726.30),(8,'2024-12-11 18:00:00','TRK98765123US','PROCESSING',11500.00),(9,'2024-12-11 18:00:00','TRK54321876US','PROCESSING',6708.00),(10,'2024-12-11 18:00:00','TRK87654321US','PROCESSING',6208.00),(11,'2024-12-11 18:00:00','TRK12345678US','PROCESSING',1820.00),(12,'2024-12-11 18:00:00','TRK32145678US','PROCESSING',7710.50),(13,'2024-12-11 18:00:00','TRK12309876US','PROCESSING',9054.70),(14,'2024-12-11 18:00:00','TRK54321876US','PROCESSING',5450.00),(15,'2024-12-11 18:00:00','TRK56789012US','PROCESSING',110500.00),(16,'2024-12-11 18:00:00','TRK45678901US','PROCESSING',13700.00);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +326,7 @@ CREATE TABLE `orderitem` (
   `orderID` int NOT NULL AUTO_INCREMENT,
   `artworkID` int NOT NULL,
   PRIMARY KEY (`orderID`,`artworkID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +335,7 @@ CREATE TABLE `orderitem` (
 
 LOCK TABLES `orderitem` WRITE;
 /*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
-INSERT INTO `orderitem` VALUES (1,2);
+INSERT INTO `orderitem` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16);
 /*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,7 +408,7 @@ CREATE TABLE `user` (
   `anonymous` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`userID`),
   UNIQUE KEY `emailAddress` (`emailAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,7 +417,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'john.doe@email.com','38c5ae2bcd1f12aa269e45ae8c8762f030630a5137dd6d1c799c019626f33096','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','ea76b1e251a0c876b3d96d2c81f12736df3bed36ecb293f79c493c089924cbdc','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','12313e7066d59b17cb8387c4d27ef847e39bc7b23ec48c9bbb6a08bac39252f3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','334ddbbc1437d63a0bf14657fb9c584d6af8697701c726febb7d8a833d9bdf27','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','43eb28aba4577b8655cca86b084c8421660e50c40cdc1a3aad61dea941fdca05','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','e3af2e502923051d802c608b7b7b31cbc978883f06cde3eb7bc0154e28a3e539','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','ad395fe6c161f463caebc59851ce565ad032ff30e3c71cd04a5356ebe05a4eb5','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','c62bb6b2345916b31d96d21b6d0a305936895bb8eef035cd15404cbd5fd4fb22','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','1a17e7d0d8c634f6812090d7dd1b5c7161e409c4ac5806c1197664345b8bc3e8','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','2811ee3c73ce17dfd398133f7207d4f8d7edbb97a54013880bf8fef8d930be2b','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0),(11,'fransico@email.com','47bb0fb013b151d5210f7cdf0819157d5e3f0d73b4576f724fd4e16b3f34c5f4','Francisca Owens','Ciscoa','3937 Oxford Court, Jackson, MS 39201',0),(12,'nich@email.com','f3b85859a45a8578b31a8fbeac54195f3ad6339507fc5316f9c176fe16c0a58b','Nichole Morrow','TommorowN','3202 Camden Place, Myrtle Beach, SC, 2957',0),(13,'kris.f@email.com','87de00b83184fe5513aa2ee4c73f2fcee13d6b23ecda3e1db98f312f2833b862','Kris Foster','Krisy','2844 Khale Street, Walterboro, SC 29488',0),(14,'long.rodrigo@email.com','e78b85ec36b1a26f0a08b2aa84814c1a23f2102ef4143713c090a3598b260306','Rodrigo Long','LongoD','2060 Rockford Mountain Lane, Milwaukee, WI 53202',0),(15,'choi.cliff@email.com','c9cd11537b30c2927618c2e6fdee76b907a033759a8907a40dc30e1f4b55c289','Cliff Choi','cliffbar','1705 Formula Lane, Farmers Branch, TX 75244',0);
+INSERT INTO `user` VALUES (1,'john.doe@email.com','38c5ae2bcd1f12aa269e45ae8c8762f030630a5137dd6d1c799c019626f33096','John Doe','JohnD','123 Main St, New York, NY 10001',0),(2,'sarah.smith@email.com','ea76b1e251a0c876b3d96d2c81f12736df3bed36ecb293f79c493c089924cbdc','Sarah Smith','SarahS','456 Oak Avenue, Los Angeles, CA 90001',0),(3,'mike.johnson@email.com','12313e7066d59b17cb8387c4d27ef847e39bc7b23ec48c9bbb6a08bac39252f3','Michael Johnson','MikeJ','789 Pine Road, Chicago, IL 60601',0),(4,'emily.brown@email.com','334ddbbc1437d63a0bf14657fb9c584d6af8697701c726febb7d8a833d9bdf27','Emily Brown','Em_Brown','321 Maple Lane, Houston, TX 77001',0),(5,'anonymous_user_1@email.com','43eb28aba4577b8655cca86b084c8421660e50c40cdc1a3aad61dea941fdca05','Anonymous User','Anon1',NULL,1),(6,'david.wilson@email.com','e3af2e502923051d802c608b7b7b31cbc978883f06cde3eb7bc0154e28a3e539','David Wilson','Dave_W','741 Beach Blvd, Miami, FL 33101',0),(7,'lisa.garcia@email.com','ad395fe6c161f463caebc59851ce565ad032ff30e3c71cd04a5356ebe05a4eb5','Lisa Garcia','LisaG','852 Hill Street, Seattle, WA 98101',0),(8,'robert.taylor@email.com','c62bb6b2345916b31d96d21b6d0a305936895bb8eef035cd15404cbd5fd4fb22','Robert Taylor','Rob_T','963 Valley Road, Boston, MA 02101',0),(9,'anonymous_user_2@email.com','1a17e7d0d8c634f6812090d7dd1b5c7161e409c4ac5806c1197664345b8bc3e8','Anonymous User 2','Anon2',NULL,1),(10,'michelle.lee@email.com','2811ee3c73ce17dfd398133f7207d4f8d7edbb97a54013880bf8fef8d930be2b','Michelle Lee','MichelleL','159 River Drive, San Francisco, CA 94101',0),(11,'fransico@email.com','47bb0fb013b151d5210f7cdf0819157d5e3f0d73b4576f724fd4e16b3f34c5f4','Francisca Owens','Ciscoa','3937 Oxford Court, Jackson, MS 39201',0),(12,'nich@email.com','f3b85859a45a8578b31a8fbeac54195f3ad6339507fc5316f9c176fe16c0a58b','Nichole Morrow','TommorowN','3202 Camden Place, Myrtle Beach, SC, 2957',0),(13,'kris.f@email.com','87de00b83184fe5513aa2ee4c73f2fcee13d6b23ecda3e1db98f312f2833b862','Kris Foster','Krisy','2844 Khale Street, Walterboro, SC 29488',0),(14,'long.rodrigo@email.com','e78b85ec36b1a26f0a08b2aa84814c1a23f2102ef4143713c090a3598b260306','Rodrigo Long','LongoD','2060 Rockford Mountain Lane, Milwaukee, WI 53202',0),(15,'choi.cliff@email.com','c9cd11537b30c2927618c2e6fdee76b907a033759a8907a40dc30e1f4b55c289','Cliff Choi','cliffbar','1705 Formula Lane, Farmers Branch, TX 75244',0),(16,'harly.o@email.com','964b503d16ebea882d3326cd7b9a1272a56b710ae798ef9c8eac87ad47475c77','Harley Olson','harleyQNS','214 Broadway Ave, San Jose, CA 95112',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -430,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12  2:38:47
+-- Dump completed on 2024-12-12 22:46:05
