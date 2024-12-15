@@ -4,6 +4,7 @@
 <%@taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@taglib prefix="layout" tagdir="/WEB-INF/tags/layouts" %>
 <%@taglib prefix="ui" tagdir="/WEB-INF/tags/components" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <layout:base>
@@ -69,8 +70,8 @@
 
 					<c:if test="${not isOwner}">
 						<section>
-							<p class="bidding"><em> Starting Bid: </em> $${auction.startingPrice}</p>
-							<p class="bidding"><em> Current Bid: </em> $${auction.amount}</p>
+							<p class="bidding"><em> Starting Bid: </em> $<fmt:formatNumber value="${auction.startingPrice}" type="number" minFractionDigits="2" /></p>
+							<p class="bidding"><em> Current Bid: </em> $<fmt:formatNumber value="${auction.amount}" type="number" minFractionDigits="2" /></p>
 							<p class="bidding"><em> Highest Bidder: </em>${highestBidder.displayName}</p>
 							<c:if test="${isHighest}">
 								<p class="highest"> You are currently the highest bidder</p>
