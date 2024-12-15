@@ -54,36 +54,34 @@ Then press Start Import and you should see some new tables pop up under the `art
 
 ## Relations:
 
-- User(**ID**, emailAddress, password, name, displayName, address, anonymous)
-- Admin(**userID**, name)
+- user(**userID**, emailAddress, password, name, displayName, address, anonymous)
+- admin(**userID**, role, referralCode, referralCodeUsed)
 - Follow(**followerID**, **followingID**)
 
 ---
-
-- Image(**ID**, filename)
-- Uploaded(**userID**, **imageID**)
-- ProfilePicture(**userID**, **imageID**)
-- ArtImage(**artworkID**, **imageID**)
+- image(**imageID**, filename, uploaderID)
+- artimage(**artworkID**, **imageID**)
+- profilepicture(**userID**, imageID)
 
 ---
 
-- Artwork(ID, title, description, artist)
-- Favorite(**userID**, **artworkID**)
+- artwork(**artworkID**, title, description, artist)
+- favorite(**userID**, **artworkID**)
 - Tag(**artworkID**, name)
 
 ---
 
-- AuctionDetails(**ID**, startTimestamp, endTimestamp, amount, startingPrice, reserve, result)
-- Auction(**userID**, **artworkID**, **auctionDetailsID**)
-- Bid(**userID**, **auctionDetailsID**, timestamp, dollarAmount)
+- auctiondetails(**artworkID**, startTimestamp, endTimestamp, amount, startingPrice, reserve, result)
+- auction(**userID**, **artworkID**)
+- bid(**userID**, **artworkID**, timestamp, bidAmount)
 
 ---
 
-- OrderDetails(**ID**, timestamp, trackingNumber, status, totalPaid)
-- Order(**userID**, **orderDetailsID**)
-- OrderItem(**orderDetailsID**, **artworkID**)
+- OrderDetails(**orderID**, timestamp, trackingNumber, status, totalPaid)
+- Order(**userID**, **orderID**)
+- OrderItem(**orderID**, **artworkID**)
 
 ## Example user passwords:
 
-User passwords are 'password\_1' through 'password\_10' respectfully. They are hashed by SHA256.
+User passwords are 'password\_1' through 'password\_16' respectfully. They are hashed by SHA256.
 
