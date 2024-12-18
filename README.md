@@ -52,6 +52,10 @@ Then press Start Import and you should see some new tables pop up under the `art
 - Click next, then either select an existing instance of Tomcat 10.1 you have installed, or click "Download and Install" and accept the license agreement to download Tomcat 10.1 for you.
 - Once you click "Finish", it should immediately startup Tomcat and load the project, and you should see http://localhost:8080/ArtAuction/ popup in your default browser. The site is now ready to use!
 
+- Some notes:
+- To reach purchase artwork functionalities, you have to bid on a active artwork, and then adjust the end timestamp in sql to very near in the future (e.g 1 min in the future)
+- Wait for the countdown to work, and refresh the page and it should direct you have won, there may be a reserve, so you can place a very large bid to ensure you bid more than the reserve. 
+
 ## Relations:
 
 - user(**userID**, emailAddress, password, name, displayName, address, anonymous)
