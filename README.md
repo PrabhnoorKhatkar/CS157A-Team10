@@ -1,21 +1,26 @@
 # CS157A-Team10
 
 ## Brushstroke Bargains
+
 An online art auction platform designed for artists to showcase their work and for users to bid on artworks.
 
 ## Setup
+
 Download the zip from Canvas. Extract it to a folder of your choosing.
 
 ### Install MySQL 8.0
 
 Either do this manually:
-+ Download from https://dev.mysql.com/downloads/mysql/8.0.html and follow the instructions there to get it running
-+ Use the root user. Set the root password to `dbpassword`.
+
+- Download from https://dev.mysql.com/downloads/mysql/8.0.html and follow the instructions there to get it running
+- Use the root user. Set the root password to `dbpassword`.
 
 Or use Docker:
-+ Ensure you have docker + docker-compose. Open a terminal in the `ArtAuction` directory and then run `docker compose up`.
+
+- Ensure you have docker + docker-compose. Open a terminal in the `ArtAuction` directory and then run `docker compose up`.
 
 ### Setup MySQL 8.0
+
 Run the MySQL server via your preferred method.
 
 Open MySQL workbench. Edit or Add the connection to the server and ensure the fields are:
@@ -34,7 +39,6 @@ Then, in the top menu, go to Server > Data Import. Select the checkbox to `Impor
 
 Then press Start Import and you should see some new tables pop up under the `artauction` schema.
 
-
 ### Running the project with Eclipse and Tomcat:
 
 - Ensure that MySQL is still running.
@@ -44,17 +48,18 @@ Then press Start Import and you should see some new tables pop up under the `art
 - Click on the root-level ArtAuction project node in the Project Explorer window.
 - Then navigate to Run > Run and in the popup, click "Run on Server" then press OK.
 - In the following popup, select:
-    - Manually define a new server
-    - Apache > Tomcat v10.1 Server
-    - Server’s host name: localhost
-    - Check the “Always use this server when running the project” box.
+
+  - Manually define a new server
+  - Apache > Tomcat v10.1 Server
+  - Server’s host name: localhost
+  - Check the “Always use this server when running the project” box.
 
 - Click next, then either select an existing instance of Tomcat 10.1 you have installed, or click "Download and Install" and accept the license agreement to download Tomcat 10.1 for you.
 - Once you click "Finish", it should immediately startup Tomcat and load the project, and you should see http://localhost:8080/ArtAuction/ popup in your default browser. The site is now ready to use!
 
 - Some notes:
 - To reach purchase artwork functionalities, you have to bid on a active artwork, and then adjust the end timestamp in sql to very near in the future (e.g 1 min in the future)
-- Wait for the countdown to work, and refresh the page and it should direct you have won, there may be a reserve, so you can place a very large bid to ensure you bid more than the reserve. 
+- Wait for the countdown to work, and refresh the page and it should direct you have won, there may be a reserve, so you can place a very large bid to ensure you bid more than the reserve.
 
 ## Relations:
 
@@ -63,6 +68,7 @@ Then press Start Import and you should see some new tables pop up under the `art
 - Follow(**followerID**, **followingID**)
 
 ---
+
 - image(**imageID**, filename, uploaderID)
 - artimage(**artworkID**, **imageID**)
 - profilepicture(**userID**, imageID)
@@ -87,5 +93,11 @@ Then press Start Import and you should see some new tables pop up under the `art
 
 ## Example user passwords:
 
-User passwords are 'password\_1' through 'password\_16' respectfully. They are hashed by SHA256.
+User passwords are 'password_1' through 'password_16' respectfully. They are hashed by SHA256.
 
+## Screenshots
+
+![App Screenshot](/public/home.png)
+![App Screenshot](/public/home2.png)
+![App Screenshot](/public/userprofile.png)
+![App Screenshot](/public/artwork.png)
